@@ -1,0 +1,15 @@
+.container {
+    width: 60%;
+    display: table;
+    margin: 0 auto;
+    padding: 2em 0;
+}
+
+.container h4.ui.header {
+    background: rgba(255, 187, 91, 0.4);
+    padding: 6px;
+}
+
+.centered_text {
+    text-align: center;
+}

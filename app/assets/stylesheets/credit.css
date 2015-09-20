@@ -1,6 +1,22 @@
-.request-info { margin-top: 10px; }
-.request-info p { margin: 0px 0px 1.5em; }
-.step { padding: 30px 5px; display: none; }
-.step p { background: rgba(255, 187, 91, 0.4); padding: 10px; }
-.ui .selection .dropdown .multiple { width: 100%; }
-.ui.segment { border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+.request-info {
+    margin-top: 10px;
+}
+
+.request-info p {
+    margin: 0px 0px 1.5em;
+}
+
+.step {
+    padding: 30px 5px; display: none;
+}
+
+.step p {
+    background: rgba(255, 187, 91, 0.4); padding: 10px;
+}
+
+.ui.selection.dropdown, .ui.vertical.menu {
+    width: 100%;
+}
+.ui.segment {
+    border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}

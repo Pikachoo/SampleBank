@@ -1,0 +1,19 @@
+<h3>*Наличие в ОАО «Rude-bank» счета, на который перечисляется заработная плата и/или приравненные к ней доходы</h3>
+
+<div class="two fields">
+  <div class="field">
+    <div class="ui checkbox radio">
+      <input type="radio" name="score_existance" onclick="toggleElement('#account_id', true)">
+      <label>Да</label>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="ui checkbox radio">
+      <input type="radio" name="score_existance" onclick="toggleElement('#account_id', false)">
+      <label>Нет</label>
+    </div>
+  </div>
+</div>
+
+<input id="account_id" class="invisible" type="text" placeholder="Номер счёта">

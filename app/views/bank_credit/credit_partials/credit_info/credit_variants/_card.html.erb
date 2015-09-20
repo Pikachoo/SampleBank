@@ -1,0 +1,27 @@
+<div class="item">
+  <a class="title">
+    <i class="dropdown icon"></i>
+    Кредитная карта
+  </a>
+  <div class="content">
+    <div class="ui form">
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input name="credit_type" onclick="toggleElement('#another_card', false)" value="7" type="radio">
+            <label>Невозобновляемая кредитная карта</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input name="credit_type" onclick="toggleElement('#another_card_credit_type', true)" value="8" type="radio">
+            <label>Другой вид кредитных карт</label>
+          </div>
+        </div>
+        <div class="field invisible" id="another_card">
+          <input id="another_card_credit_type"  class="invisible" type="text" placeholder="Укажите вид кредитной карты">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

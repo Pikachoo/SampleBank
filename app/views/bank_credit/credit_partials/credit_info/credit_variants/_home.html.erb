@@ -1,0 +1,39 @@
+<div class="item">
+  <a class="title">
+    <i class="dropdown icon"></i>
+    Финансирование недвижимости
+  </a>
+  <div class="content">
+    <div class="ui form">
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input name="credit_type" value="1" onclick="toggleElement('#another_home_credit_type', false)" type="radio">
+            <label>На строительство жилья</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input name="credit_type" value="2" onclick="toggleElement('#another_home_credit_type', false)" type="radio">
+            <label>На приобретение жилья</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input name="credit_type" value="3" onclick="toggleElement('#another_home_credit_type', false)" type="radio">
+            <label>На приобретение земельного участка</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input name="credit_type" value="4" onclick="toggleElement('#another_home_credit_type', true)" type="radio">
+            <label>Другой вид кредита на финансирование недвижимости</label>
+          </div>
+        </div>
+        <div class="field invisible" id="another_home">
+            <input id="another_home_credit_type" class="invisible" type="text" placeholder="Укажите вид кредита на финансирование">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

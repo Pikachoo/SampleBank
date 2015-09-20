@@ -1,0 +1,16 @@
+<h3>*Способ выдачи:</h3>
+
+<div class="ui selection dropdown">
+  <input type="hidden" id="issuance_method">
+  <i class="dropdown icon"></i>
+  <div class="default text">Способ выдачи</div>
+  <div class="menu">
+    <div class="item" data-value="0" onclick="toggleElement('#issuance_score', false)">Наличными деньгами</div>
+    <div class="item" data-value="1" onclick="toggleElement('#issuance_score', false)">Кредитной платёжной карточкой</div>
+    <div class="item" data-value="2" onclick="toggleElement('#issuance_score', false)">Чековой книжкой</div>
+    <div class="item" data-value="3" onclick="toggleElement('#issuance_score', false)">Перечислить на счёт третьего лица</div>
+    <div class="item" data-value="4" onclick="toggleElement('#issuance_score', true)">Зачислить на счёт(указать)</div>
+  </div>
+</div>
+<br/><br/>
+<input id="issuance_score" class="invisible" type="text" placeholder="Счёт получителя">

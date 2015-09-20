@@ -1,0 +1,27 @@
+<div class="item">
+  <a class="title">
+    <i class="dropdown icon"></i>
+    Автокредит
+  </a>
+  <div class="content">
+    <div class="ui form">
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input name="credit_type" onclick="toggleElement('#car_credit', false)" value="5" type="radio">
+            <label>На приобретение транспортных средств</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input name="credit_type" onclick="toggleElement('#another_car_credit_type', true)" value="6" type="radio">
+            <label>Другой вид автокредита</label>
+          </div>
+        </div>
+        <div class="field" id="car_credit">
+          <input id="another_car_credit_type" class="invisible" type="text" placeholder="Укажите вид автомобильного кредитования">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

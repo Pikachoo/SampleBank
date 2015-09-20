@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="ui segment">
+
+    <form class="ui form error success">
+
+      <h2 class="ui header">Заявление - анкета для получения кредита</h2>
+
+      <div class="request-info">
+        <p>Для получения кредитной поддержки в ОАО «Rude-банк» Вам необходимо заполнить данную заявку.</p>
+        <p>Данная заявка оформляется оператором ОАО «Rude-банк».</p>
+      </div>
+
+      <div id="step1" class="step">
+        <p><b>ШАГ 1 из 4</b> - Заполните данные о порядке предоставления кредита.</p>
+
+          <%= render partial: "bank_credit/credit_partials/credit_info/credit_type" %>
+          <%= render partial: "bank_credit/credit_partials/credit_info/granted_procedure" %>
+          <%= render partial: "bank_credit/credit_partials/credit_info/method_issuance" %>
+          <%= render partial: "bank_credit/credit_partials/credit_info/affirmation_of_commitments" %>
+          <%= render partial: "bank_credit/credit_partials/credit_info/collateral_value" %>
+          <%= render partial: "bank_credit/credit_partials/credit_info/bank_account" %>
+
+          <br/><br/>
+          <button type="button" class="ui button orange" onclick="navigate('#step2')">
+            Далее
+          </button>
+      </div>
+
+      <div class="request-info">
+        <br/>
+        <p>Разделы обозначенные как (*) обязательные для заполнения</p>
+      </div>
+
+    </form>
+  </div>
+</div>

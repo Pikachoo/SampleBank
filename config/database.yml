@@ -6,3 +6,6 @@ default: &default
   host: "188.226.172.162"
   port: 3306
   database: 'bank'
+
+development:
+  <<: *default

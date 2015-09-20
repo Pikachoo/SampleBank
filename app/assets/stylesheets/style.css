@@ -13,3 +13,7 @@
 .centered_text {
     text-align: center;
 }
+
+.invisible {
+    display: none;
+}

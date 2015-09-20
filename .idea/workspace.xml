@@ -35,10 +35,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_job_info.html.erb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="_job_info.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/bank_credit/credit_partials/job_info/_job_info.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72490704" vertical-offset="0" max-vertical-offset="540">
+            <state vertical-scroll-proportion="-6.5" vertical-offset="0" max-vertical-offset="540">
               <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
               <folding />
             </state>
@@ -95,11 +95,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_phones.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/bank_credit/credit_partials/applicant_info/_phones.html.erb">
+      <file leaf-file-name="new.html.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/online_credit/new.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="585">
-              <caret line="26" column="8" selection-start-line="0" selection-start-column="0" selection-end-line="33" selection-end-column="6" />
+            <state vertical-scroll-proportion="-120.625" vertical-offset="0" max-vertical-offset="3405">
+              <caret line="193" column="0" selection-start-line="193" selection-start-column="0" selection-end-line="196" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new.html.erb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/bank_credit/new.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.22316866" vertical-offset="64" max-vertical-offset="675">
+              <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -110,16 +120,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="450">
               <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="90" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_contract_date.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/bank_credit/credit_partials/job_info/_contract_date.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="345">
-              <caret line="9" column="8" selection-start-line="6" selection-start-column="2" selection-end-line="9" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -168,7 +168,6 @@
         <option value="$PROJECT_DIR$/app/views/bank_credit/credit_partials/applicant_info/adresses.html.erb" />
         <option value="$PROJECT_DIR$/app/views/bank_credit/credit_partials/applicant_info/_applicant_info.html.erb" />
         <option value="$PROJECT_DIR$/app/views/bank_credit/credit_partials/job_info/_job_info.htlm.erb" />
-        <option value="$PROJECT_DIR$/app/views/bank_credit/new.html.erb" />
         <option value="$PROJECT_DIR$/app/views/bank_credit/credit_partials/applicant_info/_military_condition.html.erb" />
         <option value="$PROJECT_DIR$/app/views/bank_credit/credit_partials/job_info/_employment_type.html.erb" />
         <option value="$PROJECT_DIR$/app/views/bank_credit/credit_partials/job_info/_contract_date.html.erb" />
@@ -181,6 +180,7 @@
         <option value="$PROJECT_DIR$/app/views/bank_credit/credit_partials/job_info/_job_category.html.erb" />
         <option value="$PROJECT_DIR$/app/views/bank_credit/credit_partials/job_info/_organization_info.html.erb" />
         <option value="$PROJECT_DIR$/app/views/bank_credit/credit_partials/job_info/_job_info.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/bank_credit/new.html.erb" />
       </list>
     </option>
   </component>
@@ -319,66 +319,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="credit_partials" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="job_info" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bank_sample" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bank_sample" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bank_credit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="credit_partials" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bank_sample" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bank_sample" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bank_credit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="credit_partials" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="applicant_info" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -857,14 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/online_credit/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.791666" vertical-offset="2204" max-vertical-offset="3405">
-          <caret line="193" column="0" selection-start-line="193" selection-start-column="0" selection-end-line="196" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/bank_credit/credit_partials/credit_sum_info/_credit_sum_info.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.041667" vertical-offset="359" max-vertical-offset="930">
@@ -877,14 +809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="345">
           <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bank_credit/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.208333" vertical-offset="64" max-vertical-offset="675">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1011,8 +935,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/bank_credit/credit_partials/job_info/_job_info.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72490704" vertical-offset="0" max-vertical-offset="540">
+        <state vertical-scroll-proportion="-6.5" vertical-offset="0" max-vertical-offset="540">
           <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/online_credit/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-120.625" vertical-offset="0" max-vertical-offset="3405">
+          <caret line="193" column="0" selection-start-line="193" selection-start-column="0" selection-end-line="196" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bank_credit/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22316866" vertical-offset="64" max-vertical-offset="675">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
           <folding />
         </state>
       </provider>

@@ -1,0 +1,16 @@
+<h3>Отношение к воинской службе:</h3>
+
+<div class="ui selection dropdown">
+  <input type="hidden" id="living_conditions">
+  <i class="dropdown icon"></i>
+  <div class="default text">Отношение к воинской службе</div>
+  <div class="menu">
+    <div class="item" data-value="0" onclick="toggleElement('#reprieve_end_date', false)">Прохожу службу/служил/запас</div>
+    <div class="item" data-value="1" onclick="toggleElement('#reprieve_end_date', false)">Невоеннообязанный</div>
+    <div class="item" data-value="2" onclick="toggleElement('#reprieve_end_date', true)">Отсрочка</div>
+    <div class="item" data-value="3" onclick="toggleElement('#reprieve_end_date', false)">Освобождён</div>
+  </div>
+</div>
+<div class="field">
+  <input id="reprieve_end_date" class="invisible" type="text" placeholder="Дата окончания отсрочки от призыва">
+</div>

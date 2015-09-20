@@ -12,33 +12,17 @@
 
       <div id="step1" class="step">
         <p><b>ШАГ 1 из 4</b> - Заполните данные о порядке предоставления кредита.</p>
-
-          <%= render partial: "bank_credit/credit_partials/credit_info/credit_type" %>
-          <%= render partial: "bank_credit/credit_partials/credit_info/granted_procedure" %>
-          <%= render partial: "bank_credit/credit_partials/credit_info/method_issuance" %>
-          <%= render partial: "bank_credit/credit_partials/credit_info/affirmation_of_commitments" %>
-          <%= render partial: "bank_credit/credit_partials/credit_info/collateral_value" %>
-          <%= render partial: "bank_credit/credit_partials/credit_info/bank_account" %>
-
-          <br/><br/>
-          <button type="button" class="ui button orange" onclick="navigate('#step2')">
-            Далее
-          </button>
+        <%= render partial: "bank_credit/credit_partials/credit_info/credit_info" %>
       </div>
 
       <div id="step2" class="step">
         <p><b>ШАГ 2 из 4</b> - Заполните информацию о размере и системе погашения кредита.</p>
-
         <%= render partial: "bank_credit/credit_partials/credit_sum_info/credit_sum_info" %>
+      </div>
 
-        <br/><br/>
-        <button type="button" class="ui button orange" onclick="navigate('#step1')">
-          Назад
-        </button>
-
-        <button type="button" class="ui button orange" onclick="navigate('#step3')">
-          Далее
-        </button>
+      <div id="step3" class="step">
+        <p><b>ШАГ 3 из 4</b> - Заполните общие сведения о заявителе.</p>
+        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_info" %>
       </div>
 
       <div class="request-info">

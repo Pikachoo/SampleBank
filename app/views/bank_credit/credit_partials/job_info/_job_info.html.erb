@@ -1,0 +1,31 @@
+<h3>Место работы заявителя</h3>
+<%= render partial: "bank_credit/credit_partials/job_info/employment_type" %>
+<%= render partial: "bank_credit/credit_partials/job_info/contract_date" %>
+<%= render partial: "bank_credit/credit_partials/job_info/organization_info" %>
+<%= render partial: "bank_credit/credit_partials/job_info/activity_list" %>
+<%= render partial: "bank_credit/credit_partials/job_info/organization_employeers" %>
+<%= render partial: "bank_credit/credit_partials/job_info/organization_experience" %>
+
+
+<h3>Должность</h3>
+<div class="field">
+  <input id="job_name" type="text" placeholder="Должность">
+</div>
+
+
+<h3>Количество фактов смены основного места работы за 3 последних года</h3>
+<div class="field">
+  <input id="job_changing_value" type="number" placeholder="Количество фактов смены основного места работы за 3 последних года">
+</div>
+
+<%= render partial: "bank_credit/credit_partials/job_info/job_category" %>
+<%= render partial: "bank_credit/credit_partials/job_info/phones" %>
+
+<br/><br/>
+<button type="button" class="ui button orange" onclick="navigate('#step3')">
+  Назад
+</button>
+
+<button type="button" class="ui button orange" onclick="navigate('#step5')">
+  Далее
+</button>

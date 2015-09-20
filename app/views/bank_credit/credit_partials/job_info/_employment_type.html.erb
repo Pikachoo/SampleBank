@@ -1,0 +1,25 @@
+<div class="ui selection dropdown">
+  <input type="hidden" id="employment_type">
+  <i class="dropdown icon"></i>
+  <div class="default text">Место работы заявителя</div>
+  <div class="menu">
+    <div class="item" data-value="0" onclick="toggleElement('#another-employment', false);toggleElement('#practical-employment', false);">Контракт</div>
+    <div class="item" data-value="1" onclick="toggleElement('#another-employment', false);toggleElement('#practical-employment', false);">Срочный трудовой договор</div>
+    <div class="item" data-value="2" onclick="toggleElement('#another-employment', false);toggleElement('#practical-employment', false);">Агент на комиссионном договоре</div>
+    <div class="item" data-value="3" onclick="toggleElement('#another-employment', false);toggleElement('#practical-employment', false);">Пенсионер</div>
+    <div class="item" data-value="4" onclick="toggleElement('#another-employment', false);toggleElement('#practical-employment', false);">Индивидуальный предприниматель</div>
+    <div class="item" data-value="5" onclick="toggleElement('#another-employment', false);toggleElement('#practical-employment', false);">Пенсионер</div>
+    <div class="item" data-value="6" onclick="toggleElement('#another-employment', false);toggleElement('#practical-employment', false);">Исполнитель по гражданско-правовому договору</div>
+    <div class="item" data-value="7" onclick="toggleElement('#another-employment', false);toggleElement('#practical-employment', false);">По совместительству</div>
+    <div class="item" data-value="8" onclick="toggleElement('#another-employment', false);toggleElement('#practical-employment', true);">Частная практика(уточните)</div>
+    <div class="item" data-value="9" onclick="toggleElement('#another-employment', true);toggleElement('#practical-employment', false);">Другое</div>
+  </div>
+</div>
+
+<div class="field">
+  <input id="practical-employment" class="invisible" type="text" placeholder="Уточните данные о типе практики">
+</div>
+
+<div class="field">
+  <input id="another-employment" class="invisible" type="text" placeholder="Уточните тип занятости">
+</div>

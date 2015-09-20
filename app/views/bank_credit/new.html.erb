@@ -26,6 +26,21 @@
           </button>
       </div>
 
+      <div id="step2" class="step">
+        <p><b>ШАГ 2 из 4</b> - Заполните информацию о размере и системе погашения кредита.</p>
+
+        <%= render partial: "bank_credit/credit_partials/credit_sum_info/credit_sum_info" %>
+
+        <br/><br/>
+        <button type="button" class="ui button orange" onclick="navigate('#step1')">
+          Назад
+        </button>
+
+        <button type="button" class="ui button orange" onclick="navigate('#step3')">
+          Далее
+        </button>
+      </div>
+
       <div class="request-info">
         <br/>
         <p>Разделы обозначенные как (*) обязательные для заполнения</p>

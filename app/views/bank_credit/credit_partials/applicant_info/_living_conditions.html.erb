@@ -5,16 +5,16 @@
   <i class="dropdown icon"></i>
   <div class="default text">Жилищные условия</div>
   <div class="menu">
-    <div class="item" data-value="0" onclick="toggleElement('#another_living_conditions', false)">Собственная дом / квартира</div>
-    <div class="item" data-value="1" onclick="toggleElement('#another_living_conditions', false)">Арендуемая квартира / дом</div>
-    <div class="item" data-value="2" onclick="toggleElement('#another_living_conditions', false)">Совместно с родителями</div>
-    <div class="item" data-value="3" onclick="toggleElement('#another_living_conditions', false)">Совместно с родственниками</div>
-    <div class="item" data-value="4" onclick="toggleElement('#another_living_conditions', false)">Общежитие</div>
-    <div class="item" data-value="5" onclick="toggleElement('#another_living_conditions', false)">Служебное жильё</div>
-    <div class="item" data-value="6" onclick="toggleElement('#another_living_conditions', false)">Воинская часть</div>
-    <div class="item" data-value="7" onclick="toggleElement('#another_living_conditions', true)">Иное(указать)</div>
+    <div class="item" data-value="0" onclick="toggleElement('#<%= name %>_another_living_conditions', false)">Собственная дом / квартира</div>
+    <div class="item" data-value="1" onclick="toggleElement('#<%= name %>_another_living_conditions', false)">Арендуемая квартира / дом</div>
+    <div class="item" data-value="2" onclick="toggleElement('#<%= name %>_another_living_conditions', false)">Совместно с родителями</div>
+    <div class="item" data-value="3" onclick="toggleElement('#<%= name %>_another_living_conditions', false)">Совместно с родственниками</div>
+    <div class="item" data-value="4" onclick="toggleElement('#<%= name %>_another_living_conditions', false)">Общежитие</div>
+    <div class="item" data-value="5" onclick="toggleElement('#<%= name %>_another_living_conditions', false)">Служебное жильё</div>
+    <div class="item" data-value="6" onclick="toggleElement('#<%= name %>_another_living_conditions', false)">Воинская часть</div>
+    <div class="item" data-value="7" onclick="toggleElement('#<%= name %>_another_living_conditions', true)">Иное(указать)</div>
   </div>
 </div>
 <div class="field">
-  <input id="another_living_conditions" class="invisible" type="text" placeholder="Укажите тип жилья">
+  <input id="<%= name %>_another_living_conditions" class="invisible" type="text" placeholder="Укажите тип жилья">
 </div>

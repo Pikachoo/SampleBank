@@ -10,24 +10,62 @@
         <p>Данная заявка оформляется оператором ОАО «Rude-банк».</p>
       </div>
 
-      <div id="step1" class="step">
-        <p><b>ШАГ 1 из 4</b> - Заполните данные о порядке предоставления кредита.</p>
+      <div id="step11" class="step">
+        <p><b>ШАГ 1 из 11</b> - Заполните данные о порядке предоставления кредита.</p>
         <%= render partial: "bank_credit/credit_partials/credit_info/credit_info" %>
       </div>
 
       <div id="step2" class="step">
-        <p><b>ШАГ 2 из 4</b> - Заполните информацию о размере и системе погашения кредита.</p>
+        <p><b>ШАГ 2 из 11</b> - Заполните информацию о размере и системе погашения кредита.</p>
         <%= render partial: "bank_credit/credit_partials/credit_sum_info/credit_sum_info" %>
       </div>
 
       <div id="step3" class="step">
-        <p><b>ШАГ 3 из 4</b> - Заполните общие сведения о заявителе.</p>
-        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_info" %>
+        <p><b>ШАГ 3 из 11</b> - Заполните общие сведения о заявителе.</p>
+        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_info", locals: { name: "customer", step: 3 } %>
+        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_navigation", locals: { step: 3}  %>
       </div>
 
       <div id="step4" class="step">
-        <p><b>ШАГ 4 из 4</b> - Заполните данные о месте работы заявителя.</p>
-        <%= render partial: "bank_credit/credit_partials/job_info/job_info" %>
+        <p><b>ШАГ 4 из 11</b> - Заполните данные о месте работы заявителя.</p>
+        <%= render partial: "bank_credit/credit_partials/job_info/job_info", locals: { name: "customer", step: 4 } %>
+      </div>
+
+      <div id="step5" class="step">
+        <p><b>ШАГ 5 из 11</b> - Заполните данные о работе по совместительству заявителя(если она существует).</p>
+        <%= render partial: "bank_credit/credit_partials/job_info/job_info", locals: { name: "customer_additional", step: 5 }  %>
+      </div>
+
+      <div id="step6" class="step">
+        <p><b>ШАГ 6 из 11</b> - Заполните общие сведенья о супруге заявителя.</p>
+        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_info", locals: { name: "partner"} %>
+        <%= render partial: "bank_credit/credit_partials/job_info/organization_info", locals: { name: 'partner' }  %>
+        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_navigation", locals: { step: 6}  %>
+      </div>
+
+      <div id="step7" class="step">
+        <p><b>ШАГ 7 из 11</b> - Заполните сведенья о близких родственниках заявителя</p>
+        <%= render partial: "bank_credit/credit_partials/closest_relatives/closest_relatives" %>
+      </div>
+
+      <div id="step8" class="step">
+        <p><b>ШАГ 8 из 11</b> - Заполните данные об имуществе заявителя</p>
+        <%= render partial: "bank_credit/credit_partials/customers_property/customers_property" %>
+      </div>
+
+      <div id="step9" class="step">
+        <p><b>ШАГ 9 из 11</b> - Заполните данные об доходах заявителя</p>
+        <%= render partial: "bank_credit/credit_partials/customers_incoming/customers_incoming" %>
+      </div>
+
+      <div id="step10" class="step">
+        <p><b>ШАГ 10 из 11</b> - Заполните дополнительную информацию</p>
+        <%= render partial: "bank_credit/credit_partials/additional_info/additional_info" %>
+      </div>
+
+      <div id="step1" class="step">
+        <p><b>ШАГ 11 из 11</b> - Заполните информацию о кредитной истории заявителя</p>
+        <%= render partial: "bank_credit/credit_partials/credit_history/credit_history" %>
       </div>
 
       <div class="request-info">

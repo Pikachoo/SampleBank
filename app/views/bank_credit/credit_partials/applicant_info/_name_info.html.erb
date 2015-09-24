@@ -1,14 +1,14 @@
 <h3>Менялось ли ФИО:</h3>
 
 <div class="ui selection dropdown">
-  <input type="hidden" id="living_conditions">
+  <input type="hidden" id="<%= name %>_name_info">
   <i class="dropdown icon"></i>
   <div class="default text">Менялось ли ФИО</div>
   <div class="menu">
-    <div class="item" data-value="0" onclick="toggleElement('#changing_reason', true)">Да</div>
-    <div class="item" data-value="1" onclick="toggleElement('#changing_reason', false)">Нет</div>
+    <div class="item" data-value="0" onclick="toggleElement('#<%= name %>_changing_reason', true)">Да</div>
+    <div class="item" data-value="1" onclick="toggleElement('#<%= name %>_changing_reason', false)">Нет</div>
   </div>
 </div>
 <div class="field">
-  <textarea id="changing_reason" class="invisible" type="text" placeholder="Старые данные и причины их изменения."></textarea>
+  <textarea id="<%= name %>_changing_reason" class="invisible" type="text" placeholder="Старые данные и причины их изменения."></textarea>
 </div>

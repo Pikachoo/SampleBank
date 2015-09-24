@@ -6,6 +6,7 @@ $('document').ready(function(){
 function navigate(navigationId) {
 	$('.step').hide();
 	$(navigationId).show();
+    //scrollTo(0, 0);
 }
 
 function toggleElement(elementId, visibilityValue) {

@@ -1,0 +1,17 @@
+<h3>БЛИЗКИЕ РОДСТВЕННИКИ ЗАЯВИТЕЛЯ </h3>
+<h5>(родители, дети, усыновители, усыновленные, родные братья и сестры (в обязательном порядке), а также при необходимости другие близкие родственники, участвующие в совокупном чистом доходе заявителя)</h5>
+
+<div id="relatives"></div>
+
+<button type="button" onclick="$('#relatives').append('<%= escape_javascript(render partial: 'bank_credit/credit_partials/closest_relatives/relative') %>');" class="ui button orange">
+  Добавить родственника
+</button>
+
+<br/><br/>
+<button type="button" class="ui button orange" onclick="navigate('#step6')">
+  Назад
+</button>
+
+<button type="button" class="ui button orange" onclick="navigate('#step8')">
+  Далее
+</button>

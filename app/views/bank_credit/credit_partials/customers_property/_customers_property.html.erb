@@ -1,0 +1,24 @@
+<h3>СВЕДЕНИЯ ОБ ИМУЩЕСТВЕ ЗАЯВИТЕЛЯ (ЛИЧНОМ/СОВМЕСТНОМ)</h3>
+
+<button type="button" onclick="$('#property').append('<%= escape_javascript(render partial: 'bank_credit/credit_partials/customers_property/property') %>');rude.semantic.init.dropdown();" class="ui button orange">
+  Добавить недвижимость
+</button>
+<br/><br/>
+
+<div id="property"></div>
+
+<button type="button" onclick="$('#vehicle').append('<%= escape_javascript(render partial: 'bank_credit/credit_partials/customers_property/vehicle') %>');rude.semantic.init.dropdown();" class="ui button orange">
+  Добавить транспортное средство
+</button>
+<br/><br/>
+
+<div id="vehicle"></div>
+
+<br/><br/>
+<button type="button" class="ui button orange" onclick="navigate('#step7')">
+  Назад
+</button>
+
+<button type="button" class="ui button orange" onclick="navigate('#step9')">
+  Далее
+</button>

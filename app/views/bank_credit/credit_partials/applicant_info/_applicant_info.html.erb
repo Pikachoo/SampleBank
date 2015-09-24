@@ -1,18 +1,9 @@
-<%= render partial: "bank_credit/credit_partials/applicant_info/personal_info" %>
-<%= render partial: "bank_credit/credit_partials/applicant_info/family_status" %>
-<%= render partial: "bank_credit/credit_partials/applicant_info/living_conditions" %>
-<%= render partial: "bank_credit/credit_partials/applicant_info/education" %>
-<%= render partial: "bank_credit/credit_partials/applicant_info/military_condition" %>
-<%= render partial: "bank_credit/credit_partials/applicant_info/name_info" %>
-<%= render partial: "bank_credit/credit_partials/applicant_info/personal_document" %>
-<%= render partial: "bank_credit/credit_partials/applicant_info/phones" %>
-<%= render partial: "bank_credit/credit_partials/applicant_info/addresses" %>
-
-<br/><br/>
-<button type="button" class="ui button orange" onclick="navigate('#step2')">
-  Назад
-</button>
-
-<button type="button" class="ui button orange" onclick="navigate('#step4')">
-  Далее
-</button>
+<%= render partial: "bank_credit/credit_partials/applicant_info/personal_info", locals: {name: name} %>
+<%= render partial: "bank_credit/credit_partials/applicant_info/family_status", locals: {name: name}  %>
+<%= render partial: "bank_credit/credit_partials/applicant_info/living_conditions", locals: {name: name}  %>
+<%= render partial: "bank_credit/credit_partials/applicant_info/education", locals: {name: name}  %>
+<%= render partial: "bank_credit/credit_partials/applicant_info/military_condition", locals: {name: name}  %>
+<%= render partial: "bank_credit/credit_partials/applicant_info/name_info", locals: {name: name}  %>
+<%= render partial: "bank_credit/credit_partials/applicant_info/personal_document", locals: {name: name}  %>
+<%= render partial: "bank_credit/credit_partials/applicant_info/phones", locals: {name: name}  %>
+<%= render partial: "bank_credit/credit_partials/applicant_info/addresses", locals: {name: name}  %>

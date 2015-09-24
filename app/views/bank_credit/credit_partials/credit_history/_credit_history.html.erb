@@ -1,0 +1,193 @@
+<h3>Опыт кредитования в ОАО «Rude-bank»</h3>
+
+<div class='two fields'>
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='rude_credits'>
+      <label>Да</label>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='rude_credits'>
+      <label>Нет</label>
+    </div>
+  </div>
+</div>
+
+<h3>Опыт кредитования в других банках</h3>
+
+<div class='two fields'>
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='another_credits'>
+      <label>Да</label>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='another_credits'>
+      <label>Нет</label>
+    </div>
+  </div>
+</div>
+
+<h3>Количество действующих кредитов</h3>
+
+<div class='field'>
+  <input type="number" placeholder = "Количество действующих кредитов" />
+</div>
+
+<h3>Сумма ежемесячных платежей по всем кредитам и по процентам за пользование ими</h3>
+
+<div class='field'>
+  <input type="number" placeholder = "Сумма ежемесячных платежей по всем кредитам и по процентам за пользование ими" />
+</div>
+
+<h3>Имелись  ли   случаи   нарушения   сроков   погашения   кредита   и   процентов</h3>
+<h4>Кредита</h4>
+<div class='two fields'>
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='credit_violation'>
+      <label>Да</label>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='credit_violation'>
+      <label>Нет</label>
+    </div>
+  </div>
+</div>
+
+<div class="two fields">
+  <div class='field'>
+    <label>Колличество нарушений</label>
+    <input type="number" placeholder = "Колличество нарушений" />
+  </div>
+
+  <div class='field'>
+    <label>Длительность(в днях)</label>
+    <input type="number" placeholder = "Длительность(в днях)" />
+  </div>
+</div>
+<textarea id="reason" placeholder="Причины"></textarea>
+
+<h4>Процентов</h4>
+<div class='two fields'>
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='credit_violation'>
+      <label>Да</label>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='credit_violation'>
+      <label>Нет</label>
+    </div>
+  </div>
+</div>
+
+<div class="two fields">
+  <div class='field'>
+    <label>Колличество нарушений</label>
+    <input type="number" placeholder = "Колличество нарушений" />
+  </div>
+
+  <div class='field'>
+    <label>Длительность(в днях)</label>
+    <input type="number" placeholder = "Длительность(в днях)" />
+  </div>
+</div>
+<textarea id="reason" placeholder="Причины"></textarea>
+
+<h3>Выступаете ли поручителем в других банках</h3>
+<div class='two fields'>
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='another_banks_credits'>
+      <label>Да</label>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='another_banks_credits'>
+      <label>Нет</label>
+    </div>
+  </div>
+</div>
+
+<h3>Исполняете ли денежные обязательства за должника по договору поручительства</h3>
+
+<div class='two fields'>
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='guarantee'>
+      <label>Да</label>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='guarantee'>
+      <label>Нет</label>
+    </div>
+  </div>
+</div>
+
+<div class='field'>
+  <label>Сумма ежемесячного платежа с процентами</label>
+  <input type="number" placeholder = "Сумма ежемесячного платежа с процентами" />
+</div>
+
+<h3>Имеется ли задолженность  по товарам, приобретенным в рассрочку</h3>
+<div class='two fields'>
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='installments'>
+      <label>Да</label>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='ui checkbox radio'>
+      <input type='radio' name='installments'>
+      <label>Нет</label>
+    </div>
+  </div>
+</div>
+
+<div class="two fields">
+  <div class='field'>
+    <label>Остаток задолженности</label>
+    <input type="number" placeholder = "Остаток задолженности" />
+  </div>
+
+  <div class='field'>
+    <label>Сумма ежемесячного платежа</label>
+    <input type="number" placeholder = "Сумма ежемесячного платежа" />
+  </div>
+</div>
+
+<button type="button" onclick="$('#debts').append('<%= escape_javascript(render partial: 'bank_credit/credit_partials/credit_history/debts') %>');rude.semantic.init.dropdown();" class="ui button orange">
+  Добавить задолженность
+</button>
+<br/><br/>
+
+<div id="debts"></div>
+
+<br/><br/>
+<button type="button" class="ui button orange" onclick="navigate('#step10')">
+  Назад
+</button>
+
+<button type="submit" class="ui button orange">
+  Отправить данные
+</button>

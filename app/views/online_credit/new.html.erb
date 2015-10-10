@@ -3,7 +3,7 @@
 
     <form class="ui form error success">
 
-      <h2 class="ui header">Предварительная заявка на кредитный продукт</h2>
+      <h2 class="ui header dividing">Предварительная заявка на кредитный продукт</h2>
         <div class="request-info">
           <p>Для получения кредитной поддержки в ОАО «Rude-банк» Вам необходимо заполнить данную заявку.</p>
           <p>Представитель ОАО «БПС-Сбербанк» в ближайшее время свяжется с Вами по указанным в заявке реквизитам с целью дальнейшей организации процесса рассмотрения возможности предоставления Банком кредитного продукта, указанного в заявке.</p>
@@ -66,7 +66,7 @@
 
           <div class="field">
             <label>*Сумма</label>
-            <input id="sum-value" type="number" placeholder="Необходимая сумма в единицах валюты">
+            <input id="sum-value" type="number" min="0" placeholder="Необходимая сумма в единицах валюты">
           </div>
 
           <button type="button" class="ui button orange" onclick="navigate('#step2')">
@@ -83,7 +83,7 @@
 
           <div class="field">
             <label>Срок кредитного продукта</label>
-            <input id="term-loan-product" type="number" placeholder="Срок кредитного продукта в месяцах">
+            <input id="term-loan-product" type="number" min="0" placeholder="Срок кредитного продукта в месяцах">
           </div>
 
           <button type="button" class="ui button orange" onclick="navigate('#step3')">
@@ -169,7 +169,7 @@
 
             <div class="field">
               <label>Опыт ведения хоз. деятельности (мес.)</label>
-              <input id="organization-name" type="number" placeholder="Опыт ведения хоз. деятельности (мес.)">
+              <input id="organization-name" type="number" min="0" placeholder="Опыт ведения хоз. деятельности (мес.)">
             </div>
 
             <p><b>Контактное лицо:</b></p>

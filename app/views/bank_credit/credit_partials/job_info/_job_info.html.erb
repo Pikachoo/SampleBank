@@ -8,7 +8,7 @@
 
 <h3>Количество фактов смены основного места работы за 3 последних года</h3>
 <div class="field">
-  <input id="<%= name %>_job_changing_value" type="number" placeholder="Количество фактов смены основного места работы за 3 последних года">
+  <input id="<%= name %>_job_changing_value" type="number" min="0" placeholder="Количество фактов смены основного места работы за 3 последних года">
 </div>
 
 <%= render partial: "bank_credit/credit_partials/job_info/job_category", locals: { name: name }  %>

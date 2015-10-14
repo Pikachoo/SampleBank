@@ -29,3 +29,9 @@
 .ui.form .inline.fields label {
     font-size: 14px;
 }
+
+.validation_errors {
+    background: #F7B3B3;
+    padding: 10px;
+    margin-bottom: 10px;
+}

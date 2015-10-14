@@ -1,7 +1,7 @@
 <div class="container">
   <div class="ui segment">
 
-    <form class="ui form error success">
+    <form id="online-credit-form" class="ui form error success">
 
       <h2 class="ui header dividing">Предварительная заявка на кредитный продукт</h2>
         <div class="request-info">
@@ -9,27 +9,32 @@
           <p>Представитель ОАО «БПС-Сбербанк» в ближайшее время свяжется с Вами по указанным в заявке реквизитам с целью дальнейшей организации процесса рассмотрения возможности предоставления Банком кредитного продукта, указанного в заявке.</p>
         </div>
 
-        <div id="step1" class="step">
+        <div id="step11" class="step">
           <p><b>ШАГ 1 из 6</b> - выберите вид кредитного продукта</p>
 
           <div class="field">
             <label>*Вид кредитного продукта</label>
 
             <div class="ui selection dropdown">
-              <input type="hidden" id="credit-product-type">
+              <input type="hidden" id="credit-product-type" value="-1">
               <i class="dropdown icon"></i>
               <div class="default text">Выберите вид кредитного продукта</div>
               <div class="menu">
-                <div class="item" data-value="0">Кредит на финансирование текущей деятельности</div>
-                <div class="item" data-value="1">Кредит на финансирование инвестиционной деятельности</div>
-                <div class="item" data-value="2">Факторинг</div>
-                <div class="item" data-value="3">Лизинг</div>
-                <div class="item" data-value="4">Банковская гарантия</div>
+                <div class="item" data-value="1">Кредит на финансирование текущей деятельности</div>
+                <div class="item" data-value="2">Кредит на финансирование инвестиционной деятельности</div>
+                <div class="item" data-value="3">Факторинг</div>
+                <div class="item" data-value="4">Лизинг</div>
+                <div class="item" data-value="5">Банковская гарантия</div>
               </div>
             </div>
           </div>
 
-          <button type="button" class="ui button orange" onclick="navigate('#step2')">
+          <div id="step-errors-1" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul><li>Выберите вид кредитного продукта.</li></ul>
+          </div>
+
+          <button type="button" class="ui button orange" onclick="validateSimpleStep('credit-product-type', 1)">
             Далее
           </button>
         </div>
@@ -41,22 +46,27 @@
             <label>*Валюта</label>
 
             <div class="ui selection dropdown">
-              <input type="hidden" id="currency-type">
+              <input type="hidden" id="currency-type" value="-1">
               <i class="dropdown icon"></i>
               <div class="default text">Выберите тип валюты</div>
               <div class="menu">
-                <div class="item" data-value="0">Белорусские рубли</div>
-                <div class="item" data-value="1">Евро</div>
-                <div class="item" data-value="2">Доллары США</div>
+                <div class="item" data-value="1">Белорусские рубли</div>
+                <div class="item" data-value="2">Евро</div>
+                <div class="item" data-value="3">Доллары США</div>
               </div>
             </div>
+          </div>
+
+          <div id="step-errors-2" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul><li>Выберите Валюту.</li></ul>
           </div>
 
           <button type="button" class="ui button orange" onclick="navigate('#step1')">
             Назад
           </button>
 
-          <button type="button" class="ui button orange" onclick="navigate('#step3')">
+          <button type="button" class="ui button orange" onclick="validateSimpleStep('currency-type', 2)">
             Далее
           </button>
         </div>
@@ -69,11 +79,16 @@
             <input id="sum-value" type="number" min="0" placeholder="Необходимая сумма в единицах валюты">
           </div>
 
+          <div id="step-errors-3" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul><li>Укажите сумму большую нуля</li></ul>
+          </div>
+
           <button type="button" class="ui button orange" onclick="navigate('#step2')">
             Назад
           </button>
 
-          <button type="button" class="ui button orange" onclick="navigate('#step4')">
+          <button type="button" class="ui button orange" onclick="validateSimpleStep('sum-value', 3)">
             Далее
           </button>
         </div>
@@ -86,11 +101,16 @@
             <input id="term-loan-product" type="number" min="0" placeholder="Срок кредитного продукта в месяцах">
           </div>
 
+          <div id="step-errors-4" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul><li>Укажите срок в месяцах больший чем ноль.</li></ul>
+          </div>
+
           <button type="button" class="ui button orange" onclick="navigate('#step3')">
             Назад
           </button>
 
-          <button type="button" class="ui button orange" onclick="navigate('#step5')">
+          <button type="button" class="ui button orange" onclick="validateSimpleStep('term-loan-product', 4)">
             Далее
           </button>
         </div>
@@ -104,15 +124,15 @@
               <i class="dropdown icon"></i>
               <div class="default text">Выберите виды предлагаемого обеспечения</div>
               <div class="menu">
-                <div class="item" data-value="0">Залог товаров в обороте</div>
-                <div class="item" data-value="1">Залог недвижимости</div>
-                <div class="item" data-value="2">Залог оборудования</div>
-                <div class="item" data-value="3">Залог транспортных средств</div>
-                <div class="item" data-value="4">Залог имущественных прав</div>
-                <div class="item" data-value="5">Поручительство</div>
-                <div class="item" data-value="6">Гарантия</div>
-                <div class="item" data-value="7">Гарантийный депозит денег</div>
-                <div class="item" data-value="8">Страхование риска невозврата (непогашения) кредита</div>
+                <div class="item" data-value="1">Залог товаров в обороте</div>
+                <div class="item" data-value="2">Залог недвижимости</div>
+                <div class="item" data-value="3">Залог оборудования</div>
+                <div class="item" data-value="4">Залог транспортных средств</div>
+                <div class="item" data-value="5">Залог имущественных прав</div>
+                <div class="item" data-value="6">Поручительство</div>
+                <div class="item" data-value="7">Гарантия</div>
+                <div class="item" data-value="8">Гарантийный депозит денег</div>
+                <div class="item" data-value="9">Страхование риска невозврата (непогашения) кредита</div>
               </div>
             </div>
           </div>
@@ -122,16 +142,21 @@
             <textarea id="other-provision-type" placeholder="Укажите здесь дополнительные виды обеспечения"></textarea>
           </div>
 
+          <div id="step-errors-5" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul><li>Выберите хотя бы один вид предлогаемого обеспечения или введите свой в "прочих видах обеспечения".</li></ul>
+          </div>
+
           <button type="button" class="ui button orange" onclick="navigate('#step4')">
             Назад
           </button>
 
-          <button type="button" class="ui button orange" onclick="navigate('#step6')">
+          <button type="button" class="ui button orange" onclick="validateFifthStep()">
             Далее
           </button>
         </div>
 
-        <div id="step6" class="step">
+        <div id="step1" class="step">
           <p><b>ШАГ 6 из 6</b> - Заполните Ваши персональные данные. Нажмите кнопку "Отправить заявку"</p>
 
           <div class="field">
@@ -143,21 +168,21 @@
 
             <div class="field">
               <label>*Адрес (город, улица, № дома)</label>
-              <input id="organization-name" type="text" placeholder="Адрес (город, улица, № дома)">
+              <input id="customers-address" type="text" placeholder="Адрес (город, улица, № дома)">
             </div>
 
             <div class="field">
               <label>*Вид основной деятельности</label>
               <div class="ui selection dropdown">
-                <input type="hidden" id="main-activity-type">
+                <input type="hidden" id="main-activity-type" value="0">
                 <i class="dropdown icon"></i>
                 <div class="default text">Укажите вид основной деятельности</div>
                 <div class="menu">
-                  <div class="item" data-value="0">Грузоперевозки</div>
-                  <div class="item" data-value="1">Производство</div>
-                  <div class="item" data-value="2">Сельское хозяйство</div>
-                  <div class="item" data-value="3">Строительство</div>
-                  <div class="item" data-value="4">Торговля</div>
+                  <div class="item" data-value="1">Грузоперевозки</div>
+                  <div class="item" data-value="2">Производство</div>
+                  <div class="item" data-value="3">Сельское хозяйство</div>
+                  <div class="item" data-value="4">Строительство</div>
+                  <div class="item" data-value="5">Торговля</div>
                 </div>
               </div>
             </div>
@@ -202,11 +227,16 @@
             </div>
           </div>
 
+          <div id="step-errors-6" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul id="errors_list"></ul>
+          </div>
+
           <button type="button" class="ui button orange" onclick="navigate('#step5')">
             Назад
           </button>
 
-          <button class="ui labeled icon button orange">
+          <button type="button" class="ui labeled icon button orange" onclick="validateSixthStep()">
             <i class="icon save"></i>
             Отправить заявку
           </button>

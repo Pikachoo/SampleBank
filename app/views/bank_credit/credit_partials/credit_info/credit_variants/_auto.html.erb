@@ -8,14 +8,14 @@
       <div class="grouped fields">
         <div class="field">
           <div class="ui radio checkbox">
-            <input name="credit_type" onclick="toggleElement('#car_credit', false)" value="5" type="radio">
-            <label>На приобретение транспортных средств</label>
+            <input id="credit_type_5" name="credit_type" onclick="toggleElement('#another_car_credit_type', false)" value="5" type="radio">
+            <label for="credit_type_5">На приобретение транспортных средств</label>
           </div>
         </div>
         <div class="field">
           <div class="ui radio checkbox">
-            <input name="credit_type" onclick="toggleElement('#another_car_credit_type', true)" value="6" type="radio">
-            <label>Другой вид автокредита</label>
+            <input id="credit_type_6" name="credit_type" onclick="toggleElement('#another_car_credit_type', true)" value="6" type="radio">
+            <label for="credit_type_6" onclick="toggleElement('#another_car_credit_type', true)">Другой вид автокредита</label>
           </div>
         </div>
         <div class="field" id="car_credit">

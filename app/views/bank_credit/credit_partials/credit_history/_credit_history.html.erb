@@ -1,32 +1,32 @@
 <div class="inline fields">
-  <label>Опыт кредитования в ОАО «Rude-bank»</label>
+  <label>*Опыт кредитования в ОАО «Rude-bank»</label>
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input id="rude_credit_yes" type='radio' name='rude_credits'>
+      <input id="rude_credit_yes" type='radio' name='rude_credits' value="1">
       <label for="rude_credit_yes">Да</label>
     </div>
   </div>
 
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="rude_credit_no" name='rude_credits'>
+      <input type='radio' id="rude_credit_no" name='rude_credits' value="2">
       <label for="rude_credit_no">Нет</label>
     </div>
   </div>
 </div>
 
 <div class="inline fields">
-  <label>Опыт кредитования в других банках</label>
+  <label>*Опыт кредитования в других банках</label>
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="another_credit_yes" name='another_credits'>
+      <input type='radio' id="another_credit_yes" name='another_credits' value="1">
       <label for="another_credit_yes">Да</label>
     </div>
   </div>
 
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="another_credit_no" name='another_credits'>
+      <input type='radio' id="another_credit_no" name='another_credits' value="2">
       <label for="another_credit_no">Нет</label>
     </div>
   </div>
@@ -46,17 +46,17 @@
 
 <h3>Имелись  ли   случаи   нарушения   сроков   погашения   кредита   и   процентов</h3>
 <div class="inline fields">
-  <label>Кредита</label>
+  <label>*Кредита</label>
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="credit_violation_yes" name='credit_violation' onclick="toggleElement('#credits_penaltyes', true)">
+      <input type='radio' id="credit_violation_yes" name='credit_violation' onclick="toggleElement('#credits_penaltyes', true)" value="1">
       <label for="credit_violation_yes">Да</label>
     </div>
   </div>
 
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="credit_violation_no" name='credit_violation' onclick="toggleElement('#credits_penaltyes', false)">
+      <input type='radio' id="credit_violation_no" name='credit_violation' onclick="toggleElement('#credits_penaltyes', false)" value="2">
       <label for="credit_violation_no">Нет</label>
     </div>
   </div>
@@ -81,14 +81,14 @@
   <label>Процентов</label>
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="procent_penalty_yes" onclick="toggleElement('#procents_penaltyes', true)" name='credit_violation'>
+      <input type='radio' id="procent_penalty_yes" value="1" onclick="toggleElement('#procents_penaltyes', true)" name='percent_violation'>
       <label for="procent_penalty_yes">Да</label>
     </div>
   </div>
 
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="procent_penalty_no" onclick="toggleElement('#procents_penaltyes', false)" name='credit_violation'>
+      <input type='radio' id="procent_penalty_no" value="2" onclick="toggleElement('#procents_penaltyes', false)" name='percent_violation'>
       <label for="procent_penalty_no">Нет</label>
     </div>
   </div>
@@ -113,14 +113,14 @@
   <label>Выступаете ли поручителем в других банках</label>
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="another_banks_credits_yes" name='another_banks_credits'>
+      <input type='radio' id="another_banks_credits_yes" value="1" name='another_banks_credits'>
       <label for="another_banks_credits_yes">Да</label>
     </div>
   </div>
 
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="another_banks_credits_no" name='another_banks_credits'>
+      <input type='radio' id="another_banks_credits_no" value="2" name='another_banks_credits'>
       <label for="another_banks_credits_no">Нет</label>
     </div>
   </div>
@@ -130,14 +130,14 @@
   <label>Исполняете ли денежные обязательства за должника по договору поручительства</label>
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' name='guarantee' id="guarantee_yes" onclick="toggleElement('#monthly_debt_sum', true)" >
+      <input type='radio' name='guarantee' id="guarantee_yes" value="1" onclick="toggleElement('#monthly_debt_sum', true)" >
       <label for="guarantee_yes">Да</label>
     </div>
   </div>
 
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="guarantee_no" name='guarantee' onclick="toggleElement('#monthly_debt_sum', false)" >
+      <input type='radio' id="guarantee_no" name='guarantee' value="2" onclick="toggleElement('#monthly_debt_sum', false)" >
       <label for="guarantee_no">Нет</label>
     </div>
   </div>
@@ -152,14 +152,14 @@
   <label>Имеется ли задолженность  по товарам, приобретенным в рассрочку</label>
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' name='installments' id="installments_yes" onclick="toggleElement('#customers_debt_info', true)" >
+      <input type='radio' name='installments' id="installments_yes" value="1" onclick="toggleElement('#customers_debt_info', true)" >
       <label for="installments_yes">Да</label>
     </div>
   </div>
 
   <div class='field'>
     <div class='ui checkbox radio'>
-      <input type='radio' id="installments_no" name='installments' onclick="toggleElement('#customers_debt_info', false)" >
+      <input type='radio' id="installments_no" name='installments' value="2" onclick="toggleElement('#customers_debt_info', false)" >
       <label for="installments_no">Нет</label>
     </div>
   </div>
@@ -187,10 +187,16 @@
 
     <br/><br/>
 </div>
+
+<div id="step-errors-11" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul id="errors-list-11"></ul>
+</div>
+
 <button type="button" class="ui button orange" onclick="navigate('#step10')">
   Назад
 </button>
 
-<button type="submit" class="ui button orange">
+<button type="button" onclick="validateEleventhStep()" class="ui button orange">
   Отправить данные
 </button>

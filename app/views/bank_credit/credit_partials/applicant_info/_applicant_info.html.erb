@@ -7,3 +7,8 @@
 <%= render partial: "bank_credit/credit_partials/applicant_info/personal_document", locals: {name: name}  %>
 <%= render partial: "bank_credit/credit_partials/applicant_info/phones", locals: {name: name}  %>
 <%= render partial: "bank_credit/credit_partials/applicant_info/addresses", locals: {name: name}  %>
+
+<div id="step-errors-<%= step %>" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul id="errors-list-<%= step %>"></ul>
+</div>

@@ -1,4 +1,4 @@
-<h3>Место работы заявителя</h3>
+<h3>Тип работы заявителя</h3>
 <%= render partial: "bank_credit/credit_partials/job_info/employment_type", locals: { name: name } %>
 <%= render partial: "bank_credit/credit_partials/job_info/contract_date", locals: { name: name }  %>
 <%= render partial: "bank_credit/credit_partials/job_info/organization_info", locals: { name: name }  %>
@@ -14,11 +14,12 @@
 <%= render partial: "bank_credit/credit_partials/job_info/job_category", locals: { name: name }  %>
 <%= render partial: "bank_credit/credit_partials/job_info/phones", locals: { name: name }  %>
 
+<div id="step-errors-<%= step %>" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul id="errors-list-<%= step %>"></ul>
+</div>
+
 <br/><br/>
 <button type="button" class="ui button orange" onclick="navigate('#step<%= step - 1 %>')">
   Назад
-</button>
-
-<button type="button" class="ui button orange" onclick="navigate('#step<%= step + 1 %>')">
-  Далее
 </button>

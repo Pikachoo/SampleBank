@@ -1,12 +1,12 @@
-<h3>Менялось ли ФИО:</h3>
+<h3>*Менялось ли ФИО:</h3>
 
 <div class="ui selection dropdown">
   <input type="hidden" id="<%= name %>_name_info">
   <i class="dropdown icon"></i>
   <div class="default text">Менялось ли ФИО</div>
   <div class="menu">
-    <div class="item" data-value="0" onclick="toggleElement('#<%= name %>_changing_reason', true)">Да</div>
-    <div class="item" data-value="1" onclick="toggleElement('#<%= name %>_changing_reason', false)">Нет</div>
+    <div class="item" data-value="1" onclick="toggleElement('#<%= name %>_changing_reason', true)">Да</div>
+    <div class="item" data-value="2" onclick="toggleElement('#<%= name %>_changing_reason', false)">Нет</div>
   </div>
 </div>
 <div class="field">

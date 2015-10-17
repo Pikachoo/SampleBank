@@ -10,7 +10,7 @@
         <p>Данная заявка оформляется оператором ОАО «Rude-банк».</p>
       </div>
 
-      <div id="step1" class="step">
+      <div id="step12" class="step">
         <p><b>ШАГ 1 из 11</b> - Заполните данные о порядке предоставления кредита.</p>
         <%= render partial: "bank_credit/credit_partials/credit_info/credit_info" %>
       </div>
@@ -23,24 +23,29 @@
       <div id="step3" class="step">
         <p><b>ШАГ 3 из 11</b> - Заполните общие сведения о заявителе.</p>
         <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_info", locals: { name: "customer", step: 3 } %>
-        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_navigation", locals: { step: 3}  %>
+        <br/><br/>
+        <button type="button" class="ui button orange" onclick="navigate('#step2')">Назад</button>
+        <button type="button" class="ui button orange" onclick="validateThirdCreditStep()">Далее</button>
       </div>
 
       <div id="step4" class="step">
         <p><b>ШАГ 4 из 11</b> - Заполните данные о месте работы заявителя.</p>
         <%= render partial: "bank_credit/credit_partials/job_info/job_info", locals: { name: "customer", step: 4 } %>
+        <button type="button" class="ui button orange" onclick="validateFourthCreditStep()">Далее</button>
       </div>
 
       <div id="step5" class="step">
-        <p><b>ШАГ 5 из 11</b> - Заполните данные о работе по совместительству заявителя(если она существует).</p>
+        <p><b>ШАГ 5 из 11</b> - Заполните данные о работе по совместительству заявителя(укажите "безработный" если она отсутствует).</p>
         <%= render partial: "bank_credit/credit_partials/job_info/job_info", locals: { name: "customer_additional", step: 5 }  %>
+        <button type="button" class="ui button orange" onclick="validateFifthCreditStep()">Далее</button>
       </div>
 
       <div id="step6" class="step">
         <p><b>ШАГ 6 из 11</b> - Заполните общие сведенья о супруге заявителя.</p>
-        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_info", locals: { name: "partner"} %>
+        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_info", locals: { name: "partner", step: 6} %>
         <%= render partial: "bank_credit/credit_partials/job_info/organization_info", locals: { name: 'partner' }  %>
-        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_navigation", locals: { step: 6}  %>
+        <button type="button" class="ui button orange" onclick="navigate('#step5')">Назад</button>
+        <button type="button" class="ui button orange" onclick="validateSixthStep()">Далее</button>
       </div>
 
       <div id="step7" class="step">
@@ -63,7 +68,7 @@
         <%= render partial: "bank_credit/credit_partials/additional_info/additional_info" %>
       </div>
 
-      <div id="step11" class="step">
+      <div id="step1" class="step">
         <p><b>ШАГ 11 из 11</b> - Заполните информацию о кредитной истории заявителя</p>
         <%= render partial: "bank_credit/credit_partials/credit_history/credit_history" %>
       </div>

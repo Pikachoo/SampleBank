@@ -4,3 +4,4 @@
 //= require custom/statement_behaviour.js
 //= require semantic_ui_initializer
 //= require custom/online_form_validation
+//= require custom/credit_form_validation

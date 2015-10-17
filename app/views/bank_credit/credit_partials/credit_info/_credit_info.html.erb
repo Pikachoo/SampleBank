@@ -5,7 +5,12 @@
 <%= render partial: "bank_credit/credit_partials/credit_info/collateral_value" %>
 <%= render partial: "bank_credit/credit_partials/credit_info/bank_account" %>
 
+<div id="step-errors-1" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul id="errors-list-1"></ul>
+</div>
+
 <br/><br/>
-<button type="button" class="ui button orange" onclick="navigate('#step2')">
+<button type="button" class="ui button orange" onclick="validateFirstCreditStep()">
   Далее
 </button>

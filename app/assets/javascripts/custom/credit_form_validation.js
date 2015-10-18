@@ -123,7 +123,7 @@ function validateFifthCreditStep() {
     validateJobCreditStep(5, "customer_additional");
 }
 
-function validateSixthStep() {
+function validateSixthCreditStep() {
     if ($("customer_family_status") == 3 || $("customer_family_status" == 4))
         return validateApplicant(6, "partner");
     navigateAfterValidation("#step-errors-" + 6, 6);

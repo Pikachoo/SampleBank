@@ -1,12 +1,23 @@
 <div class="container">
   <div class="ui segment">
 
-    <form id="online-credit-form" class="ui form error success">
-
+    <%= form_for :online_credit, url: online_credit_index_path, html: {class: "ui form error success", id: "online-credit-form"}, method: :post do |f| %>
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
       <h2 class="ui header dividing">Предварительная заявка на кредитный продукт</h2>
         <div class="request-info">
           <p>Для получения кредитной поддержки в ОАО «Rude-банк» Вам необходимо заполнить данную заявку.</p>
           <p>Представитель ОАО «БПС-Сбербанк» в ближайшее время свяжется с Вами по указанным в заявке реквизитам с целью дальнейшей организации процесса рассмотрения возможности предоставления Банком кредитного продукта, указанного в заявке.</p>
+        </div>
+
+        <div id="submit-errors" class="validation_errors <%= "invisible" if flash[:validation_errors] == nil %>">
+          <b>Во время отправки данных обнаружились следующие ошибки:</b>
+          <ul>
+            <% if (flash[:validation_errors] != nil) %>
+              <% flash[:validation_errors].each do |e| %>
+                <li><%= e %></li>
+              <% end %>
+            <% end %>
+          </ul>
         </div>
 
         <div id="step1" class="step">
@@ -16,7 +27,7 @@
             <label>*Вид кредитного продукта</label>
 
             <div class="ui selection dropdown">
-              <input type="hidden" id="credit-product-type" value="-1">
+              <%= f.number_field :credit_product_type, value: @online_credit_inputs["credit_product_type"], type: "hidden" %>
               <i class="dropdown icon"></i>
               <div class="default text">Выберите вид кредитного продукта</div>
               <div class="menu">
@@ -34,7 +45,7 @@
             <ul><li>Выберите вид кредитного продукта.</li></ul>
           </div>
 
-          <button type="button" class="ui button orange" onclick="validateSimpleStep('credit-product-type', 1)">
+          <button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_credit_product_type', 1)">
             Далее
           </button>
         </div>
@@ -46,7 +57,7 @@
             <label>*Валюта</label>
 
             <div class="ui selection dropdown">
-              <input type="hidden" id="currency-type" value="-1">
+              <%= f.number_field :currency_type, value: @online_credit_inputs["currency_type"], type: "hidden" %>
               <i class="dropdown icon"></i>
               <div class="default text">Выберите тип валюты</div>
               <div class="menu">
@@ -66,7 +77,7 @@
             Назад
           </button>
 
-          <button type="button" class="ui button orange" onclick="validateSimpleStep('currency-type', 2)">
+          <button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_currency_type', 2)">
             Далее
           </button>
         </div>
@@ -76,7 +87,7 @@
 
           <div class="field">
             <label>*Сумма</label>
-            <input id="sum-value" type="number" min="0" placeholder="Необходимая сумма в единицах валюты">
+            <%= f.number_field :sum_value, value: @online_credit_inputs["sum_value"], min: 0, placeholder: "Необходимая сумма в единицах валюты" %>
           </div>
 
           <div id="step-errors-3" class="validation_errors invisible">
@@ -88,7 +99,7 @@
             Назад
           </button>
 
-          <button type="button" class="ui button orange" onclick="validateSimpleStep('sum-value', 3)">
+          <button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_sum_value', 3)">
             Далее
           </button>
         </div>
@@ -98,7 +109,7 @@
 
           <div class="field">
             <label>Срок кредитного продукта</label>
-            <input id="term-loan-product" type="number" min="0" placeholder="Срок кредитного продукта в месяцах">
+            <%= f.number_field :term_loan_product, value: @online_credit_inputs["term_loan_product"], min: 0, placeholder: "Срок кредитного продукта в месяцах" %>
           </div>
 
           <div id="step-errors-4" class="validation_errors invisible">
@@ -110,7 +121,7 @@
             Назад
           </button>
 
-          <button type="button" class="ui button orange" onclick="validateSimpleStep('term-loan-product', 4)">
+          <button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_term_loan_product', 4)">
             Далее
           </button>
         </div>
@@ -120,7 +131,7 @@
 
           <div class="field">
             <div class="ui selection dropdown multiple">
-              <input type="hidden" id="provision-type">
+              <%= f.number_field :provision_type, value: @online_credit_inputs["provision_type"], type: "hidden" %>
               <i class="dropdown icon"></i>
               <div class="default text">Выберите виды предлагаемого обеспечения</div>
               <div class="menu">
@@ -139,7 +150,7 @@
 
           <div class="field">
             <label>Прочие виды обеспечения:</label>
-            <textarea id="other-provision-type" placeholder="Укажите здесь дополнительные виды обеспечения"></textarea>
+            <%= f.text_field :other_provision_type, value: @online_credit_inputs["other_provision_type"], placeholder: "Укажите здесь дополнительные виды обеспечения" %>
           </div>
 
           <div id="step-errors-5" class="validation_errors invisible">
@@ -163,18 +174,18 @@
 
             <div class="field">
               <label>*Наименование организации</label>
-              <input id="organization-name" type="text" placeholder="Наименование организации">
+              <%= f.text_field :organization_name, value: @online_credit_inputs["organization_name"], placeholder: "Наименование организации" %>
             </div>
 
             <div class="field">
               <label>*Адрес (город, улица, № дома)</label>
-              <input id="customers-address" type="text" placeholder="Адрес (город, улица, № дома)">
+              <%= f.text_field :customers_address, value: @online_credit_inputs["customers_address"], placeholder: "Адрес (город, улица, № дома)" %>
             </div>
 
             <div class="field">
               <label>*Вид основной деятельности</label>
               <div class="ui selection dropdown">
-                <input type="hidden" id="main-activity-type" value="0">
+                <%= f.number_field :main_activity_type, value: @online_credit_inputs["main_activity_type"], type: "hidden" %>
                 <i class="dropdown icon"></i>
                 <div class="default text">Укажите вид основной деятельности</div>
                 <div class="menu">
@@ -189,41 +200,41 @@
 
             <div class="field">
               <label>*Иной вид основной деятельности:</label>
-              <input id="alt-main-activity" type="text" placeholder="Укажите в случае отсутсвия в списке вашей основной деятельности">
+              <%= f.text_field :alt_main_activity, value: @online_credit_inputs["alt_main_activity"], placeholder: "Укажите в случае отсутсвия в списке вашей основной деятельности" %>
             </div>
 
             <div class="field">
               <label>Опыт ведения хоз. деятельности (мес.)</label>
-              <input id="organization-name" type="number" min="0" placeholder="Опыт ведения хоз. деятельности (мес.)">
+              <%= f.number_field :organization_experience, value: @online_credit_inputs["organization_experience"], placeholder: "Опыт ведения хоз. деятельности (мес.)", min: 0 %>
             </div>
 
             <p><b>Контактное лицо:</b></p>
 
             <div class="field">
               <label>*Имя</label>
-              <input id="customers-firstname" type="text" placeholder="Имя">
+              <%= f.text_field :customers_firstname, value: @online_credit_inputs["customers_firstname"], placeholder: "Имя" %>
             </div>
 
             <div class="field">
               <label>*Фамилия</label>
-              <input id="customers-lastname" type="text" placeholder="Фамилия">
+              <%= f.text_field :customers_lastname, value: @online_credit_inputs["customers_lastname"], placeholder: "Фамилия" %>
             </div>
 
             <div class="field">
               <label>*Отчество</label>
-              <input id="customers-patronymic" type="text" placeholder="Отчество">
+              <%= f.text_field :customers_patronymic, value: @online_credit_inputs["customers_patronymic"], placeholder: "Отчество" %>
             </div>
 
             <p><b>Контактная информация:</b></p>
 
             <div class="field">
               <label>*Телефон</label>
-              <input id="customers-phone" type="text" placeholder="+375-XXX-НОМЕР">
+              <%= f.text_field :customers_phone, value: @online_credit_inputs["customers_phone"], placeholder: "+375-XXX-НОМЕР" %>
             </div>
 
             <div class="field">
               <label>E-mail</label>
-              <input id="customers-email" type="text" placeholder="E-mail">
+              <%= f.text_field :customers_email, value: @online_credit_inputs["customers_email"], placeholder: "E-mail" %>
             </div>
           </div>
 
@@ -246,7 +257,7 @@
           <p>(*) Поля обязательные для заполнения</p>
           <p><b>Внимание!</b> Данная предварительная заявка не является обязательством банка по выдаче кредитных средств</p>
         </div>
-    </form>
+    <% end %>
 
   </div>
 </div>

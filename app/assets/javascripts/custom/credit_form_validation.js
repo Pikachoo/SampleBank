@@ -51,7 +51,6 @@ function validateFirstCreditStep() {
     validateToggledElement("[name='score_existance']:checked", 1, "bank_credit_account_id", 1, "Укажите номер счёта");
     $("#bank_credit_score_existance").val($("[name='score_existance']:checked").val());
     navigateAfterValidation("#step-errors-1", 1);
-    return $("#bank-credit-form").submit();
 }
 
 function validateSecondCreditStep() {

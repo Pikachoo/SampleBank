@@ -4,6 +4,7 @@ class BankCreditController < ApplicationController
     @bank_credit_inputs =  {credit_type: 0, credit_type_another_car: "", credit_type_another_card: "",
       another_home_credit_type: "", issuance_method: 0, granted_procedure: 0, issuance_score: "",
       affirmation_of_commitments: 0, collateral_employee: 0, collateral_customer: 0, score_id: "", score_existance: 0,
+      credit_sum: 0, credit_term: 0, credit_limit_term: 0, make_insurance: 0, repayment_method: 0
     }
     @bank_credit_inputs = flash[:inputs_params] if flash[:inputs_params] != nil
   end
@@ -33,6 +34,15 @@ class BankCreditController < ApplicationController
     validation_errors.push "Введите достоверную оценку залога клиентом на 1ом шаге." if bankCredit[:collateral_customer] != "" && bankCredit[:collateral_customer].to_i < 0
     validation_errors.push "Введите достоверную оценку залога служащим на 1ом шаге." if bankCredit[:collateral_employee] != "" && bankCredit[:collateral_employee].to_i < 0
     #End of first step validation
+
+    #Second step validation
+    validation_errors.push "Укажите сумму кредита на 2ом шаге." if bankCredit[:credit_sum].to_i < 1
+    validation_errors.push "Укажите срок кредита на 2ом шаге." if bankCredit[:credit_term].to_i < 1
+    validation_errors.push "Укажите срок освоения кредита на 2ом шаге." if bankCredit[:credit_limit_term].to_i < 1
+    validation_errors.push "Укажите ответ на совокупный кредит на 2ом шаге." if bankCredit[:total_income].to_i < 1 || bankCredit[:total_income].to_i > 2
+    validation_errors.push "Укажите будет ли клиент страховаться на 2ом шаге." if bankCredit[:make_insurance].to_i < 1 || bankCredit[:total_income].to_i > 2
+    validation_errors.push "Укажите вид выплаты кредита на 2ом шаге." if bankCredit[:repayment_method].to_i < 1 || bankCredit[:total_income].to_i > 2
+    #End of second step validation
 
     validation_errors == [] ? nil : validation_errors
   end

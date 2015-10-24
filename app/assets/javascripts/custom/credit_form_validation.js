@@ -55,12 +55,13 @@ function validateFirstCreditStep() {
 
 function validateSecondCreditStep() {
     prepareToValidation(2);
-    validateElementWithNullify("#credit_sum", 2, "Укажите сумму кредита");
-    validateElementWithNullify("#credit_term", 2, "Укажите колличество месяцев до конца оплаты");
-    validateElementWithNullify("#credit_limit_term", 2, "Укажите срок освоения кредита");
-    validateElementWithNullify("#make_insurance", 2, "Укажите информацию о страховании клиента");
-    validateElementWithNullify("#repayment_method", 2, "Укажите способ погашения кредита");
+    validateElementWithNullify("#bank_credit_credit_sum", 2, "Укажите сумму кредита");
+    validateElementWithNullify("#bank_credit_credit_term", 2, "Укажите колличество месяцев до конца оплаты");
+    validateElementWithNullify("#bank_credit_credit_limit_term", 2, "Укажите срок освоения кредита");
+    validateElementWithNullify("#bank_credit_make_insurance", 2, "Укажите информацию о страховании клиента");
+    validateElementWithNullify("#bank_credit_repayment_method", 2, "Укажите способ погашения кредита");
     navigateAfterValidation("#step-errors-2", 2);
+    return $("#bank-credit-form").submit();
 }
 
 function validateApplicant(step, id) {

@@ -1,22 +1,22 @@
 <h3>*Сумма кредита</h3>
 
 <div class="field">
-  <input id="credit_sum" type="number" min="0" placeholder="сумма кредита в белорусских рублях">
+  <%= f.number_field :credit_sum, value: @bank_credit_inputs["credit_sum"], min: 0, placeholder: "Cумма кредита в белорусских рублях"%>
 </div>
 
 <h3>*Срок кредита</h3>
 <div class="field">
-  <input id="credit_term" type="number" min="0" placeholder="месяцев до даты">
+  <%= f.number_field :credit_term, value: @bank_credit_inputs["credit_term"], min: 0, placeholder: "Месяцев до даты"%>
 </div>
 
 <h3>*Срок освоения(предельная дата выдачи) кредита</h3>
 <div class="field">
-  <input id="credit_limit_term" type="number" min="0" placeholder="месяцев до даты">
+  <%= f.number_field :credit_limit_term, value: @bank_credit_inputs["credit_limit_term"], min: 0, placeholder: "Месяцев до даты"%>
 </div>
 
 <h3>Совокупный доход (для кредита на финансирование недвижимости или автокредита)</h3>
 <div class="ui selection dropdown">
-  <input type="hidden" id="total_income">
+  <%= f.number_field :total_income, value: @bank_credit_inputs["total_income"], type: "hidden"%>
   <i class="dropdown icon"></i>
   <div class="default text">Совокупный доход (для кредита на финансирование недвижимости или автокредита)</div>
   <div class="menu">
@@ -27,7 +27,7 @@
 
 <h3>*Будете ли Вы страховаться от несчастных случаев и болезней</h3>
 <div class="ui selection dropdown">
-  <input type="hidden" id="make_insurance">
+  <%= f.number_field :make_insurance, value: @bank_credit_inputs["make_insurance"], type: "hidden"%>
   <i class="dropdown icon"></i>
   <div class="default text">Будете ли Вы страховаться от несчастных случаев и болезней</div>
   <div class="menu">
@@ -38,7 +38,7 @@
 
 <h3>*Способ погашения кредита</h3>
 <div class="ui selection dropdown">
-  <input type="hidden" id="repayment_method">
+  <%= f.number_field :repayment_method, value: @bank_credit_inputs["repayment_method"], type: "hidden"%>
   <i class="dropdown icon"></i>
   <div class="default text">Способ погашения кредита</div>
   <div class="menu">

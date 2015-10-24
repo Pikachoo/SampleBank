@@ -1,19 +1,21 @@
 <h3>*Наличие в ОАО «Rude-bank» счета, на который перечисляется заработная плата и/или приравненные к ней доходы</h3>
 
+<input id="score_existance" type="hidden" />
+<%= f.number_field :score_existance, value: @bank_credit_inputs["score_existance"], type: "hidden" %>
 <div class="two fields">
   <div class="field">
     <div class="ui checkbox radio">
-      <input type="radio" id="score_existance_yes" value="1" name="score_existance" onclick="toggleElement('#account_id', true)">
+      <input type="radio" id="score_existance_yes" value="1" name="score_existance" onclick="toggleElement('#bank_credit_account_id', true)">
       <label for="score_existance_yes">Да</label>
     </div>
   </div>
 
   <div class="field">
     <div class="ui checkbox radio">
-      <input type="radio" id="score_existance_no" value="2" name="score_existance" onclick="toggleElement('#account_id', false)">
+      <input type="radio" id="score_existance_no" value="2" name="score_existance" onclick="toggleElement('#bank_credit_account_id', false)">
       <label for="score_existance_no">Нет</label>
     </div>
   </div>
 </div>
 
-<input id="account_id" class="invisible" type="text" placeholder="Номер счёта">
+<%= f.text_field :account_id, value: @bank_credit_inputs["account_id"], class: "invisible", placeholder: "Номер счёта" %>

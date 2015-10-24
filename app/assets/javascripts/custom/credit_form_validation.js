@@ -40,15 +40,18 @@ function navigateAfterValidation(boardSelector, step) {
 function validateFirstCreditStep() {
     prepareToValidation(1);
     validateElementWithNullify("[name='credit_type']:checked", 1, "Выберите тип кредита");
-    validateElementWithNullify("#granted_procedure", 1, "Выберите порядок предоставления");
-    validateElementWithNullify("#issuance_method", 1, "Выберите способ выдачи");
-    validateElementWithNullify("#affirmation_of_commitments", 1, "Выберите вид обеспечения исполнения кредитных обязательств");
+    $("#bank_credit_credit_type").val($("[name='credit_type']:checked").val());
+    validateElementWithNullify("#bank_credit_granted_procedure", 1, "Выберите порядок предоставления");
+    validateElementWithNullify("#bank_credit_issuance_method", 1, "Выберите способ выдачи");
+    validateElementWithNullify("#bank_credit_affirmation_of_commitments", 1, "Выберите вид обеспечения исполнения кредитных обязательств");
     validateElementWithNullify("[name='score_existance']:checked", 1, "Укажите, имеется ли з.п. или доходы в нашем банке");
-    validateToggledElement("[name='credit_type']:checked", 4, "another_home_credit_type", 1, "Укажите вид кредита на финансирование имущества");
-    validateToggledElement("[name='credit_type']:checked", 6, "another_car_credit_type", 1, "Укажите вид автокредита");
-    validateToggledElement("[name='credit_type']:checked", 8, "another_card_credit_type", 1, "Укажите вид кредитных карт");
-    validateToggledElement("[name='score_existance']:checked", 1, "account_id", 1, "Укажите номер счёта");
+    validateToggledElement("[name='credit_type']:checked", 4, "bank_credit_another_home_credit_type", 1, "Укажите вид кредита на финансирование имущества");
+    validateToggledElement("[name='credit_type']:checked", 6, "bank_credit_credit_type_another_car", 1, "Укажите вид автокредита");
+    validateToggledElement("[name='credit_type']:checked", 8, "bank_credit_credit_type_another_card", 1, "Укажите вид кредитных карт");
+    validateToggledElement("[name='score_existance']:checked", 1, "bank_credit_account_id", 1, "Укажите номер счёта");
+    $("#bank_credit_score_existance").val($("[name='score_existance']:checked").val());
     navigateAfterValidation("#step-errors-1", 1);
+    return $("#bank-credit-form").submit();
 }
 
 function validateSecondCreditStep() {

@@ -40,6 +40,10 @@ function validateSixthStep() {
         validateErrorsCount++;
         $("#errors_list").append("<li>Укажите имя клиента.</li>");
     }
+    if ($("#online_credit_organization_experience").val() < 1){
+        validateErrorsCount++;
+        $("#errors_list").append("<li>Укажите ваш опыт работы.</li>");
+    }
     if ($("#online_credit_customers_lastname").val() == ""){
         validateErrorsCount++;
         $("#errors_list").append("<li>Укажите фамилию клиента.</li>");

@@ -9,7 +9,6 @@ class OnlineCreditController < ApplicationController
   end
 
   def create
-    #@online_credit = OnlineCredit.new(online_credit_params)
     return redirect_to :back, params: params, flash: { validation_errors: validate, inputs_params: params[:online_credit] }
   end
 
@@ -30,8 +29,6 @@ class OnlineCreditController < ApplicationController
     validation_errors.push "Введите имя вашей организации на 6ом шаге." if onlineCredit[:organization_name] == ""
     validation_errors.push "Введите ваш адрес проживания на 6ом шаге." if onlineCredit[:customers_address] == ""
     validation_errors.push "Введите вид вашей деятельности на 6ом шаге." if (onlineCredit[:main_activity_type].to_i == 0 && onlineCredit[:alt_main_activity] == "") || onlineCredit[:main_activity_type].to_i > 5
-    validation_errors.push "Введите ваш опыт работы на 6ом шаге." if onlineCredit[:organization_experience].to_i <= 0
-    validation_errors.push "Введите ваш опыт работы на 6ом шаге." if onlineCredit[:organization_experience].to_i <= 0
     validation_errors.push "Введите ваш опыт работы на 6ом шаге." if onlineCredit[:organization_experience].to_i <= 0
     validation_errors.push "Введите ваш имя на 6ом шаге." if onlineCredit[:customers_firstname] == ""
     validation_errors.push "Введите ваш фамилию на 6ом шаге." if onlineCredit[:customers_lastname] == ""

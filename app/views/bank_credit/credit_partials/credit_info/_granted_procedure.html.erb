@@ -1,7 +1,7 @@
 <h3>*Порядок предоставления:</h3>
 
 <div class="ui selection dropdown">
-  <input type="hidden" id="granted_procedure">
+  <%= f.number_field :granted_procedure, value: @bank_credit_inputs["granted_procedure"], type: "hidden"%>
   <i class="dropdown icon"></i>
   <div class="default text">Порядок предоставления</div>
   <div class="menu">

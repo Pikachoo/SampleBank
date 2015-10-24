@@ -1,7 +1,7 @@
 <h3>*Предлагаю в обеспечение исполнения кредитных обязательств:</h3>
 
 <div class="ui selection dropdown">
-  <input type="hidden" id="affirmation_of_commitments">
+  <%= f.number_field :affirmation_of_commitments, value: @bank_credit_inputs["affirmation_of_commitments"], type: "hidden"%>
   <i class="dropdown icon"></i>
   <div class="default text">Способ выдачи</div>
   <div class="menu">

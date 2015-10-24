@@ -1,8 +1,9 @@
 <h3>*Прошу предоставить кредит на:</h3>
 
 <div class="ui vertical selection accordion menu">
-  <%= render partial: "bank_credit/credit_partials/credit_info/credit_variants/home" %>
-  <%= render partial: "bank_credit/credit_partials/credit_info/credit_variants/auto" %>
-  <%= render partial: "bank_credit/credit_partials/credit_info/credit_variants/card" %>
-  <%= render partial: "bank_credit/credit_partials/credit_info/credit_variants/credit_factory" %>
+  <%= f.number_field :credit_type, value: @bank_credit_inputs["credit_type"], type: "hidden" %>
+  <%= render partial: "bank_credit/credit_partials/credit_info/credit_variants/home", locals: {f: f} %>
+  <%= render partial: "bank_credit/credit_partials/credit_info/credit_variants/auto", locals: {f: f} %>
+  <%= render partial: "bank_credit/credit_partials/credit_info/credit_variants/card", locals: {f: f} %>
+  <%= render partial: "bank_credit/credit_partials/credit_info/credit_variants/credit_factory", locals: {f: f} %>
 </div>

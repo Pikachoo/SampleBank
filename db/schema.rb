@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018130412) do
+ActiveRecord::Schema.define(version: 20151024131723) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer "type_id",     limit: 4,                  null: false
@@ -27,6 +27,24 @@ ActiveRecord::Schema.define(version: 20151018130412) do
   add_index "accounts", ["client_id"], name: "client_id", using: :btree
   add_index "accounts", ["currency_id"], name: "currency_id", using: :btree
   add_index "accounts", ["type_id"], name: "type_id", using: :btree
+
+  create_table "bank_credit", force: :cascade do |t|
+    t.integer "credit_type",                limit: 4
+    t.string  "credit_type_another_home",   limit: 255
+    t.string  "credit_type_another_car",    limit: 255
+    t.string  "credit_type_another_card",   limit: 255
+    t.integer "granted_procedure",          limit: 4
+    t.integer "affirmation_of_commitments", limit: 4
+    t.integer "collateral_customer",        limit: 4
+    t.integer "collateral_employee",        limit: 4
+    t.integer "score_existance",            limit: 4
+    t.integer "account_id",                 limit: 4
+  end
+
+  create_table "bank_credits", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cards", force: :cascade do |t|
     t.integer "account_id",  limit: 4, null: false
@@ -166,7 +184,7 @@ ActiveRecord::Schema.define(version: 20151018130412) do
     t.datetime "timestamp",               null: false
   end
 
-  create_table "type", force: :cascade do |t|
+  create_table "types", force: :cascade do |t|
     t.string "name", limit: 16, null: false
   end
 

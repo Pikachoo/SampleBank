@@ -1,7 +1,7 @@
 <div class="container">
   <div class="ui segment">
 
-    <form class="ui form error success">
+    <%= form_for :bank_credit, url: bank_credit_index_path, html: {class: "ui form error success", id: "bank-credit-form"}, method: :post do |f| %>
 
       <h2 class="ui header">Заявление - анкета для получения кредита</h2>
 
@@ -10,9 +10,20 @@
         <p>Данная заявка оформляется оператором ОАО «Rude-банк».</p>
       </div>
 
+      <div id="submit-errors" class="validation_errors <%= "invisible" if flash[:validation_errors] == nil %>">
+        <b>Во время отправки данных обнаружились следующие ошибки:</b>
+        <ul>
+          <% if (flash[:validation_errors] != nil) %>
+            <% flash[:validation_errors].each do |e| %>
+                <li><%= e %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
       <div id="step1" class="step">
         <p><b>ШАГ 1 из 11</b> - Заполните данные о порядке предоставления кредита.</p>
-        <%= render partial: "bank_credit/credit_partials/credit_info/credit_info" %>
+        <%= render partial: "bank_credit/credit_partials/credit_info/credit_info", locals: {f: f} %>
       </div>
 
       <div id="step2" class="step">
@@ -78,6 +89,6 @@
         <p>Разделы обозначенные как (*) обязательные для заполнения</p>
       </div>
 
-    </form>
+    <% end %>
   </div>
 </div>

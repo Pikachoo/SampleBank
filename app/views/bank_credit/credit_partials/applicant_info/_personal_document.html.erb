@@ -3,28 +3,28 @@
 <div class="three fields">
   <div class="field">
     <label>*Наименование документа</label>
-    <input id="<%= name %>_document_type" type="text" placeholder="Наименование документа">
+    <%= f.text_field "#{name}_document_type", value: @bank_credit_inputs["#{name}_document_type"], placeholder: "Наименование документа"%>
   </div>
 
   <div class="field">
     <label>*Серия</label>
-    <input id="<%= name %>_document_series" type="text" placeholder="Серия">
+    <%= f.text_field "#{name}_document_series", value: @bank_credit_inputs["#{name}_document_series"], placeholder: "Серия"%>
   </div>
 
   <div class="field">
     <label>*Номер</label>
-    <input id="<%= name %>_document_number" type="text" placeholder="Номер">
+    <%= f.text_field "#{name}_document_number", value: @bank_credit_inputs["#{name}_document_number"], placeholder: "Номер"%>
   </div>
 </div>
 
 <div class="two fields">
   <div class="field">
     <label>*Дата выдачи</label>
-    <input id="<%= name %>_document_given_date" type="date" placeholder="Наименование документа">
+    <%= f.text_field "#{name}_document_given_date", value: @bank_credit_inputs["#{name}_document_given_date"], placeholder: "Дата выдачи"%>
   </div>
 
   <div class="field">
     <label>*Дата окончания</label>
-    <input id="<%= name %>_document_end_date" type="date" placeholder="Серия">
+    <%= f.text_field "#{name}_document_end_date", value: @bank_credit_inputs["#{name}_document_end_date"], placeholder: "Дата окончания"%>
   </div>
 </div>

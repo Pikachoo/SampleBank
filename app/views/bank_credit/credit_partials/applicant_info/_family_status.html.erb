@@ -1,7 +1,7 @@
 <h3>Семейное положение</h3>
 
 <div class="ui selection dropdown">
-  <input type="hidden" id="<%= name %>_family_status">
+  <%= f.text_field "#{name}_family_status", value: @bank_credit_inputs["#{name}_family_status"], type: "hidden"%>
   <i class="dropdown icon"></i>
   <div class="default text">Семейное положение</div>
   <div class="menu">

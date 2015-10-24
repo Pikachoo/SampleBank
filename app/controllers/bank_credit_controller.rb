@@ -44,6 +44,35 @@ class BankCreditController < ApplicationController
     validation_errors.push "Укажите вид выплаты кредита на 2ом шаге." if bankCredit[:repayment_method].to_i < 1 || bankCredit[:total_income].to_i > 2
     #End of second step validation
 
+    #Third step validation
+    validation_errors.push "Укажите имя клиента на 3ем шаге." if bankCredit[:customer_firstname] == ""
+    validation_errors.push "Укажите фамилию клиента на 3ем шаге." if bankCredit[:customer_lastname] == ""
+    validation_errors.push "Укажите отчество клиента на 3ем шаге." if bankCredit[:customer_patronymic] == ""
+    validation_errors.push "Укажите день рождения клиента на 3ем шаге." if bankCredit[:customer_birthdate] == ""
+    validation_errors.push "Укажите идентификационный номер клиента на 3ем шаге." if bankCredit[:customer_id] == ""
+    validation_errors.push "Укажите возраст клиента на 3ем шаге." if bankCredit[:customer_age] == "" || bankCredit[:customer_age].to_i < 1
+    validation_errors.push "Укажите гражданство клиента на 3ем шаге." if bankCredit[:customer_country] == ""
+    validation_errors.push "Укажите место рождения клиента на 3ем шаге." if bankCredit[:customer_birthplace] == ""
+    validation_errors.push "Укажите семейное положение клиента на 3ем шаге." if bankCredit[:customer_family_status].to_i < 1 || bankCredit[:customer_family_status].to_i > 5
+    validation_errors.push "Укажите жилищные условия клиента на 3ем шаге." if bankCredit[:customer_living_conditions].to_i < 1 || bankCredit[:customer_living_conditions].to_i > 8
+    validation_errors.push "Укажите тип жилищных условий клиента на 3ем шаге." if bankCredit[:customer_living_conditions].to_i == 8 && bankCredit[:customer_another_living_conditions] == ""
+    validation_errors.push "Укажите образование клиента на 3ем шаге." if bankCredit[:customer_education].to_i < 1 || bankCredit[:customer_education].to_i > 8
+    validation_errors.push "Укажите отношение клиента к воинской службе на 3ем шаге." if bankCredit[:customer_military_conditions].to_i < 1 || bankCredit[:customer_military_conditions].to_i > 4
+    validation_errors.push "Укажите дату отсрочки клиента от воинской службы на 3ем шаге." if bankCredit[:customer_military_conditions].to_i == 3 && bankCredit[:customer_reprieve_end_date] == ""
+    validation_errors.push "Укажите информацию об имени клиента на 3ем шаге." if bankCredit[:customer_name_info].to_i < 1 || bankCredit[:customer_name_info].to_i > 2
+    validation_errors.push "Укажите причину смены имени клиентом на 3ем шаге." if bankCredit[:customer_name_info].to_i == 1 && bankCredit[:customer_changing_reason] == ""
+    validation_errors.push "Укажите наименование документа клиента на 3ем шаге." if bankCredit[:customer_document_type] == ""
+    validation_errors.push "Укажите серию документа клиента на 3ем шаге." if bankCredit[:customer_document_series] == ""
+    validation_errors.push "Укажите номер документа клиента на 3ем шаге." if bankCredit[:customer_document_number] == ""
+    validation_errors.push "Укажите дату выдачи документа клиента на 3ем шаге." if bankCredit[:customer_document_given_date] == ""
+    validation_errors.push "Укажите дату окончания документа клиента на 3ем шаге." if bankCredit[:customer_document_end_date] == ""
+    validation_errors.push "Укажите адрес регистрации по месту жительства клиента на 3ем шаге." if bankCredit[:customer_registration_address] == ""
+    validation_errors.push "Укажите адрес по месту пребывания клиента на 3ем шаге." if bankCredit[:customer_registration_place] == ""
+    validation_errors.push "Укажите адрес фактического места проживания клиента на 3ем шаге." if bankCredit[:customer_actual_living_place] == ""
+    validation_errors.push "Укажите срок проживания по месту фактического проживания клиента на 3ем шаге." if bankCredit[:customer_living_age].to_i < 1
+
+    #End of third step validation
+
     validation_errors == [] ? nil : validation_errors
   end
 end

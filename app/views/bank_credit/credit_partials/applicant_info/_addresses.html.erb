@@ -2,20 +2,20 @@
 
 <div class="field">
   <label>*Адрес регистрации по месту жительства</label>
-  <input id="<%= name %>-registration-address" type="text" placeholder="Адрес регистрации по месту жительства">
+  <%= f.text_field "#{name}_registration_address", value: @bank_credit_inputs["#{name}_registration_address"], placeholder: "Адрес регистрации по месту жительства"%>
 </div>
 
 <div class="field">
   <label>*Адрес регистрации по месту пребывания</label>
-  <input id="<%= name %>-registration-place" type="text" placeholder="Адрес регистрации по месту пребывания">
+  <%= f.text_field "#{name}_registration_place", value: @bank_credit_inputs["#{name}_registration_place"], placeholder: "Адрес регистрации по месту пребывания"%>
 </div>
 
 <div class="field">
   <label>*Адрес места фактического проживания</label>
-  <input id="<%= name %>-actual-living-place" type="text" placeholder="Адрес места фактического проживания">
+  <%= f.text_field "#{name}_actual_living_place", value: @bank_credit_inputs["#{name}_actual_living_place"], placeholder: "Адрес места фактического проживания"%>
 </div>
 
 <div class="field">
   <label>*Срок проживания в населенном пункте по адресу фактического проживания</label>
-  <input id="<%= name %>-living-age" type="number" min="0" placeholder="Срок проживания в населенном пункте по адресу фактического проживания">
+  <%= f.number_field "#{name}_living_age", value: @bank_credit_inputs["#{name}_living_age"], placeholder: "Срок проживания в населенном пункте по адресу фактического проживания", min: 0%>
 </div>

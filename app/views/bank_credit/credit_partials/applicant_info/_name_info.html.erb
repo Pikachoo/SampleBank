@@ -1,14 +1,14 @@
 <h3>*Менялось ли ФИО:</h3>
 
 <div class="ui selection dropdown">
-  <input type="hidden" id="<%= name %>_name_info">
+  <%= f.number_field "#{name}_name_info", value: @bank_credit_inputs["#{name}_name_info"], type: "hidden"%>
   <i class="dropdown icon"></i>
   <div class="default text">Менялось ли ФИО</div>
   <div class="menu">
-    <div class="item" data-value="1" onclick="toggleElement('#<%= name %>_changing_reason', true)">Да</div>
-    <div class="item" data-value="2" onclick="toggleElement('#<%= name %>_changing_reason', false)">Нет</div>
+    <div class="item" data-value="1" onclick="toggleElement('#bank_credit_<%= name %>_changing_reason', true)">Да</div>
+    <div class="item" data-value="2" onclick="toggleElement('#bank_credit_<%= name %>_changing_reason', false)">Нет</div>
   </div>
 </div>
 <div class="field">
-  <textarea id="<%= name %>_changing_reason" class="invisible" type="text" placeholder="Старые данные и причины их изменения."></textarea>
+  <%= f.text_field "#{name}_changing_reason", value: @bank_credit_inputs["#{name}_changing_reason"], placeholder: "Старые данные и причины их изменения.", class: "invisible"%>
 </div>

@@ -3,50 +3,50 @@
 <div class="three fields">
   <div class="field">
     <label>*Имя</label>
-    <input id="<%= name %>-firstname" type="text" placeholder="Имя">
+    <%= f.text_field "#{name}_firstname", value: @bank_credit_inputs["#{name}_firstname"], placeholder: "Имя"%>
   </div>
 
   <div class="field">
     <label>*Фамилия</label>
-    <input id="<%= name %>-lastname" type="text" placeholder="Фамилия">
+    <%= f.text_field "#{name}_lastname", value: @bank_credit_inputs["#{name}_lastname"], placeholder: "Фамилия"%>
   </div>
 
   <div class="field">
     <label>*Отчество</label>
-    <input id="<%= name %>-patronymic" type="text" placeholder="Отчество">
+    <%= f.text_field "#{name}_patronymic", value: @bank_credit_inputs["#{name}_patronymic"], placeholder: "Отчество"%>
   </div>
 </div>
 
 <div class="three fields">
   <div class="field">
     <label>*Число, месяц, год, рождения</label>
-    <input id="<%= name %>-birthdate" type="text" placeholder="Число, месяц, год, рождения">
+    <%= f.text_field "#{name}_birthdate", value: @bank_credit_inputs["#{name}_birthdate"], placeholder: "Число, месяц, год, рождения"%>
   </div>
 
   <div class="field">
     <label>*Идентификационный номер</label>
-    <input id="<%= name %>-id" type="text" placeholder="Идентификационный номер">
+    <%= f.text_field "#{name}_id", value: @bank_credit_inputs["#{name}_id"], placeholder: "Идентификационный номер"%>
   </div>
 
   <div class="field">
     <label>*Возраст</label>
-    <input id="<%= name %>-age" type="number" min="0" placeholder="Колличество полных лет">
+    <%= f.number_field "#{name}_age", min: 0, value: @bank_credit_inputs["#{name}_age"], placeholder: "Колличество полных лет"%>
   </div>
 </div>
 
 <div class="three fields">
   <div class="field">
     <label>*Гражданство</label>
-    <input id="<%= name %>-country" type="text" placeholder="Гражданство">
+    <%= f.text_field "#{name}_country", value: @bank_credit_inputs["#{name}_country"], placeholder: "Гражданство"%>
   </div>
 
   <div class="field">
     <label>*Место рождения</label>
-    <input id="<%= name %>-birthplace" type="text" placeholder="Место рождения">
+    <%= f.text_field "#{name}_birthplace", value: @bank_credit_inputs["#{name}_birthplace"], placeholder: "Место рождения"%>
   </div>
 </div>
 
 <div class="field">
   <label>Длительность подтверждаемого проживания на территории РБ (заполняется лицом без гражданства/иностранным гражданином, постоянно проживающим в Республике Беларусь)</label>
-  <input id="<%= name %>-rb-age" type="number" min="0" placeholder="Колличество полных лет">
+  <%= f.number_field "#{name}_rb_age", min: 0, value: @bank_credit_inputs["#{name}_rb_age"], placeholder: "Колличество полных лет"%>
 </div>

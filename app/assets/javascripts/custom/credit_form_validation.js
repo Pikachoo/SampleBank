@@ -61,41 +61,41 @@ function validateSecondCreditStep() {
     validateElementWithNullify("#bank_credit_make_insurance", 2, "Укажите информацию о страховании клиента");
     validateElementWithNullify("#bank_credit_repayment_method", 2, "Укажите способ погашения кредита");
     navigateAfterValidation("#step-errors-2", 2);
-    return $("#bank-credit-form").submit();
 }
 
 function validateApplicant(step, id) {
     prepareToValidation(step);
-    validateElementWithEmptiness("#" + id + "-firstname", step, "Укажите имя");
-    validateElementWithEmptiness("#" + id + "-lastname", step, "Укажите фамилию");
-    validateElementWithEmptiness("#" + id + "-patronymic", step, "Укажите отчество");
-    validateElementWithEmptiness("#" + id + "-birthdate", step, "Укажите день рождения");
-    validateElementWithEmptiness("#" + id + "-id", step, "Укажите идентификационный номер");
-    validateElementWithNullify("#" + id + "-age", step, "Укажите возраст");
-    validateElementWithEmptiness("#" + id + "-country", step, "Укажите гражданство");
-    validateElementWithEmptiness("#" + id + "-birthplace", step, "Укажите место рождения");
-    validateElementWithNullify("#" + id + "_family_status", step, "Укажите семейное положение");
-    validateElementWithNullify("#" + id + "_living_conditions", step, "Укажите жилищные условия");
-    validateToggledElement("#" + id + "_living_conditions", 8, "" + id + "_another_living_conditions", step, "Укажите место проживания");
-    validateElementWithNullify("#" + id + "_education", step, "Укажите образование клиента");
-    validateElementWithNullify("#" + id + "_military_conditions", step, "Укажите отношение к воинской службе");
-    validateToggledElement("#" + id + "_military_conditions", 3, "" + id + "_reprieve_end_date", step, "Укажите срок окончания отсрочки");
-    validateElementWithNullify("#" + id + "_name_info", step, "Укажите менялось ли ФИО");
-    validateToggledElement("#" + id + "_name_info", 1, "" + id + "_changing_reason", step, "Укажите причину смены фио");
-    validateElementWithEmptiness("#" + id + "_document_type", step, "Укажите наименование документа");
-    validateElementWithEmptiness("#" + id + "_document_series", step, "Укажите серию документа");
-    validateElementWithEmptiness("#" + id + "_document_number", step, "Укажите номер документа");
-    validateElementWithEmptiness("#" + id + "_document_given_date", step, "Укажите дату выдачи документа");
-    validateElementWithEmptiness("#" + id + "_document_end_date", step, "Укажите дату окончания документа");
-    validateElementWithEmptiness("#" + id + "-registration-address", step, "Укажите адрес регистрации по месту жительства");
-    validateElementWithEmptiness("#" + id + "-registration-place", step, "Укажите адрес регистрации по месту пребывания");
-    validateElementWithEmptiness("#" + id + "-actual-living-place", step, "Укажите адрес места фактического проживания");
-    validateElementWithNullify("#c" + id + "-living-age", step, "Укажите срок проживания клиента по фактическому адресу");
+    validateElementWithEmptiness("#bank_credit_" + id + "_firstname", step, "Укажите имя");
+    validateElementWithEmptiness("#bank_credit_" + id + "_lastname", step, "Укажите фамилию");
+    validateElementWithEmptiness("#bank_credit_" + id + "_patronymic", step, "Укажите отчество");
+    validateElementWithEmptiness("#bank_credit_" + id + "_birthdate", step, "Укажите день рождения");
+    validateElementWithEmptiness("#bank_credit_" + id + "_id", step, "Укажите идентификационный номер");
+    validateElementWithNullify("#bank_credit_" + id + "_age", step, "Укажите возраст");
+    validateElementWithEmptiness("#bank_credit_" + id + "_country", step, "Укажите гражданство");
+    validateElementWithEmptiness("#bank_credit_" + id + "_birthplace", step, "Укажите место рождения");
+    validateElementWithNullify("#bank_credit_" + id + "_family_status", step, "Укажите семейное положение");
+    validateElementWithNullify("#bank_credit_" + id + "_living_conditions", step, "Укажите жилищные условия");
+    validateToggledElement("#bank_credit_" + id + "_living_conditions", 8, "bank_credit_" + id + "_another_living_conditions", step, "Укажите место проживания");
+    validateElementWithNullify("#bank_credit_" + id + "_education", step, "Укажите образование клиента");
+    validateElementWithNullify("#bank_credit_" + id + "_military_conditions", step, "Укажите отношение к воинской службе");
+    validateToggledElement("#bank_credit_" + id + "_military_conditions", 3, "bank_credit_" + id + "_reprieve_end_date", step, "Укажите срок окончания отсрочки");
+    validateElementWithNullify("#bank_credit_" + id + "_name_info", step, "Укажите менялось ли ФИО");
+    validateToggledElement("#bank_credit_" + id + "_name_info", 1, "bank_credit_" + id + "_changing_reason", step, "Укажите причину смены фио");
+    validateElementWithEmptiness("#bank_credit_" + id + "_document_type", step, "Укажите наименование документа");
+    validateElementWithEmptiness("#bank_credit_" + id + "_document_series", step, "Укажите серию документа");
+    validateElementWithEmptiness("#bank_credit_" + id + "_document_number", step, "Укажите номер документа");
+    validateElementWithEmptiness("#bank_credit_" + id + "_document_given_date", step, "Укажите дату выдачи документа");
+    validateElementWithEmptiness("#bank_credit_" + id + "_document_end_date", step, "Укажите дату окончания документа");
+    validateElementWithEmptiness("#bank_credit_" + id + "_registration_address", step, "Укажите адрес регистрации по месту жительства");
+    validateElementWithEmptiness("#bank_credit_" + id + "_registration_place", step, "Укажите адрес регистрации по месту пребывания");
+    validateElementWithEmptiness("#bank_credit_" + id + "_actual_living_place", step, "Укажите адрес места фактического проживания");
+    validateElementWithNullify("#bank_credit_" + id + "_living_age", step, "Укажите срок проживания клиента по фактическому адресу");
     navigateAfterValidation("#step-errors-" + step, step);
 }
 
 function validateThirdCreditStep() {
     validateApplicant(3, "customer");
+    //return $("#bank-credit-form").submit();
 }
 
 function validateJobCreditStep(step, id) {

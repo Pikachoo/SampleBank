@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024145458) do
+ActiveRecord::Schema.define(version: 20151024163344) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer "type_id",     limit: 4,                  null: false
@@ -182,6 +182,16 @@ ActiveRecord::Schema.define(version: 20151024145458) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", limit: 255,   null: false
+    t.text     "data",       limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "sms", force: :cascade do |t|
     t.string   "status",    limit: 16,    null: false

@@ -1,7 +1,7 @@
-<h3>Численность работающих в организации:</h3>
+<h3>*Численность работающих в организации:</h3>
 
 <div class="ui selection dropdown">
-  <input type="hidden" id="<%= name %>_employers_count">
+  <%= f.number_field :"#{name}_employers_count", value: @bank_credit_inputs["#{name}_employers_count"], type: "hidden" %>
   <i class="dropdown icon"></i>
   <div class="default text">Численность работающих в организации</div>
   <div class="menu">

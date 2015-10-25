@@ -1,7 +1,7 @@
 <h3>Стаж работы в организации:</h3>
 
 <div class="ui selection dropdown">
-  <input type="hidden" id="<%= name %>_experience_in_organization">
+  <%= f.number_field :"#{name}_experience_in_organization", value: @bank_credit_inputs["#{name}_experience_in_organization"], type: "hidden" %>
   <i class="dropdown icon"></i>
   <div class="default text">Стаж работы в организации</div>
   <div class="menu">

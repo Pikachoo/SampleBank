@@ -1,7 +1,7 @@
-<h3>Сфера деятельности</h3>
+<h3>*Сфера деятельности</h3>
 
 <div class="ui selection dropdown">
-  <input type="hidden" id="<%= name %>_activity_status">
+  <%= f.number_field :"#{name}_activity_status", value: @bank_credit_inputs["#{name}_activity_status"], type: "hidden" %>
   <i class="dropdown icon"></i>
   <div class="default text">Сфера деятельности</div>
   <div class="menu">

@@ -95,26 +95,25 @@ function validateApplicant(step, id) {
 
 function validateThirdCreditStep() {
     validateApplicant(3, "customer");
-    //return $("#bank-credit-form").submit();
 }
 
 function validateJobCreditStep(step, id) {
     prepareToValidation(step);
-    validateElementWithNullify("#" + id + "_employment_type", step, "Укажите тип работы клиента");
-    if ($("#" + id + "_employment_type").val() == 4 || $("#" + id + "_employment_type").val() == 10 )
+    validateElementWithNullify("#bank_credit_" + id + "_employment_type", step, "Укажите тип работы клиента");
+    if ($("#bank_credit_" + id + "_employment_type").val() == 4 || $("#bank_credit_" + id + "_employment_type").val() == 10 )
         return navigateAfterValidation("#step-errors-" + step, step);
-    validateToggledElement("#" + id + "_employment_type", 9, "" + id + "_practical-employment", step, "Уточните тип практики.");
-    validateToggledElement("#" + id + "_employment_type", 11, "" + id + "_another-employment", step, "Уточните тип занятости.");
-    validateElementWithEmptiness("#" + id + "-start-job-date", step, "Укажите начало работы клиента");
-    validateElementWithEmptiness("#" + id + "-end-job-date", step, "Укажите срок окончания работы клиента");
-    validateElementWithEmptiness("#" + id + "_organization_name", step, "Укажите наименование организации");
-    validateElementWithEmptiness("#" + id + "_job_name", step, "Укажите должность клиента");
-    validateElementWithEmptiness("#" + id + "_organization_address", step, "Укажите адресс организации клиента");
-    validateElementWithNullify("#" + id + "_activity_status", step, "Укажите сферу деятельности клиента");
-    validateElementWithNullify("#" + id + "_employers_count", step, "Укажите численность работающих в организации");
-    validateElementWithNullify("#" + id + "_experience_in_organization", step, "Укажите стаж работы клиента");
-    validateElementWithNullify("#" + id + "_job_category", step, "Укажите категорию занимаемой должности клиента");
-    validateToggledElement("#" + id + "_job_category", step, "" + id + "_owners_percent", step, "Укажите процент от доходов предприятия.");
+    validateToggledElement("#bank_credit_" + id + "_employment_type", 9, "bank_credit_" + id + "_practical_employment", step, "Уточните тип практики.");
+    validateToggledElement("#bank_credit_" + id + "_employment_type", 11, "bank_credit_" + id + "_another_employment", step, "Уточните тип занятости.");
+    validateElementWithEmptiness("#bank_credit_" + id + "_start_job_date", step, "Укажите начало работы клиента");
+    validateElementWithEmptiness("#bank_credit_" + id + "_end_job_date", step, "Укажите срок окончания работы клиента");
+    validateElementWithEmptiness("#bank_credit_" + id + "_organization_name", step, "Укажите наименование организации");
+    validateElementWithEmptiness("#bank_credit_" + id + "_job_name", step, "Укажите должность клиента");
+    validateElementWithEmptiness("#bank_credit_" + id + "_organization_address", step, "Укажите адресс организации клиента");
+    validateElementWithNullify("#bank_credit_" + id + "_activity_status", step, "Укажите сферу деятельности клиента");
+    validateElementWithNullify("#bank_credit_" + id + "_employers_count", step, "Укажите численность работающих в организации");
+    validateElementWithNullify("#bank_credit_" + id + "_experience_in_organization", step, "Укажите стаж работы клиента");
+    validateElementWithNullify("#bank_credit_" + id + "_job_category", step, "Укажите категорию занимаемой должности клиента");
+    validateToggledElement("#bank_credit_" + id + "_job_category", 9, "bank_credit_" + id + "_owners_percent", step, "Укажите процент от доходов предприятия.");
     navigateAfterValidation("#step-errors-" + step, step);
 }
 
@@ -130,6 +129,7 @@ function validateSixthCreditStep() {
     if ($("customer_family_status") == 3 || $("customer_family_status" == 4))
         return validateApplicant(6, "partner");
     navigateAfterValidation("#step-errors-" + 6, 6);
+    //return $("#bank-credit-form").submit();
 }
 
 function validateTenthStep() {

@@ -1,18 +1,18 @@
 <div class="two fields">
   <div class="field">
     <label>*Работаю с</label>
-    <input id="<%= name %>-start-job-date" type="text" placeholder="Начало работы">
+    <%= f.text_field :"#{name}_start_job_date", value: @bank_credit_inputs["#{name}_start_job_date"], placeholder: "Начало работы" %>
   </div>
 
   <div class="field">
     <label>*До</label>
-    <input id="<%= name %>-end-job-date" type="text" placeholder="Окончание завершения работы">
+    <%= f.text_field :"#{name}_end_job_date", value: @bank_credit_inputs["#{name}_end_job_date"], placeholder: "Окончание завершения работы" %>
   </div>
 </div>
 
 <div class="field">
   <div class="ui checkbox">
-    <input type="checkbox" id="<%= name %>_is_contract">
-    <label for="<%= name %>_is_contract">Является ли трудовой договор срочным.</label>
+    <%= f.check_box :"#{name}_is_contract", value: @bank_credit_inputs["#{name}_is_contract"] %>
+    <label for="bank_credit_<%= name %>_is_contract">Является ли трудовой договор срочным.</label>
   </div>
 </div>

@@ -1,23 +1,23 @@
 <h3>Категория занимаемой должности:</h3>
 
 <div class="ui selection dropdown">
-  <input type="hidden" id="<%= name %>_job_category">
+  <%= f.number_field :"#{name}_job_category", value: @bank_credit_inputs["#{name}_job_category"], type: "hidden" %>
   <i class="dropdown icon"></i>
   <div class="default text">Категория занимаемой должности</div>
   <div class="menu">
-    <div class="item" data-value="10" onclick="toggleElement('#<%= name %>_owners_percent', false);">Рабочий</div>
-    <div class="item" data-value="1" onclick="toggleElement('#<%= name %>_owners_percent', false);">Служащий</div>
-    <div class="item" data-value="2" onclick="toggleElement('#<%= name %>_owners_percent', false);">Специалист</div>
-    <div class="item" data-value="3" onclick="toggleElement('#<%= name %>_owners_percent', false);">Военнослужащий</div>
-    <div class="item" data-value="4" onclick="toggleElement('#<%= name %>_owners_percent', false);">Высококвалифицированный специалист</div>
-    <div class="item" data-value="5" onclick="toggleElement('#<%= name %>_owners_percent', false);">Ген.директор / директор / главный бухгалтер</div>
-    <div class="item" data-value="6" onclick="toggleElement('#<%= name %>_owners_percent', false);">Руководитель начального звена</div>
-    <div class="item" data-value="7" onclick="toggleElement('#<%= name %>_owners_percent', false);">Руководитель среднего звена</div>
-    <div class="item" data-value="8" onclick="toggleElement('#<%= name %>_owners_percent', false);">Руководитель высшего звена</div>
-    <div class="item" data-value="9" onclick="toggleElement('#<%= name %>_owners_percent', true);">Владелец предприятия</div>
+    <div class="item" data-value="10" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Рабочий</div>
+    <div class="item" data-value="1" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Служащий</div>
+    <div class="item" data-value="2" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Специалист</div>
+    <div class="item" data-value="3" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Военнослужащий</div>
+    <div class="item" data-value="4" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Высококвалифицированный специалист</div>
+    <div class="item" data-value="5" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Ген.директор / директор / главный бухгалтер</div>
+    <div class="item" data-value="6" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Руководитель начального звена</div>
+    <div class="item" data-value="7" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Руководитель среднего звена</div>
+    <div class="item" data-value="8" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Руководитель высшего звена</div>
+    <div class="item" data-value="9" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', true);">Владелец предприятия</div>
   </div>
 </div>
 
 <div class="field">
-  <input id="<%= name %>_owners_percent" class="invisible" type="number" min="0" placeholder="Уточните ваш процент от доходов предприятия(в процентах)">
+  <%= f.number_field :"#{name}_owners_percent", value: @bank_credit_inputs["#{name}_owners_percent"], min: 0, placeholder:"Уточните ваш процент от доходов предприятия(в процентах)" %>
 </div>

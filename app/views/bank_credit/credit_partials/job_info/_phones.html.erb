@@ -11,17 +11,17 @@
         <br/><br/>
         <div class="field">
           <label>Бухгалтерия</label>
-          <input id="<%= name %>_organization-buh-phone" type="text" placeholder="+375-XXX-НОМЕР">
+          <%= f.text_field :"#{name}_organization_buh_phone", value: @bank_credit_inputs["#{name}_organization_buh_phone"], placeholder: "+375-XXX-НОМЕР" %>
         </div>
 
         <div class="field">
           <label>Отдел кадров</label>
-          <input id="<%= name %>_organization-head-phone" type="text" placeholder="+375-XXX-НОМЕР">
+          <%= f.text_field :"#{name}_organization_head_phone", value: @bank_credit_inputs["#{name}_organization_head_phone"], placeholder: "+375-XXX-НОМЕР" %>
         </div>
 
         <div class="field">
           <label>Прочие</label>
-          <input id="<%= name %>_organization-another-phone" type="text" placeholder="+375-XXX-НОМЕР">
+          <%= f.text_field :"#{name}_organization_another_phone", value: @bank_credit_inputs["#{name}_organization_another_phone"], placeholder: "+375-XXX-НОМЕР" %>
         </div>
       </div>
     </div>

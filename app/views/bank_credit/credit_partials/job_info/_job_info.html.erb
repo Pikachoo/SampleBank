@@ -1,18 +1,18 @@
 <h3>Тип работы заявителя</h3>
-<%= render partial: "bank_credit/credit_partials/job_info/employment_type", locals: { name: name } %>
-<%= render partial: "bank_credit/credit_partials/job_info/contract_date", locals: { name: name }  %>
-<%= render partial: "bank_credit/credit_partials/job_info/organization_info", locals: { name: name }  %>
-<%= render partial: "bank_credit/credit_partials/job_info/activity_list", locals: { name: name }  %>
-<%= render partial: "bank_credit/credit_partials/job_info/organization_employeers", locals: { name: name }  %>
-<%= render partial: "bank_credit/credit_partials/job_info/organization_experience", locals: { name: name }  %>
+<%= render partial: "bank_credit/credit_partials/job_info/employment_type", locals: { name: name, f: f } %>
+<%= render partial: "bank_credit/credit_partials/job_info/contract_date", locals: { name: name, f: f }  %>
+<%= render partial: "bank_credit/credit_partials/job_info/organization_info", locals: { name: name, f: f } %>
+<%= render partial: "bank_credit/credit_partials/job_info/activity_list", locals: { name: name, f: f }  %>
+<%= render partial: "bank_credit/credit_partials/job_info/organization_employeers", locals: { name: name, f: f }  %>
+<%= render partial: "bank_credit/credit_partials/job_info/organization_experience", locals: { name: name, f: f }  %>
 
 <h3>Количество фактов смены основного места работы за 3 последних года</h3>
 <div class="field">
-  <input id="<%= name %>_job_changing_value" type="number" min="0" placeholder="Количество фактов смены основного места работы за 3 последних года">
+  <%= f.number_field :"#{name}_job_changing_value", min: 0, value: @bank_credit_inputs["#{name}_job_changing_value"], placeholder: "Количество фактов смены основного места работы за 3 последних года" %>
 </div>
 
-<%= render partial: "bank_credit/credit_partials/job_info/job_category", locals: { name: name }  %>
-<%= render partial: "bank_credit/credit_partials/job_info/phones", locals: { name: name }  %>
+<%= render partial: "bank_credit/credit_partials/job_info/job_category", locals: { name: name, f: f }  %>
+<%= render partial: "bank_credit/credit_partials/job_info/phones", locals: { name: name, f: f }  %>
 
 <div id="step-errors-<%= step %>" class="validation_errors invisible">
   <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>

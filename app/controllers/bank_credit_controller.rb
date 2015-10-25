@@ -70,8 +70,76 @@ class BankCreditController < ApplicationController
     validation_errors.push "Укажите адрес по месту пребывания клиента на 3ем шаге." if bankCredit[:customer_registration_place] == ""
     validation_errors.push "Укажите адрес фактического места проживания клиента на 3ем шаге." if bankCredit[:customer_actual_living_place] == ""
     validation_errors.push "Укажите срок проживания по месту фактического проживания клиента на 3ем шаге." if bankCredit[:customer_living_age].to_i < 1
-
     #End of third step validation
+
+    #Fourth step validation
+    validation_errors.push "Укажите тип работы клиента на 4ом шаге." if bankCredit[:customer_employment_type].to_i < 1 || bankCredit[:customer_employment_type].to_i > 11
+    if bankCredit[:customer_employment_type].to_i != 10 then
+      validation_errors.push "Укажите место практики клиента на 4ом шаге." if bankCredit[:customer_employment_type] == "9" && bankCredit[:customer_practical_employment] == ""
+      validation_errors.push "Укажите тип занятости клиента на 4ом шаге." if bankCredit[:customer_employment_type] == "11" && bankCredit[:customer_another_employment] == ""
+      validation_errors.push "Укажите начало работы клиента на 4ом шаге." if bankCredit[:customer_start_job_date] == ""
+      validation_errors.push "Укажите конец контракта клиента на 4ом шаге." if bankCredit[:customer_end_job_date] == ""
+      validation_errors.push "Укажите наименование организации клиента на 4ом шаге." if bankCredit[:customer_organization_name] == ""
+      validation_errors.push "Укажите должность работы клиента на 4ом шаге." if bankCredit[:customer_job_name] == ""
+      validation_errors.push "Укажите адрес работы клиента на 4ом шаге." if bankCredit[:customer_organization_address] == ""
+      validation_errors.push "Укажите сферу деятельности клиента на 4ом шаге." if bankCredit[:customer_activity_status].to_i < 1 || bankCredit[:customer_activity_status].to_i > 38
+      validation_errors.push "Укажите численность рабочих на 4ом шаге." if bankCredit[:customer_employers_count].to_i < 1 || bankCredit[:customer_employers_count].to_i > 6
+      validation_errors.push "Укажите стаж работы на 4ом шаге." if bankCredit[:customer_experience_in_organization].to_i < 1 || bankCredit[:customer_experience_in_organization].to_i > 7
+      validation_errors.push "Укажите категорию занимаемой должности на 4ом шаге." if bankCredit[:customer_job_category].to_i < 1 || bankCredit[:customer_job_category].to_i > 10
+      validation_errors.push "Укажите процент от доходов предприятия на 4ом шаге." if bankCredit[:customer_job_category].to_i == 9 && (bankCredit[:customer_owners_percent].to_f <= 0.0 || bankCredit[:customer_owners_percent].to_f > 100)
+    end
+    #End of fourth step validation
+
+    #Fifth step validation
+    validation_errors.push "Укажите тип работы клиента на 5ом шаге." if bankCredit[:customer_additional_employment_type].to_i < 1 || bankCredit[:customer_additional_employment_type].to_i > 11
+    if bankCredit[:customer_additional_employment_type].to_i != 10 then
+      validation_errors.push "Укажите место практики клиента на 5ом шаге." if bankCredit[:customer_additional_employment_type] == "9" && bankCredit[:customer_additional_practical_employment] == ""
+      validation_errors.push "Укажите тип занятости клиента на 5ом шаге." if bankCredit[:customer_additional_employment_type] == "11" && bankCredit[:customer_additional_another_employment] == ""
+      validation_errors.push "Укажите начало работы клиента на 5ом шаге." if bankCredit[:customer_additional_start_job_date] == ""
+      validation_errors.push "Укажите конец контракта клиента на 5ом шаге." if bankCredit[:customer_additional_end_job_date] == ""
+      validation_errors.push "Укажите наименование организации клиента на 5ом шаге." if bankCredit[:customer_additional_organization_name] == ""
+      validation_errors.push "Укажите должность работы клиента на 5ом шаге." if bankCredit[:customer_additional_job_name] == ""
+      validation_errors.push "Укажите адрес работы клиента на 5ом шаге." if bankCredit[:customer_additional_organization_address] == ""
+      validation_errors.push "Укажите сферу деятельности клиента на 5ом шаге." if bankCredit[:customer_additional_activity_status].to_i < 1 || bankCredit[:customer_additional_activity_status].to_i > 38
+      validation_errors.push "Укажите численность рабочих на 5ом шаге." if bankCredit[:customer_additional_employers_count].to_i < 1 || bankCredit[:customer_additional_employers_count].to_i > 6
+      validation_errors.push "Укажите стаж работы на 5ом шаге." if bankCredit[:customer_additional_experience_in_organization].to_i < 1 || bankCredit[:customer_additional_experience_in_organization].to_i > 7
+      validation_errors.push "Укажите категорию занимаемой должности на 5ом шаге." if bankCredit[:customer_additional_job_category].to_i < 1 || bankCredit[:customer_additional_job_category].to_i > 10
+      validation_errors.push "Укажите процент от доходов предприятия на 5ом шаге." if bankCredit[:customer_additional_job_category].to_i == 9 && (bankCredit[:customer_additional_owners_percent].to_f <= 0.0 || bankCredit[:customer_owners_percent].to_f > 100)
+    end
+    #End of fifth step validation
+
+    #Sixth step validation (3 - 4)
+    if bankCredit[:customer_family_status].to_i == 3 || bankCredit[:customer_family_status].to_i == 4
+      validation_errors.push "Укажите имя супруга клиента на 6ом шаге." if bankCredit[:partner_firstname] == ""
+      validation_errors.push "Укажите фамилию супруга клиента на 6ом шаге." if bankCredit[:partner_lastname] == ""
+      validation_errors.push "Укажите отчество супруга клиента на 6ом шаге." if bankCredit[:partner_patronymic] == ""
+      validation_errors.push "Укажите день рождения супруга клиента на 6ом шаге." if bankCredit[:partner_birthdate] == ""
+      validation_errors.push "Укажите идентификационный номер супруга клиента на 6ом шаге." if bankCredit[:partner_id] == ""
+      validation_errors.push "Укажите возраст супруга клиента на 6ом шаге." if bankCredit[:partner_age] == "" || bankCredit[:partner_age].to_i < 1
+      validation_errors.push "Укажите гражданство супруга клиента на 6ом шаге." if bankCredit[:partner_country] == ""
+      validation_errors.push "Укажите место рождения супруга клиента на 6ом шаге." if bankCredit[:partner_birthplace] == ""
+      validation_errors.push "Укажите семейное положение супруга клиента на 6ом шаге." if bankCredit[:partner_family_status].to_i < 1 || bankCredit[:partner_family_status].to_i > 5
+      validation_errors.push "Укажите жилищные условия супруга клиента на 6ом шаге." if bankCredit[:partner_living_conditions].to_i < 1 || bankCredit[:partner_living_conditions].to_i > 8
+      validation_errors.push "Укажите тип жилищных условий супруга клиента на 6ом шаге." if bankCredit[:partner_living_conditions].to_i == 8 && bankCredit[:partner_another_living_conditions] == ""
+      validation_errors.push "Укажите образование супруга клиента на 6ом шаге." if bankCredit[:partner_education].to_i < 1 || bankCredit[:partner_education].to_i > 8
+      validation_errors.push "Укажите отношение супруга клиента к воинской службе на 6ом шаге." if bankCredit[:partner_military_conditions].to_i < 1 || bankCredit[:partner_military_conditions].to_i > 4
+      validation_errors.push "Укажите дату отсрочки супруга клиента от воинской службы на 6ом шаге." if bankCredit[:partner_military_conditions].to_i == 3 && bankCredit[:partner_reprieve_end_date] == ""
+      validation_errors.push "Укажите информацию об имени супруга клиента на 6ом шаге." if bankCredit[:partner_name_info].to_i < 1 || bankCredit[:partner_name_info].to_i > 2
+      validation_errors.push "Укажите причину смены имени супруга клиента на 6ом шаге." if bankCredit[:partner_name_info].to_i == 1 && bankCredit[:partner_changing_reason] == ""
+      validation_errors.push "Укажите наименование документа супруга клиента на 6ом шаге." if bankCredit[:partner_document_type] == ""
+      validation_errors.push "Укажите серию документа супруга клиента на 6ом шаге." if bankCredit[:partner_document_series] == ""
+      validation_errors.push "Укажите номер документа супруга клиента на 6ом шаге." if bankCredit[:partner_document_number] == ""
+      validation_errors.push "Укажите дату выдачи документа супруга клиента на 6ом шаге." if bankCredit[:partner_document_given_date] == ""
+      validation_errors.push "Укажите дату окончания документа супруга клиента на 6ом шаге." if bankCredit[:partner_document_end_date] == ""
+      validation_errors.push "Укажите адрес регистрации по месту жительства супруга клиента на 6ом шаге." if bankCredit[:partner_registration_address] == ""
+      validation_errors.push "Укажите адрес по месту пребывания супруга клиента на 6ом шаге." if bankCredit[:partner_registration_place] == ""
+      validation_errors.push "Укажите адрес фактического места проживания супруга клиента на 6ом шаге." if bankCredit[:partner_actual_living_place] == ""
+      validation_errors.push "Укажите срок проживания по месту фактического проживания супруга клиента на 6ом шаге." if bankCredit[:partner_living_age].to_i < 1
+      validation_errors.push "Укажите организации работы супруга клиента на 6ом шаге." if bankCredit[:partner_organization_name] == ""
+      validation_errors.push "Укажите должность супруга клиента на 6ом шаге." if bankCredit[:partner_job_name] == ""
+      validation_errors.push "Укажите адрес организации супруга клиента на 6ом шаге." if bankCredit[:partner_organization_address] == ""
+    end
+    #End of sixth step validation
 
     validation_errors == [] ? nil : validation_errors
   end

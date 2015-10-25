@@ -1,14 +1,14 @@
 <div class="field">
-  <label>Наименование организации</label>
-  <input id="<%= name %>_organization_name" type="text" placeholder="Наименование организации">
+  <label>*Наименование организации</label>
+  <%= f.text_field :"#{name}_organization_name", value: @bank_credit_inputs["#{name}_organization_name"], placeholder: "Наименование организации" %>
 </div>
 
 <div class="field">
-  <label>Должность</label>
-  <input id="<%= name %>_job_name" type="text" placeholder="Должность">
+  <label>*Должность</label>
+  <%= f.text_field :"#{name}_job_name", value: @bank_credit_inputs["#{name}_job_name"], placeholder: "Должность" %>
 </div>
 
 <div class="field">
-  <label>Адрес</label>
-  <input id="<%= name %>_organization_address" type="text" placeholder="Адрес организации">
+  <label>*Адрес</label>
+  <%= f.text_field :"#{name}_organization_address", value: @bank_credit_inputs["#{name}_organization_address"], placeholder: "Адрес организации" %>
 </div>

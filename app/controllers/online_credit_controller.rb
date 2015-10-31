@@ -65,9 +65,9 @@ class OnlineCreditController < ApplicationController
     necessaryMark = onlineCredit[:sum_value].to_f * coefficient.to_f / 10000
     mark_explanations.push "Сумма кредита составила #{onlineCredit[:sum_value] + ' ' + addition}, необходимая оценка будет равна (Сумма / коэфициент валюты / 10000) #{necessaryMark}"
 
-    mark_explanations.push "Срок кредита будет равен #{onlineCredit[:term_loan_product].to_i}, коэфициент равен #{onlineCredit[:term_loan_product].to_f / 6.0}"
+    mark_explanations.push "Срок кредита будет равен #{onlineCredit[:term_loan_product].to_i}, коэфициент равен #{(onlineCredit[:term_loan_product].to_f / 6.0).round(2)}"
     mark = mark * (onlineCredit[:term_loan_product].to_f / 6.0)
-    calculating = "#{calculating}*#{onlineCredit[:term_loan_product].to_f / 6.0.to_f}"
+    calculating = "#{calculating}*#{(onlineCredit[:term_loan_product].to_f / 6.0.to_f).round(2)}"
 
 
     markSum = 0.0
@@ -150,9 +150,9 @@ class OnlineCreditController < ApplicationController
       calculating = "#{calculating}*1"
     end
 
-    mark_explanations.push "Стаж работы клиента равен #{onlineCredit[:organization_experience].to_i}, коэфициент равен #{onlineCredit[:organization_experience].to_f / 12.0}"
+    mark_explanations.push "Стаж работы клиента равен #{onlineCredit[:organization_experience].to_i}, коэфициент равен #{(onlineCredit[:organization_experience].to_f / 12.0).round(2)}"
     mark = mark * (onlineCredit[:organization_experience].to_f / 12.0)
-    calculating = "#{calculating}*#{onlineCredit[:organization_experience].to_f / 12.0.to_f}"
+    calculating = "#{calculating}*#{(onlineCredit[:organization_experience].to_f / 12.0.to_f).round(2)}"
 
     return mark, necessaryMark, mark_explanations, calculating
   end

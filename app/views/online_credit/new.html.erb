@@ -92,7 +92,7 @@
 
           <div id="step-errors-3" class="validation_errors invisible">
             <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
-            <ul><li>Укажите сумму большую нуля</li></ul>
+            <ul><li>Укажите сумму большую нуля, в целочисленном исчеслении.</li></ul>
           </div>
 
           <button type="button" class="ui button orange" onclick="navigate('#step2')">
@@ -199,13 +199,13 @@
             </div>
 
             <div class="field">
-              <label>*Иной вид основной деятельности:</label>
+              <label>Иной вид основной деятельности:</label>
               <%= f.text_field :alt_main_activity, value: @online_credit_inputs["alt_main_activity"], placeholder: "Укажите в случае отсутсвия в списке вашей основной деятельности" %>
             </div>
 
             <div class="field">
-              <label>Опыт ведения хоз. деятельности (мес.)</label>
-              <%= f.number_field :organization_experience, value: @online_credit_inputs["organization_experience"], placeholder: "Опыт ведения хоз. деятельности (мес.)", min: 0 %>
+              <label>*Опыт работы (мес.)</label>
+              <%= f.number_field :organization_experience, value: @online_credit_inputs["organization_experience"], placeholder: "Опыт работы (мес.)", min: 0 %>
             </div>
 
             <p><b>Контактное лицо:</b></p>
@@ -247,8 +247,7 @@
             Назад
           </button>
 
-          <button type="button" class="ui labeled icon button orange" onclick="validateSixthStep()">
-            <i class="icon save"></i>
+          <button type="button" class="ui labeled button orange" onclick="validateSixthStep()">
             Отправить заявку
           </button>
         </div>

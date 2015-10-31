@@ -1,16 +1,21 @@
 <div class='field'>
     <label>Среднемесячные доходы за последние 6 месяцев</label>
-    <input type="number" min="0" name='last_incomings'>
+    <%= f.number_field :last_incomings, value: @bank_credit_inputs["last_incomings"], default: 0, min: 0 %>
 </div>
 
 <div class='field'>
     <label>Среднемесячные расходы за последние 6 месяцев </label>
-    <input type="number" min="0" name='last_outcomings'>
+    <%= f.number_field :last_outcomings, value: @bank_credit_inputs["last_outcomings"], default: 0, min: 0 %>
 </div>
 
 <div class='field'>
     <label>Среднемесячные доход семьи за последние 6 месяцев</label>
-    <input type="number" min="0" name='family_incomings'>
+    <%= f.number_field :family_incomings, value: @bank_credit_inputs["family_incomings"], default: 0, min: 0 %>
+</div>
+
+<div id="step-errors-9" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul id="errors-list-9"></ul>
 </div>
 
 <br/><br/>
@@ -18,6 +23,6 @@
   Назад
 </button>
 
-<button type="button" class="ui button orange" onclick="navigate('#step10')">
+<button type="button" class="ui button orange" onclick="validateNinthStep()">
   Далее
 </button>

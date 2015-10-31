@@ -141,6 +141,27 @@ class BankCreditController < ApplicationController
     end
     #End of sixth step validation
 
+    #Ninth step validation
+    validation_errors.push "Укажите среднемесячные доходы за последние 6 месяцев на 9ом шаге." if bankCredit[:last_incomings].to_i < 0
+    validation_errors.push "Укажите среднемесячные расходы за последние 6 месяцев на 9ом шаге." if bankCredit[:last_outcomings].to_i < 0
+    validation_errors.push "Укажите среднемесячные доход семьи за последние 6 месяцев на 9ом шаге." if bankCredit[:family_incomings].to_i < 0
+    #End of ninth step validation
+
+    #Tenth step validation
+    validation_errors.push "Укажите наличие ограничений со стороны других банков 10ом шаге." if bankCredit[:another_contracts].to_i < 1
+    validation_errors.push "Укажите наличие невыполненных судебных решений 10ом шаге." if bankCredit[:unfinushed_contracts].to_i < 1
+    validation_errors.push "Укажите наличие учёта у психиатора 10ом шаге." if bankCredit[:mental_desease].to_i < 1
+    validation_errors.push "Укажите наличие судебного процесса 10ом шаге." if bankCredit[:guilty_contracts].to_i < 1
+    validation_errors.push "Укажите наличие приговора 10ом шаге." if bankCredit[:is_punished].to_i < 1
+    validation_errors.push "Укажите невыполненных судебных решений супругом 10ом шаге." if bankCredit[:partner_unfinushed_contracts].to_i < 1
+    validation_errors.push "Укажите наличие учёта супругом у психиатора 10ом шаге." if bankCredit[:partner_mental_desease].to_i < 1
+    validation_errors.push "Укажите наличие судебного процесса у супруга 10ом шаге." if bankCredit[:partner_guilty_contracts].to_i < 1
+    validation_errors.push "Укажите приговора у супруга 10ом шаге." if bankCredit[:partner_is_punished].to_i < 1
+    #End of tenth step validation
+
+    #Eleventh step validation
+    #End of eleventh step validation
+
     validation_errors == [] ? nil : validation_errors
   end
 end

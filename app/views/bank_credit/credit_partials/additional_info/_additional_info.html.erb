@@ -1,5 +1,6 @@
 <div class="inline fields">
   <label>*Имеются ли ограничения со стороны других банков на заключение нового кредитного договора</label>
+  <%= f.number_field :another_contracts, value: @bank_credit_inputs["another_contracts"], type: "hidden" %>
   <div class='field'>
     <div class='ui checkbox radio'>
       <input type='radio' name='another_contracts' value="1">
@@ -18,6 +19,7 @@
 <h4>Заявитель</h4>
 <div class="inline fields">
   <label>*Имеется ли какое-нибудь судебное решение, которое Вы не выполнили?</label>
+  <%= f.number_field :unfinushed_contracts, value: @bank_credit_inputs["unfinushed_contracts"], type: "hidden" %>
   <div class='field'>
     <div class='ui checkbox radio'>
       <input type='radio' id="unfinushed_contracts_yes" name='unfinushed_contracts'  value="1">
@@ -34,6 +36,7 @@
 </div>
 
 <div class="inline fields">
+  <%= f.number_field :mental_desease, value: @bank_credit_inputs["mental_desease"], type: "hidden" %>
   <label>*Состоите (состояли) ли Вы на учете у психиатра или нарколога?</label>
   <div class='field'>
     <div class='ui checkbox radio'>
@@ -51,6 +54,7 @@
 </div>
 
 <div class="inline fields">
+  <%= f.number_field :guilty_contracts, value: @bank_credit_inputs["guilty_contracts"], type: "hidden" %>
   <label>*Участвуете ли Вы в настоящее время в судебном процессе в качестве обвиняемого?</label>
   <div class='field'>
     <div class='ui checkbox radio'>
@@ -68,6 +72,7 @@
 </div>
 
 <div class="inline fields">
+  <%= f.number_field :is_punished, value: @bank_credit_inputs["is_punished"], type: "hidden" %>
   <label>*Были ли Вы когда-либо приговорены судом к какому-либо наказанию?</label>
   <div class='field'>
     <div class='ui checkbox radio'>
@@ -86,6 +91,7 @@
 
 <h4>Супруг</h4>
 <div class="inline fields">
+  <%= f.number_field :partner_unfinushed_contracts, value: @bank_credit_inputs["partner_unfinushed_contracts"], type: "hidden" %>
   <label>*Имеется ли какое-нибудь судебное решение, которое Вы не выполнили?</label>
   <div class='field'>
     <div class='ui checkbox radio'>
@@ -110,6 +116,7 @@
 </div>
 
 <div class="inline fields">
+  <%= f.number_field :partner_mental_desease, value: @bank_credit_inputs["partner_mental_desease"], type: "hidden" %>
   <label>*Состоите (состояли) ли Вы на учете у психиатра или нарколога?</label>
   <div class='field'>
     <div class='ui checkbox radio'>
@@ -134,7 +141,8 @@
 </div>
 
 <div class="inline fields">
-  <label>*Участвуете ли Вы в настоящее время в судебном процессе в качестве обвиняемого?</label>
+  <%= f.number_field :partner_guilty_contracts, value: @bank_credit_inputs["partner_guilty_contracts"], type: "hidden" %>
+  <label>*Участвуете ли супруг в настоящее время в судебном процессе в качестве обвиняемого?</label>
   <div class='field'>
     <div class='ui checkbox radio'>
       <input type='radio' name='partner_guilty_contracts' value="1">
@@ -158,6 +166,7 @@
 </div>
 
 <div class="inline fields">
+  <%= f.number_field :partner_is_punished, value: @bank_credit_inputs["partner_is_punished"], type: "hidden" %>
   <label>*Были ли Вы когда-либо приговорены судом к какому-либо наказанию?</label>
   <div class='field'>
     <div class='ui checkbox radio'>

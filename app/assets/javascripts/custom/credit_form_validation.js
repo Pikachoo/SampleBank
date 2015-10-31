@@ -129,20 +129,38 @@ function validateSixthCreditStep() {
     if ($("customer_family_status") == 3 || $("customer_family_status" == 4))
         return validateApplicant(6, "partner");
     navigateAfterValidation("#step-errors-" + 6, 6);
-    //return $("#bank-credit-form").submit();
+
+}
+
+function validateNinthStep() {
+    prepareToValidation(9);
+    validateElementWithNullify("#bank_credit_last_incomings", 9, "Укажите среднемесячные доходы");
+    validateElementWithNullify("#bank_credit_last_outcomings", 9, "Укажите среднемесячные расходы");
+    validateElementWithNullify("#bank_credit_family_incomings", 9, "Укажите среднемесячные доходы семьи");
+    navigateAfterValidation("#step-errors-" + 9, 9);
 }
 
 function validateTenthStep() {
     prepareToValidation(10);
     validateElementWithNullify("[name='another_contracts']:checked", 10, "Укажите наличие ограничений со стороны других банков");
+    $("#bank_credit_another_contracts").val($("[name='another_contracts']:checked").val());
     validateElementWithNullify("[name='unfinushed_contracts']:checked", 10, "Укажите наличие судебных решений по отношению к клиенту");
+    $("#bank_credit_unfinushed_contracts").val($("[name='another_contracts']:checked").val());
     validateElementWithNullify("[name='mental_desease']:checked", 10, "Укажите состояние на учёте клиента у психиатра или психолога");
+    $("#bank_credit_mental_desease").val($("[name='mental_desease']:checked").val());
     validateElementWithNullify("[name='guilty_contracts']:checked", 10, "Укажите является ли клиент обвиняемым в данный момент");
+    $("#bank_credit_guilty_contracts").val($("[name='guilty_contracts']:checked").val());
     validateElementWithNullify("[name='is_punished']:checked", 10, "Укажите приговорён ли клиент в данный момент");
+    $("#bank_credit_is_punished").val($("[name='is_punished']:checked").val());
     validateElementWithNullify("[name='partner_unfinushed_contracts']:checked", 10, "Укажите наличие судебных решений по отношению к супругу клиента");
+    $("#bank_credit_partner_unfinushed_contracts").val($("[name='partner_unfinushed_contracts']:checked").val());
     validateElementWithNullify("[name='partner_mental_desease']:checked", 10, "Укажите состояние на учёте супруг клиента у психиатра или психолога");
+    $("#bank_credit_partner_mental_desease").val($("[name='partner_mental_desease']:checked").val());
     validateElementWithNullify("[name='partner_guilty_contracts']:checked", 10, "Укажите является ли супруг клиента обвиняемым в данный момент");
+    $("#bank_credit_partner_guilty_contracts").val($("[name='partner_guilty_contracts']:checked").val());
     validateElementWithNullify("[name='partner_is_punished']:checked", 10, "Укажите приговорён ли супруг клиента в данный момент");
+    $("#bank_credit_partner_is_punished").val($("[name='partner_is_punished']:checked").val());
+    //return $("#bank-credit-form").submit();
     navigateAfterValidation("#step-errors-10", 10);
 }
 

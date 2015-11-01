@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="ui segment">
+    <h2 class="ui header dividing">Расчёт оценки заполнения кредита</h2>
+    <div class="request-info">
+      <p>Вся информация о выставлении оценки.</p>
+    </div>
+
+    <div id="step1" class="step">
+      <p><b>Оценка выставлена на основе:</b></p>
+    </div>
+
+    <ul>
+      <% @mark_explanations.each do |e| %>
+          <li><%= e %></li>
+      <% end %>
+    </ul>
+
+    <b>Необходимая оценка равна: </b><%=@necessaryMark %><br/>
+    <b>Полученная оценка равна: </b><%= @mark %><br/>
+    <b>Полученная оценка высчитывалась по формуле: </b><%= @calculating %>
+
+    <% unless @isCollateralEmployed %>
+        <% if (@mark >= @necessaryMark) %>
+            <h2 style="text-align: center">Выдача онлайн кредита одобрена</h2>
+        <% else %>
+            <h2 style="text-align: center">Выдача онлайн кредита не рекомендуется</h2>
+        <% end %>
+    <% else %>
+        <h2 style="text-align: center">Оценка залога полностью покроет долг. <%= @creditSum %></h2>
+    <% end %>
+  </div>
+</div>

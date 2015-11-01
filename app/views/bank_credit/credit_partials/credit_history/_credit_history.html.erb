@@ -1,6 +1,7 @@
 <div class="inline fields">
   <label>*Опыт кредитования в ОАО «Rude-bank»</label>
   <div class='field'>
+    <%= f.number_field :rude_credits, value: @bank_credit_inputs["rude_credits"], type: "hidden" %>
     <div class='ui checkbox radio'>
       <input id="rude_credit_yes" type='radio' name='rude_credits' value="1">
       <label for="rude_credit_yes">Да</label>
@@ -17,6 +18,7 @@
 
 <div class="inline fields">
   <label>*Опыт кредитования в других банках</label>
+  <%= f.number_field :another_credits, value: @bank_credit_inputs["another_credits"], type: "hidden" %>
   <div class='field'>
     <div class='ui checkbox radio'>
       <input type='radio' id="another_credit_yes" name='another_credits' value="1">
@@ -35,18 +37,19 @@
 <h3>Количество действующих кредитов</h3>
 
 <div class='field'>
-  <input type="number" min="0" placeholder = "Количество действующих кредитов" />
+  <%= f.number_field :currentCreditsCount, value: @bank_credit_inputs["another_credits"], placeholder: "Количество действующих кредитов", min: 0 %>
 </div>
 
 <h3>Сумма ежемесячных платежей по всем кредитам и по процентам за пользование ими</h3>
 
 <div class='field'>
-  <input type="number" min="0" placeholder = "Сумма ежемесячных платежей по всем кредитам и по процентам за пользование ими" />
+  <%= f.number_field :currentCreditsSum, value: @bank_credit_inputs["another_credits"], placeholder: "Сумма ежемесячных платежей по всем кредитам и по процентам за пользование ими", min: 0 %>
 </div>
 
 <h3>Имелись  ли   случаи   нарушения   сроков   погашения   кредита   и   процентов</h3>
 <div class="inline fields">
   <label>*Кредита</label>
+  <%= f.number_field :credit_violation, value: @bank_credit_inputs["credit_violation"], type: "hidden" %>
   <div class='field'>
     <div class='ui checkbox radio'>
       <input type='radio' id="credit_violation_yes" name='credit_violation' onclick="toggleElement('#credits_penaltyes', true)" value="1">
@@ -79,6 +82,7 @@
 
 <div class="inline fields">
   <label>Процентов</label>
+  <%= f.number_field :procents_penaltyes, value: @bank_credit_inputs["procents_penaltyes"], type: "hidden" %>
   <div class='field'>
     <div class='ui checkbox radio'>
       <input type='radio' id="procent_penalty_yes" value="1" onclick="toggleElement('#procents_penaltyes', true)" name='percent_violation'>
@@ -111,6 +115,7 @@
 
 <div class="inline fields">
   <label>Выступаете ли поручителем в других банках</label>
+  <%= f.number_field :another_banks_credits, value: @bank_credit_inputs["another_banks_credits"], type: "hidden" %>
   <div class='field'>
     <div class='ui checkbox radio'>
       <input type='radio' id="another_banks_credits_yes" value="1" name='another_banks_credits'>
@@ -128,6 +133,7 @@
 
 <div class="inline fields">
   <label>Исполняете ли денежные обязательства за должника по договору поручительства</label>
+  <%= f.number_field :guarantee, value: @bank_credit_inputs["guarantee"], type: "hidden" %>
   <div class='field'>
     <div class='ui checkbox radio'>
       <input type='radio' name='guarantee' id="guarantee_yes" value="1" onclick="toggleElement('#monthly_debt_sum', true)" >
@@ -151,6 +157,7 @@
 <div class="inline fields">
   <label>Имеется ли задолженность  по товарам, приобретенным в рассрочку</label>
   <div class='field'>
+    <%= f.number_field :installments, value: @bank_credit_inputs["installments"], type: "hidden" %>
     <div class='ui checkbox radio'>
       <input type='radio' name='installments' id="installments_yes" value="1" onclick="toggleElement('#customers_debt_info', true)" >
       <label for="installments_yes">Да</label>

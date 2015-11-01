@@ -10,7 +10,393 @@ class BankCreditController < ApplicationController
   end
 
   def create
-    return redirect_to :back, flash: { validation_errors: validate, inputs_params: params[:bank_credit] }
+    validation_errors = validate
+    return redirect_to :back, flash: { validation_errors: validate, inputs_params: params[:bank_credit] } if validation_errors != nil
+    @mark, @necessaryMark, @mark_explanations, @calculating, @isCollateralEmployed, @creditSum = calculate_mark
+  end
+
+  def calculate_mark
+    mark = 1.0
+    necessaryMark = 0
+    mark_explanations = []
+    calculating = ""
+    bankCredit = params[:bank_credit]
+    collateral_employee = 0
+    collateralEmployed = false
+    calculatedMark = "("
+
+    #First step mark
+    case bankCredit[:credit_type].to_i
+      when 3, 5, 9
+        mark *= 1.2
+        mark_explanations.push "Коэфициент предоставленного кредита составляет 1.2"
+        calculating += "(1.2"
+      when 2
+        mark *= 0.92
+        mark_explanations.push "Коэфициент предоставленного кредита на приобретения жилья составляет 0.92"
+        calculating += "(0.92"
+      else
+        mark *= 0.95
+        mark_explanations.push "Коэфициент предоставленного кредита составляет 0.95"
+        calculating += "(0.95"
+    end
+
+    case bankCredit[:granted_procedure].to_i
+      when 1
+        mark += 0.05
+        mark_explanations.push "Выбран единовременный порядок предоставления, добавлен коэфициент равный 0.05"
+        calculating += "+0.05)"
+      when 2
+        mark += 0.07
+        mark_explanations.push "Выбрана невозобновляемая кредитная линия, добавлен коэфициент равный 0.07"
+        calculating += "+0.07)"
+      when 3
+        mark += 0.1
+        mark_explanations.push "Выбран невозобновляемая кредитная линия с использованием банковской карты, добавлен коэфициент равный 0.1"
+        calculating += "+0.1)"
+    end
+
+    case bankCredit[:issuance_method].to_i
+      when 1, 3, 4
+        mark *= 1.1
+        mark_explanations.push "Коэфициент способа выдачи равнен 1.1"
+        calculating += "*1.1"
+      else
+        mark *= 0.98
+        mark_explanations.push "Коэфициент способа выдачи равнен 0.98"
+        calculating += "*0.98"
+    end
+
+    case bankCredit[:affirmation_of_commitments].to_i
+      when 10, 11, 12
+        mark *= 1.1
+        mark_explanations.push "Коэфициент обеспечения кредитных обязательств равнен 1.1"
+        calculating += "*1.1"
+      when 7, 6, 4, 9
+        mark *= 1.05
+        mark_explanations.push "Коэфициент обеспечения кредитных обязательств равнен 1.05"
+        calculating += "*1.05"
+      else
+        mark *= 0.9
+        mark_explanations.push "Коэфициент обеспечения кредитных обязательств равнен 0.9"
+        calculating += "*0.9"
+    end
+
+    if bankCredit[:account_id].to_i == 1
+      mark *= 1.05
+      mark_explanations.push ["Ввиду наличия в нашем банке счёта, добавночный коэфициент будет равен 1.05"]
+      calculating += "*1.05"
+    end
+
+    collateral_employee = bankCredit[:collateral_employee].to_i if bankCredit[:collateral_employee] != 0
+    #End of first step mark
+
+    #Second step mark
+    creditSum = bankCredit[:credit_sum].to_f
+    necessaryMark = creditSum / 2000000000.0
+
+    mark_explanations.push "Необходимая оценка равна #{necessaryMark}"
+
+    mark *= bankCredit[:credit_term].to_f / 12.0
+    mark_explanations.push "Добавночный коэфициент для срока кредита будет равен #{(bankCredit[:credit_term].to_f / 12.0).round(2)}"
+    calculating += "*#{(bankCredit[:credit_term].to_f / 12.0).round(2)}"
+
+    case bankCredit[:make_insurance].to_i
+      when 1
+        mark *= 1.1
+        mark_explanations.push "Добавночный коэфициент в связи со страховкой равен 1.1"
+        calculating += "*1.1"
+      when 2
+        mark *= 0.7
+        mark_explanations.push "Добавночный коэфициент в виду отсутствия страховки равен 0.7"
+        calculating += "*0.7"
+    end
+
+    if bankCredit[:repayment_method].to_i == 2
+      mark *= 1.05
+      mark_explanations.push "Добавночный коэфициент погашения равными долями равен 1.05"
+      calculating += "*1.05"
+    end
+    #End of second step mark
+
+    #Third step mark
+    case bankCredit[:customer_living_conditions].to_i
+      when 1
+        mark *= 1.15
+        mark_explanations.push "В связи с наличием собственной квартиры коэфициент равен 1.15"
+        calculating += "*1.15"
+      when 2
+        mark *= 0.95
+        mark_explanations.push "Коэфициент съёмной квартиры равен 0.9"
+        calculating += "*0.9"
+      else
+        mark *= 0.7
+        mark_explanations.push "Коэфициент жилищных условий 0.7"
+        calculating += "*0.7"
+    end
+
+    case bankCredit[:customer_education].to_i
+      when 6
+        mark *= 1.02
+        mark_explanations.push "Коэфициент образования равен 1.02"
+        calculating += "*1.02"
+      when 7, 8
+        mark *= 1.04
+        mark_explanations.push "Коэфициент образования равен 1.04"
+        calculating += "*1.04"
+      else
+        mark *= 0.98
+        mark_explanations.push "Коэфициент образования равен 0.98"
+        calculating += "*0.98"
+    end
+
+    case bankCredit[:customer_military_conditions].to_i
+      when 1, 2
+        mark_explanations.push "Коэфициент отношения к воинской службе равен 1"
+        calculating += "*1"
+      else
+        mark *= 0.93
+        mark_explanations.push "Коэфициент отношения к воинской службе равен 0.93"
+        calculating += "*0.93"
+    end
+
+    if bankCredit[:customer_age].to_i < 18
+      mark *= -1
+      mark_explanations.push "Ввиду несовершеннолетия клиента мы не можем выдать ему кредит."
+      calculating += "*-1"
+    end
+    #End of third step mark
+
+    #Fourth step mark
+    case bankCredit[:customer_employment_type].to_i
+      when 10
+        mark *= 0.01
+        mark_explanations.push "Ввиду Отсутствия работы коэфициент кредита равен 0.1"
+        calculating += "*0.1"
+      when 9
+        mark *= 0.2
+        mark_explanations.push "Ввиду частной практики коэфициент кредита равен 0.2"
+        calculating += "*0.2"
+      when 4
+        mark *= 0.05
+        mark_explanations.push "Ввиду того что клиент пенсионер коэфициент кредита равен 0.4"
+        calculating += "*0.4"
+      when 3, 5
+        mark *= 1.1
+        mark_explanations.push "Коэфициент кредита по работе равен 1.1"
+        calculating += "*1.1"
+      else
+        mark *= 0.91
+        mark_explanations.push "Коэфициент кредита по работе равен 0.91"
+        calculating += "*0.91"
+    end
+
+    if bankCredit[:customer_employment_type].to_i != 10 && bankCredit[:customer_employment_type].to_i != 4
+      case bankCredit[:customer_activity_status].to_i
+        when 38, 15, 17, 34, 35
+          mark *= 1.2
+          mark_explanations.push "Коэфициент сферы деятельности равен 1.2"
+          calculating += "*1.2"
+        else
+          mark *= 0.95
+          mark_explanations.push "Коэфициент сферы деятельности равен 0.95"
+          calculating += "*0.95"
+      end
+
+      case bankCredit[:customer_job_category].to_i
+        when 4, 5, 8
+          mark *= 1.2
+          mark_explanations.push "Коэфициент занимаемой должности равен 1.2"
+          calculating += "*1.2"
+        when 9
+          percent = bankCredit[:customer_owners_percent].to_f
+          mark *= 1.0 + percent / 10.0
+          mark_explanations.push "Коэфициент занимаемой должности владельца предприятия равен #{1.0 + percent / 10.0}"
+          calculating += "*#{1.0 + percent / 10.0}"
+        else
+          mark *= 0.95
+          mark_explanations.push "Коэфициент занимаемой должности равен 0.95"
+          calculating += "*0.95"
+      end
+
+      job_changing_coeficient = 1.0 - bankCredit[:customer_job_changing_value].to_i / 30.0
+      if job_changing_coeficient != 0
+        mark *= job_changing_coeficient
+        mark_explanations.push "Коэфициент cмен мест работы равен #{job_changing_coeficient}"
+        calculating += "*#{job_changing_coeficient}"
+      end
+    end
+    #End of fourth step mark
+
+    #Fifth step mark
+    if bankCredit[:customer_additional_employment_type].to_i != 10 && bankCredit[:customer_additional_employment_type].to_i != 4
+      case bankCredit[:customer_activity_status].to_i
+        when 38, 15, 17, 34, 35
+          mark *= 1.2
+          mark_explanations.push "Коэфициент сферы доп. деятельности равен 1.2"
+          calculating += "*1.2"
+        else
+          mark *= 0.95
+          mark_explanations.push "Коэфициент сферы доп. деятельности равен 0.95"
+          calculating += "*0.95"
+      end
+
+      case bankCredit[:customer_additional_job_category].to_i
+        when 4, 5, 8
+          mark *= 1.2
+          mark_explanations.push "Коэфициент занимаемой доп. должности равен 1.2"
+          calculating += "*1.2"
+        when 9
+          percent = bankCredit[:customer_additional_owners_percent].to_f
+          mark *= 1.0 + percent / 10.0
+          mark_explanations.push "Коэфициент занимаемой доп. должности владельца предприятия равен #{1.0 + percent / 10.0}"
+          calculating += "*#{1.0 + percent / 10.0}"
+        else
+          mark *= 1.01
+          mark_explanations.push "Коэфициент занимаемой доп. должности равен 1.01"
+          calculating += "*1.01"
+      end
+    end
+    #End of fifth step mark
+
+    #Sixth step validation
+    if bankCredit[:customer_family_status] == 3 || bankCredit[:customer_family_status] == 4
+      case bankCredit[:partner_education].to_i
+        when 6
+          mark *= 1.02
+          mark_explanations.push "Коэфициент образования партнёра равен 1.02"
+          calculating += "*1.02"
+        when 7, 8
+          mark *= 1.04
+          mark_explanations.push "Коэфициент образования партнёра равен 1.04"
+          calculating += "*1.04"
+        else
+          mark *= 0.98
+          mark_explanations.push "Коэфициент образования партнёра равен 0.98"
+          calculating += "*0.98"
+      end
+    end
+    #End of sixth step mark
+
+    #Ninth step mark
+    incomingsAdditional = (bankCredit[:last_incomings].to_f + bankCredit[:family_incomings].to_f) / bankCredit[:last_outcomings].to_f
+    incomingsAdditional = incomingsAdditional > 1.0 ? incomingsAdditional / 100 : incomingsAdditional / -100
+    mark += incomingsAdditional
+    mark_explanations.push "Коэфициент среднего достатка равен #{incomingsAdditional}"
+    calculating += "+#{incomingsAdditional})"
+    #End of ninth step mark
+
+    #Tenth step mark
+    if bankCredit[:another_contracts].to_i == 1
+      mark *= 0.7
+      mark_explanations.push "Коэфициент наличия обязательст перед другими банками равен 0.7"
+      calculating += "*0.7"
+    end
+    if bankCredit[:unfinushed_contracts].to_i == 1
+      mark *= 0.7
+      mark_explanations.push "Коэфициент наличия невыполненныех контрактов равен 0.7"
+      calculating += "*0.7"
+    end
+    if bankCredit[:mental_desease].to_i == 1
+      mark *= 0.7
+      mark_explanations.push "Коэфициент наличия психических расстройств равен 0.7"
+      calculating += "*0.7"
+    end
+    if bankCredit[:guilty_contracts].to_i == 1
+      mark *= 0.3
+      mark_explanations.push "Коэфициент участия в качестве обвиняемого равен 0.3"
+      calculating += "*0.3"
+    end
+    if bankCredit[:is_punished].to_i == 1
+      mark *= 0.1
+      mark_explanations.push "Коэфициент приговора суда равен 0.1"
+      calculating += "*0.1"
+    end
+    if bankCredit[:partner_unfinushed_contracts].to_i == 1
+      mark *= 0.8
+      mark_explanations.push "Коэфициент незавершённых контрактов супруга равен 0.8"
+      calculating += "*0.8"
+    end
+    if bankCredit[:partner_mental_desease].to_i == 1
+      mark *= 0.8
+      mark_explanations.push "Коэфициент психических расстройств супруга равен 0.8"
+      calculating += "*0.8"
+    end
+    if bankCredit[:partner_guilty_contracts].to_i == 1
+      mark *= 0.7
+      mark_explanations.push "Коэфициент участия супруга в качестве обвиняемого равен 0.7"
+      calculating += "*0.7"
+
+    end
+    if bankCredit[:partner_is_punished].to_i == 1
+      mark *= 0.6
+      mark_explanations.push "Коэфициент приговора суда над супругом равен 0.6"
+      calculating += "*0.6"
+    end
+    #End of tenth step mark
+
+    #Eleventh step mark
+    if bankCredit[:rude_credits].to_i == 1
+      mark *= 1.1
+      mark_explanations.push "Коэфициент опыта кредитования в нашем банке равен 1.1"
+      calculating += "*1.1"
+    end
+
+    if bankCredit[:another_credits].to_i == 1.01
+      mark *= 1.01
+      mark_explanations.push "Коэфициент опыта кредитования в других банках равен 1.01"
+      calculating += "*1.01"
+    end
+
+    if bankCredit[:currentCreditsCount].to_i > 0
+      mark *= 1.0 - bankCredit[:currentCreditsCount].to_i / 10.0
+      mark_explanations.push "Коэфициент колличества действующих кредитов равен #{1.0 - bankCredit[:currentCreditsCount].to_i.to_f / 10.0}"
+      calculating += "*#{1.0 - bankCredit[:currentCreditsCount].to_i.to_f / 10.0}"
+    end
+
+    if bankCredit[:currentCreditsSum].to_i > 0
+      necessaryMark *= 1.0 + bankCredit[:currentCreditsSum].to_i / 1000.0
+      mark_explanations.push "Необходимая оценка возрасла на #{1.0 + bankCredit[:currentCreditsSum].to_i / 1000.0}"
+    end
+
+    if bankCredit[:credit_violation].to_i == 1
+      mark *= 0.7
+      mark_explanations.push "Коэфициент нарушения сроков кредита равен 0.7"
+      calculating += "*0.7"
+    end
+
+    if bankCredit[:procents_penaltyes].to_i == 1
+      mark *= 0.85
+      mark_explanations.push "Коэфициент нарушения процентов равен 0.85"
+      calculating += "*0.85"
+    end
+
+    if bankCredit[:another_banks_credits].to_i == 1
+      mark *= 0.78
+      mark_explanations.push "Коэфициент поручительства равен 0.78"
+      calculating += "*0.78"
+
+    end
+
+    if bankCredit[:guarantee].to_i == 1
+      mark *= 0.64
+      mark_explanations.push "Коэфициент исполнения обязательств должника равен 0.64"
+      calculating += "*0.64"
+    end
+
+    if bankCredit[:installments].to_i == 1
+      mark *= 0.6
+      mark_explanations.push "Коэфициент задолженности по товарам в рассрочку равен 0.6"
+      calculating += "*0.6"
+    end
+    #End of eleventh step mark
+
+    if collateral_employee >= creditSum
+      collateralEmployed = true
+      calculatedMark = "#{collateral_employee}>#{creditSum}"
+    end
+
+    return mark, necessaryMark, mark_explanations, calculating, collateralEmployed, calculatedMark
   end
 
   def online_credit_params

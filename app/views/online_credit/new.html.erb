@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="ui segment">
+  <div class="ui segment piled">
 
     <%= form_for :online_credit, url: online_credit_index_path, html: {class: "ui form error success", id: "online-credit-form"}, method: :post do |f| %>
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />

@@ -19,7 +19,8 @@
 }
 
 .ui.segment {
-    border-radius: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: none;
+    border-radius: 0;
 }
 
 .ui.checkbox label {

@@ -19,9 +19,10 @@
         <b>Полученная оценка равна: </b><%= @mark %><br/>
         <b>Полученная оценка высчитывалась по формуле: </b><%= @calculating %>
         <% if (@mark >= @necessaryMark) %>
-            <h2 style="text-align: center">Выдача онлайн кредита одобрена</h2>
+            <h2 style="text-align: center">Ваша заявка одобрена.
+                            <%= %>Приходите в банк с документами.</h2>
         <% else %>
-            <h2 style="text-align: center">Выдача онлайн кредита не рекомендуется</h2>
+            <h2 style="text-align: center">В выдаче  кредита отказано</h2>
         <% end %>
     </div>
 </div>

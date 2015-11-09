@@ -1,7 +1,29 @@
 class OnlineCreditController < ApplicationController
 
   def new
-    @online_credit_inputs =  {"credit_product_type"=>"0", "currency_type"=>"0", "sum_value"=>"0", "term_loan_product"=>"0", "provision_type"=>"0", "other_provision_type"=>"", "organization_name"=>"dhghf", "customers_address"=>"", "main_activity_type"=>"0", "alt_main_activity"=>"", "organization_experience"=>"", "customers_firstname"=>"", "customers_lastname"=>"", "customers_patronymic"=>"", "customers_phone"=>"", "customers_email"=>"" }
+    client_job_types = ClientJobType.all
+    credit_warranty_types = CreditWarrantyType.all
+    currencies = Currency.all
+
+    @online_credit_inputs =  {credit_product_type: "0",
+                              currency_type: "0",
+                              sum_value: "0",
+                              term_loan_product: "0",
+                              provision_type: "0",
+                              other_provision_type: "",
+                              organization_name: "",
+                              customers_address: "",
+                              main_activity_type: "0",
+                              alt_main_activity: "",
+                              organization_experience: "",
+                              customers_firstname: "",
+                              customers_lastname: "",
+                              customers_patronymic: "",
+                              customers_phone: "",
+                              customers_email: "",
+                              client_job_types: client_job_types,
+                              credit_warranty_types: credit_warranty_types,
+                              currencies: currencies}
     @online_credit_inputs = flash[:inputs_params] if flash[:inputs_params] != nil
   end
 

@@ -1,0 +1,25 @@
+<div class="field">
+  <label>*Вид кредитного продукта</label>
+
+  <div class="ui selection dropdown">
+    <%= f.number_field :credit_product_type, value: @online_credit_inputs[:credit_product_type], type: "hidden" %>
+    <i class="dropdown icon"></i>
+    <div class="default text">Выберите вид кредитного продукта</div>
+    <div class="menu">
+      <div class="item" data-value="1">Кредит на финансирование текущей деятельности</div>
+      <div class="item" data-value="2">Кредит на финансирование инвестиционной деятельности</div>
+      <div class="item" data-value="3">Факторинг</div>
+      <div class="item" data-value="4">Лизинг</div>
+      <div class="item" data-value="5">Банковская гарантия</div>
+    </div>
+  </div>
+</div>
+
+<div id="step-errors-1" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul><li>Выберите вид кредитного продукта.</li></ul>
+</div>
+<button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_credit_product_type', 1)">
+  Далее
+</button>
+

@@ -1,0 +1,30 @@
+<div class="field">
+  <div class="ui selection dropdown multiple">
+    <%= f.number_field :provision_type, value: @online_credit_inputs[:provision_type], type: "hidden" %>
+    <i class="dropdown icon"></i>
+    <div class="default text">Выберите виды предлагаемого обеспечения</div>
+    <div class="menu">
+      <%  @online_credit_inputs[:credit_warranty_types].each do |credit_warranty_type|%>
+          <div class="item" data-value="<%= credit_warranty_type.id %>" ><%= credit_warranty_type.name %></div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <label>Прочие виды обеспечения:</label>
+  <%= f.text_field :other_provision_type, value: @online_credit_inputs[:other_provision_type], placeholder: "Укажите здесь дополнительные виды обеспечения" %>
+</div>
+
+<div id="step-errors-5" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul><li>Выберите хотя бы один вид предлогаемого обеспечения или введите свой в "прочих видах обеспечения".</li></ul>
+</div>
+
+<button type="button" class="ui button orange" onclick="navigate('#step4')">
+  Назад
+</button>
+
+<button type="button" class="ui button orange" onclick="validateFifthStep()">
+  Далее
+</button>

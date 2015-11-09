@@ -1,0 +1,17 @@
+<div class="field">
+  <label>Срок кредитного продукта</label>
+  <%= f.number_field :term_loan_product, value: @online_credit_inputs[:term_loan_product], min: 0, placeholder: "Срок кредитного продукта в месяцах" %>
+</div>
+
+<div id="step-errors-4" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul><li>Укажите срок в месяцах больший чем ноль.</li></ul>
+</div>
+
+<button type="button" class="ui button orange" onclick="navigate('#step3')">
+  Назад
+</button>
+
+<button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_term_loan_product', 4)">
+  Далее
+</button>

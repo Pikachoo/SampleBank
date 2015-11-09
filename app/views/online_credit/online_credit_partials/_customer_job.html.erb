@@ -1,0 +1,23 @@
+<div class="field">
+  <label>*Сфера деятельности</label>
+  <div class="ui selection dropdown">
+    <%= f.number_field :main_activity_type, value: @online_credit_inputs[:main_activity_type], type: "hidden" %>                <i class="dropdown icon"></i>
+    <div class="default text">Сфера деятельности</div>
+    <div class="menu">
+      <% @online_credit_inputs[:client_job_types].each do |client_job_type|%>
+          <div class="item" data-value="<%= client_job_type.id %>" ><%= client_job_type.name %></div>
+      <%end%>
+
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <label>Иной вид основной деятельности:</label>
+  <%= f.text_field :alt_main_activity, value: @online_credit_inputs[:alt_main_activity], placeholder: "Укажите в случае отсутсвия в списке вашей основной деятельности" %>
+</div>
+
+<div class="field">
+  <label>*Опыт работы (мес.)</label>
+  <%= f.number_field :organization_experience, value: @online_credit_inputs[:organization_experience], placeholder: "Опыт работы (мес.)", min: 0 %>
+</div>

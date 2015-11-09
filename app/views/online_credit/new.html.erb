@@ -1,7 +1,11 @@
 <div class="container">
   <div class="ui segment piled">
 
-    <%= form_for :online_credit, url: online_credit_index_path, html: {class: "ui form error success", id: "online-credit-form"}, method: :post do |f| %>
+    <%= form_for :online_credit,
+                 url: online_credit_index_path,
+                 html: {class: "ui form error success",
+                        id: "online-credit-form"},
+                 method: :post do |f| %>
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
       <h2 class="ui header dividing">Предварительная заявка на кредитный продукт</h2>
         <div class="request-info">
@@ -22,234 +26,32 @@
 
         <div id="step1" class="step">
           <p><b>ШАГ 1 из 6</b> - выберите вид кредитного продукта</p>
-
-          <div class="field">
-            <label>*Вид кредитного продукта</label>
-
-            <div class="ui selection dropdown">
-              <%= f.number_field :credit_product_type, value: @online_credit_inputs["credit_product_type"], type: "hidden" %>
-              <i class="dropdown icon"></i>
-              <div class="default text">Выберите вид кредитного продукта</div>
-              <div class="menu">
-                <div class="item" data-value="1">Кредит на финансирование текущей деятельности</div>
-                <div class="item" data-value="2">Кредит на финансирование инвестиционной деятельности</div>
-                <div class="item" data-value="3">Факторинг</div>
-                <div class="item" data-value="4">Лизинг</div>
-                <div class="item" data-value="5">Банковская гарантия</div>
-              </div>
-            </div>
-          </div>
-
-          <div id="step-errors-1" class="validation_errors invisible">
-            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
-            <ul><li>Выберите вид кредитного продукта.</li></ul>
-          </div>
-
-          <button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_credit_product_type', 1)">
-            Далее
-          </button>
+          <%= render partial: "online_credit/online_credit_partials/credit_type", locals: {f: f} %>
         </div>
 
         <div id="step2" class="step">
           <p><b>ШАГ 2 из 6</b> - Выберите необходимую валюту</p>
-
-          <div class="field">
-            <label>*Валюта</label>
-
-            <div class="ui selection dropdown">
-              <%= f.number_field :currency_type, value: @online_credit_inputs["currency_type"], type: "hidden" %>
-              <i class="dropdown icon"></i>
-              <div class="default text">Выберите тип валюты</div>
-              <div class="menu">
-                <div class="item" data-value="1">Белорусские рубли</div>
-                <div class="item" data-value="2">Евро</div>
-                <div class="item" data-value="3">Доллары США</div>
-              </div>
-            </div>
-          </div>
-
-          <div id="step-errors-2" class="validation_errors invisible">
-            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
-            <ul><li>Выберите Валюту.</li></ul>
-          </div>
-
-          <button type="button" class="ui button orange" onclick="navigate('#step1')">
-            Назад
-          </button>
-
-          <button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_currency_type', 2)">
-            Далее
-          </button>
+          <%= render partial: "online_credit/online_credit_partials/currencies", locals: {f: f} %>
         </div>
 
         <div id="step3" class="step">
           <p><b>ШАГ 3 из 6</b> - Укажите необходимую сумму в единицах валюты</p>
-
-          <div class="field">
-            <label>*Сумма</label>
-            <%= f.number_field :sum_value, value: @online_credit_inputs["sum_value"], min: 0, placeholder: "Необходимая сумма в единицах валюты" %>
-          </div>
-
-          <div id="step-errors-3" class="validation_errors invisible">
-            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
-            <ul><li>Укажите сумму большую нуля, в целочисленном исчеслении.</li></ul>
-          </div>
-
-          <button type="button" class="ui button orange" onclick="navigate('#step2')">
-            Назад
-          </button>
-
-          <button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_sum_value', 3)">
-            Далее
-          </button>
+          <%= render partial: "online_credit/online_credit_partials/credit_sum", locals: {f: f} %>
         </div>
 
         <div id="step4" class="step">
           <p><b>ШАГ 4 из 6</b> - Укажите желаемый срок в месяцах</p>
-
-          <div class="field">
-            <label>Срок кредитного продукта</label>
-            <%= f.number_field :term_loan_product, value: @online_credit_inputs["term_loan_product"], min: 0, placeholder: "Срок кредитного продукта в месяцах" %>
-          </div>
-
-          <div id="step-errors-4" class="validation_errors invisible">
-            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
-            <ul><li>Укажите срок в месяцах больший чем ноль.</li></ul>
-          </div>
-
-          <button type="button" class="ui button orange" onclick="navigate('#step3')">
-            Назад
-          </button>
-
-          <button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_term_loan_product', 4)">
-            Далее
-          </button>
+          <%= render partial: "online_credit/online_credit_partials/credit_time", locals: {f: f} %>
         </div>
 
         <div id="step5" class="step">
           <p><b>ШАГ 5 из 6</b> - Выберите виды предлагаемого обеспечения</p>
-
-          <div class="field">
-            <div class="ui selection dropdown multiple">
-              <%= f.number_field :provision_type, value: @online_credit_inputs["provision_type"], type: "hidden" %>
-              <i class="dropdown icon"></i>
-              <div class="default text">Выберите виды предлагаемого обеспечения</div>
-              <div class="menu">
-                <div class="item" data-value="1">Залог товаров в обороте</div>
-                <div class="item" data-value="2">Залог недвижимости</div>
-                <div class="item" data-value="3">Залог оборудования</div>
-                <div class="item" data-value="4">Залог транспортных средств</div>
-                <div class="item" data-value="5">Залог имущественных прав</div>
-                <div class="item" data-value="6">Поручительство</div>
-                <div class="item" data-value="7">Гарантия</div>
-                <div class="item" data-value="8">Гарантийный депозит денег</div>
-                <div class="item" data-value="9">Страхование риска невозврата (непогашения) кредита</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Прочие виды обеспечения:</label>
-            <%= f.text_field :other_provision_type, value: @online_credit_inputs["other_provision_type"], placeholder: "Укажите здесь дополнительные виды обеспечения" %>
-          </div>
-
-          <div id="step-errors-5" class="validation_errors invisible">
-            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
-            <ul><li>Выберите хотя бы один вид предлогаемого обеспечения или введите свой в "прочих видах обеспечения".</li></ul>
-          </div>
-
-          <button type="button" class="ui button orange" onclick="navigate('#step4')">
-            Назад
-          </button>
-
-          <button type="button" class="ui button orange" onclick="validateFifthStep()">
-            Далее
-          </button>
+          <%= render partial: "online_credit/online_credit_partials/credit_warrency", locals: {f: f} %>
         </div>
 
         <div id="step6" class="step">
           <p><b>ШАГ 6 из 6</b> - Заполните Ваши персональные данные. Нажмите кнопку "Отправить заявку"</p>
-
-          <div class="field">
-
-            <div class="field">
-              <label>*Наименование организации</label>
-              <%= f.text_field :organization_name, value: @online_credit_inputs["organization_name"], placeholder: "Наименование организации" %>
-            </div>
-
-            <div class="field">
-              <label>*Адрес (город, улица, № дома)</label>
-              <%= f.text_field :customers_address, value: @online_credit_inputs["customers_address"], placeholder: "Адрес (город, улица, № дома)" %>
-            </div>
-
-            <div class="field">
-              <label>*Вид основной деятельности</label>
-              <div class="ui selection dropdown">
-                <%= f.number_field :main_activity_type, value: @online_credit_inputs["main_activity_type"], type: "hidden" %>
-                <i class="dropdown icon"></i>
-                <div class="default text">Укажите вид основной деятельности</div>
-                <div class="menu">
-                  <div class="item" data-value="1">Грузоперевозки</div>
-                  <div class="item" data-value="2">Производство</div>
-                  <div class="item" data-value="3">Сельское хозяйство</div>
-                  <div class="item" data-value="4">Строительство</div>
-                  <div class="item" data-value="5">Торговля</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="field">
-              <label>Иной вид основной деятельности:</label>
-              <%= f.text_field :alt_main_activity, value: @online_credit_inputs["alt_main_activity"], placeholder: "Укажите в случае отсутсвия в списке вашей основной деятельности" %>
-            </div>
-
-            <div class="field">
-              <label>*Опыт работы (мес.)</label>
-              <%= f.number_field :organization_experience, value: @online_credit_inputs["organization_experience"], placeholder: "Опыт работы (мес.)", min: 0 %>
-            </div>
-
-            <p><b>Контактное лицо:</b></p>
-
-            <div class="field">
-              <label>*Имя</label>
-              <%= f.text_field :customers_firstname, value: @online_credit_inputs["customers_firstname"], placeholder: "Имя" %>
-            </div>
-
-            <div class="field">
-              <label>*Фамилия</label>
-              <%= f.text_field :customers_lastname, value: @online_credit_inputs["customers_lastname"], placeholder: "Фамилия" %>
-            </div>
-
-            <div class="field">
-              <label>*Отчество</label>
-              <%= f.text_field :customers_patronymic, value: @online_credit_inputs["customers_patronymic"], placeholder: "Отчество" %>
-            </div>
-
-            <p><b>Контактная информация:</b></p>
-
-            <div class="field">
-              <label>*Телефон</label>
-              <%= f.text_field :customers_phone, value: @online_credit_inputs["customers_phone"], placeholder: "+375-XXX-НОМЕР" %>
-            </div>
-
-            <div class="field">
-              <label>E-mail</label>
-              <%= f.text_field :customers_email, value: @online_credit_inputs["customers_email"], placeholder: "E-mail" %>
-            </div>
-          </div>
-
-          <div id="step-errors-6" class="validation_errors invisible">
-            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
-            <ul id="errors_list"></ul>
-          </div>
-
-          <button type="button" class="ui button orange" onclick="navigate('#step5')">
-            Назад
-          </button>
-
-          <button type="button" class="ui button orange" onclick="validateSixthStep()">
-            Отправить заявку
-          </button>
+          <%= render partial: "online_credit/online_credit_partials/personal_data", locals: {f: f} %>
         </div>
 
         <div class="request-info">

@@ -32,9 +32,9 @@ class BankCreditController < ApplicationController
         mark_explanations.push "Коэфициент предоставленного кредита составляет 1.2"
         calculating += "(1.2"
       when 2
-        mark *= 0.92
-        mark_explanations.push "Коэфициент предоставленного кредита на приобретения жилья составляет 0.92"
-        calculating += "(0.92"
+        mark *= 1.12
+        mark_explanations.push "Коэфициент предоставленного кредита на приобретения жилья составляет 1.12"
+        calculating += "(1.12"
       else
         mark *= 0.95
         mark_explanations.push "Коэфициент предоставленного кредита составляет 0.95"

@@ -3,20 +3,10 @@
 <div class="ui selection dropdown">
   <%= f.number_field :affirmation_of_commitments, value: @bank_credit_inputs["affirmation_of_commitments"], type: "hidden"%>
   <i class="dropdown icon"></i>
-  <div class="default text">Способ выдачи</div>
+  <div class="default text">Обеспечения выплат</div>
   <div class="menu">
-    <div class="item" data-value="1">Поручительство физических(-го) лиц(-а)</div>
-    <div class="item" data-value="2">Поручительство юридического лица (индивидуального предпринимателя)</div>
-    <div class="item" data-value="3">Залог недвижимости (ипотека) жилых помещений </div>
-    <div class="item" data-value="4">Залог недвижимости (ипотека) кроме жилых помещений</div>
-    <div class="item" data-value="5">Залог транспортных средств</div>
-    <div class="item" data-value="6">Залог ценных бумаг</div>
-    <div class="item" data-value="7">Залог мерных слитков драгоценных металлов </div>
-    <div class="item" data-value="8">Гарантийный депозит денег в белорусских рублях</div>
-    <div class="item" data-value="9">Гарантийный депозит денег в иностранной валюте</div>
-    <div class="item" data-value="10">Залог имущественных прав на строящийся объект недвижимости</div>
-    <div class="item" data-value="11">Залог имущественных прав на приобретаемый объект недвижимости</div>
-    <div class="item" data-value="12">Залог имущественных прав на приобретаемое транспортное средство </div>
-    <div class="item" data-value="13">Неустойка</div>
+    <%  @bank_credit_inputs[:credit_warrency_types].each do |credit_warrency_type| %>
+        <div class="item" data-value="<%= credit_warrency_type.id %>"><%= credit_warrency_type.name %></div>
+    <% end %>
   </div>
 </div>

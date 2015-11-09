@@ -5,11 +5,9 @@
   <i class="dropdown icon"></i>
   <div class="default text">Способ выдачи</div>
   <div class="menu">
-    <div class="item" data-value="1" onclick="toggleElement('#bank_credit_issuance_score', false)">Наличными деньгами</div>
-    <div class="item" data-value="2" onclick="toggleElement('#bank_credit_issuance_score', false)">Кредитной платёжной карточкой</div>
-    <div class="item" data-value="3" onclick="toggleElement('#bank_credit_issuance_score', false)">Чековой книжкой</div>
-    <div class="item" data-value="4" onclick="toggleElement('#bank_credit_issuance_score', false)">Перечислить на счёт третьего лица</div>
-    <div class="item" data-value="5" onclick="toggleElement('#bank_credit_issuance_score', true)">Зачислить на счёт(указать)</div>
+    <%  @bank_credit_inputs[:credit_payment_types].each do |credit_payment_type| %>
+        <div class="item" data-value="<%= credit_payment_type.id %>"><%= credit_payment_type.name %></div>
+    <% end %>
   </div>
 </div>
 <br/><br/>

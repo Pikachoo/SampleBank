@@ -1,0 +1,57 @@
+<div class="field">
+
+  <p><b>Контактное лицо:</b></p>
+
+  <div class="field">
+    <label>*Имя</label>
+    <%= f.text_field :customers_firstname, value: @online_credit_inputs[:customers_firstname], placeholder: "Имя" %>
+  </div>
+
+  <div class="field">
+    <label>*Фамилия</label>
+    <%= f.text_field :customers_lastname, value: @online_credit_inputs[:customers_lastname], placeholder: "Фамилия" %>
+  </div>
+
+  <div class="field">
+    <label>*Отчество</label>
+    <%= f.text_field :customers_patronymic, value: @online_credit_inputs[:customers_patronymic], placeholder: "Отчество" %>
+  </div>
+  <p><b>Работа:</b></p>
+  <div class="field">
+    <label>*Наименование организации</label>
+    <%= f.text_field :organization_name, value: @online_credit_inputs[:organization_name], placeholder: "Наименование организации" %>
+  </div>
+
+  <div class="field">
+    <label>*Адрес (город, улица, № дома)</label>
+    <%= f.text_field :customers_address, value: @online_credit_inputs[:customers_address], placeholder: "Адрес (город, улица, № дома)" %>
+  </div>
+
+
+  <%= render partial: "online_credit/online_credit_partials/customer_job", locals: {f: f} %>
+
+  <p><b>Контактная информация:</b></p>
+
+  <div class="field">
+    <label>*Телефон</label>
+    <%= f.text_field :customers_phone, value: @online_credit_inputs[:customers_phone], placeholder: "+375-XX-XXXXXXX" %>
+  </div>
+
+  <div class="field">
+    <label>E-mail</label>
+    <%= f.text_field :customers_email, value: @online_credit_inputs[:customers_email], placeholder: "E-mail" %>
+  </div>
+</div>
+
+<div id="step-errors-6" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul id="errors_list"></ul>
+</div>
+
+<button type="button" class="ui button orange" onclick="navigate('#step5')">
+  Назад
+</button>
+
+<button type="button" class="ui button orange" onclick="validateSixthStep()">
+  Отправить заявку
+</button>

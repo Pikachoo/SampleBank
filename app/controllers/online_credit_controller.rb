@@ -1,7 +1,31 @@
 class OnlineCreditController < ApplicationController
 
   def new
-    @online_credit_inputs =  {"credit_product_type"=>"0", "currency_type"=>"0", "sum_value"=>"0", "term_loan_product"=>"0", "provision_type"=>"0", "other_provision_type"=>"", "organization_name"=>"dhghf", "customers_address"=>"", "main_activity_type"=>"0", "alt_main_activity"=>"", "organization_experience"=>"", "customers_firstname"=>"", "customers_lastname"=>"", "customers_patronymic"=>"", "customers_phone"=>"", "customers_email"=>"" }
+    client_job_types = ClientJobType.all
+    credit_warranty_types = CreditWarrantyType.all
+    currencies = Currency.all
+    client_goals = ClientCreditGoal.all
+
+    @online_credit_inputs = {credit_product_type: "0",
+                             currency_type: "0",
+                             sum_value: "0",
+                             term_loan_product: "0",
+                             provision_type: "0",
+                             other_provision_type: "",
+                             organization_name: "",
+                             customers_address: "",
+                             main_activity_type: "0",
+                             alt_main_activity: "",
+                             organization_experience: "",
+                             customers_firstname: "",
+                             customers_lastname: "",
+                             customers_patronymic: "",
+                             customers_phone: "",
+                             customers_email: "",
+                             client_job_types: client_job_types,
+                             credit_warranty_types: credit_warranty_types,
+                             currencies: currencies,
+                             client_goals: client_goals}
     @online_credit_inputs = flash[:inputs_params] if flash[:inputs_params] != nil
   end
 
@@ -10,7 +34,8 @@ class OnlineCreditController < ApplicationController
 
   def create
     validation_errors = validate
-    return redirect_to :back, params: params, flash: { validation_errors: validation_errors, inputs_params: params[:online_credit] } if validation_errors != nil
+    return redirect_to :back, params: params, flash: {validation_errors: validation_errors,
+                                                      inputs_params: params[:online_credit]} if validation_errors != nil
     @mark, @necessaryMark, @mark_explanations, @calculating = calculate_mark
   end
 
@@ -31,7 +56,7 @@ class OnlineCreditController < ApplicationController
         calculating = "1"
       when 3
         mark_explanations.push "Клиент выбрал факторинг в качестве вида кредита, коэфициент равен 1.5"
-        mark = mark *  1.5
+        mark = mark * 1.5
         calculating = "1.5"
       when 4
         mark_explanations.push "Клиент выбрал лизинг в качестве вида кредита, коэфициент равен 1.5"
@@ -63,9 +88,11 @@ class OnlineCreditController < ApplicationController
     end
 
     necessaryMark = onlineCredit[:sum_value].to_f * coefficient.to_f / 10000
-    mark_explanations.push "Сумма кредита составила #{onlineCredit[:sum_value] + ' ' + addition}, необходимая оценка будет равна (Сумма / коэфициент валюты / 10000) #{necessaryMark}"
+    mark_explanations.push("Сумма кредита составила #{onlineCredit[:sum_value] + ' ' + addition},
+                            необходимая оценка будет равна (Сумма / коэфициент валюты / 10000) #{necessaryMark}")
 
-    mark_explanations.push "Срок кредита будет равен #{onlineCredit[:term_loan_product].to_i}, коэфициент равен #{(onlineCredit[:term_loan_product].to_f / 6.0).round(2)}"
+    mark_explanations.push("Срок кредита будет равен #{onlineCredit[:term_loan_product].to_i},
+                            коэфициент равен #{(onlineCredit[:term_loan_product].to_f / 6.0).round(2)}")
     mark = mark * (onlineCredit[:term_loan_product].to_f / 6.0)
     calculating = "#{calculating}*#{(onlineCredit[:term_loan_product].to_f / 6.0.to_f).round(2)}"
 
@@ -73,7 +100,8 @@ class OnlineCreditController < ApplicationController
     markSum = 0.0
     isMarkSetted = false
     if onlineCredit[:provision_type] == "0"
-      mark_explanations.push "В качестве видов обеспечения клиент выбрал #{onlineCredit[:other_provision_type]}, коэфициент равен 0.3"
+      mark_explanations.push("В качестве видов обеспечения клиент выбрал #{onlineCredit[:other_provision_type]},
+                              коэфициент равен 0.3")
       markSum = 0.3
       calculating = "#{calculating}*(0.3+"
       isMarkSetted = true
@@ -117,7 +145,7 @@ class OnlineCreditController < ApplicationController
             mark_explanations.push "Клиент выбрал Гарантийный депозит денег, коэфициент равен 0.8"
             markSum += 0.3
             calculating = "#{calculating}+0.8"
-          end
+        end
       end
       calculating = "#{calculating})"
     end
@@ -146,7 +174,8 @@ class OnlineCreditController < ApplicationController
     end
 
     if onlineCredit[:alt_main_activity] != ""
-      mark_explanations.push "Клиент выбрал в качестве вида альтернативной деятельности #{onlineCredit[:alt_main_activity]}, коэфициент равен 1"
+      mark_explanations.push("Клиент выбрал в качестве вида альтернативной деятельности #{onlineCredit[:alt_main_activity]},
+                              коэфициент равен 1")
       calculating = "#{calculating}*1"
     end
 
@@ -159,8 +188,8 @@ class OnlineCreditController < ApplicationController
 
   def online_credit_params
     params.require(:online_credit).permit(:organization_name,
-        :customers_address, :main_activity_type, :alt_main_activity, :organization_experience,
-        :customers_firstname, :customers_lastname, :customers_patronymic, :customers_phone, :customers_email)
+                                          :customers_address, :main_activity_type, :alt_main_activity, :organization_experience,
+                                          :customers_firstname, :customers_lastname, :customers_patronymic, :customers_phone, :customers_email)
   end
 
   def validate

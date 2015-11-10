@@ -1,11 +1,27 @@
 class BankCreditController < ApplicationController
 
   def new
-    @bank_credit_inputs =  {credit_type: 0, credit_type_another_car: "", credit_type_another_card: "",
-      another_home_credit_type: "", issuance_method: 0, granted_procedure: 0, issuance_score: "",
-      affirmation_of_commitments: 0, collateral_employee: 0, collateral_customer: 0, score_id: "", score_existance: 0,
-      credit_sum: 0, credit_term: 0, credit_limit_term: 0, make_insurance: 0, repayment_method: 0
-    }
+    credit_warrency_types = CreditWarrantyType.all
+    credit_payment_types = CreditPaymentType.all
+    @bank_credit_inputs =  {credit_type: 0,
+                            credit_type_another_car: "",
+                            credit_type_another_card: "",
+                            another_home_credit_type: "",
+                            issuance_method: 0,
+                            granted_procedure: 0,
+                            issuance_score: "",
+                            affirmation_of_commitments: 0,
+                            collateral_employee: 0,
+                            collateral_customer: 0,
+                            score_id: "",
+                            score_existance: 0,
+                            credit_sum: 0,
+                            credit_term: 0,
+                            credit_limit_term: 0,
+                            make_insurance: 0,
+                            repayment_method: 0,
+                            credit_warrency_types: credit_warrency_types,
+                            credit_payment_types: credit_payment_types}
     @bank_credit_inputs = flash[:inputs_params] if flash[:inputs_params] != nil
   end
 

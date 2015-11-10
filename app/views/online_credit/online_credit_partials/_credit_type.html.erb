@@ -1,0 +1,26 @@
+<div class="field">
+  <label>*Цель кредита</label>
+
+  <div class="ui selection dropdown">
+    <%= f.number_field :credit_product_type, value: @online_credit_inputs[:credit_product_type], type: "hidden" %>
+    <i class="dropdown icon"></i>
+
+    <div class="default text">Выберите цель кредита</div>
+    <div class="menu">
+      <% @online_credit_inputs[:client_goals].each do |client_goal| %>
+          <div class="item" data-value="<%= client_goal.id %>"><%= client_goal.name %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="step-errors-1" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul>
+    <li>Выберите цель кредита.</li>
+  </ul>
+</div>
+<button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_credit_product_type', 1)">
+  Далее
+</button>
+

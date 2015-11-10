@@ -1,0 +1,16 @@
+<div class="field">
+  <label>*Сумма</label>
+  <%= f.number_field :sum_value, value: @online_credit_inputs[:sum_value], min: 0, placeholder: "Необходимая сумма в единицах валюты" %>
+</div>
+
+<div id="step-errors-3" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul><li>Укажите сумму большую нуля, в целочисленном исчеслении.</li></ul>
+</div>
+<button type="button" class="ui button orange" onclick="navigate('#step2')">
+  Назад
+</button>
+
+<button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_sum_value', 3)">
+  Далее
+</button>

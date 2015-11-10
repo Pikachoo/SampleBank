@@ -1,0 +1,26 @@
+<div class="field">
+  <label>*Валюта</label>
+
+  <div class="ui selection dropdown">
+    <%= f.number_field :currency_type, value: @online_credit_inputs[:currency_type], type: "hidden" %>
+    <i class="dropdown icon"></i>
+    <div class="default text">Выберите тип валюты</div>
+    <div class="menu">
+      <%  @online_credit_inputs[:currencies].each do |currency|%>
+          <div class="item" data-value="<%= currency.id %>" ><%= currency.name %></div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div id="step-errors-2" class="validation_errors invisible">
+  <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+  <ul><li>Выберите Валюту.</li></ul>
+</div>
+<button type="button" class="ui button orange" onclick="navigate('#step1')">
+  Назад
+</button>
+
+<button type="button" class="ui button orange" onclick="validateSimpleStep('online_credit_currency_type', 2)">
+  Далее
+</button>

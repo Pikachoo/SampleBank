@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024163344) do
+ActiveRecord::Schema.define(version: 20151110131557) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer "type_id",     limit: 4,                  null: false
@@ -67,6 +67,14 @@ ActiveRecord::Schema.define(version: 20151024163344) do
     t.string "name", limit: 32, null: false
   end
 
+  create_table "client_credit_goal", force: :cascade do |t|
+    t.string "name", limit: 42, null: false
+  end
+
+  create_table "client_credit_goals", force: :cascade do |t|
+    t.string "name", limit: 56, null: false
+  end
+
   create_table "client_credits", force: :cascade do |t|
     t.integer "client_id",  limit: 4,                 null: false
     t.integer "credit_id",  limit: 4,                 null: false
@@ -89,6 +97,14 @@ ActiveRecord::Schema.define(version: 20151024163344) do
 
   add_index "client_deposits", ["client_id"], name: "client_id", using: :btree
   add_index "client_deposits", ["deposit_id"], name: "deposit_id", using: :btree
+
+  create_table "client_job_type", force: :cascade do |t|
+    t.string "name", limit: 42, null: false
+  end
+
+  create_table "client_job_types", force: :cascade do |t|
+    t.string "name", limit: 56, null: false
+  end
 
   create_table "client_street_types", force: :cascade do |t|
     t.string "name", limit: 32, null: false
@@ -134,6 +150,18 @@ ActiveRecord::Schema.define(version: 20151024163344) do
 
   add_index "contracts", ["type_id"], name: "type_id", using: :btree
 
+  create_table "credit_payment_type", force: :cascade do |t|
+    t.string "name", limit: 42, null: false
+  end
+
+  create_table "credit_warranty_type", force: :cascade do |t|
+    t.string "name", limit: 42, null: false
+  end
+
+  create_table "credit_warranty_types", force: :cascade do |t|
+    t.string "name", limit: 45, null: false
+  end
+
   create_table "credits", force: :cascade do |t|
     t.string  "name",             limit: 68, null: false
     t.integer "percent",          limit: 4,  null: false
@@ -143,6 +171,10 @@ ActiveRecord::Schema.define(version: 20151024163344) do
 
   create_table "currencies", force: :cascade do |t|
     t.string "name", limit: 5, null: false
+  end
+
+  create_table "currency", force: :cascade do |t|
+    t.string "name", limit: 42, null: false
   end
 
   create_table "deposits", force: :cascade do |t|

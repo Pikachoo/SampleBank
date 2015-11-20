@@ -1,6 +1,4 @@
-/**
- * Created by nastya on 11.11.15.
- */
+
 window.api_url = window.location.origin + '/api';
 
 window.api_part_credit = '/credit_information/';
@@ -16,17 +14,17 @@ function get_credit_information(id)
     clear_dropdowns();
 
     payments.forEach(function(item){  payment = construct(item);
-                                      html_payment(payment)});
+        html_payment(payment)});
 
     grantings.forEach(function(item){ granting = construct(item);
-                                      html_granting(granting);});
+        html_granting(granting);});
 
     if(warrenties.length > 0)
     {
 
         html_warrenties();
         warrenties.forEach(function(item){  warrenty = construct(item);
-                                            html_warrenty(warrenty);});
+            html_warrenty(warrenty);});
     }
 
     refresh_dropdowns();
@@ -54,7 +52,7 @@ function html_warrenties(){
     selector.append('<div class="ui selection dropdown" id = "dropdown_affirmation" tabindex="0"></div>');
 
     var drop_down_selector = $('#dropdown_affirmation');
-    drop_down_selector.append('<input type="hidden" name="bank_credit[affirmation_of_commitments]" id="bank_credit_affirmation_of_commitments" value="6"/>');
+    drop_down_selector.append('<input type="hidden" name="bank_credit[affirmation_of_commitments]" id="bank_credit_affirmation_of_commitments" />');
     drop_down_selector.append('<i class="dropdown icon"></i>');
     drop_down_selector.append('<div class="default text">Обеспечения выплат</div>');
     drop_down_selector.append('<div class="menu" id = "menu_affirmation" tabindex="-1"></div>');
@@ -72,21 +70,21 @@ function html_collateral_value(){
     var collateral_item_selector = $('#item_collateral');
 
     collateral_item_selector.append('<a class="title">' +
-                                        '<i class="dropdown icon"></i>' +
-                                    'Оценка предмета залога (в случае его существования)</a>');
+        '<i class="dropdown icon"></i>' +
+        'Оценка предмета залога (в случае его существования)</a>');
     collateral_item_selector.append('<div class="content" id = "content_collateral"></div>');
     $('#content_collateral').append('<div class="ui form" id = "form_collateral" ><br/></div>');
     var collateral_form_selector = $('#form_collateral');
 
     collateral_form_selector.append('<div class="field">' +
-                            '<label>Заявителем самостоятельно согласно внутренней оценке в сумме</label>' +
-                            '<input min="0" placeholder="Заявителем самостоятельно согласно внутренней оценке в сумме" type="number" name="bank_credit[collateral_customer]" id="bank_credit_collateral_customer" />' +
-                        '</div>');
+        '<label>Заявителем самостоятельно согласно внутренней оценке в сумме</label>' +
+        '<input min="0" placeholder="Заявителем самостоятельно согласно внутренней оценке в сумме" type="number" name="bank_credit[collateral_customer]" id="bank_credit_collateral_customer" />' +
+        '</div>');
 
     collateral_form_selector.append('<div class="field">'+
-                                         '<label>По независимой оценке, определенной независимым оценщиком  в сумме</label>' +
-                                         '<input min="0" placeholder="По независимой оценке, определенной независимым оценщиком  в сумме" type="number" name="bank_credit[collateral_employee]" id="bank_credit_collateral_employee" />' +
-                                    '</div>');
+        '<label>По независимой оценке, определенной независимым оценщиком  в сумме</label>' +
+        '<input min="0" placeholder="По независимой оценке, определенной независимым оценщиком  в сумме" type="number" name="bank_credit[collateral_employee]" id="bank_credit_collateral_employee" />' +
+        '</div>');
 }
 
 function clear_dropdowns(){
@@ -174,5 +172,3 @@ function Struct(keys, vals) {
 
     return this;
 }
-
-

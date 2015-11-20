@@ -44,7 +44,9 @@ function validateFirstCreditStep() {
     $("#bank_credit_credit_type").val($("[name='credit_type']:checked").val());
     validateElementWithNullify("#bank_credit_granted_procedure", 1, "Выберите порядок предоставления");
     validateElementWithNullify("#bank_credit_issuance_method", 1, "Выберите способ выдачи");
-    validateElementWithNullify("#bank_credit_affirmation_of_commitments", 1, "Выберите вид обеспечения исполнения кредитных обязательств");
+    if  ($('#credit_affirmation').text() != '') {
+        validateElementWithNullify("#bank_credit_affirmation_of_commitments", 1, "Выберите вид обеспечения исполнения кредитных обязательств");
+    }
     validateElementWithNullify("[name='score_existance']:checked", 1, "Укажите, имеется ли з.п. или доходы в нашем банке");
     validateToggledElement("[name='credit_type']:checked", 4, "bank_credit_another_home_credit_type", 1, "Укажите вид кредита на финансирование имущества");
     validateToggledElement("[name='credit_type']:checked", 6, "bank_credit_credit_type_another_car", 1, "Укажите вид автокредита");

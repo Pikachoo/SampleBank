@@ -1,26 +1,20 @@
 <div class="item">
   <a class="title">
     <i class="dropdown icon"></i>
-    Кредитная карта
+    Кредитная линия
   </a>
   <div class="content">
     <div class="ui form">
       <div class="grouped fields">
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input id="credit_type_7" name="credit_type" onclick="toggleElement('#bank_credit_credit_type_another_card', false)" value="7" type="radio">
-            <label for="credit_type_7">Невозобновляемая кредитная карта</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input id="credit_type_8" name="credit_type" onclick="toggleElement('#bank_credit_credit_type_another_card', true)" value="8" type="radio">
-            <label for="credit_type_8" onclick="toggleElement('#bank_credit_credit_type_another_card', true)">Другой вид кредитных карт</label>
-          </div>
-        </div>
-        <div class="field invisible" id="another_card">
-          <%= f.text_field :credit_type_another_card, value: @bank_credit_inputs["credit_type_another_card"], class: "invisible", type: "text", placeholder: "Укажите вид кредитной карты" %>
-        </div>
+        <% @bank_credit_inputs[:credits].each do |credit| %>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input id="credit_type_<%= credit.id.to_s %>" name="credit_type" onclick="toggleElement('#bank_credit_credit_type_another_card', false)" onchange="get_credit_information(<%=credit.id.to_s%>)" value="<%= credit.id.to_s %> " type="radio">
+                <label for="credit_type_<%= credit.id.to_s %>" ><%=credit.name%></label>
+              </div>
+            </div>
+        <% end %>
+
       </div>
     </div>
   </div>

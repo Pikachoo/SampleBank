@@ -13,20 +13,26 @@
 
 ActiveRecord::Schema.define(version: 20151024163344) do
 
-  create_table "accounts", force: :cascade do |t|
-    t.integer "type_id",     limit: 4,                  null: false
-    t.string  "IBAN",        limit: 34,                 null: false
-    t.float   "balance",     limit: 24,                 null: false
-    t.integer "currency_id", limit: 4,                  null: false
-    t.integer "client_id",   limit: 4,                  null: false
-    t.boolean "is_active",   limit: 1,  default: true,  null: false
-    t.boolean "is_deleted",  limit: 1,  default: false, null: false
+  create_table "airlineroutes", force: :cascade do |t|
+    t.integer "airline_id", limit: 4, null: false
+    t.integer "route_id",   limit: 4, null: false
   end
 
-  add_index "accounts", ["IBAN"], name: "account_number", unique: true, using: :btree
-  add_index "accounts", ["client_id"], name: "client_id", using: :btree
-  add_index "accounts", ["currency_id"], name: "currency_id", using: :btree
-  add_index "accounts", ["type_id"], name: "type_id", using: :btree
+  create_table "airlines", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+  end
+
+  create_table "airports", force: :cascade do |t|
+    t.string  "name",              limit: 45, null: false
+    t.integer "city_id",           limit: 4,  null: false
+    t.integer "number_of_runways", limit: 4,  null: false
+    t.integer "country_id",        limit: 4,  null: false
+  end
+
+  create_table "baggages", force: :cascade do |t|
+    t.integer "passenger_id", limit: 4,  null: false
+    t.float   "weight",       limit: 24, null: false
+  end
 
   create_table "bank_credit", force: :cascade do |t|
     t.integer "credit_type",                limit: 4
@@ -52,111 +58,23 @@ ActiveRecord::Schema.define(version: 20151024163344) do
     t.integer  "repayment_method",  limit: 4
   end
 
-  create_table "cards", force: :cascade do |t|
-    t.integer "account_id",  limit: 4, null: false
-    t.integer "client_id",   limit: 4, null: false
-    t.integer "cvv",         limit: 4, null: false
-    t.date    "date_expiry",           null: false
+  create_table "cities", force: :cascade do |t|
+    t.string  "name",       limit: 45, null: false
+    t.integer "country_id", limit: 4,  null: false
   end
 
-  add_index "cards", ["account_id"], name: "account_id", using: :btree
-  add_index "cards", ["client_id"], name: "client_id", using: :btree
-  add_index "cards", ["cvv"], name: "cvv", using: :btree
-
-  create_table "client_cities", force: :cascade do |t|
-    t.string "name", limit: 32, null: false
+  create_table "countries", force: :cascade do |t|
+    t.string "name", limit: 45, null: false
   end
 
-  create_table "client_credits", force: :cascade do |t|
-    t.integer "client_id",  limit: 4,                 null: false
-    t.integer "credit_id",  limit: 4,                 null: false
-    t.date    "begin_date",                           null: false
-    t.date    "end_date",                             null: false
-    t.boolean "is_overdue", limit: 1, default: false, null: false
-    t.boolean "is_closed",  limit: 1, default: false, null: false
-  end
-
-  add_index "client_credits", ["client_id"], name: "client_id", using: :btree
-  add_index "client_credits", ["credit_id"], name: "credit_id", using: :btree
-
-  create_table "client_deposits", force: :cascade do |t|
-    t.integer "client_id",  limit: 4,                 null: false
-    t.integer "deposit_id", limit: 4,                 null: false
-    t.date    "date_begin",                           null: false
-    t.date    "date_end",                             null: false
-    t.boolean "is_closed",  limit: 1, default: false, null: false
-  end
-
-  add_index "client_deposits", ["client_id"], name: "client_id", using: :btree
-  add_index "client_deposits", ["deposit_id"], name: "deposit_id", using: :btree
-
-  create_table "client_street_types", force: :cascade do |t|
-    t.string "name", limit: 32, null: false
-  end
-
-  create_table "client_streets", force: :cascade do |t|
-    t.string  "name",    limit: 64, null: false
-    t.integer "type_id", limit: 4,  null: false
-  end
-
-  add_index "client_streets", ["type_id"], name: "type_id", using: :btree
-
-  create_table "clients", force: :cascade do |t|
-    t.string  "name",       limit: 42,             null: false
-    t.string  "surname",    limit: 42,             null: false
-    t.string  "patronymic", limit: 42,             null: false
-    t.date    "birth_date",                        null: false
-    t.string  "sex",        limit: 1,              null: false
-    t.integer "phone",      limit: 4,              null: false
-    t.string  "email",      limit: 56,             null: false
-    t.integer "city_id",    limit: 4,              null: false
-    t.integer "street_id",  limit: 4,              null: false
-    t.string  "house",      limit: 11,             null: false
-    t.integer "block",      limit: 4
-    t.integer "appartment", limit: 4,              null: false
-    t.integer "score",      limit: 4,  default: 0, null: false
-    t.string  "passport",   limit: 42,             null: false
-    t.integer "user_id",    limit: 4,              null: false
-  end
-
-  add_index "clients", ["city_id"], name: "city_id", using: :btree
-  add_index "clients", ["house"], name: "house", using: :btree
-  add_index "clients", ["phone"], name: "phone", using: :btree
-  add_index "clients", ["score"], name: "score", using: :btree
-  add_index "clients", ["street_id"], name: "street_id", using: :btree
-  add_index "clients", ["user_id"], name: "user_id", using: :btree
-
-  create_table "contracts", force: :cascade do |t|
-    t.string  "file_path",      limit: 100, null: false
-    t.string  "operation_type", limit: 16,  null: false
-    t.integer "type_id",        limit: 4,   null: false
-  end
-
-  add_index "contracts", ["type_id"], name: "type_id", using: :btree
-
-  create_table "credits", force: :cascade do |t|
-    t.string  "name",             limit: 68, null: false
-    t.integer "percent",          limit: 4,  null: false
-    t.integer "currency_id",      limit: 4,  null: false
-    t.integer "default_interest", limit: 4,  null: false
-  end
-
-  create_table "currencies", force: :cascade do |t|
-    t.string "name", limit: 5, null: false
-  end
-
-  create_table "deposits", force: :cascade do |t|
-    t.string  "name",        limit: 42, null: false
-    t.integer "percent",     limit: 4,  null: false
-    t.integer "currency_id", limit: 4,  null: false
-    t.string  "type",        limit: 16, null: false
-    t.integer "duration",    limit: 4,  null: false
-  end
-
-  create_table "emails", force: :cascade do |t|
-    t.string "from",    limit: 42,    null: false
-    t.text   "to",      limit: 65535, null: false
-    t.text   "message", limit: 65535, null: false
+  create_table "flights", force: :cascade do |t|
+    t.datetime "time_from",                null: false
+    t.datetime "time_to",                  null: false
+    t.integer  "plane_id",      limit: 4,  null: false
+    t.integer  "free_seat",     limit: 4,  null: false
+    t.integer  "route_id",      limit: 4,  null: false
+    t.integer  "airline_id",    limit: 4,  null: false
+    t.string   "flight_number", limit: 45
   end
 
   create_table "online_credit", force: :cascade do |t|
@@ -183,6 +101,25 @@ ActiveRecord::Schema.define(version: 20151024163344) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "passengers", force: :cascade do |t|
+    t.string  "name",            limit: 45, null: false
+    t.string  "surname",         limit: 80, null: false
+    t.string  "secondname",      limit: 45
+    t.integer "country_id",      limit: 4,  null: false
+    t.string  "passport_number", limit: 45, null: false
+  end
+
+  create_table "planes", force: :cascade do |t|
+    t.string  "name",        limit: 45, null: false
+    t.string  "plane_class", limit: 45
+    t.integer "capacity",    limit: 4,  null: false
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.integer "from_airport_id", limit: 4, null: false
+    t.integer "to_airport_id",   limit: 4, null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255,   null: false
     t.text     "data",       limit: 65535
@@ -193,28 +130,30 @@ ActiveRecord::Schema.define(version: 20151024163344) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
-  create_table "sms", force: :cascade do |t|
-    t.string   "status",    limit: 16,    null: false
-    t.integer  "error",     limit: 4,     null: false
-    t.text     "message",   limit: 65535, null: false
-    t.datetime "timestamp",               null: false
-  end
-
-  create_table "types", force: :cascade do |t|
-    t.string "name", limit: 16, null: false
-  end
-
-  create_table "user_roles", force: :cascade do |t|
-    t.string "name", limit: 42, null: false
+  create_table "tickets", force: :cascade do |t|
+    t.string  "place_number",  limit: 10
+    t.integer "passenger_id",  limit: 4,                 null: false
+    t.integer "flight_id",     limit: 4,                 null: false
+    t.integer "baggage_id",    limit: 4
+    t.boolean "ticket_enable", limit: 1,  default: true, null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string  "name",    limit: 42, null: false
-    t.string  "hash",    limit: 32, null: false
-    t.string  "salt",    limit: 32, null: false
-    t.integer "role_id", limit: 4,  null: false
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "users", ["role_id"], name: "role_id", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

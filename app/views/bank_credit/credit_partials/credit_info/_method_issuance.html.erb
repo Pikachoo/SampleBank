@@ -1,14 +1,12 @@
 <h3>*Способ выдачи:</h3>
 
-<div class="ui selection dropdown">
+<div class="ui selection dropdown" id = "dropdown_method_issuance">
   <%= f.number_field :issuance_method, value: @bank_credit_inputs["issuance_method"], type: "hidden"%>
   <i class="dropdown icon"></i>
   <div class="default text">Способ выдачи</div>
-  <div class="menu">
-    <%  @bank_credit_inputs[:credit_payment_types].each do |credit_payment_type| %>
-        <div class="item" data-value="<%= credit_payment_type.id %>"><%= credit_payment_type.name %></div>
-    <% end %>
-  </div>
+      <div class="menu" id="menu_method_issuance" tabindex="-1">
+
+      </div>
 </div>
 <br/><br/>
 <%= f.number_field :issuance_score, value: @bank_credit_inputs["issuance_score"], class:"invisible", placeholder:"Счёт получителя"%>

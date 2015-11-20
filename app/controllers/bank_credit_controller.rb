@@ -3,6 +3,7 @@ class BankCreditController < ApplicationController
   def new
     credit_warrency_types = CreditWarrantyType.all
     credit_payment_types = CreditPaymentType.all
+    credits = Credit.all
     @bank_credit_inputs =  {credit_type: 0,
                             credit_type_another_car: "",
                             credit_type_another_card: "",
@@ -20,6 +21,7 @@ class BankCreditController < ApplicationController
                             credit_limit_term: 0,
                             make_insurance: 0,
                             repayment_method: 0,
+                            credits: credits,
                             credit_warrency_types: credit_warrency_types,
                             credit_payment_types: credit_payment_types}
     @bank_credit_inputs = flash[:inputs_params] if flash[:inputs_params] != nil

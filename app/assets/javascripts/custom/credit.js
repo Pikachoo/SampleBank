@@ -59,6 +59,7 @@ function html_warrenties(){
     drop_down_selector.append('<div class="default text">Обеспечения выплат</div>');
     drop_down_selector.append('<div class="menu" id = "menu_affirmation" tabindex="-1"></div>');
 
+    selector.append('<br/><br/>')
     html_collateral_value();
 }
 function html_collateral_value(){

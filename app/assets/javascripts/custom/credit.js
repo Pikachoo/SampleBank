@@ -1,12 +1,13 @@
 /**
  * Created by nastya on 11.11.15.
  */
-window.api_url = "http://localhost:3000/api";
+window.api_url = window.location.origin + '/api';
 
 window.api_part_credit = '/credit_information/';
 
 function get_credit_information(id)
 {
+    console.log(window.api_url);
     var information = json_parse(window.api_url + window.api_part_credit + id);
     var payments = information.payments;
     var warrenties = information.warrenties;

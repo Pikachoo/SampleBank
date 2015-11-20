@@ -13,39 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151024163344) do
 
-  create_table "airlineroutes", force: :cascade do |t|
-    t.integer "airline_id", limit: 4, null: false
-    t.integer "route_id",   limit: 4, null: false
-  end
-
-  create_table "airlines", force: :cascade do |t|
-    t.string "name", limit: 50, null: false
-  end
-
-  create_table "airports", force: :cascade do |t|
-    t.string  "name",              limit: 45, null: false
-    t.integer "city_id",           limit: 4,  null: false
-    t.integer "number_of_runways", limit: 4,  null: false
-    t.integer "country_id",        limit: 4,  null: false
-  end
-
-  create_table "baggages", force: :cascade do |t|
-    t.integer "passenger_id", limit: 4,  null: false
-    t.float   "weight",       limit: 24, null: false
-  end
-
-  create_table "bank_credit", force: :cascade do |t|
-    t.integer "credit_type",                limit: 4
-    t.string  "credit_type_another_home",   limit: 255
-    t.string  "credit_type_another_car",    limit: 255
-    t.string  "credit_type_another_card",   limit: 255
-    t.integer "granted_procedure",          limit: 4
-    t.integer "affirmation_of_commitments", limit: 4
-    t.integer "collateral_customer",        limit: 4
-    t.integer "collateral_employee",        limit: 4
-    t.integer "score_existance",            limit: 4
-    t.integer "account_id",                 limit: 4
-  end
 
   create_table "bank_credits", force: :cascade do |t|
     t.datetime "created_at",                  null: false
@@ -67,15 +34,6 @@ ActiveRecord::Schema.define(version: 20151024163344) do
     t.string "name", limit: 45, null: false
   end
 
-  create_table "flights", force: :cascade do |t|
-    t.datetime "time_from",                null: false
-    t.datetime "time_to",                  null: false
-    t.integer  "plane_id",      limit: 4,  null: false
-    t.integer  "free_seat",     limit: 4,  null: false
-    t.integer  "route_id",      limit: 4,  null: false
-    t.integer  "airline_id",    limit: 4,  null: false
-    t.string   "flight_number", limit: 45
-  end
 
   create_table "online_credit", force: :cascade do |t|
     t.integer "creditProductType",      limit: 4
@@ -101,24 +59,7 @@ ActiveRecord::Schema.define(version: 20151024163344) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "passengers", force: :cascade do |t|
-    t.string  "name",            limit: 45, null: false
-    t.string  "surname",         limit: 80, null: false
-    t.string  "secondname",      limit: 45
-    t.integer "country_id",      limit: 4,  null: false
-    t.string  "passport_number", limit: 45, null: false
-  end
 
-  create_table "planes", force: :cascade do |t|
-    t.string  "name",        limit: 45, null: false
-    t.string  "plane_class", limit: 45
-    t.integer "capacity",    limit: 4,  null: false
-  end
-
-  create_table "routes", force: :cascade do |t|
-    t.integer "from_airport_id", limit: 4, null: false
-    t.integer "to_airport_id",   limit: 4, null: false
-  end
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255,   null: false
@@ -130,13 +71,7 @@ ActiveRecord::Schema.define(version: 20151024163344) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
-  create_table "tickets", force: :cascade do |t|
-    t.string  "place_number",  limit: 10
-    t.integer "passenger_id",  limit: 4,                 null: false
-    t.integer "flight_id",     limit: 4,                 null: false
-    t.integer "baggage_id",    limit: 4
-    t.boolean "ticket_enable", limit: 1,  default: true, null: false
-  end
+ 
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

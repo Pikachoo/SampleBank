@@ -1,7 +1,6 @@
 <h3>*Сумма кредита</h3>
-
 <div class="field">
-  <%= f.number_field :credit_sum, value: @bank_credit_inputs["credit_sum"], min: 0, placeholder: "Cумма кредита в белорусских рублях"%>
+  <%= f.number_field :credit_sum, value: @bank_credit_inputs["credit_sum"],   placeholder: "Cумма кредита в белорусских рублях"%>
 </div>
 
 <h3>*Срок кредита</h3>
@@ -14,16 +13,16 @@
   <%= f.number_field :credit_limit_term, value: @bank_credit_inputs["credit_limit_term"], min: 0, placeholder: "Месяцев до даты"%>
 </div>
 
-<h3>Совокупный доход (для кредита на финансирование недвижимости или автокредита)</h3>
-<div class="ui selection dropdown">
-  <%= f.number_field :total_income, value: @bank_credit_inputs["total_income"], type: "hidden"%>
-  <i class="dropdown icon"></i>
-  <div class="default text">Совокупный доход (для кредита на финансирование недвижимости или автокредита)</div>
-  <div class="menu">
-    <div class="item" data-value="1">Да</div>
-    <div class="item" data-value="2">Нет</div>
-  </div>
-</div>
+<!--<h3>Совокупный доход (для кредита на финансирование недвижимости или автокредита)</h3>-->
+<!--<div class="ui selection dropdown">-->
+  <!--<% f.number_field :total_income, value: @bank_credit_inputs["total_income"], type: "hidden"%>-->
+  <!--<i class="dropdown icon"></i>-->
+  <!--<div class="default text">Совокупный доход (для кредита на финансирование недвижимости или автокредита)</div>-->
+  <!--<div class="menu">-->
+    <!--<div class="item" data-value="1">Да</div>-->
+    <!--<div class="item" data-value="2">Нет</div>-->
+  <!--</div>-->
+<!--</div>-->
 
 <h3>*Будете ли Вы страховаться от несчастных случаев и болезней</h3>
 <div class="ui selection dropdown">

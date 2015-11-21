@@ -7,11 +7,20 @@ function validateElementWithEmptiness(elementSelector, errorsId, message) {
     if (!isElementNotEmpty(elementSelector))
         addErrorMessage(errorsId, message);
 }
-
+function validateElementWithMaxMin(elementSelector, errorsId, message){
+    if(!isInRange(elementSelector))
+        addErrorMessage(errorsId, message);
+}
 function isElementGreaterThanZero(elementSelector) {
     return $(elementSelector).val() != undefined && $(elementSelector).val() > 0;
 }
+function isInRange(elementSelector){
+    var value = Number($(elementSelector).val());
+    var min = Number($(elementSelector).attr('min'));
+    var max = Number($(elementSelector).attr('max'));
+    return value >= min  && value <= max;
 
+}
 function isElementNotEmpty(elementSelector) {
     return $(elementSelector).val() != undefined && $(elementSelector).val() != "";
 }
@@ -59,7 +68,9 @@ function validateFirstCreditStep() {
 function validateSecondCreditStep() {
     prepareToValidation(2);
     validateElementWithNullify("#bank_credit_credit_sum", 2, "Укажите сумму кредита");
+    validateElementWithMaxMin("#bank_credit_credit_sum", 2, "Укажите правильную сумму кредита ");
     validateElementWithNullify("#bank_credit_credit_term", 2, "Укажите колличество месяцев до конца оплаты");
+    validateElementWithMaxMin("#bank_credit_credit_term", 2, "Укажите правильное количество месяцев до конца оплаты");
     validateElementWithNullify("#bank_credit_credit_limit_term", 2, "Укажите срок освоения кредита");
     validateElementWithNullify("#bank_credit_make_insurance", 2, "Укажите информацию о страховании клиента");
     validateElementWithNullify("#bank_credit_repayment_method", 2, "Укажите способ погашения кредита");

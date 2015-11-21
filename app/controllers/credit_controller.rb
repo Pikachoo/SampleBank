@@ -5,6 +5,7 @@ class CreditController < ApplicationController
 
     credit = Credit.find(id)
 
+    information[:credit] = credit
     information[:payments] = credit.get_credit_payments
     information[:warrenties] = credit.get_credit_warrenties
     information[:grantings] = credit.get_credit_grantings

@@ -5,8 +5,9 @@ window.api_part_credit = '/credit_information/';
 
 function get_credit_information(id)
 {
-    console.log(window.api_url);
+    //console.log(window.api_url);
     var information = json_parse(window.api_url + window.api_part_credit + id);
+    var credit = construct(information.credit);
     var payments = information.payments;
     var warrenties = information.warrenties;
     var grantings = information.grantings;
@@ -27,9 +28,23 @@ function get_credit_information(id)
             html_warrenty(warrenty);});
     }
 
+    set_max_min_values(credit);
     refresh_dropdowns();
 
 }
+
+function set_max_min_values(credit){
+    $("#bank_credit_credit_sum").attr({
+        "max" : credit.max_sum,
+        "min" : credit.min_sum
+    });
+    $("#bank_credit_credit_term").attr({
+        "max" : credit.max_number_of_months,
+        "min" : credit.min_number_of_months
+    });
+
+}
+
 
 
 function html_payment(payment){
@@ -164,6 +179,27 @@ function Struct(keys, vals) {
                 break;
             case 'name':
                 this.name = vals[i];
+                break;
+            case 'percent':
+                this.percent = vals[i];
+                break;
+            case 'currency_id':
+                this.currency_id = vals[i];
+                break;
+            case 'default_interest':
+                this.default_interest = vals[i];
+                break;
+            case 'min_sum':
+                this.min_sum = vals[i];
+                break;
+            case 'max_sum':
+                this.max_sum = vals[i];
+                break;
+            case 'min_number_of_months':
+                this.min_number_of_months = vals[i];
+                break;
+            case 'max_number_of_months':
+                this.max_number_of_months = vals[i];
                 break;
             default:
                 break;

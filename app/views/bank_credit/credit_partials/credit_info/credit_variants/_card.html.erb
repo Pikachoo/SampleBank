@@ -6,7 +6,7 @@
   <div class="content">
     <div class="ui form">
       <div class="grouped fields">
-        <% @bank_credit_inputs[:credits].each do |credit| %>
+        <%@credits.each do |credit| %>
             <div class="field">
               <div class="ui radio checkbox">
                 <input id="credit_type_<%= credit.id.to_s %>" name="credit_type" onclick="toggleElement('#bank_credit_credit_type_another_card', false)" onchange="get_credit_information(<%=credit.id.to_s%>)" value="<%= credit.id.to_s %> " type="radio">
@@ -14,6 +14,7 @@
               </div>
             </div>
         <% end %>
+
       </div>
     </div>
   </div>

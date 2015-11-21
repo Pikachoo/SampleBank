@@ -20,7 +20,7 @@
 <div class="three fields">
   <div class="field">
     <label>*Число, месяц, год, рождения</label>
-    <%= f.text_field "#{name}_birthdate", value: @bank_credit_inputs["#{name}_birthdate"], placeholder: "Число, месяц, год, рождения"%>
+    <%= f.date_field "#{name}_birthdate", value: @bank_credit_inputs["#{name}_birthdate"], placeholder: "Число, месяц, год, рождения"%>
   </div>
 
   <div class="field">
@@ -30,7 +30,7 @@
 
   <div class="field">
     <label>*Возраст</label>
-    <%= f.number_field "#{name}_age", min: 0, value: @bank_credit_inputs["#{name}_age"], placeholder: "Колличество полных лет"%>
+    <%= f.number_field "#{name}_age", min: 18, value: @bank_credit_inputs["#{name}_age"], placeholder: "Колличество полных лет"%>
   </div>
 </div>
 

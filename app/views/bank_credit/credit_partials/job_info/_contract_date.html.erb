@@ -1,12 +1,12 @@
 <div class="two fields">
   <div class="field">
     <label>*Работаю с</label>
-    <%= f.text_field :"#{name}_start_job_date", value: @bank_credit_inputs["#{name}_start_job_date"], placeholder: "Начало работы" %>
+    <%= f.date_field :"#{name}_start_job_date", value: @bank_credit_inputs["#{name}_start_job_date"], placeholder: "Начало работы" %>
   </div>
 
   <div class="field">
     <label>*До</label>
-    <%= f.text_field :"#{name}_end_job_date", value: @bank_credit_inputs["#{name}_end_job_date"], placeholder: "Окончание завершения работы" %>
+    <%= f.date_field :"#{name}_end_job_date", value: @bank_credit_inputs["#{name}_end_job_date"], placeholder: "Окончание завершения работы" %>
   </div>
 </div>
 

@@ -13,18 +13,18 @@
 
   <div class="field">
     <label>*Номер</label>
-    <%= f.text_field "#{name}_document_number", value: @bank_credit_inputs["#{name}_document_number"], placeholder: "Номер"%>
+    <%= f.number_field "#{name}_document_number", value: @bank_credit_inputs["#{name}_document_number"], placeholder: "Номер"%>
   </div>
 </div>
 
 <div class="two fields">
   <div class="field">
     <label>*Дата выдачи</label>
-    <%= f.text_field "#{name}_document_given_date", value: @bank_credit_inputs["#{name}_document_given_date"], placeholder: "Дата выдачи"%>
+    <%= f.date_field "#{name}_document_given_date", value: @bank_credit_inputs["#{name}_document_given_date"], placeholder: "Дата выдачи"%>
   </div>
 
   <div class="field">
     <label>*Дата окончания</label>
-    <%= f.text_field "#{name}_document_end_date", value: @bank_credit_inputs["#{name}_document_end_date"], placeholder: "Дата окончания"%>
+    <%= f.date_field "#{name}_document_end_date", value: @bank_credit_inputs["#{name}_document_end_date"], placeholder: "Дата окончания"%>
   </div>
 </div>

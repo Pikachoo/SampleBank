@@ -15,18 +15,18 @@
       <% end %>
     </ul>
 
-    <b>Необходимая оценка равна: </b><%=@necessaryMark %><br/>
+    <b>Необходимая оценка равна: </b><%=@necessary_mark %><br/>
     <b>Полученная оценка равна: </b><%= @mark %><br/>
     <b>Полученная оценка высчитывалась по формуле: </b><%= @calculating %>
 
-    <% unless @isCollateralEmployed %>
-        <% if (@mark >= @necessaryMark) %>
-            <h2 style="text-align: center">Выдача онлайн кредита одобрена</h2>
+    <% unless @is_collateral_employed %>
+        <% if (@mark >= @necessary_mark) %>
+            <h2 style="text-align: center">Выдача кредита одобрена</h2>
         <% else %>
-            <h2 style="text-align: center">Выдача онлайн кредита не рекомендуется</h2>
+            <h2 style="text-align: center">Выдача кредита не рекомендуется</h2>
         <% end %>
     <% else %>
-        <h2 style="text-align: center">Оценка залога полностью покроет долг. <%= @creditSum %></h2>
+        <h2 style="text-align: center">Оценка залога полностью покроет долг. <%= @credit_sum %></h2>
     <% end %>
   </div>
 </div>

@@ -10,7 +10,7 @@
         <p>Данная заявка оформляется оператором ОАО «Rude-банк».</p>
       </div>
 
-      <div id="submit-errors" class="validation_errors <%= "invisible" if flash[:validation_errors] == nil %>">
+      <div id="submit-errors" class="validation_errors <%='invisible' if flash[:validation_errors] == nil %>">
         <b>Во время отправки данных обнаружились следующие ошибки:</b>
         <ul>
           <% if (flash[:validation_errors] != nil) %>
@@ -23,17 +23,17 @@
 
       <div id="step1" class="step">
         <p><b>ШАГ 1 из 11</b> - Заполните данные о порядке предоставления кредита.</p>
-        <%= render partial: "bank_credit/credit_partials/credit_info/credit_info", locals: {f: f} %>
+        <%= render partial: 'bank_credit/credit_partials/credit_info/credit_info', locals: {f: f} %>
       </div>
 
       <div id="step2" class="step">
         <p><b>ШАГ 2 из 11</b> - Заполните информацию о размере и системе погашения кредита.</p>
-        <%= render partial: "bank_credit/credit_partials/credit_sum_info/credit_sum_info", locals: {f: f} %>
+        <%= render partial: 'bank_credit/credit_partials/credit_sum_info/credit_sum_info', locals: {f: f} %>
       </div>
 
       <div id="step3" class="step">
         <p><b>ШАГ 3 из 11</b> - Заполните общие сведения о заявителе.</p>
-        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_info", locals: { name: "customer", step: 3, f: f } %>
+        <%= render partial: 'bank_credit/credit_partials/applicant_info/applicant_info', locals: { name: 'customer', step: 3, f: f } %>
         <br/><br/>
         <button type="button" class="ui button orange" onclick="navigate('#step2')">Назад</button>
         <button type="button" class="ui button orange" onclick="validateThirdCreditStep()">Далее</button>
@@ -41,21 +41,21 @@
 
       <div id="step4" class="step">
         <p><b>ШАГ 4 из 11</b> - Заполните данные о месте работы заявителя.</p>
-        <%= render partial: "bank_credit/credit_partials/job_info/job_info", locals: { name: "customer", step: 4, f: f } %>
+        <%= render partial: 'bank_credit/credit_partials/job_info/job_info', locals: { name: 'customer', step: 4, f: f } %>
         <button type="button" class="ui button orange" onclick="validateFourthCreditStep()">Далее</button>
       </div>
 
       <div id="step5" class="step">
         <p><b>ШАГ 5 из 11</b> - Заполните данные о работе по совместительству заявителя(укажите "безработный" если она отсутствует).</p>
-        <%= render partial: "bank_credit/credit_partials/job_info/job_info", locals: { name: "customer_additional", step: 5, f: f  }  %>
+        <%= render partial: 'bank_credit/credit_partials/job_info/job_info', locals: { name: 'customer_additional', step: 5, f: f  }  %>
         <button type="button" class="ui button orange" onclick="validateFifthCreditStep()">Далее</button>
       </div>
 
       <div id="step6" class="step">
         <p><b>ШАГ 6 из 11</b> - Заполните общие сведенья о супруге заявителя.</p>
         <button type="button" class="ui button orange" onclick="validateSixthCreditStep()">Пропустить</button>
-        <%= render partial: "bank_credit/credit_partials/applicant_info/applicant_info", locals: { name: "partner", step: 6, f: f} %>
-        <%= render partial: "bank_credit/credit_partials/job_info/organization_info", locals: { name: 'partner', f: f }  %>
+        <%= render partial: 'bank_credit/credit_partials/applicant_info/applicant_info', locals: { name: 'partner', step: 6, f: f} %>
+        <%= render partial: 'bank_credit/credit_partials/job_info/organization_info', locals: { name: 'partner', f: f }  %>
         <button type="button" class="ui button orange" onclick="navigate('#step5')">Назад</button>
         <button type="button" class="ui button orange" onclick="validateSixthCreditStep()">Далее</button>
 
@@ -63,7 +63,7 @@
 
       <div id="step7" class="step">
         <p><b>ШАГ 7 из 11</b> - Заполните сведенья о близких родственниках заявителя</p>
-        <%= render partial: "bank_credit/credit_partials/closest_relatives/closest_relatives" %>
+        <%= render partial: 'bank_credit/credit_partials/closest_relatives/closest_relatives' %>
       </div>
 
       <div id="step8" class="step">

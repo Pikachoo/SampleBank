@@ -111,6 +111,7 @@ class BankCreditController < ApplicationController
     end
     puts json: client_credit_search
   end
+
   def calculate_mark
     mark = 1.0
     necessary_mark = 0

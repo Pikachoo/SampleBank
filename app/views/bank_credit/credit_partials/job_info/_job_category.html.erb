@@ -4,7 +4,7 @@
   <%= f.number_field :"#{name}_job_category", value: @bank_credit_inputs["#{name}_job_category"], type: "hidden" %>
   <i class="dropdown icon"></i>
   <div class="default text">Категория занимаемой должности</div>
-  <div class="menu">
+  <div class="menu" tabindex="-1">
     <div class="item" data-value="10" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Рабочий</div>
     <div class="item" data-value="1" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Служащий</div>
     <div class="item" data-value="2" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', false);">Специалист</div>
@@ -17,7 +17,8 @@
     <div class="item" data-value="9" onclick="toggleElement('#bank_credit_<%= name %>_owners_percent', true);">Владелец предприятия</div>
   </div>
 </div>
-
+<br/>
+<br/>
 <div class="field">
-  <%= f.number_field :"#{name}_owners_percent", value: @bank_credit_inputs["#{name}_owners_percent"], min: 0, placeholder:"Уточните ваш процент от доходов предприятия(в процентах)" %>
+  <%= f.number_field :"#{name}_owners_percent",  style: "display:none", value: @bank_credit_inputs["#{name}_owners_percent"], min: 0, placeholder:"Уточните ваш процент от доходов предприятия(в процентах)" %>
 </div>

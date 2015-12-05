@@ -5,10 +5,8 @@
   <i class="dropdown icon"></i>
   <div class="default text">Семейное положение</div>
   <div class="menu">
-    <div class="item" data-value="1">Холост / не замужем</div>
-    <div class="item" data-value="2">В разводе</div>
-    <div class="item" data-value="3">Женат / замужем</div>
-    <div class="item" data-value="4">Гражданский брак</div>
-    <div class="item" data-value="5">Вдовец / вдова</div>
+    <% @client_family_status.each do |family_status|%>
+        <div class="item" data-value="<%= family_status.id %>" ><%= family_status.name %></div>
+    <%end%>
   </div>
 </div>

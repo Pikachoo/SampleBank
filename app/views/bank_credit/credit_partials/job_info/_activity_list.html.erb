@@ -5,44 +5,9 @@
   <i class="dropdown icon"></i>
   <div class="default text">Сфера деятельности</div>
   <div class="menu">
-    <div class="item" data-value="38">IT/телекоммуникация</div>
-    <div class="item" data-value="1">Автомобилестроение</div>
-    <div class="item" data-value="2">Армия</div>
-    <div class="item" data-value="3">ЖКХ</div>
-    <div class="item" data-value="4">Бытовое обслуживание </div>
-    <div class="item" data-value="5">Культура и искусство</div>
-    <div class="item" data-value="6">Здравоохранение</div>
-    <div class="item" data-value="7">Легкая промышленность</div>
-    <div class="item" data-value="8">Лесная, целлюлозн., деревообрабатывающая промышленность</div>
-    <div class="item" data-value="9">Лесное хозяйство</div>
-    <div class="item" data-value="10">Материально-техническое снабжение и сбыт</div>
-    <div class="item" data-value="11">Машиностроение и металлообработка</div>
-    <div class="item" data-value="12">Медицинская промышленность   </div>
-    <div class="item" data-value="13">Металлургия</div>
-    <div class="item" data-value="14">Милиция и силовые структуры</div>
-    <div class="item" data-value="15">Наука</div>
-    <div class="item" data-value="16">Образование</div>
-    <div class="item" data-value="17">Органы власти и управления</div>
-    <div class="item" data-value="18">Пищевая промышленность</div>
-    <div class="item" data-value="19">Полиграфическая промышленность</div>
-    <div class="item" data-value="20">Производство строительных материалов</div>
-    <div class="item" data-value="21">Связь</div>
-    <div class="item" data-value="22">Сельское хозяйство</div>
-    <div class="item" data-value="23">Станкостроительная и инструментальная промышленность</div>
-    <div class="item" data-value="24">Стекло, фарфор (промышленность)</div>
-    <div class="item" data-value="25">Строительство</div>
-    <div class="item" data-value="26">Топливная промышленность</div>
-    <div class="item" data-value="27">Торговля оптовая</div>
-    <div class="item" data-value="28">Торговля розничная   </div>
-    <div class="item" data-value="29">Тракторостроение и с/х машиностроение</div>
-    <div class="item" data-value="30">Транспорт</div>
-    <div class="item" data-value="31">Туризм</div>
-    <div class="item" data-value="32">Услуги</div>
-    <div class="item" data-value="33">Физкультура и спорт</div>
-    <div class="item" data-value="34">Финансы, банки, страхование</div>
-    <div class="item" data-value="35">Химическая и нефтехимическая промышленность</div>
-    <div class="item" data-value="36">Электротехническая промышленность</div>
-    <div class="item" data-value="37">Электроэнергетика</div>
+    <% @client_job_types.each do |client_job_type|%>
+        <div class="item" data-value="<%= client_job_type.id %>" ><%= client_job_type.name %></div>
+    <%end%>
 
   </div>
 </div>

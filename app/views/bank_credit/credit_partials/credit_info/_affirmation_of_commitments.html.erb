@@ -1,12 +1,4 @@
-<h3>*Предлагаю в обеспечение исполнения кредитных обязательств:</h3>
+<div id = "credit_affirmation">
 
-<div class="ui selection dropdown">
-  <%= f.number_field :affirmation_of_commitments, value: @bank_credit_inputs["affirmation_of_commitments"], type: "hidden"%>
-  <i class="dropdown icon"></i>
-  <div class="default text">Обеспечения выплат</div>
-  <div class="menu">
-    <%  @bank_credit_inputs[:credit_warrency_types].each do |credit_warrency_type| %>
-        <div class="item" data-value="<%= credit_warrency_type.id %>"><%= credit_warrency_type.name %></div>
-    <% end %>
-  </div>
 </div>
+

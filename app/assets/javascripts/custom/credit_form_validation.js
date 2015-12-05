@@ -7,11 +7,20 @@ function validateElementWithEmptiness(elementSelector, errorsId, message) {
     if (!isElementNotEmpty(elementSelector))
         addErrorMessage(errorsId, message);
 }
-
+function validateElementWithMaxMin(elementSelector, errorsId, message){
+    if(!isInRange(elementSelector))
+        addErrorMessage(errorsId, message);
+}
 function isElementGreaterThanZero(elementSelector) {
     return $(elementSelector).val() != undefined && $(elementSelector).val() > 0;
 }
+function isInRange(elementSelector){
+    var value = Number($(elementSelector).val());
+    var min = Number($(elementSelector).attr('min'));
+    var max = Number($(elementSelector).attr('max'));
+    return value >= min  && value <= max;
 
+}
 function isElementNotEmpty(elementSelector) {
     return $(elementSelector).val() != undefined && $(elementSelector).val() != "";
 }
@@ -44,7 +53,9 @@ function validateFirstCreditStep() {
     $("#bank_credit_credit_type").val($("[name='credit_type']:checked").val());
     validateElementWithNullify("#bank_credit_granted_procedure", 1, "Выберите порядок предоставления");
     validateElementWithNullify("#bank_credit_issuance_method", 1, "Выберите способ выдачи");
-    validateElementWithNullify("#bank_credit_affirmation_of_commitments", 1, "Выберите вид обеспечения исполнения кредитных обязательств");
+    if  ($('#credit_affirmation').text() != '') {
+        validateElementWithNullify("#bank_credit_affirmation_of_commitments", 1, "Выберите вид обеспечения исполнения кредитных обязательств");
+    }
     validateElementWithNullify("[name='score_existance']:checked", 1, "Укажите, имеется ли з.п. или доходы в нашем банке");
     validateToggledElement("[name='credit_type']:checked", 4, "bank_credit_another_home_credit_type", 1, "Укажите вид кредита на финансирование имущества");
     validateToggledElement("[name='credit_type']:checked", 6, "bank_credit_credit_type_another_car", 1, "Укажите вид автокредита");
@@ -57,7 +68,9 @@ function validateFirstCreditStep() {
 function validateSecondCreditStep() {
     prepareToValidation(2);
     validateElementWithNullify("#bank_credit_credit_sum", 2, "Укажите сумму кредита");
+    validateElementWithMaxMin("#bank_credit_credit_sum", 2, "Укажите правильную сумму кредита ");
     validateElementWithNullify("#bank_credit_credit_term", 2, "Укажите колличество месяцев до конца оплаты");
+    validateElementWithMaxMin("#bank_credit_credit_term", 2, "Укажите правильное количество месяцев до конца оплаты");
     validateElementWithNullify("#bank_credit_credit_limit_term", 2, "Укажите срок освоения кредита");
     validateElementWithNullify("#bank_credit_make_insurance", 2, "Укажите информацию о страховании клиента");
     validateElementWithNullify("#bank_credit_repayment_method", 2, "Укажите способ погашения кредита");
@@ -88,7 +101,7 @@ function validateApplicant(step, id) {
     validateElementWithEmptiness("#bank_credit_" + id + "_document_given_date", step, "Укажите дату выдачи документа");
     validateElementWithEmptiness("#bank_credit_" + id + "_document_end_date", step, "Укажите дату окончания документа");
     validateElementWithEmptiness("#bank_credit_" + id + "_registration_address", step, "Укажите адрес регистрации по месту жительства");
-    validateElementWithEmptiness("#bank_credit_" + id + "_registration_place", step, "Укажите адрес регистрации по месту пребывания");
+    //validateElementWithEmptiness("#bank_credit_" + id + "_registration_place", step, "Укажите адрес регистрации по месту пребывания");
     validateElementWithEmptiness("#bank_credit_" + id + "_actual_living_place", step, "Укажите адрес места фактического проживания");
     validateElementWithNullify("#bank_credit_" + id + "_living_age", step, "Укажите срок проживания клиента по фактическому адресу");
     navigateAfterValidation("#step-errors-" + step, step);

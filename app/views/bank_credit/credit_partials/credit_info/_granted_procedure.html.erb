@@ -1,12 +1,9 @@
 <h3>*Порядок предоставления:</h3>
 
-<div class="ui selection dropdown">
+<div class="ui selection dropdown" id = "dropdown_granting">
   <%= f.number_field :granted_procedure, value: @bank_credit_inputs["granted_procedure"], type: "hidden"%>
   <i class="dropdown icon"></i>
   <div class="default text">Порядок предоставления</div>
-  <div class="menu">
-    <div class="item" data-value="1">Единовременно</div>
-    <div class="item" data-value="2">Невозобновляемая кредитная линия</div>
-    <div class="item" data-value="3">Невозобновляемая кредитная линия (с использованием банковской платежной карточки)</div>
+  <div class="menu" id = "menu_granting" tabindex="-1">
   </div>
 </div>

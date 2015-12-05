@@ -1,0 +1,2 @@
+class CreditWarrentyController < ApplicationController
+end

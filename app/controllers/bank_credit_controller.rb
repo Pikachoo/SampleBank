@@ -1,3 +1,4 @@
+require 'securerandom'
 class BankCreditController < ApplicationController
 
   def new
@@ -30,14 +31,23 @@ class BankCreditController < ApplicationController
   def create
     validation_errors = validate
     return redirect_to :back, flash: { validation_errors: validate, inputs_params: params[:bank_credit] } if validation_errors != nil
-    puts json:@necessary_mark
+
+    application_id = SecureRandom.uuid
+    bank_credit_params = params[:bank_credit]
+    bank_credit_params.to_a.to_h.each do |key, value|
+      credit_application_item = CreditApplication.new
+      credit_application_item.param_names = key
+      credit_application_item.param_values = value
+      credit_application_item.application_id = application_id.to_s
+      credit_application_item.save
+    end
 
     @mark, @necessary_mark, @mark_explanations, @calculating, @is_collateral_employed, @credit_sum = calculate_mark
-    if @mark > @necessary_mark
-      client = save_client
-      puts json: client
-      save_credit(client)
-    end
+    # if @mark > @necessary_mark
+    #   client = save_client
+    #   puts json: client
+    #   save_credit(client)
+    # end
   end
 
   def save_client

@@ -67,7 +67,8 @@ function validateFirstCreditStep() {
 
 function validateSecondCreditStep() {
     prepareToValidation(2);
-    validateElementWithNullify("#bank_credit_credit_sum", 2, "Укажите сумму кредита");validateElementWithMaxMin("#bank_credit_credit_sum", 2, "Укажите правильную сумму кредита (В порядке от " + $(bank_credit_credit_sum).attr('min') + " до " + $(bank_credit_credit_sum).attr('max') + ")");
+    validateElementWithNullify("#bank_credit_credit_sum", 2, "Укажите сумму кредита");
+    validateElementWithMaxMin("#bank_credit_credit_sum", 2, "Укажите правильную сумму кредита ");
     validateElementWithNullify("#bank_credit_credit_term", 2, "Укажите колличество месяцев до конца оплаты");
     validateElementWithMaxMin("#bank_credit_credit_term", 2, "Укажите правильное количество месяцев до конца оплаты");
     validateElementWithNullify("#bank_credit_credit_limit_term", 2, "Укажите срок освоения кредита");

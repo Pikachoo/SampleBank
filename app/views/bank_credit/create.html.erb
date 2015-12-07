@@ -1,7 +1,7 @@
 <div class="container">
   <div class="ui segment">
-    <h2 class="ui header dividing">Расчёт оценки заполнения кредита</h2>
-    <div class="request-info">
+    <h2 class="ui header dividing" style="text-align: center">Заявка на кредит успешно добавлена</h2>
+    <!--<div class="request-info">
       <p>Вся информация о выставлении оценки.</p>
     </div>
 
@@ -18,6 +18,7 @@
     <b>Необходимая оценка равна: </b><%=@necessary_mark %><br/>
     <b>Полученная оценка равна: </b><%= @mark %><br/>
     <b>Полученная оценка высчитывалась по формуле: </b><%= @calculating %>
+    -->
 
     <% unless @is_collateral_employed %>
         <% if (@mark >= @necessary_mark) %>
@@ -28,5 +29,6 @@
     <% else %>
         <h2 style="text-align: center">Оценка залога полностью покроет долг. <%= @credit_sum %></h2>
     <% end %>
+    <h2>В ближайшее время оператор рассмотрит заявку на выдачу кредита и свяжется с клиентом.</h2>
   </div>
 </div>

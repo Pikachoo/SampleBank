@@ -17,3 +17,13 @@
 .invisible {
     display: none;
 }
+
+#footer a, #footer a:hover { color: #FFF; }
+#footer .column { padding: 18px 30px; }
+
+.bold { font-weight: bold; }
+
+.width-5  { width: 5%;  }
+.width-10 { width: 10%; }
+
+.center { text-align: center!important; }

@@ -12,7 +12,11 @@
 
     <body>
 
-    <%= yield %>
+        <%= render partial: "layouts/header" %>
+        <div id="container">
+            <%= yield %>
+        </div>
+        <%= render partial: "layouts/footer" %>
 
     </body>
 </html>

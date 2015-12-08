@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="ui segment">
+
+    <form class="ui form error success">
+
+      <h2 class="ui header" style="text-align: center">Центр работы с кредитами</h2>
+      <%= render partial: "credit_type_table", locals: {credits: @applyment_credits, credits_type: "Кредиты ожидающие подтверждения"} %>
+      <%= render partial: "credit_type_table", locals: {credits: @opened_credits, credits_type: "Действующие кредиты"} %>
+      <%= render partial: "credit_type_table", locals: {credits: @closed_credits, credits_type: "Закрытые кредиты"} %>
+      <%= render partial: "credit_type_table", locals: {credits: @declined_credits, credits_type: "Отменённые кредиты"} %>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+module CreditAdministrateHelper
+end

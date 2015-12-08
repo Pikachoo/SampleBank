@@ -1,0 +1,8 @@
+<h3>Информация о кредите:</h3>
+Дата заявки: <%= @credit.begin_date %><br/>
+Сумма: <%= @credit.sum %><br/>
+Кредитная линия: <%= @credit_type %><br/>
+Способ выдачи: <%= @credit.repayment_method %><br/>
+Срок: <%= @credit.term %> месяц(ев)<br/>
+Способ выдачи: <%= CreditPaymentType.where(id: (CreditPayment.where(id: @credit.payment_id).first.payment_type_id)).first.name %><br/>
+Порядок предоставления: <%= CreditGrantingType.where(id: (CreditGranting.where(id: @credit.granting_id).first.granting_type_id)).first.name %><br/>

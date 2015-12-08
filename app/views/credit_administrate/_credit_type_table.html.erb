@@ -1,0 +1,45 @@
+<% if credits.any? %>
+    <div class="ui vertical accordion menu">
+      <div class="item">
+        <a class="title">
+          <i class="dropdown icon"></i>
+          <%= credits_type %>:
+        </a>
+        <div class="content">
+          <table class="sortable">
+            <tr>
+              <td>Id</td>
+              <td>Сумма</td>
+              <% if credits_type == "Кредиты ожидающие подтверждения" %>
+                <td>Реккомендация к подтверждению</td>
+              <% end %>
+              <td>Ссылка</td>
+            </tr>
+            <% credits.each do |e| %>
+                <tr>
+                  <td>
+                    <%= e.id %>
+                  </td>
+                  <td>
+                    <%= e.sum %>
+                  </td>
+                  <% if credits_type == "Кредиты ожидающие подтверждения" %>
+                      <td><%= e.is_require == 0 ? "Реккомендуется" : "Не реккомендуется" %></td>
+                  <% end %>
+                  <% if credits_type == "Кредиты ожидающие подтверждения" %>
+                      <td>
+                        <%= link_to "Перейти", applyment_path(e.id) %>
+                      </td>
+                  <% end %>
+                  <% if credits_type == "Действующие кредиты" %>
+                      <td>
+                        <%= link_to "Перейти", credit_info_path(e.id) %>
+                      </td>
+                  <% end %>
+                </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+<% end %>

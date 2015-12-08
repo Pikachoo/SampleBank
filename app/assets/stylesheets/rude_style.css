@@ -38,3 +38,14 @@
 .width-10 { width: 10%; }
 
 .center { text-align: center!important; }
+
+table.sortable thead {
+    background-color:#FAF0BC;
+    color:black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+table { width: 100%; }
+
+tbody td { padding: 11px 1px 1px 12px;}

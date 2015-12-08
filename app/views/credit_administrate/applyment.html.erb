@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="ui segment">
+
+    <form class="ui form error success">
+      <h2 class="ui header" style="text-align: center">Подтверждение кредита</h2>
+      <%= render partial: "credit_info" %>
+      <%= render partial: "client_info" %>
+      <% if @credit.is_require == 1 %>
+        <h2 class="ui header" style="text-align: center">Выдача кредита клиенту одобрена</h2>
+      <% else %>
+          <h2 class="ui header" style="text-align: center">Выдача кредита клиенту не реккомендуется</h2>
+      <% end %>
+
+      <div style="display: flex">
+        <%= link_to 'Отменить регистрацию кредита', applyment_decline_path %>
+        <%= link_to 'Оформить кредит', applyment_confirmation_path, style: "margin-left: 150px"%>
+      </div>
+    </form>
+  </div>
+</div>

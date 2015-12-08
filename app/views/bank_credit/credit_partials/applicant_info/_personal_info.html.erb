@@ -44,6 +44,19 @@
     <label>*Место рождения</label>
     <%= f.text_field "#{name}_birthplace", value: @bank_credit_inputs["#{name}_birthplace"], placeholder: "Место рождения"%>
   </div>
+
+  <div class="field">
+    <label>*Пол</label>
+    <div class="ui selection dropdown">
+      <%= f.text_field "#{name}_gender", value: @bank_credit_inputs["#{name}_gender"], type: "hidden"%>
+      <i class="dropdown icon"></i>
+      <div class="default text">Пол</div>
+      <div class="menu">
+        <div class="item" data-value="0>" >Мужчина</div>
+        <div class="item" data-value="1" >Женщина</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="field">

@@ -43,11 +43,9 @@ class BankCreditController < ApplicationController
     end
 
     @mark, @necessary_mark, @mark_explanations, @calculating, @is_collateral_employed, @credit_sum = calculate_mark
-    # if @mark > @necessary_mark
-    #   client = save_client
-    #   puts json: client
-    #   save_credit(client)
-    # end
+    client = save_client
+    puts json: client
+    save_credit(client)
   end
 
   def save_client
@@ -58,12 +56,12 @@ class BankCreditController < ApplicationController
     client.patronymic = params[:bank_credit][:customer_patronymic]
     client.birth_date = params[:bank_credit][:customer_birthdate]
     client.passport_identificational_number = params[:bank_credit][:customer_id]
-    client.sex = 'M'
+    client.sex = params[:bank_credit][:customer_gender] == 0 ? "M" : "F"
     client.family_status_id = params[:bank_credit][:customer_family_status]
     client.phone_home = params[:bank_credit][:customer_actual_phone]
     client.phone_mobile= params[:bank_credit][:customer_mobile_phone]
     client.phone_work= params[:bank_credit][:customer_work_phone]
-    client.email = 'sdaf@gmail.com'
+    client.email = params[:bank_credit][:customer_email]
     client.passport_series = params[:bank_credit][:customer_document_series]
     client.passport_number = params[:bank_credit][:customer_document_number]
     client.passport_begin_date = params[:bank_credit][:customer_document_given_date]
@@ -71,7 +69,7 @@ class BankCreditController < ApplicationController
     client.address_living = params[:bank_credit][:customer_actual_living_place]
     client.address_registration = params[:bank_credit][:customer_registration_address]
     client.education_id = params[:bank_credit][:customer_education]
-    client.job_type_id = params[:bank_credit][:customer_activity_status]
+    client.job_type_id = params[:bank_credit][:customer_activity_status] != "" ? params[:bank_credit][:customer_activity_status] : 39
     client.salary = params[:bank_credit][:last_incomings]
 
     client_search = Client.find_by_passport_identificational_number(client.passport_identificational_number)
@@ -110,6 +108,7 @@ class BankCreditController < ApplicationController
     client_credit.limit_term = params[:bank_credit][:credit_limit_term]
     client_credit.payment_id = params[:bank_credit][:issuance_method]
     client_credit.granting_id = params[:bank_credit][:granted_procedure]
+    client_credit.is_require = @is_collateral_employed ? 1 : @mark >= @necessary_mark ? 1 : 0
     if params[:bank_credit][:repayment_method] == 1
       client_credit.repayment_method = 'Стандартный'
     else
@@ -577,7 +576,8 @@ class BankCreditController < ApplicationController
       validation_errors.push 'Укажите наименование организации клиента на 4ом шаге.' if bank_credit[:customer_organization_name] == ''
       validation_errors.push 'Укажите должность работы клиента на 4ом шаге.' if bank_credit[:customer_job_name] == ''
       validation_errors.push 'Укажите адрес работы клиента на 4ом шаге.' if bank_credit[:customer_organization_address] == ''
-      validation_errors.push 'Укажите сферу деятельности клиента на 4ом шаге.' if bank_credit[:customer_activity_status].to_i < 1 || bank_credit[:customer_activity_status].to_i > 38
+      validation_errors.push 'Укажите пол клиента на 4ом шаге.' if bank_credit[:customer_gender].to_i < 0 || bank_credit[:customer_gender].to_i > 1
+      validation_errors.push 'Укажите сферу деятельности клиента на 4ом шаге.' if bank_credit[:customer_activity_status].to_i < 1 || bank_credit[:customer_activity_status].to_i > 39
       validation_errors.push 'Укажите численность рабочих на 4ом шаге.' if bank_credit[:customer_employers_count].to_i < 1 || bank_credit[:customer_employers_count].to_i > 6
       validation_errors.push 'Укажите стаж работы на 4ом шаге.' if bank_credit[:customer_experience_in_organization].to_i < 1 || bank_credit[:customer_experience_in_organization].to_i > 7
       validation_errors.push 'Укажите категорию занимаемой должности на 4ом шаге.' if bank_credit[:customer_job_category].to_i < 1 || bank_credit[:customer_job_category].to_i > 10

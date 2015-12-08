@@ -1,0 +1,5 @@
+<h3>Информация о клиенте:</h3>
+ФИО: <%= "#{@client.name} #{@client.surname} #{@client.patronymic}" %><br>
+Семейное состояние: <%= ClientFamilyStatus.where(id: @client.family_status_id).first.name %><br>
+Тип профессии: <%= ClientJobType.where(id: @client.job_type_id).first.name %><br>
+Последний профит клиента: <%= @client.salary %> BYR

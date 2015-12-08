@@ -1,0 +1,28 @@
+<div id="container">
+  <div id="content">
+    <div id="auth" class="ui segment">
+      <%= form_tag session_index_path, class: 'ui error form' do %>
+          <% unless flash[:error].nil? %>
+              <div class="ui error message">
+                <%= content_tag :div, 'Наличие ошибок', class: 'header' %>
+                <% flash.each do |name, msg| %>
+                    <%= content_tag :p, msg %>
+                <% end %>
+              </div>
+          <% end %>
+          <div class="field">
+            <%= label_tag 'name', 'Логин' %>
+            <%= text_field_tag :name, params[:name], placeholder: "Ваш логин" %>
+          </div>
+
+          <div class="field">
+            <%= label_tag 'password', 'Пароль' %>
+            <%= password_field_tag :password, '', placeholder: 'Ваш пароль' %>
+          </div>
+          <%= button_tag "Авторизация", class: "ui button right" %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+

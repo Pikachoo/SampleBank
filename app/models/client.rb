@@ -1,24 +1,9 @@
 class Client < ActiveRecord::Base
-  # attr_accessor :id,
-  #               :name,
-  #               :surname,
-  #               :patronymic,
-  #               :birth_date,
-  #               :sex,
-  #               :family_status_id,
-  #               :phone_hom,
-  #               :phone_mobile,
-  #               :phone_work,
-  #               :email,
-  #               :score,
-  #               :passport_series,
-  #               :passport_number,
-  #               :passport_identificational_number,
-  #               :passport_begin_date,
-  #               :passport_end_date,
-  #               :address_livin,
-  #               :address_registration,
-  #               :education_id,
-  #               :job_type_id,
-  #               :salary
+
+  has_many :cards
+  has_many :accounts
+
+  def self.get_client_id_by_user_id(user_id)
+    Client.find_by(:user_id => user_id)
+  end
 end

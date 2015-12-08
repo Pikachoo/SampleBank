@@ -1,64 +1,66 @@
-<div class="container">
-  <div class="ui segment piled">
+<div id="container">
+    <div class="container">
+      <div class="ui segment piled">
 
-    <%= form_for :online_credit,
-                 url: online_credit_index_path,
-                 html: {class: "ui form error success",
-                        id: "online-credit-form"},
-                 method: :post do |f| %>
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
-      <h2 class="ui header dividing">Предварительная заявка на кредитный продукт</h2>
-        <div class="request-info">
-          <p>Для получения кредитной поддержки в ОАО «Rude-банк» Вам необходимо заполнить данную заявку.</p>
-          <p>Представитель ОАО «Rude-банк» в ближайшее время свяжется с Вами по указанным в заявке реквизитам с целью дальнейшей организации процесса рассмотрения возможности предоставления Банком кредитного продукта, указанного в заявке.</p>
-        </div>
+        <%= form_for :online_credit,
+                     url: online_credit_index_path,
+                     html: {class: "ui form error success",
+                            id: "online-credit-form"},
+                     method: :post do |f| %>
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+          <h2 class="ui header dividing">Предварительная заявка на кредитный продукт</h2>
+            <div class="request-info">
+              <p>Для получения кредитной поддержки в ОАО «Rude-банк» Вам необходимо заполнить данную заявку.</p>
+              <p>Представитель ОАО «Rude-банк» в ближайшее время свяжется с Вами по указанным в заявке реквизитам с целью дальнейшей организации процесса рассмотрения возможности предоставления Банком кредитного продукта, указанного в заявке.</p>
+            </div>
 
-        <div id="submit-errors" class="validation_errors <%= "invisible" if flash[:validation_errors] == nil %>">
-          <b>Во время отправки данных обнаружились следующие ошибки:</b>
-          <ul>
-            <% if (flash[:validation_errors] != nil) %>
-              <% flash[:validation_errors].each do |e| %>
-                <li><%= e %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        </div>
+            <div id="submit-errors" class="validation_errors <%= "invisible" if flash[:validation_errors] == nil %>">
+              <b>Во время отправки данных обнаружились следующие ошибки:</b>
+              <ul>
+                <% if (flash[:validation_errors] != nil) %>
+                  <% flash[:validation_errors].each do |e| %>
+                    <li><%= e %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
 
-        <div id="step1" class="step">
-          <p><b>ШАГ 1 из 6</b> - Выберите цель кредита</p>
-          <%= render partial: "online_credit/online_credit_partials/credit_type", locals: {f: f} %>
-        </div>
+            <div id="step1" class="step">
+              <p><b>ШАГ 1 из 6</b> - Выберите цель кредита</p>
+              <%= render partial: "online_credit/online_credit_partials/credit_type", locals: {f: f} %>
+            </div>
 
-        <div id="step2" class="step">
-          <p><b>ШАГ 2 из 6</b> - Выберите необходимую валюту</p>
-          <%= render partial: "online_credit/online_credit_partials/currencies", locals: {f: f} %>
-        </div>
+            <div id="step2" class="step">
+              <p><b>ШАГ 2 из 6</b> - Выберите необходимую валюту</p>
+              <%= render partial: "online_credit/online_credit_partials/currencies", locals: {f: f} %>
+            </div>
 
-        <div id="step3" class="step">
-          <p><b>ШАГ 3 из 6</b> - Укажите необходимую сумму в единицах валюты</p>
-          <%= render partial: "online_credit/online_credit_partials/credit_sum", locals: {f: f} %>
-        </div>
+            <div id="step3" class="step">
+              <p><b>ШАГ 3 из 6</b> - Укажите необходимую сумму в единицах валюты</p>
+              <%= render partial: "online_credit/online_credit_partials/credit_sum", locals: {f: f} %>
+            </div>
 
-        <div id="step4" class="step">
-          <p><b>ШАГ 4 из 6</b> - Укажите желаемый срок в месяцах</p>
-          <%= render partial: "online_credit/online_credit_partials/credit_time", locals: {f: f} %>
-        </div>
+            <div id="step4" class="step">
+              <p><b>ШАГ 4 из 6</b> - Укажите желаемый срок в месяцах</p>
+              <%= render partial: "online_credit/online_credit_partials/credit_time", locals: {f: f} %>
+            </div>
 
-        <div id="step5" class="step">
-          <p><b>ШАГ 5 из 6</b> - Выберите виды предлагаемого обеспечения</p>
-          <%= render partial: "online_credit/online_credit_partials/credit_warrency", locals: {f: f} %>
-        </div>
+            <div id="step5" class="step">
+              <p><b>ШАГ 5 из 6</b> - Выберите виды предлагаемого обеспечения</p>
+              <%= render partial: "online_credit/online_credit_partials/credit_warrency", locals: {f: f} %>
+            </div>
 
-        <div id="step6" class="step">
-          <p><b>ШАГ 6 из 6</b> - Заполните Ваши персональные данные. Нажмите кнопку "Отправить заявку"</p>
-          <%= render partial: "online_credit/online_credit_partials/personal_data", locals: {f: f} %>
-        </div>
+            <div id="step6" class="step">
+              <p><b>ШАГ 6 из 6</b> - Заполните Ваши персональные данные. Нажмите кнопку "Отправить заявку"</p>
+              <%= render partial: "online_credit/online_credit_partials/personal_data", locals: {f: f} %>
+            </div>
 
-        <div class="request-info">
-          <p>(*) Поля обязательные для заполнения</p>
-          <p><b>Внимание!</b> Данная предварительная заявка не является обязательством банка по выдаче кредитных средств</p>
-        </div>
-    <% end %>
+            <div class="request-info">
+              <p>(*) Поля обязательные для заполнения</p>
+              <p><b>Внимание!</b> Данная предварительная заявка не является обязательством банка по выдаче кредитных средств</p>
+            </div>
+        <% end %>
 
-  </div>
+      </div>
+    </div>
 </div>

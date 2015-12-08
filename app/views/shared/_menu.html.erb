@@ -1,0 +1,18 @@
+<div id="menu" class="ui menu inverted">
+  <%= link_to "Главная", root_path, class: 'item' %>
+  <%= link_to 'Онлайн заявка на кредит', new_online_credit_path, class: 'item' %>
+  <%= link_to 'Оформление кредита', new_bank_credit_path, class: 'item' if can? :manage, Credit %>
+  <%= link_to 'Одобрение кредита', credit_administrate_index_path, class: 'item' if can? :manage, Credit %>
+
+  <% if current_user %>
+    <%= link_to 'Счета', accounts_path, class: 'item' if can? :read, Account%>
+    <%= link_to 'Карточки', cards_path, class: 'item' if can? :read, Card%>
+  <%end%>
+  <div class="right menu">
+    <% if current_user %>
+        <%= link_to "Выход (#{current_user.name})", log_out_path, class: 'item' %>
+    <% else %>
+        <%= link_to "Войти",  log_in_path, class: 'item'%>
+    <% end %>
+  </div>
+</div>

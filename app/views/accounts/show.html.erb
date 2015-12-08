@@ -1,0 +1,59 @@
+<div id="container">
+  <div id="content" class="account-settings">
+    <div id="accounts" class="ui segment">
+      <%= form_tag accounts_path, method: 'patch' do %>
+        <h3 class="ui header dividing">Банковские счета</h3>
+          <% unless flash[:notice].nil? %>
+              <div class="ui success message">
+                <% flash.each do |name, msg| %>
+                    <%= content_tag :p, msg %>
+                <% end %>
+
+              </div>
+          <% end %>
+          <% flash[:notice] = nil%>
+        <table class="ui table celled striped">
+          <thead>
+          <tr>
+            <th>Наименование</th>
+            <th class="center width-10">Доступный остаток</th>
+            <th class="center width-5">Валюта</th>
+            <!--<th class="center width-10">Последняя операция</th>-->
+            <th class="center width-5">Уведомления</th>
+          </tr>
+          </thead>
+
+          <tbody>
+            <% @accounts.each do |account|%>
+            <tr>
+              <td class="bold"><a href="#"><%= account.IBAN%></a> </td>
+              <td class="center"><%= account.balance%></td>
+              <td class="center"><%= account.currency.name%></td>
+              <td>
+                <div class="list">
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <%= check_box_tag "sms_ids[]", account.id.to_s, account.is_sms%>
+                      <label>SMS</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <%= check_box_tag "emails_ids[]", account.id.to_s, account.is_email%>
+                      <label>Email</label>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          <%end%>
+
+          </tbody>
+        </table>
+        <div class="buttons">
+          <button class="ui button">Сохранить изменения</button>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

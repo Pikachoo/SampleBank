@@ -1,0 +1,69 @@
+<div id="container">
+  <div id="content" class="account-settings">
+
+    <div id="cards" class="ui segment">
+      <%=form_tag cards_path, method: 'patch' do%>
+        <h3 class="ui header dividing">Пластиковые карты</h3>
+          <% unless flash[:notice].nil? %>
+              <div class="ui success message">
+                <% flash.each do |name, msg| %>
+                    <%= content_tag :p, msg %>
+                <% end %>
+
+              </div>
+          <% end %>
+          <% flash[:notice] = nil%>
+        <table class="ui table celled striped">
+          <thead>
+          <tr>
+            <th>Класс карты</th>
+            <th>Тип карты</th>
+            <th>Номер карты</th>
+            <th>Привязанный счёт</th>
+            <th class="center width-10">Доступный остаток</th>
+            <th class="center width-5">Валюта</th>
+            <!--<th class="center width-10">Последняя операция</th>-->
+            <th class="center width-5">Уведомления</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @cards.each do |card|%>
+            <% if can? :read, card %>
+                <tr>
+                  <td class="bold"><%=card.card_type%></td>
+                  <td class="bold"><%=card.account.account_type%></td>
+                  <td class="bold"><a href="#"><%=card.number%></a></td>
+                  <td class="bold"><a href="#"><%=card.account.IBAN%></a></td>
+                  <td class="center"><%=card.account.balance%></td>
+                  <td class="center"><%= card.account.currency.name%></td>
+                  <td>
+                    <div class="list">
+                      <div class="item">
+                        <div class="ui child checkbox">
+                          <%= check_box_tag "sms_ids[]", card.id.to_s, card.is_sms%>
+                          <label>SMS</label>
+                        </div>
+                      </div>
+                      <div class="item">
+                        <div class="ui child checkbox">
+                          <%= check_box_tag "emails_ids[]", card.id.to_s, card.is_email%>
+                          <label>Email</label>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+            <%end%>
+          <%end%>
+
+          </tbody>
+        </table>
+
+        <div class="buttons">
+          <button class="ui button">Сохранить изменения</button>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

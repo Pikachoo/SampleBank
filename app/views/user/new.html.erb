@@ -1,0 +1,39 @@
+
+<%= render partial: 'shared/header' %>
+
+<%= render partial: 'shared/menu' %>
+<div id="container">
+  <div id="content">
+
+    <div id="auth" class="ui segment">
+      <%= form_tag  user_index_path, class: 'ui error form' do %>
+          <%if flash.nil? %>
+            <div class="ui error message">
+              <%= content_tag :div, 'Наличие ошибок', class:'header' %>
+              <% flash.each do |name, msg| %>
+                  <%= content_tag :p, msg%>
+              <% end %>
+            </div>
+          <%end%>
+          <div class="field">
+            <%= label_tag 'identifical_number', 'Индетификационный номер' %><br />
+            <%= text_field_tag :identifical_number, params[:identifical_number] %>
+          </div>
+          <div class="field">
+            <%= label_tag 'password', 'Пароль' %><br />
+            <%= password_field_tag :password %>
+          </div>
+          <div class="field">
+            <%= label_tag 'password_confirmation','Подтвердите пароль' %><br />
+            <%= password_field_tag :password_confirmation %>
+          </div>
+          <%= button_tag "Зарегистрироваться", class:"ui button right"  %>
+      <% end %>
+      <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+<%= render partial: 'shared/footer' %>

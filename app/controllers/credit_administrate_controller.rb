@@ -1,4 +1,9 @@
 class CreditAdministrateController < ApplicationController
+  before_filter :check_is_manage
+
+  def check_is_manage
+    raise() if User.find(session[:user_id]).role_id != 2
+  end
 
   def index
     @applyment_credits = ClientCredit.where(credit_state: 0)

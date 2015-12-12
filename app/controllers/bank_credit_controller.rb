@@ -1,13 +1,16 @@
 require 'securerandom'
 class BankCreditController < ApplicationController
 
+  load_and_authorize_resource
+  skip_load_resource :only => :new
   def new
-    @credit_warrency_types = CreditWarrantyType.all
+    @credit_warrency_types = CreditWarrentyType.all
     @credit_payment_types = CreditPaymentType.all
     @credits = Credit.all
     @client_job_types = ClientJobType.all
     @client_family_status = ClientFamilyStatus.all
     @client_eduction = ClientEducation.all
+
     @bank_credit_inputs =  {credit_type: 0,
                             credit_type_another_car: '',
                             credit_type_another_card: '',
@@ -25,6 +28,7 @@ class BankCreditController < ApplicationController
                             credit_limit_term: 0,
                             make_insurance: 0,
                             repayment_method: 0}
+    puts @bank_credit_inputs
     @bank_credit_inputs = flash[:inputs_params] if flash[:inputs_params] != nil
   end
 

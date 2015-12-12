@@ -3,6 +3,7 @@
   <%= link_to 'Онлайн заявка на кредит', new_online_credit_path, class: 'item' %>
   <%= link_to 'Оформление кредита', new_bank_credit_path, class: 'item' if can? :manage, Credit %>
   <%= link_to 'Одобрение кредита', credit_administrate_index_path, class: 'item' if can? :manage, Credit %>
+  <%= link_to 'Управление кредитами', operator_credits_path, class: 'item' if can? :manage, Credit %>
 
   <% if current_user %>
     <%= link_to 'Счета', accounts_path, class: 'item' if can? :read, Account%>

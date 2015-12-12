@@ -3,75 +3,21 @@ Rails.application.routes.draw do
 
   get 'user/new'
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-
   root 'main#index'
 
   get "log_out" => "session#destroy", :as => "log_out"
   get "log_in" => "session#new", :as => "log_in"
   get "sign_up" => "user#new", :as => "sign_up"
-  #get 'online_credit' => 'main#online_credit'
 
   get 'credit_applyment/applyment/:id', to: 'credit_administrate#applyment', as: :applyment
   get 'current_credit/info/:id', to: 'credit_administrate#current_credit', as: :credit_info
   get 'current_credit/close/:id', to: 'credit_administrate#close', as: :credit_close
   get 'credit_applyment/decline/:id', to: 'credit_administrate#applyment_decline', as: :applyment_decline
   get 'credit_applyment/confirmation/:id', to: 'credit_administrate#applyment_confirmation', as: :applyment_confirmation
-  get "api/credit_information/:id" => 'credit#get_extra_information_by_id'
+
+  namespace :api do
+    get "credit_information/:id" => 'credit#get_extra_information_by_id'
+  end
 
 
   resources :online_credit, :bank_credit, :credit_payment

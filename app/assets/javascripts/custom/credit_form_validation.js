@@ -195,6 +195,6 @@ function validateEleventhStep() {
 
     if ($("#step-errors-11").is(':hidden') == true) {
         toggleElement('#step-errors-11', false);
-        $("#bank-credit-form").submit();
+        $("#bank-credits-form").submit();
     }
 }

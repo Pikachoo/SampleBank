@@ -1,7 +1,120 @@
 <div id="container">
   <div id="content" class="account-settings">
     <div class="ui segment" id="credits">
+      <%= form_for :credit, url: operator_credits_path, html: {class: "ui form error success", id: "credit_form"}, method: :post do |f| %>
+          <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
+            <b>Во время отправки данных обнаружились следующие ошибки:</b>
+            <ul>
+              <% if (flash[:validation_errors] != nil) %>
+                  <% flash[:validation_errors].each do |e| %>
+                      <li><%= e %></li>
+                  <% end %>
+              <% end %>
+            </ul>
+          </div>
 
+
+          <div class="field">
+            <%= f.label :name, 'Название кредита' %>
+            <%= f.text_field :name, value: @credit["name"], placeholder: "Название кредита" %><br/>
+          </div>
+
+          <div class="field">
+            <%= f.label :currency, 'Валюта' %>
+
+            <div class="ui selection dropdown" id="dropdown_granting">
+              <%= f.number_field :currency, value: @credit["currency"], type: "hidden" %>
+              <i class="dropdown icon"></i>
+
+              <div class="default text">Валюта</div>
+              <div class="menu" id="menu_granting" tabindex="-1">
+
+                <% Currency.all.each do |currency| %>
+                    <div class="item" data-value="<%= currency.id %>"><%= currency.name %></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :min_sum, 'Минимальная сумма кредита' %>
+            <%= f.number_field :min_sum, value: @credit["min_sum"], placeholder: "Минимальная сумма кредита" %><br/>
+          </div>
+
+          <div class="field">
+            <%= f.label :max_sum, 'Максимальная сумма кредита' %>
+            <%= f.number_field :max_sum, value: @credit["max_sum"], placeholder: "Максимальная сумма кредита" %><br/>
+          </div>
+
+          <div class="field">
+            <%= f.label :min_number_of_months, 'Минимальный срок кредита' %>
+            <%= f.number_field :min_number_of_months, value: @credit["min_number_of_months"], placeholder: "Минимальный срок кредита" %><br/>
+          </div>
+
+          <div class="field">
+            <%= f.label :max_number_of_months, 'Максимальный срок кредита' %>
+            <%= f.number_field :max_number_of_months, value: @credit["max_number_of_months"], placeholder: "Максимальный срок кредита" %><br/>
+          </div>
+
+          <div class="field">
+            <%= f.label :percent, 'Проценты по кредиту' %>
+            <%= f.number_field :percent, value: @credit["percent"], placeholder: "Проценты по кредиту" %><br/>
+          </div>
+
+          <div class="field">
+            <%= f.label :default_interest, 'Штрафные проценты' %>
+            <%= f.number_field :default_interest, value: @credit["default_interest"], placeholder: "Штрафные проценты" %><br/>
+          </div>
+
+
+          <div class="field">
+            <%= f.label :granting_type, 'Порядок предоставления' %>
+            <div class="ui selection dropdown multiple">
+              <%= f.number_field :granting_type, value: @credit[:granting_type], type: "hidden" %>
+              <i class="dropdown icon"></i>
+              <div class="default text">Порядок предоставления</div>
+              <div class="menu">
+                <%  CreditGrantingType.all.each do |credit_granting_type|%>
+                    <div class="item" data-value="<%= credit_granting_type.id %>" ><%= credit_granting_type.name %></div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :warrenty_type, 'Виды предлагаемого обеспечения' %>
+            <div class="ui selection dropdown multiple">
+              <%= f.number_field :warrenty_type, value: @credit[:warrenty_type], type: "hidden" %>
+              <i class="dropdown icon"></i>
+              <div class="default text">Выберите виды предлагаемого обеспечения</div>
+              <div class="menu">
+                <%  CreditWarrentyType.all.each do |credit_warrenty_type|%>
+                    <div class="item" data-value="<%= credit_warrenty_type.id %>" ><%= credit_warrenty_type.name %></div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :payment_type, 'Способы выдачи кредита' %>
+            <div class="ui selection dropdown multiple">
+              <%= f.number_field :payment_type, value: @credit[:payment_type], type: "hidden" %>
+              <i class="dropdown icon"></i>
+              <div class="default text">Выберите способы выдачи кредита</div>
+              <div class="menu">
+                <%  CreditPaymentType.all.each do |credit_payment_type|%>
+                    <div class="item" data-value="<%= credit_payment_type.id %>" ><%= credit_payment_type.name %></div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+
+          <div id="step-errors" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul id="errors_list"></ul>
+          </div>
+          <%= f.submit type: 'button', class: 'ui button', value: 'Сохранить кредит', onclick: "validateCredit()" %>
+      <% end %>
     </div>
   </div>
 </div>

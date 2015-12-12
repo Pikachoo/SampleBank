@@ -28,4 +28,9 @@ class Credit < ActiveRecord::Base
     grantings = CreditGrantingType.where(id: grantings_ids)
     grantings
   end
+
+  # def save
+  #   super
+  #
+  # end
 end

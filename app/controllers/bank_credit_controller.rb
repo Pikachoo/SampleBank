@@ -199,7 +199,8 @@ class BankCreditController < ApplicationController
 
     #Second step mark
     credit_sum = bank_credit[:credit_sum].to_f
-    necessary_mark = credit_sum / 2000000000.0
+    necessary_mark = Credit.first.min_sum ? 2 - credit_sum / Credit.last.max_sum : credit_sum / Credit.first.max_sum
+    #necessary_mark = credit_sum / 2000000000.0
 
     mark_explanations.push "Необходимая оценка равна #{necessary_mark}"
 
@@ -532,6 +533,10 @@ class BankCreditController < ApplicationController
     #Second step validation
     validation_errors.push 'Укажите сумму кредита на 2ом шаге.' if bank_credit[:credit_sum].to_i < 1
     validation_errors.push 'Укажите срок кредита на 2ом шаге.' if bank_credit[:credit_term].to_i < 1
+
+    if ((bank_credit[:credit_sum].to_i < Credit.first.min_sum && bank_credit[:credit_sum].to_i < Credit.last.min_sum) || (bank_credit[:credit_sum].to_i > Credit.first.max_sum && bank_credit[:credit_sum].to_i > Credit.last.max_sum))
+      validation_errors.push 'Укажите правильное значение кредитной суммы'
+    end
     validation_errors.push 'Укажите срок освоения кредита на 2ом шаге.' if bank_credit[:credit_limit_term].to_i < 1
     # validation_errors.push 'Укажите ответ на совокупный кредит на 2ом шаге.' if bank_credit[:total_income].to_i < 1 || bank_credit[:total_income].to_i > 2
     validation_errors.push 'Укажите будет ли клиент страховаться на 2ом шаге.' if bank_credit[:make_insurance].to_i < 1 || bank_credit[:total_income].to_i > 2

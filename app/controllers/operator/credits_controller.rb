@@ -13,28 +13,7 @@ module Operator
       credit = Credit.new(credit_params)
       credit.currency_id = params[:credit][:currency]
       credit.save
-
-      credit_warrenty_ids = params[:credit][:warrenty_type]
-      credit_warrenty_ids = credit_warrenty_ids.split(",").map { |s| s.to_i }
-      credit_warrenty_ids.each do |warrenty|
-        credit_warrenty = CreditWarrenty.new(credit_id: credit.id, warrenty_type_id: warrenty)
-        credit_warrenty_ids.save
-      end
-
-
-      credit_granting_ids = params[:credit][:granting_type]
-      credit_granting_ids = credit_granting_ids.split(",").map { |s| s.to_i }
-      credit_granting_ids.each do |granting|
-        credit_granting = CreditGranting.new(credit_id: credit.id, granting_type_id: granting)
-        credit_granting.save
-      end
-
-      credit_payment_ids = params[:credit][:payment_type]
-      credit_payment_ids = credit_payment_ids.split(",").map { |s| s.to_i }
-      credit_payment_ids.each do |payment|
-        credit_payment = CreditPayment.new(credit_id: credit.id, payment_type_id: payment)
-        credit_payment.save
-      end
+      credit.save_credit(params[:credit][:warrenty_type],  params[:credit][:granting_type],  params[:credit][:payment_type])
 
       @credits = Credit.all
       render 'operator/credits/index'
@@ -42,28 +21,20 @@ module Operator
 
     def edit
 
+      @credit = Credit.find(params[:id])
+    end
+    def update
+      @credit.update(credit_params)
+      @credit.update_dependecies(params[:credit][:warrenty_type],  params[:credit][:granting_type],  params[:credit][:payment_type])
+      @credits = Credit.all
+      render 'operator/credits/index'
     end
 
     def destroy
       credit = Credit.find(params[:id])
-
-      credit_grantings = CreditGranting.where(credit_id: credit.id)
-      credit_grantings.each do |granting|
-        granting.destroy
-      end
-
-      credit_payments = CreditPayment.where(credit_id: credit.id)
-      credit_payments.each do |payment|
-        payment.destroy
-      end
-
-      credit_warrenties = CreditWarrenty.where(credit_id: credit.id)
-      credit_warrenties.each do |warrenty|
-        warrenty.destroy
-      end
-
-
+      credit.destroy_credit
       credit.destroy
+
       @credits = Credit.all
       render 'operator/credits/index'
     end

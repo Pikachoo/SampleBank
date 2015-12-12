@@ -48,10 +48,12 @@ function validateCredit() {
         validateErrorsCount++;
         add_error("<li>Укажите штрафные проценты по кредиту.</li>");
     }
-    if ($("#credit_granting").val() != "0" || $("#credit_granting").val() != ""){
+    if ($("#credit_granting_type").val() == "0" || $("#credit_granting_type").val() == "" || $("#credit_granting_type").val() == undefined){
+        validateErrorsCount++;
         add_error("<li>Укажите порядок предоставления.</li>");
     }
-    if ($("#credit_payment").val() != "0" || $("#credit_payment").val() != ""){
+    if ($("#credit_payment_type").val() == "0" || $("#credit_payment_type").val() == "" || $("#credit_payment_type").val() == undefined){
+        validateErrorsCount++;
         add_error("<li>Укажите способ выдачи кредита.</li>");
     }
     if (validateErrorsCount == 0)
@@ -61,3 +63,4 @@ function validateCredit() {
     }
 
 }
+

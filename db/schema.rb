@@ -209,25 +209,24 @@ ActiveRecord::Schema.define(version: 20151207191906) do
   add_index "credit_warrenties", ["credit_id", "warrenty_type_id"], name: "credit_id", using: :btree
 
   create_table "credits", force: :cascade do |t|
-    t.string   "name",                 limit: 68, null: false
-    t.integer  "percent",              limit: 4,  null: false
-    t.integer  "currency_id",          limit: 4,  null: false
-    t.integer  "default_interest",     limit: 4,  null: false
-    t.integer  "min_sum",              limit: 4,  null: false
-    t.integer  "max_sum",              limit: 4,  null: false
-    t.integer  "min_number_of_months", limit: 4,  null: false
-    t.integer  "max_number_of_months", limit: 4,  null: false
-    t.datetime "start_time"
-    t.integer  "credit_state_id",      limit: 4
+    t.string  "name",                 limit: 68, null: false
+    t.integer "percent",              limit: 4,  null: false
+    t.integer "currency_id",          limit: 4,  null: false
+    t.integer "default_interest",     limit: 4,  null: false
+    t.integer "min_sum",              limit: 4,  null: false
+    t.integer "max_sum",              limit: 4,  null: false
+    t.integer "min_number_of_months", limit: 4,  null: false
+    t.integer "max_number_of_months", limit: 4,  null: false
   end
 
   create_table "currencies", force: :cascade do |t|
     t.string "name", limit: 5, null: false
   end
 
-  create_table "currency_exch_rates", primary_key: "from_currency_id", force: :cascade do |t|
-    t.integer "to_currency_id", limit: 4,  null: false
-    t.float   "rate",           limit: 24, null: false
+  create_table "currency_exch_rates", id: false, force: :cascade do |t|
+    t.integer "from_currency_id", limit: 4,  null: false
+    t.integer "to_currency_id",   limit: 4,  null: false
+    t.float   "rate",             limit: 24, null: false
   end
 
   create_table "deposits", force: :cascade do |t|

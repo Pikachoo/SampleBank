@@ -2,6 +2,7 @@ var rude =
 {
     cards:
     {
+
         init: function()
         {
             var width_card = parseInt($('.cards .card:eq(1)').css('width'));

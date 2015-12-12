@@ -1,25 +1,8 @@
 <div id="container">
-    <div class="container">
-        <div class="ui segment">
+  <div id="content" >
+        <div class="ui segment" id = 'online_credit'>
             <h2 class="ui header dividing" style="text-align: center;">Расчёт оценки онлайн заполнения кредита</h2>
-            <!--<div class="request-info">
-                <p>Вся информация о выставлении оценки.</p>
-            </div>
 
-            <div id="step1" class="step">
-                <p><b>Оценка выставлена на основе:</b></p>
-            </div>
-
-            <ul>
-                <% @mark_explanations.each do |e| %>
-                    <li><%= e %></li>
-                <% end %>
-            </ul>
-
-            <b>Необходимая оценка равна: </b><%=@necessaryMark %><br/>
-            <b>Полученная оценка равна: </b><%= @mark %><br/>
-            <b>Полученная оценка высчитывалась по формуле: </b><%= @calculating %>
-            -->
             <% if (@mark >= @necessaryMark) %>
                 <h2 style="text-align: center">
                   Ваша заявка одобрена.<br/>

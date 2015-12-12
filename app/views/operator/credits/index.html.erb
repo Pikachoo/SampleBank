@@ -1,8 +1,8 @@
 <div id="container">
-  <div id="content" class="account-settings">
+  <div id="content" >
 
-    <div id="credits" class="ui segment">
-      <h3 class="ui header dividing">Пластиковые карты</h3>
+    <div class="ui segment" id="credits" >
+      <h3 class="ui header dividing">Кредиты</h3>
       <table class="ui table celled striped">
         <thead>
         <tr id='credti_tr'>
@@ -108,22 +108,26 @@
         <tr>
           <th>Изменить</th>
           <% @credits.each do |credit| %>
-              <% if can? :read, credit %>
+              <% if can? :update, credit %>
                   <td><%= link_to 'Изменить', edit_operator_credit_path(credit.id), class: 'ui button orange' if can? :update, Credit %></td>
               <% end %>
           <% end %>
 
         </tr>
-        <tr >
+        <tr>
           <th>Удалить</th>
           <% @credits.each do |credit| %>
-              <% if can? :read, credit %>
-                  <td><%= link_to 'Удалить', operator_credit_path(credit.id), class: 'ui button orange', method: 'delete' if can? :delete, Credit %></td>              <% end %>
+              <% if can? :destroy, credit %>
+                  <td><%= link_to 'Удалить', operator_credit_path(credit.id), class: 'ui button orange', method: 'delete' if can? :delete, Credit %></td>
+              <% end %>
           <% end %>
 
         </tr>
         </thead>
       </table>
+      <%= link_to 'Создать', new_operator_credit_path, class: 'ui button orange' if can? :create, Credit %>
+
+
     </div>
   </div>
 </div>

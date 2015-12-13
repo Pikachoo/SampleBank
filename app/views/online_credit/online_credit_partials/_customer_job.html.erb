@@ -21,3 +21,8 @@
   <label>*Опыт работы (мес.)</label>
   <%= f.number_field :organization_experience, value: @online_credit_inputs[:organization_experience], placeholder: "Опыт работы (мес.)", min: 0 %>
 </div>
+
+<div class="field">
+  <label>*Заработная плата в BYR</label>
+  <%= f.number_field :salary, value: @online_credit_inputs[:salary], placeholder: "Заработная плата в BYR", min: 0 %>
+</div>

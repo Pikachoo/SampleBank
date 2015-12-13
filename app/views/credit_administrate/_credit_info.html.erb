@@ -1,6 +1,6 @@
 <h3>Информация о кредите:</h3>
 Дата заявки: <%= @credit.begin_date %><br/>
-Сумма: <%= @credit.sum %><br/>
+Сумма: <%= @credit.sum %><br/> <%= @credit.credit_id == 1 ? "BYR" : "USD" %>
 Кредитная линия: <%= @credit_type %><br/>
 Способ выдачи: <%= @credit.repayment_method %><br/>
 Срок: <%= @credit.term %> месяц(ев)<br/>

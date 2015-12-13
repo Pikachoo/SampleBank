@@ -25,6 +25,7 @@ class OnlineCreditController < ApplicationController
                              client_job_types: client_job_types,
                              credit_warranty_types: credit_warranty_types,
                              currencies: currencies,
+                             salary: "0",
                              client_goals: client_goals}
     @online_credit_inputs = flash[:inputs_params] if flash[:inputs_params] != nil
   end
@@ -68,7 +69,7 @@ class OnlineCreditController < ApplicationController
         calculating = "2"
     end
     case onlineCredit[:currency_type].to_i
-      when 1
+      when 3
         mark_explanations.push "Клиент выбрал белорусские рубли, коэфициент валюты 0.0001, коэфициент рассчёта оценки = 1"
         calculating = "#{calculating}*1"
         addition = "BYR"
@@ -79,7 +80,7 @@ class OnlineCreditController < ApplicationController
         calculating = "#{calculating}*0.97"
         addition = "EUR"
         coefficient = 0.97
-      when 3
+      when 1
         mark_explanations.push "Клиент выбрал доллары, коэфициент валюты и коэфициент рассчёта оценки равен 0.95"
         mark = mark * 0.95
         coefficient = 0.95
@@ -87,9 +88,9 @@ class OnlineCreditController < ApplicationController
         addition = "$"
     end
 
-    necessaryMark = onlineCredit[:sum_value].to_f * coefficient.to_f / 10000
+    necessaryMark = onlineCredit[:sum_value].to_f * coefficient.to_f
     mark_explanations.push("Сумма кредита составила #{onlineCredit[:sum_value] + ' ' + addition},
-                            необходимая оценка будет равна (Сумма / коэфициент валюты / 10000) #{necessaryMark}")
+                            необходимая оценка будет равна (Сумма / коэфициент валюты ) #{necessaryMark}")
 
     mark_explanations.push("Срок кредита будет равен #{onlineCredit[:term_loan_product].to_i},
                             коэфициент равен #{(onlineCredit[:term_loan_product].to_f / 6.0).round(2)}")
@@ -182,7 +183,7 @@ class OnlineCreditController < ApplicationController
     mark_explanations.push "Стаж работы клиента равен #{onlineCredit[:organization_experience].to_i}, коэфициент равен #{(onlineCredit[:organization_experience].to_f / 12.0).round(2)}"
     mark = mark * (onlineCredit[:organization_experience].to_f / 12.0)
     calculating = "#{calculating}*#{(onlineCredit[:organization_experience].to_f / 12.0.to_f).round(2)}"
-
+    mark *= onlineCredit[:salary].to_f * 0.0001 * onlineCredit[:term_loan_product].to_f
     return mark, necessaryMark, mark_explanations, calculating
   end
 
@@ -208,6 +209,7 @@ class OnlineCreditController < ApplicationController
     validation_errors.push "Введите ваш фамилию на 6ом шаге." if onlineCredit[:customers_lastname] == ""
     validation_errors.push "Введите ваш отчество на 6ом шаге." if onlineCredit[:customers_patronymic] == ""
     validation_errors.push "Введите ваш мобильный телефон на 6ом шаге." if onlineCredit[:customers_phone] == ""
+    validation_errors.push "Введите вашу заработную плату на 6ом шаге." if onlineCredit[:salary].to_i < 1
     validation_errors == [] ? nil : validation_errors
   end
 end

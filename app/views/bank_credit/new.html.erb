@@ -23,17 +23,17 @@
           </div>
 
           <div id="step1" class="step">
-            <p><b>ШАГ 1 из 11</b> - Заполните данные о порядке предоставления кредита.</p>
+            <p><b>ШАГ 1 из 9</b> - Заполните данные о порядке предоставления кредита.</p>
             <%= render partial: 'bank_credit/credit_partials/credit_info/credit_info', locals: {f: f} %>
           </div>
 
           <div id="step2" class="step">
-            <p><b>ШАГ 2 из 11</b> - Заполните информацию о размере и системе погашения кредита.</p>
+            <p><b>ШАГ 2 из 9</b> - Заполните информацию о размере и системе погашения кредита.</p>
             <%= render partial: 'bank_credit/credit_partials/credit_sum_info/credit_sum_info', locals: {f: f} %>
           </div>
 
           <div id="step3" class="step">
-            <p><b>ШАГ 3 из 11</b> - Заполните общие сведения о заявителе.</p>
+            <p><b>ШАГ 3 из 9</b> - Заполните общие сведения о заявителе.</p>
             <%= render partial: 'bank_credit/credit_partials/applicant_info/applicant_info', locals: { name: 'customer', step: 3, f: f } %>
             <br/><br/>
             <button type="button" class="ui button orange" onclick="navigate('#step2')">Назад</button>
@@ -41,19 +41,19 @@
           </div>
 
           <div id="step4" class="step">
-            <p><b>ШАГ 4 из 11</b> - Заполните данные о месте работы заявителя.</p>
+            <p><b>ШАГ 4 из 9</b> - Заполните данные о месте работы заявителя.</p>
             <%= render partial: 'bank_credit/credit_partials/job_info/job_info', locals: { name: 'customer', step: 4, f: f } %>
             <button type="button" class="ui button orange" onclick="validateFourthCreditStep()">Далее</button>
           </div>
 
           <div id="step5" class="step">
-            <p><b>ШАГ 5 из 11</b> - Заполните данные о работе по совместительству заявителя(укажите "безработный" если она отсутствует).</p>
+            <p><b>ШАГ 5 из 9</b> - Заполните данные о работе по совместительству заявителя(укажите "безработный" если она отсутствует).</p>
             <%= render partial: 'bank_credit/credit_partials/job_info/job_info', locals: { name: 'customer_additional', step: 5, f: f  }  %>
             <button type="button" class="ui button orange" onclick="validateFifthCreditStep()">Далее</button>
           </div>
 
           <div id="step6" class="step">
-            <p><b>ШАГ 6 из 11</b> - Заполните общие сведенья о супруге заявителя.</p>
+            <p><b>ШАГ 6 из 9</b> - Заполните общие сведенья о супруге заявителя.</p>
             <button type="button" class="ui button orange" onclick="validateSixthCreditStep()">Пропустить</button>
             <%= render partial: 'bank_credit/credit_partials/applicant_info/applicant_info', locals: { name: 'partner', step: 6, f: f} %>
             <%= render partial: 'bank_credit/credit_partials/job_info/organization_info', locals: { name: 'partner', f: f }  %>
@@ -62,6 +62,7 @@
 
           </div>
 
+            <!--
           <div id="step7" class="step">
             <p><b>ШАГ 7 из 11</b> - Заполните сведенья о близких родственниках заявителя</p>
             <%= render partial: 'bank_credit/credit_partials/closest_relatives/closest_relatives' %>
@@ -71,19 +72,20 @@
             <p><b>ШАГ 8 из 11</b> - Заполните данные об имуществе заявителя</p>
             <%= render partial: 'bank_credit/credit_partials/customers_property/customers_property' %>
           </div>
+          -->
 
-          <div id="step9" class="step">
-            <p><b>ШАГ 9 из 11</b> - Заполните данные об доходах заявителя</p>
+          <div id="step7" class="step">
+            <p><b>ШАГ 7 из 9</b> - Заполните данные об доходах заявителя</p>
             <%= render partial: 'bank_credit/credit_partials/customers_incoming/customers_incoming', locals: { f: f } %>
           </div>
 
-          <div id="step10" class="step">
-            <p><b>ШАГ 10 из 11</b> - Заполните дополнительную информацию</p>
+          <div id="step8" class="step">
+            <p><b>ШАГ 8 из 9</b> - Заполните дополнительную информацию</p>
             <%= render partial: 'bank_credit/credit_partials/additional_info/additional_info', locals: { f: f } %>
           </div>
 
-          <div id="step11" class="step">
-            <p><b>ШАГ 11 из 11</b> - Заполните информацию о кредитной истории заявителя</p>
+          <div id="step9" class="step">
+            <p><b>ШАГ 9 из 9</b> - Заполните информацию о кредитной истории заявителя</p>
             <%= render partial: 'bank_credit/credit_partials/credit_history/credit_history', locals: { f: f } %>
           </div>
 

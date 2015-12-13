@@ -44,6 +44,10 @@ function validateSixthStep() {
         validateErrorsCount++;
         $("#errors_list").append("<li>Укажите ваш опыт работы.</li>");
     }
+    if ($("#online_credit_salary").val() < 1){
+        validateErrorsCount++;
+        $("#errors_list").append("<li>Укажите вашу заработную плату.</li>");
+    }
     if ($("#online_credit_customers_lastname").val() == ""){
         validateErrorsCount++;
         $("#errors_list").append("<li>Укажите фамилию клиента.</li>");

@@ -105,7 +105,7 @@ class BankCreditController < ApplicationController
     client_credit.begin_date = Date.today
     client_credit.sum = params[:bank_credit][:credit_sum]
     client_credit.term = params[:bank_credit][:credit_term]
-    client_credit.limit_term = params[:bank_credit][:credit_limit_term]
+    client_credit.limit_term = 0 #params[:bank_credit][:credit_limit_term]
     client_credit.payment_id = params[:bank_credit][:issuance_method]
     client_credit.granting_id = params[:bank_credit][:granted_procedure]
     client_credit.is_require = @is_collateral_employed ? 1 : @mark >= @necessary_mark ? 1 : 0
@@ -199,8 +199,9 @@ class BankCreditController < ApplicationController
 
     #Second step mark
     credit_sum = bank_credit[:credit_sum].to_f
-    necessary_mark = Credit.first.min_sum ? 2 - credit_sum / Credit.last.max_sum : credit_sum / Credit.first.max_sum
-    #necessary_mark = credit_sum / 2000000000.0
+    necessary_mark = credit_sum
+    coefficient = credit_sum < Credit.first.min_sum ? 20000 : 1
+    necessary_mark *= coefficient
 
     mark_explanations.push "Необходимая оценка равна #{necessary_mark}"
 
@@ -537,7 +538,7 @@ class BankCreditController < ApplicationController
     if ((bank_credit[:credit_sum].to_i < Credit.first.min_sum && bank_credit[:credit_sum].to_i < Credit.last.min_sum) || (bank_credit[:credit_sum].to_i > Credit.first.max_sum && bank_credit[:credit_sum].to_i > Credit.last.max_sum))
       validation_errors.push 'Укажите правильное значение кредитной суммы'
     end
-    validation_errors.push 'Укажите срок освоения кредита на 2ом шаге.' if bank_credit[:credit_limit_term].to_i < 1
+    #validation_errors.push 'Укажите срок освоения кредита на 2ом шаге.' if bank_credit[:credit_limit_term].to_i < 1
     # validation_errors.push 'Укажите ответ на совокупный кредит на 2ом шаге.' if bank_credit[:total_income].to_i < 1 || bank_credit[:total_income].to_i > 2
     validation_errors.push 'Укажите будет ли клиент страховаться на 2ом шаге.' if bank_credit[:make_insurance].to_i < 1 || bank_credit[:total_income].to_i > 2
     validation_errors.push 'Укажите вид выплаты кредита на 2ом шаге.' if bank_credit[:repayment_method].to_i < 1 || bank_credit[:total_income].to_i > 2
@@ -642,21 +643,22 @@ class BankCreditController < ApplicationController
     #End of sixth step validation
 
     #Ninth step validation
-    validation_errors.push 'Укажите среднемесячные доходы за последние 6 месяцев на 9ом шаге.' if bank_credit[:last_incomings].to_i < 0
-    validation_errors.push 'Укажите среднемесячные расходы за последние 6 месяцев на 9ом шаге.' if bank_credit[:last_outcomings].to_i < 0
-    validation_errors.push 'Укажите среднемесячные доход семьи за последние 6 месяцев на 9ом шаге.' if bank_credit[:family_incomings].to_i < 0
+    validation_errors.push 'Укажите среднемесячные доходы за последние 6 месяцев на 7 шаге.' if bank_credit[:last_incomings].to_i < 0
+    validation_errors.push 'Укажите среднемесячные расходы за последние 6 месяцев на 7 шаге.' if bank_credit[:last_outcomings].to_i < 0
+    validation_errors.push 'Укажите среднемесячные доход семьи за последние 6 месяцев на 7 шаге.' if bank_credit[:family_incomings].to_i < 0
+    validation_errors.push 'Укажите заработную плату 7 шаге.' if bank_credit[:salary].to_i < 0
     #End of ninth step validation
 
     #Tenth step validation
-    validation_errors.push 'Укажите наличие ограничений со стороны других банков 10ом шаге.' if bank_credit[:another_contracts].to_i < 1
-    validation_errors.push 'Укажите наличие невыполненных судебных решений 10ом шаге.' if bank_credit[:unfinushed_contracts].to_i < 1
-    validation_errors.push 'Укажите наличие учёта у психиатора 10ом шаге.' if bank_credit[:mental_desease].to_i < 1
-    validation_errors.push 'Укажите наличие судебного процесса 10ом шаге.' if bank_credit[:guilty_contracts].to_i < 1
+    validation_errors.push 'Укажите наличие ограничений со стороны других банков 8 шаге.' if bank_credit[:another_contracts].to_i < 1
+    validation_errors.push 'Укажите наличие невыполненных судебных решений 8 шаге.' if bank_credit[:unfinushed_contracts].to_i < 1
+    validation_errors.push 'Укажите наличие учёта у психиатора 8 шаге.' if bank_credit[:mental_desease].to_i < 1
+    validation_errors.push 'Укажите наличие судебного процесса 8 шаге.' if bank_credit[:guilty_contracts].to_i < 1
     validation_errors.push 'Укажите наличие приговора 10ом шаге.' if bank_credit[:is_punished].to_i < 1
-    validation_errors.push 'Укажите невыполненных судебных решений супругом 10ом шаге.' if bank_credit[:partner_unfinushed_contracts].to_i < 1
-    validation_errors.push 'Укажите наличие учёта супругом у психиатора 10ом шаге.' if bank_credit[:partner_mental_desease].to_i < 1
-    validation_errors.push 'Укажите наличие судебного процесса у супруга 10ом шаге.' if bank_credit[:partner_guilty_contracts].to_i < 1
-    validation_errors.push 'Укажите приговора у супруга 10ом шаге.' if bank_credit[:partner_is_punished].to_i < 1
+    validation_errors.push 'Укажите невыполненных судебных решений супругом 8 шаге.' if bank_credit[:partner_unfinushed_contracts].to_i < 1
+    validation_errors.push 'Укажите наличие учёта супругом у психиатора 8 шаге.' if bank_credit[:partner_mental_desease].to_i < 1
+    validation_errors.push 'Укажите наличие судебного процесса у супруга 8 шаге.' if bank_credit[:partner_guilty_contracts].to_i < 1
+    validation_errors.push 'Укажите приговора у супруга 8 шаге.' if bank_credit[:partner_is_punished].to_i < 1
     #End of tenth step validation
 
     #Eleventh step validation

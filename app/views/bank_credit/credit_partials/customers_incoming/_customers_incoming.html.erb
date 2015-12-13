@@ -13,13 +13,18 @@
     <%= f.number_field :family_incomings, value: @bank_credit_inputs["family_incomings"], default: 0, min: 0 %>
 </div>
 
-<div id="step-errors-9" class="validation_errors invisible">
+<div class="field">
+  <label>*Заработная плата в BYR</label>
+  <%= f.number_field :salary, value: @bank_credit_inputs["salary"], placeholder: "Заработная плата в BYR", min: 0 %>
+</div>
+
+<div id="step-errors-7" class="validation_errors invisible">
   <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
-  <ul id="errors-list-9"></ul>
+  <ul id="errors-list-7"></ul>
 </div>
 
 <br/><br/>
-<button type="button" class="ui button orange" onclick="navigate('#step8')">
+<button type="button" class="ui button orange" onclick="navigate('#step6')">
   Назад
 </button>
 

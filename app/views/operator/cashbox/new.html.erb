@@ -1,7 +1,7 @@
 <div id="container">
   <div id="content" class="account-settings">
     <div class="ui segment" id="cashbox">
-      <%= form_tag :credit, url: operator_cashbox_path, html: {class: "ui form error success", id: "credit_form"}, method: :post do %>
+      <%= form_tag  operator_cashbox_index_path, class: "ui form error success", id: "credit_form", method: :post do %>
           <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
             <b>Во время отправки данных обнаружились следующие ошибки:</b>
             <ul>
@@ -15,8 +15,12 @@
 
 
           <div class="field">
-            <%= label_tag :sum, 'Сумма кредита' %>
-            <%= text_field_tag :sum, params[:sum], placeholder: 'Сумма кредита' %><br/>
+            <%= label_tag :sum, 'Вносимая сумма' %>
+            <%= number_field_tag :sum, params[:sum], placeholder: 'Вносимая сумма' %><br/>
+          </div>
+          <div class="field">
+            <%= label_tag :credit_number, 'Номер кредита' %>
+            <%= number_field_tag :credit_number, params[:credit_number], placeholder: 'Номер кредита' %><br/>
           </div>
 
           <div class="field">
@@ -37,12 +41,11 @@
           </div>
 
 
-
           <div id="step-errors" class="validation_errors invisible">
             <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
             <ul id="errors_list"></ul>
           </div>
-          <%= button_tag  class: 'ui button', value: 'Сохранить кредит', onclick: "validateCredit()" %>
+          <%= button_tag 'Сохранить кредит', type: 'button', class: 'ui button', onclick: "validateCredit()" %>
       <% end %>
     </div>
   </div>

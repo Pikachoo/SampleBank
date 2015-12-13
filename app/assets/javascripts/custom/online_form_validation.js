@@ -61,7 +61,7 @@ function validateSixthStep() {
         $("#errors_list").append("<li>Укажите номер телефона клиента.</li>");
     }
     if (validateErrorsCount == 0)
-        $("#online-credit-form").submit();
+        $("#online-credits-form").submit();
     else{
         toggleElement('#step-errors-6', true);
     }

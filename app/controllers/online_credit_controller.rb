@@ -2,7 +2,7 @@ class OnlineCreditController < ApplicationController
 
   def new
     client_job_types = ClientJobType.all
-    credit_warranty_types = CreditWarrantyType.all
+    credit_warranty_types = CreditWarrentyType.all
     currencies = Currency.all
     client_goals = ClientCreditGoal.all
 

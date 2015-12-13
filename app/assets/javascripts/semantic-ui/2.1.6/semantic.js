@@ -1585,7 +1585,7 @@ $.fn.form.settings = {
     maxLength            : '{name} cannot be longer than {ruleValue} characters',
     match                : '{name} must match {ruleValue} field',
     different            : '{name} must have a different value than {ruleValue} field',
-    creditCard           : '{name} must be a valid credit card number',
+    creditCard           : '{name} must be a valid credits card number',
     minCount             : '{name} must have at least {ruleValue} choices',
     exactCount           : '{name} must have exactly {ruleValue} choices',
     maxCount             : '{name} must have {ruleValue} or less choices'

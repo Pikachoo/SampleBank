@@ -1,0 +1,133 @@
+<div id="container">
+  <div id="content" >
+
+    <div class="ui segment" id="credits" >
+      <h3 class="ui header dividing">Кредиты</h3>
+      <table class="ui table celled striped">
+        <thead>
+        <tr id='credti_tr'>
+          <th>Кредит</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold"><%= credit.name %></td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='currency_tr'>
+          <th>Валюта</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold"><%= credit.currency.name %></td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='min_sum_tr'>
+          <th>Минимальная сумма</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold"><%= credit.min_sum %></td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='max_sum_tr'>
+          <th>Максимальная сумма</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold"><%= credit.max_sum %></td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='min_months_tr'>
+          <th>Минимальный срок</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold"><%= credit.min_number_of_months %></td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='max_months_tr'>
+          <th>Максимальный срок</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold"><%= credit.max_number_of_months %></td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='percent_tr'>
+          <th>Проценты, %</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold"><%= credit.percent %></td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='default_interes_tr'>
+          <th>Штрафные проценты, %</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold"><%= credit.default_interest %></td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='warrenty_types_tr'>
+          <th>Виды обеспечения</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold">
+                    <% credit.credit_warrenties.each do |warrenty| %>
+                        <%= warrenty.credit_warrenty_type.name %>
+                    <% end %>
+                  </td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='payment_types_tr'>
+          <th>Виды выплаты</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold">
+                    <% credit.credit_payments.each do |payment| %>
+                        <%= payment.credit_payment_type.name %>
+                    <% end %>
+                  </td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr id='granting_type_tr'>
+          <th>Виды предоставления</th>
+          <% @credits.each do |credit| %>
+              <% if can? :read, credit %>
+                  <td class="bold">
+                    <% credit.credit_grantings.each do |granting| %>
+                        <%= granting.credit_granting_type.name %>
+                    <% end %>
+                  </td>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <th>Изменить</th>
+          <% @credits.each do |credit| %>
+              <% if can? :update, credit %>
+                  <td><%= link_to 'Изменить', edit_operator_credit_path(credit.id), class: 'ui button orange' if can? :update, Credit %></td>
+              <% end %>
+          <% end %>
+
+        </tr>
+        <tr>
+          <th>Удалить</th>
+          <% @credits.each do |credit| %>
+              <% if can? :destroy, credit %>
+                  <td><%= link_to 'Удалить', operator_credit_path(credit.id), method: :delete, class: 'ui button orange' if can? :delete, Credit %></td>
+              <% end %>
+          <% end %>
+
+        </tr>
+        </thead>
+      </table>
+      <%= link_to 'Создать', new_operator_credit_path, class: 'ui button orange' if can? :create, Credit %>
+
+
+    </div>
+  </div>
+</div>

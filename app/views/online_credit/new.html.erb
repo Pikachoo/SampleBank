@@ -5,7 +5,7 @@
         <%= form_for :online_credit,
                      url: online_credit_index_path,
                      html: {class: "ui form error success",
-                            id: "online-credit-form"},
+                            id: "online-credits-form"},
                      method: :post do |f| %>
           <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
           <h2 class="ui header dividing">Предварительная заявка на кредитный продукт</h2>

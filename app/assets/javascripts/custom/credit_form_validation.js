@@ -191,8 +191,7 @@ function validateEleventhStep() {
     $("#bank_credit_guarantee").val($("[name='guarantee']:checked").val());
     validateElementWithNullify("[name='installments']:checked", 9, "Укажите наличие задолженности по товарам в рассрочку");
     $("#bank_credit_installments").val($("[name='installments']:checked").val());
-
-
+    
     if ($("#step-errors-9").is(':hidden') == true) {
         toggleElement('#step-errors-9', false);
         $("#bank-credit-form").submit();

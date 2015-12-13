@@ -1,8 +1,7 @@
 <h3>Информация о кредите:</h3>
-Дата заявки: <%= @credit.begin_date %><br/>
-Сумма: <%= @credit.sum %><br/> <%= @credit.credit_id == 1 ? "BYR" : "USD" %>
-Кредитная линия: <%= @credit_type %><br/>
-Способ выдачи: <%= @credit.repayment_method %><br/>
-Срок: <%= @credit.term %> месяц(ев)<br/>
-Способ выдачи: <%= CreditPaymentType.where(id: (CreditPayment.where(id: @credit.payment_id).first.payment_type_id)).first.name %><br/>
-Порядок предоставления: <%= CreditGrantingType.where(id: (CreditGranting.where(id: @credit.granting_id).first.granting_type_id)).first.name %><br/>
+Дата заявки: <%= @client_credit.begin_date %><br/>
+Сумма: <%= @client_credit.sum %><br/> <%= @client_credit.credit_id == 1 ? "BYR" : "USD" %>
+Кредитная линия: <%= @client_credit.credit.name %><br/>
+Способ выдачи: <%= @client_credit.credit_payment_type.name %><br/>
+Срок: <%= @client_credit.term %> месяц(ев)<br/>
+Порядок предоставления: <%= @client_credit.credit_granting_type.name %> <br/>

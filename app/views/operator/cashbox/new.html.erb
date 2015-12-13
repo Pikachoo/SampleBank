@@ -1,0 +1,52 @@
+<div id="container">
+  <div id="content" class="account-settings">
+    <div class="ui segment" id="cashbox">
+      <%= form_tag  operator_cashbox_index_path, class: "ui form error success", id: "credit_form", method: :post do %>
+          <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
+            <b>Во время отправки данных обнаружились следующие ошибки:</b>
+            <ul>
+              <% if (flash[:validation_errors] != nil) %>
+                  <% flash[:validation_errors].each do |e| %>
+                      <li><%= e %></li>
+                  <% end %>
+              <% end %>
+            </ul>
+          </div>
+
+
+          <div class="field">
+            <%= label_tag :sum, 'Вносимая сумма' %>
+            <%= number_field_tag :sum, params[:sum], placeholder: 'Вносимая сумма' %><br/>
+          </div>
+          <div class="field">
+            <%= label_tag :credit_number, 'Номер кредита' %>
+            <%= number_field_tag :credit_number, params[:credit_number], placeholder: 'Номер кредита' %><br/>
+          </div>
+
+          <div class="field">
+            <%= label_tag :currency, 'Валюта' %>
+
+            <div class="ui selection dropdown" id="dropdown_granting">
+              <%= number_field_tag :currency, params[:currency], type: "hidden" %>
+              <i class="dropdown icon"></i>
+
+              <div class="default text">Валюта</div>
+              <div class="menu" id="menu_granting" tabindex="-1">
+
+                <% Currency.all.each do |currency| %>
+                    <div class="item" data-value="<%= currency.id %>"><%= currency.name %></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+
+          <div id="step-errors" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul id="errors_list"></ul>
+          </div>
+          <%= button_tag 'Сохранить кредит', type: 'button', class: 'ui button', onclick: "validateCredit()" %>
+      <% end %>
+    </div>
+  </div>
+</div>

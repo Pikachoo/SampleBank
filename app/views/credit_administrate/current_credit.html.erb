@@ -1,12 +1,12 @@
 <div id="container">
-    <div class="container">
-      <div class="ui segment">
+    <div id="content">
+      <div class="ui segment" id = 'credit_aministrate'>
 
         <form class="ui form error success">
           <h2 class="ui header" style="text-align: center">Информация о кредите</h2>
           <%= render partial: "credit_info" %>
-          <div style="display: flex">
-            <%= link_to 'Закрыть кредит', credit_close_path %>
+          <div style="display: flex; padding-top: 10px">
+            <%= link_to 'Закрыть кредит', credit_close_path, class: 'ui button orange' if can? :manage, ClientCredit %>
           </div>
         </form>
       </div>

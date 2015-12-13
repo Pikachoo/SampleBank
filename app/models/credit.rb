@@ -3,6 +3,8 @@ class Credit < ActiveRecord::Base
   has_many :credit_grantings
   has_many :credit_warrenties
   has_many :credit_payments
+  has_many :client_credits
+
   def get_credit_payments
     credit_payments = CreditPayment.where(credit_id: self.id)
     puts json: credit_payments

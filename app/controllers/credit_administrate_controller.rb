@@ -13,13 +13,11 @@ class CreditAdministrateController < ApplicationController
   end
 
   def applyment
-    @credit = ClientCredit.where(id: params[:id]).first
-    @client = Client.where(id: @credit.client_id).first
-    @credit_type = (Credit.where(id: @credit.credit_id).first).name
+    @client_credit = ClientCredit.find(params[:id])
   end
 
   def current_credit
-    @credit = ClientCredit.where(id: params[:id]).first
+    @client_credit = ClientCredit.find(params[:id])
   end
 
   def close

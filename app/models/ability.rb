@@ -20,6 +20,7 @@ class Ability
     if user.is? 'operator'
       can :manage, Credit
       can :manage, BankCredit
+      can :manage, ClientCredit
       can :manage, @bank_credit_inputs
       can :manage, CreditApplication
       can :read, CreditGranting

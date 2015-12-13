@@ -5,10 +5,10 @@
         <form class="ui form error success">
 
           <h2 class="ui header" style="text-align: center">Центр работы с кредитами</h2>
-          <%= render partial: "credit_type_table", locals: {credits: @applyment_credits, credits_type: "Кредиты ожидающие подтверждения"} %>
-          <%= render partial: "credit_type_table", locals: {credits: @opened_credits, credits_type: "Действующие кредиты"} %>
-          <%= render partial: "credit_type_table", locals: {credits: @closed_credits, credits_type: "Закрытые кредиты"} %>
-          <%= render partial: "credit_type_table", locals: {credits: @declined_credits, credits_type: "Отменённые кредиты"} %>
+          <%= render partial: "credit_type_table", locals: {credits: @applyment_credits, total_pages: @applyment_credits.total_pages, credits_type: "Кредиты ожидающие подтверждения", param_id: "applyment_credits_page", current_page: params[:applyment_credits_page].to_i} %>
+          <%= render partial: "credit_type_table", locals: {credits: @opened_credits, total_pages: @opened_credits.total_pages, credits_type: "Действующие кредиты", param_id: "opened_credits_page", current_page: params[:opened_credits_page].to_i} %>
+          <%= render partial: "credit_type_table", locals: {credits: @closed_credits, total_pages: @closed_credits.total_pages, credits_type: "Закрытые кредиты", param_id: "closed_credits_page", current_page: params[:closed_credits_page].to_i} %>
+          <%= render partial: "credit_type_table", locals: {credits: @declined_credits, total_pages: @declined_credits.total_pages, credits_type: "Отменённые кредиты", param_id: "declined_credits_page", current_page: params[:declined_credits_page].to_i} %>
         </form>
       </div>
     </div>

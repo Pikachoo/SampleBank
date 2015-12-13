@@ -1,0 +1,43 @@
+<div class="ui pagination menu">
+  <% currentPage = currentPage == 0 ? 1 : currentPage %>
+  <% if pageCount.to_i < maxPerPageCount %>
+      <% for i in 1..pageCount %>
+        <%= link_to i, path + "?#{param_id + "=" + i.to_s}", class: i == currentPage ? "active item" : "item" %>
+      <% end %>
+  <% else %>
+    <% middlePoint = (maxPerPageCount / 3).to_i %>
+    <% middlePadding = (middlePoint / 2).to_i %>
+    <% leftExtremum = currentPage - middlePadding %>
+    <% rightExtremum = currentPage + middlePadding %>
+    <% if currentPage < 1 + middlePoint then leftExtremum = middlePoint end %>
+    <% for i in 1..(middlePoint) %>
+          <a class="<%= i == currentPage ? "active" : "" %> item">
+            <%= i %>
+          </a>
+        <% end %>
+      <% if leftExtremum > middlePoint + 1 %>
+          <div class="disabled item">
+            ...
+          </div>
+      <% else %>
+        <% leftExtremum = middlePoint + 1 %>
+      <% end %>
+
+      <% unless rightExtremum < (pageCount - middlePoint) - 1 %>
+          <% rightExtremum = pageCount %>
+      <% end %>
+
+      <% for i in leftExtremum..rightExtremum %>
+          <%= link_to i, path + "?#{param_id + "=" + i.to_s}", class: i == currentPage ? "active item" : "item" %>
+      <% end %>
+
+      <% if rightExtremum != pageCount %>
+          <div class="disabled item">
+            ...
+          </div>
+          <% for i in (pageCount - middlePoint)..pageCount %>
+              <%= link_to i, path + "?#{param_id + "=" + i.to_s}", class: i == currentPage ? "active item" : "item" %>
+          <% end %>
+      <% end %>
+    <% end %>
+</div>

@@ -6,10 +6,10 @@ class CreditAdministrateController < ApplicationController
   end
 
   def index
-    @applyment_credits = ClientCredit.where(credit_state: 0)
-    @opened_credits = ClientCredit.where(credit_state: 1)
-    @closed_credits = ClientCredit.where(credit_state: 3)
-    @declined_credits = ClientCredit.where(credit_state: 4)
+    @applyment_credits = ClientCredit.where(credit_state: 0).page(params[:applyment_credits_page].to_i)
+    @opened_credits = ClientCredit.where(credit_state: 1).page(params[:opened_credits_page].to_i)
+    @closed_credits = ClientCredit.where(credit_state: 3).page(params[:closed_credits_page].to_i)
+    @declined_credits = ClientCredit.where(credit_state: 4).page(params[:declined_credits_page].to_i)
   end
 
   def applyment

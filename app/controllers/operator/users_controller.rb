@@ -9,11 +9,11 @@ module Operator
       @user_inputs = flash[:inputs_params] if flash[:inputs_params] != nil
     end
     def create
-      user = User.new(user_params)
-      user.save
-      @user_inputs = {name: user.name, role_id: user.role_id}
-      redirect_to :back,  flash: {validation_errors: user.error_message,
-                                  inputs_params: params[:user]}  unless user.error_message.nil?
+      @user = User.new(user_params)
+      @user.save_first_time
+      @user_inputs = {name: @user.name, role_id: @user.role_id}
+      redirect_to :back,  flash: {validation_errors: @user.error_message,
+                                  inputs_params: params[:user]}  unless @user.error_message.nil?
     end
 
     private

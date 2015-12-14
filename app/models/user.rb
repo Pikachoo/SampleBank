@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
     end
   end
 
-  def save
+  def save_first_time
     self.generate_password
     if self.valid?
-      super
+      self.save
     else
       if self.errors[:name]
         self.error_message = [ 'Данный пользователь уже существует.']
@@ -43,6 +43,18 @@ class User < ActiveRecord::Base
 
   def generate_password
     self.password = SecureRandom.hex(8)
+  end
+
+  def self.create_client_user(client_id)
+    client = Client.find(client_id)
+
+    user = User.new(name: client.passport_identificational_number, role_id: 1)
+    user.save_first_time
+
+    client.user_id = user.id
+    client.save
+
+    user
   end
 
   def is?( requested_role )

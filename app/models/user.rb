@@ -58,7 +58,9 @@ class User < ActiveRecord::Base
     client.user_id = user.id
     client.save
     user
+    end
   end
+  
 
   def is?(requested_role)
     if self.role

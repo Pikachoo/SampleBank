@@ -1,0 +1,36 @@
+<div id="container">
+  <div id="content" >
+
+    <div class="ui segment" id="credits" >
+      <% if @users.any? %>
+          <div class="ui vertical accordion menu">
+            <div class="item">
+              <a class="title">
+                <i class="dropdown icon"></i>
+                Аккаунты клиентов:
+              </a>
+              <div class="content">
+                <table class="sortable">
+                  <tr>
+                    <td>Id</td>
+                    <td>Пользователь</td>
+                    <td>Ссылка</td>
+                  </tr>
+                  <% @users.each do |user| %>
+                      <tr>
+                        <td>
+                          <%= user.id %>
+                        </td>
+                        <td>
+                          <%= user.name %>
+                        </td>
+                      </tr>
+                  <% end %>
+                </table>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

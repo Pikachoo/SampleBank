@@ -18,7 +18,6 @@ class Ability
     end
 
     if user.is? 'operator'
-      can :manage, Credit
       can :manage, BankCredit
       can :manage, ClientCredit
       can :manage, @bank_credit_inputs
@@ -27,6 +26,19 @@ class Ability
       can :read, CreditGrantingType
       can :read, CreditWarrenty
       can :read, CreditWarrentyType
+    end
+
+    if user.is? 'cashier'
+      can :manage, Account
+    end
+
+    if user.is? 'credit_admin'
+      can :manage, Credit
+
+    end
+
+    if user.is? 'user_admin'
+      can :manage, User
     end
   end
 end

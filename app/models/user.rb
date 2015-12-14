@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   attr_accessor :password, :error_message
   before_save :encrypt_password
 
+
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
   validates_presence_of :name
@@ -20,6 +21,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def save
+    self.generate_password
+    if self.valid?
+      super
+    else
+      if self.errors[:name]
+        self.error_message = [ 'Данный пользователь уже существует.']
+      end
+    end
+  end
+
   def encrypt_password
     if password.present?
       self.salt = BCrypt::Engine.generate_salt
@@ -27,6 +39,10 @@ class User < ActiveRecord::Base
       # self.write_attribute('hash', Digest::MD5.hexdigest(self.salt + password).to_s)
       # self.hash = BCrypt::Engine.hash_secret(password, salt)
     end
+  end
+
+  def generate_password
+    self.password = SecureRandom.hex(8)
   end
 
   def is?( requested_role )

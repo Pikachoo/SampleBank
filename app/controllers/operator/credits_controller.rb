@@ -20,7 +20,6 @@ module Operator
     end
 
     def edit
-
       @credit = Credit.find(params[:id])
     end
     def update

@@ -11,10 +11,19 @@ class Ability
 
     # # Define a few sample abilities
     if user.is? 'client'
-      can :read, Card, client_id: client.id
-      can :update, Card, client_id: client.id
-      can :read, Account, client_id: client.id
-      can :update, Account, client_id: client.id
+      if client
+        if client.cards
+          can :read, Card, client_id: client.id
+          can :update, Card, client_id: client.id
+        end
+        if client.accounts
+          can :read, Account, client_id: client.id
+          can :update, Account, client_id: client.id
+        end
+      end
+
+
+
     end
 
     if user.is? 'operator'

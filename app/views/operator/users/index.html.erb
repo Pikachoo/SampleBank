@@ -2,35 +2,14 @@
   <div id="content" >
 
     <div class="ui segment" id="credits" >
-      <% if @users.any? %>
-          <div class="ui vertical accordion menu">
-            <div class="item">
-              <a class="title">
-                <i class="dropdown icon"></i>
-                Аккаунты клиентов:
-              </a>
-              <div class="content">
-                <table class="sortable">
-                  <tr>
-                    <td>Id</td>
-                    <td>Пользователь</td>
-                    <td>Ссылка</td>
-                  </tr>
-                  <% @users.each do |user| %>
-                      <tr>
-                        <td>
-                          <%= user.id %>
-                        </td>
-                        <td>
-                          <%= user.name %>
-                        </td>
-                      </tr>
-                  <% end %>
-                </table>
-              </div>
-            </div>
-          </div>
-      <% end %>
+      <form class="ui form error success">
+
+        <h2 class="ui header" style="text-align: center">Центр работы с пользователями</h2>
+        <%= render partial: "users_table", locals: {users: @client_users, total_pages: @client_users.total_pages, users_type: 'Аккаунты клиентов', param_id: 'client_users_page', current_page: params[:client_users_page].to_i} %>
+        <%= render partial: 'users_table', locals: {users: @operator_users, total_pages: @operator_users.total_pages, users_type: 'Аккаунты операционистов', param_id: 'operator_users_page', current_page: params[:operator_users_page].to_i} %>
+      </form>
+      <%= link_to 'Создать', new_operator_user_path, style: 'margin-top: 17px', class: 'ui button orange' if can? :create, User %>
+
     </div>
   </div>
 </div>

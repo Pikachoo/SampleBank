@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
     user
     end
   end
-  
+
 
   def is?(requested_role)
     if self.role

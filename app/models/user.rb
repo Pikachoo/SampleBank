@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   belongs_to :role
-  bad_attribute_names  :hash
+  bad_attribute_names :hash
 
   attr_accessor :password, :error_message
   before_save :encrypt_password
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       self.save
     else
       if self.errors[:name]
-        self.error_message = [ 'Данный пользователь уже существует.']
+        self.error_message = ['Данный пользователь уже существует.']
       end
     end
   end
@@ -35,9 +35,7 @@ class User < ActiveRecord::Base
   def encrypt_password
     if password.present?
       self.salt = BCrypt::Engine.generate_salt
-      self.attributes = {hash:  Digest::MD5.hexdigest(self.salt + password).to_s}
-      # self.write_attribute('hash', Digest::MD5.hexdigest(self.salt + password).to_s)
-      # self.hash = BCrypt::Engine.hash_secret(password, salt)
+      self.attributes = {hash: Digest::MD5.hexdigest(self.salt + password).to_s}
     end
   end
 
@@ -45,25 +43,29 @@ class User < ActiveRecord::Base
     self.password = SecureRandom.hex(8)
   end
 
-  def self.create_client_user(client_id)
+  def self.create_user_for_client(client_id)
     client = Client.find(client_id)
 
+    if client.user_id
+
     user = User.new(name: client.passport_identificational_number, role_id: 1)
-    user.save_first_time
+    if user.valid?
+      user.save_first_time
+    else
+      user = User.find_by(name: client.passport_identificational_number)
+    end
 
     client.user_id = user.id
     client.save
-
     user
   end
 
-  def is?( requested_role )
+  def is?(requested_role)
     if self.role
       return self.role.name == requested_role.to_s
     end
     false
   end
-
 
 
 end

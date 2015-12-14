@@ -28,7 +28,7 @@ class CreditAdministrateController < ApplicationController
   def applyment_confirmation
     client_credit = ClientCredit.find(params[:id])
     client_credit.update_state(1)
-     redirect_to credit_administrate_index_path
+    redirect_to credit_administrate_index_path
   end
 
   def applyment_decline

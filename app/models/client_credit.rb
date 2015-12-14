@@ -8,9 +8,9 @@ class ClientCredit < ActiveRecord::Base
   def update_state(state)
     if state == 1
       self.update_attributes(begin_date: Date.today)
-      Account.create_account(client_credit)
-      User.create_client_user(client_credit.client_id)
+      Account.create_account(self)
+      User.create_user_for_client(self.client_id)
     end
-    self.update_attributes(state: state)
+    self.update_attributes(credit_state: state)
   end
 end

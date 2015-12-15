@@ -6,7 +6,10 @@ class Client < ActiveRecord::Base
   belongs_to :client_family_status, :foreign_key => :family_status_id
   belongs_to :client_job_type, :foreign_key => :job_type_id
 
+  validates_uniqueness_of :passport_identificational_number
+
   def self.get_client_id_by_user_id(user_id)
     Client.find_by(:user_id => user_id)
   end
+
 end

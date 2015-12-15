@@ -11,14 +11,22 @@ class Ability
 
     # # Define a few sample abilities
     if user.is? 'client'
-      can :read, Card, client_id: client.id
-      can :update, Card, client_id: client.id
-      can :read, Account, client_id: client.id
-      can :update, Account, client_id: client.id
+      if client
+        if client.cards
+          can :read, Card, client_id: client.id
+          can :update, Card, client_id: client.id
+        end
+        if client.accounts
+          can :read, Account, client_id: client.id
+          can :update, Account, client_id: client.id
+        end
+      end
+
+
+
     end
 
     if user.is? 'operator'
-      can :manage, Credit
       can :manage, BankCredit
       can :manage, ClientCredit
       can :manage, @bank_credit_inputs
@@ -27,6 +35,19 @@ class Ability
       can :read, CreditGrantingType
       can :read, CreditWarrenty
       can :read, CreditWarrentyType
+    end
+
+    if user.is? 'cashier'
+      can :manage, Account
+    end
+
+    if user.is? 'credit_admin'
+      can :manage, Credit
+
+    end
+
+    if user.is? 'user_admin'
+      can :manage, User
     end
   end
 end

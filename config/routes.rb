@@ -27,7 +27,8 @@ Rails.application.routes.draw do
   resources :session
   resource :accounts, :cards
   namespace :operator do
-    resources  :cashbox
+    resources :users
+    resources :cashbox
     resources :credits
   end
 end

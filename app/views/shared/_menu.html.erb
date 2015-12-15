@@ -1,20 +1,23 @@
 <div id="menu" class="ui menu inverted">
   <%= link_to "Главная", root_path, class: 'item' %>
-  <%= link_to 'Онлайн заявка на кредит', new_online_credit_path, class: 'item' %>
-  <%= link_to 'Оформление кредита', new_bank_credit_path, class: 'item' if can? :manage, Credit %>
-  <%= link_to 'Одобрение кредита', credit_administrate_index_path, class: 'item' if can? :manage, Credit %>
+  <%= link_to 'Онлайн заявка на кредит', new_online_credit_path, class: 'item' if current_user.nil? %>
+  <%= link_to 'Оформление кредита', new_bank_credit_path, class: 'item' if can? :manage, ClientCredit %>
+  <%= link_to 'Одобрение кредита', credit_administrate_index_path, class: 'item' if can? :manage, ClientCredit %>
   <%= link_to 'Управление кредитами', operator_credits_path, class: 'item' if can? :manage, Credit %>
-  <%= link_to 'Касса', new_operator_cashbox_path, class: 'item' if can? :manage, Credit %>
+  <%= link_to 'Управление пользователями', operator_users_path, class: 'item' if can? :manage, User %>
+  <% if current_user %>
+      <%= link_to 'Касса', new_operator_cashbox_path, class: 'item' if current_user.is? 'cashier' %>
+  <% end %>
 
   <% if current_user %>
-    <%= link_to 'Счета', accounts_path, class: 'item' if can? :read, Account%>
-    <%= link_to 'Карточки', cards_path, class: 'item' if can? :read, Card%>
-  <%end%>
+      <%= link_to 'Счета', accounts_path, class: 'item' if current_user.is? 'client' %>
+      <%= link_to 'Карточки', cards_path, class: 'item' if current_user.is? 'client' %>
+  <% end %>
   <div class="right menu">
     <% if current_user %>
         <%= link_to "Выход (#{current_user.name})", log_out_path, class: 'item' %>
     <% else %>
-        <%= link_to "Войти",  log_in_path, class: 'item'%>
+        <%= link_to "Войти", log_in_path, class: 'item' %>
     <% end %>
   </div>
 </div>

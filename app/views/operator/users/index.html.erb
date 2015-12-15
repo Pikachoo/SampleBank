@@ -1,0 +1,15 @@
+<div id="container">
+  <div id="content" >
+
+    <div class="ui segment" id="credits" >
+      <form class="ui form error success">
+
+        <h2 class="ui header" style="text-align: center">Центр работы с пользователями</h2>
+        <%= render partial: "users_table", locals: {users: @client_users, total_pages: @client_users.total_pages, users_type: 'Аккаунты клиентов', param_id: 'client_users_page', current_page: params[:client_users_page].to_i} %>
+        <%= render partial: 'users_table', locals: {users: @operator_users, total_pages: @operator_users.total_pages, users_type: 'Аккаунты операционистов', param_id: 'operator_users_page', current_page: params[:operator_users_page].to_i} %>
+      </form>
+      <%= link_to 'Создать', new_operator_user_path, style: 'margin-top: 17px', class: 'ui button orange' if can? :create, User %>
+
+    </div>
+  </div>
+</div>

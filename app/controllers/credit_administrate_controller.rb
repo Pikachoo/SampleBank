@@ -21,18 +21,22 @@ class CreditAdministrateController < ApplicationController
   end
 
   def close
-    ClientCredit.find(params[:id]).update_attributes(credit_state: 3)
-    return redirect_to credit_administrate_index_path
+    ClientCredit.find(params[:id]).update_state(3)
+    redirect_to credit_administrate_index_path
   end
 
   def applyment_confirmation
-    ClientCredit.find(params[:id]).update_attributes(credit_state: 1, begin_date: Date.today)
-    return redirect_to credit_administrate_index_path
+    client_credit = ClientCredit.find(params[:id])
+    client_credit.update_state(1)
+    redirect_to credit_administrate_index_path
   end
 
   def applyment_decline
     ClientCredit.find(params[:id]).update_attributes(credit_state: 4)
-    return redirect_to credit_administrate_index_path
+    redirect_to credit_administrate_index_path
   end
+
+
+
 end
 

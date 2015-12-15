@@ -12,15 +12,13 @@ module Operator
 
       credit = Credit.new(credit_params)
       credit.currency_id = params[:credit][:currency]
-      credit.save
-      credit.save_credit(params[:credit][:warrenty_type],  params[:credit][:granting_type],  params[:credit][:payment_type])
+      credit.save_credit_and_dependecies(params[:credit][:warrenty_type],  params[:credit][:granting_type],  params[:credit][:payment_type])
 
       @credits = Credit.all
       render 'operator/credits/index'
     end
 
     def edit
-
       @credit = Credit.find(params[:id])
     end
     def update
@@ -32,8 +30,7 @@ module Operator
 
     def destroy
       credit = Credit.find(params[:id])
-      credit.destroy_credit
-      credit.destroy
+      credit.destroy_credit_and_dependecies
 
       @credits = Credit.all
       render 'operator/credits/index'

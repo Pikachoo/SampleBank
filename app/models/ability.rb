@@ -35,6 +35,7 @@ class Ability
       can :read, CreditGrantingType
       can :read, CreditWarrenty
       can :read, CreditWarrentyType
+      can :manage, Timemachine
     end
 
     if user.is? 'cashier'

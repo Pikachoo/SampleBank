@@ -30,5 +30,7 @@ Rails.application.routes.draw do
     resources :users
     resources :cashbox
     resources :credits
+    get 'timemachine/new', to: 'timemachine#new'
+    post 'timemachine/create', to: 'timemachine#create'
   end
 end

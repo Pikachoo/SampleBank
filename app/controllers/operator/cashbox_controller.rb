@@ -6,9 +6,9 @@ module Operator
     end
 
     def create
-      sum = params[:sum]
-      currency_id = params[:currency]
-      client_credit_id = params[:credit_number]
+      sum = params[:cashbox][:sum]
+      currency_id = params[:cashbox][:currency]
+      client_credit_id = params[:cashbox][:credit_number]
 
       client_credit = ClientCredit.where(id: client_credit_id)
       unless client_credit.empty?

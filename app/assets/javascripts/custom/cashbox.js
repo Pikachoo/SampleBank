@@ -8,17 +8,17 @@ function validateCash() {
     var validateErrorsCount = 0;
     $("#errors_list").empty();
 
-    if ($("#sum").val() == "" || $("#sum").val() <= 0){
+    if ($("#cashbox_sum").val() == "" || $("#cashbox_sum").val() <= 0){
         validateErrorsCount++;
         add_error("<li>Укажите вносимую сумму.</li>");
     }
-    if ($("#credit_number").val() == ""){
+    if ($("#cashbox_credit_number").val() == ""){
         validateErrorsCount++;
         add_error("<li>Укажите номер кредита.</li>");
     }
 
 
-    if ($("#currency").val()  ==  ""){
+    if ($("#cashbox_currency").val()  ==  ""){
         validateErrorsCount++;
         add_error("<li>Укажите валюту.</li>");
     }

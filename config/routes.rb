@@ -25,7 +25,10 @@ Rails.application.routes.draw do
 
   resources :user
   resources :session
-  resource :accounts, :cards
+
+  namespace :client_account do
+    resource :accounts, :cards
+  end
   namespace :operator do
     resources :users
     resources :credits

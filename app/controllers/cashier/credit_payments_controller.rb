@@ -8,13 +8,22 @@ module Cashier
     def create
       client_credit_id = params[:credit_payments][:credit_number]
 
-      client_credit = ClientCredit.where(id: client_credit_id)
-      if !client_credit.empty?
-        final_sum = exchange_sum(currency_id, client_credit.credit.currency_id, sum)
-        client_credit.update_attributes(brought_sum: final_sum)
+      client_credit = ClientCredit.find_by(id: client_credit_id)
+      if !client_credit.nil?
+          calculate_payments(client_credit)
       else
         redirect_to :back, params: params, flash: {validation_errors: ['Такого кредита не существует'],
                                                    inputs_params: {credit_number: client_credit_id}}
+      end
+    end
+
+    def calculate_payments(client_credit)
+
+      if client_credit.repayment_method == 'Равными долями'
+        credit_percent = client_credit.credit.percent.to_f/100
+        coefficient = credit_percent / 12
+        payment = (client_credit.sum * coefficient)/(1 - 1 / ((1 + coefficient) ** client_credit.term))
+        puts payment
       end
     end
   end

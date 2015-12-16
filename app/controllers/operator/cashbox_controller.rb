@@ -21,6 +21,10 @@ module Operator
 
     end
 
+    def payments_form
+
+    end
+
     def exchange_sum(currency_from_id, currency_to_id, sum)
       if currency_from_id == currency_to_id
         final_sum = sum.to_f

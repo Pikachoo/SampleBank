@@ -32,5 +32,6 @@ Rails.application.routes.draw do
     resources :credits
     get 'timemachine/new', to: 'timemachine#new'
     post 'timemachine/create', to: 'timemachine#create'
+    get 'cashbox/payments_form', to: 'cashbox#payment_form'
   end
 end

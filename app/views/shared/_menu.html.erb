@@ -8,8 +8,10 @@
   <%= link_to 'Управление временем', operator_timemachine_new_path, class: 'item' if can? :manage, Timemachine %>
 
   <% if current_user %>
-      <%= link_to 'Касса', new_operator_cashbox_path, class: 'item' if current_user.is? 'cashier' %>
-  <% end %>
+      <%= link_to 'Касса', new_cashier_cashbox_path, class: 'item' if current_user.is? 'cashier' %>
+      <%= link_to 'Выплаты по кредиту', new_cashier_credit_payment_path, class: 'item' if current_user.is? 'cashier' %>
+
+<% end %>
 
   <% if current_user %>
       <%= link_to 'Счета', accounts_path, class: 'item' if current_user.is? 'client' %>

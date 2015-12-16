@@ -1,0 +1,33 @@
+<div id="container">
+  <div id="content" class="account-settings">
+    <div class="ui segment" id="cashbox">
+      <%= form_for :credit_payments, url: cashier_credit_payments_path, html: {class: "ui form error success", id: "cashbox_form"}, method: :post do |f| %>
+          <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
+            <b>Во время отправки данных обнаружились следующие ошибки:</b>
+            <ul>
+              <% if (flash[:validation_errors] != nil) %>
+                  <% flash[:validation_errors].each do |e| %>
+                      <li><%= e %></li>
+                  <% end %>
+              <% end %>
+            </ul>
+          </div>
+
+
+          <div class="field">
+            <%= f.label :credit_number, 'Номер кредита' %>
+            <%= f.number_field :credit_number, value: @cashbox_inputs['credit_number'], placeholder: 'Номер кредита' %><br/>
+          </div>
+
+
+          <div id="step-errors" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul id="errors_list"></ul>
+          </div>
+          <%= f.submit type: 'button', class: 'ui button', value: 'Рассчитать', onclick: "validateCreditPayments()" %>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+

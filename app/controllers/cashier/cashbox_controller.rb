@@ -1,4 +1,4 @@
-module Operator
+module Cashier
   class CashboxController < ApplicationController
     def new
       @cashbox_inputs = {sum: '', credit_number: ''}
@@ -11,7 +11,7 @@ module Operator
       client_credit_id = params[:cashbox][:credit_number]
 
       client_credit = ClientCredit.where(id: client_credit_id)
-      unless client_credit.empty?
+      if !client_credit.empty?
         final_sum = exchange_sum(currency_id, client_credit.credit.currency_id, sum)
         client_credit.update_attributes(brought_sum: final_sum)
       else
@@ -21,9 +21,6 @@ module Operator
 
     end
 
-    def payments_form
-
-    end
 
     def exchange_sum(currency_from_id, currency_to_id, sum)
       if currency_from_id == currency_to_id

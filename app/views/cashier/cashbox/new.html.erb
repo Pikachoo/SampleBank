@@ -1,7 +1,7 @@
 <div id="container">
   <div id="content" class="account-settings">
     <div class="ui segment" id="cashbox">
-      <%= form_for :cashbox, url: operator_cashbox_index_path, html: {class: "ui form error success", id: "cashbox_form"}, method: :post do |f| %>
+      <%= form_for :cashbox, url: cashier_cashbox_index_path, html: {class: "ui form error success", id: "cashbox_form"}, method: :post do |f| %>
           <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
             <b>Во время отправки данных обнаружились следующие ошибки:</b>
             <ul>

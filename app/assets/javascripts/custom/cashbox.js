@@ -30,4 +30,20 @@ function validateCash() {
     }
 
 }
+function validateCreditPayments() {
+    var validateErrorsCount = 0;
+    $("#errors_list").empty();
+
+    if ($("#cashbox_credit_number").val() == ""){
+        validateErrorsCount++;
+        add_error("<li>Укажите номер кредита.</li>");
+    }
+
+    if (validateErrorsCount == 0)
+        $("#cashbox_form").submit();
+    else{
+        toggleElement('#step-errors', true);
+    }
+
+}
 

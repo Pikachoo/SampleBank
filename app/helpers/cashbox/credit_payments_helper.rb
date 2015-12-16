@@ -1,0 +1,2 @@
+module Cashbox::CreditPaymentsHelper
+end

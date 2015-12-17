@@ -1,0 +1,31 @@
+<div id="container">
+  <div id="content" class="account-settings">
+    <div class="ui segment" id="credits">
+      <%= form_for :timemachine,  url: operator_timemachine_create_path, html: {class: "ui form error success", id: "time_form"}, method: :post do |f| %>
+          <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
+            <b>Во время отправки данных обнаружились следующие ошибки:</b>
+            <ul>
+              <% puts params
+                 if (flash[:validation_errors] != nil) %>
+                  <% flash[:validation_errors].each do |e| %>
+                      <li><%= e %></li>
+                  <% end %>
+              <% end %>
+            </ul>
+          </div>
+
+          <div class="field">
+            <%= f.label :date, 'Текущая дата' %>
+            <%= f.date_field :date %><br/>
+          </div>
+
+
+          <div id="step-errors" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul id="errors_list"></ul>
+          </div>
+          <%= f.submit type: 'button', class: 'ui button', value: 'Обновить', onclick: 'validateDate()'%>
+      <% end %>
+    </div>
+  </div>
+</div>

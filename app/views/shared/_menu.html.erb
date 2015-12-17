@@ -5,13 +5,17 @@
   <%= link_to 'Одобрение кредита', credit_administrate_index_path, class: 'item' if can? :manage, ClientCredit %>
   <%= link_to 'Управление кредитами', operator_credits_path, class: 'item' if can? :manage, Credit %>
   <%= link_to 'Управление пользователями', operator_users_path, class: 'item' if can? :manage, User %>
-  <% if current_user %>
-      <%= link_to 'Касса', new_operator_cashbox_path, class: 'item' if current_user.is? 'cashier' %>
-  <% end %>
+  <%= link_to 'Управление временем', operator_timemachine_new_path, class: 'item' if can? :manage, Timemachine %>
 
   <% if current_user %>
-      <%= link_to 'Счета', accounts_path, class: 'item' if current_user.is? 'client' %>
-      <%= link_to 'Карточки', cards_path, class: 'item' if current_user.is? 'client' %>
+      <%= link_to 'Касса', new_cashier_cashbox_path, class: 'item' if current_user.is? 'cashier' %>
+      <%= link_to 'Выплаты по кредиту', new_cashier_credit_payment_path, class: 'item' if current_user.is? 'cashier' %>
+
+<% end %>
+
+  <% if current_user %>
+      <%= link_to 'Счета', client_account_accounts_path, class: 'item' if current_user.is? 'client' %>
+      <%= link_to 'Карточки', client_account_cards_path, class: 'item' if current_user.is? 'client' %>
   <% end %>
   <div class="right menu">
     <% if current_user %>

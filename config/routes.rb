@@ -25,10 +25,19 @@ Rails.application.routes.draw do
 
   resources :user
   resources :session
-  resource :accounts, :cards
+
+  namespace :client_account do
+    resource :accounts, :cards
+  end
   namespace :operator do
     resources :users
-    resources :cashbox
     resources :credits
+    get  'timemachine/new',       to: 'timemachine#new'
+    post 'timemachine/create',    to: 'timemachine#create'
+  end
+
+  namespace :cashier do
+    resources :cashbox
+    resources :credit_payments
   end
 end

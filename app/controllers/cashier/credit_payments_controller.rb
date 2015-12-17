@@ -1,0 +1,110 @@
+module Cashier
+  class CreditPaymentsController < ApplicationController
+    def new
+      @cashbox_inputs = {credit_number: ''}
+      @cashbox_inputs = flash[:inputs_params] if flash[:inputs_params] != nil
+    end
+
+    def create
+      @paymens_params = Array.new
+      client_credit_id = params[:credit_payments][:credit_number]
+
+      client_credit = ClientCredit.find_by(id: client_credit_id)
+      if !client_credit.nil?
+        orders = Order.where(credit_id: client_credit.id)
+        payments = calculate_payments(client_credit)
+
+        timemachine = Timemachine.find(1)
+        timemachine_months = timemachine.cur_date.year * 12 + timemachine.cur_date.month
+        credit_months = client_credit.begin_date.year * 12 + client_credit.begin_date.month
+        days = timemachine.cur_date.day - client_credit.begin_date.day
+        months = timemachine_months - credit_months
+
+        if days < 0
+          calculate_payments_params(months, payments, client_credit, orders)
+        else
+          calculate_payments_params(months + 1, payments, client_credit, orders)
+
+        end
+      else
+        redirect_to :back, params: params, flash: {validation_errors: ['Такого кредита не существует'],
+                                                   inputs_params: {credit_number: client_credit_id}}
+      end
+    end
+
+    def calculate_payments_params(times, payments, client_credit, orders)
+      1.upto(times) do |time|
+        is_payed = order_is_payed?(orders, time)
+        penalty_payment = 0
+        unless is_payed
+          penalty_payment = calculate_penalty_payment(times - time, payments[time][:payment], client_credit.credit.default_interest.to_f / 100)
+        end
+
+        @paymens_params.push({number: time,
+                              main_payment: payments[time][:main_payment].round(2),
+                              percent_payment: payments[time][:percent_payment].round(2),
+                              payment: payments[time][:payment].round(2),
+                              penalty_payment: penalty_payment.round(2),
+                              expire_date: client_credit.begin_date.to_time.advance(:months => time).to_date,
+                              is_payed: is_payed})
+      end
+
+      puts json: @paymens_params
+
+    end
+
+    def calculate_penalty_payment(months_numbers, payment, penalty_percent)
+      penalty_payment = 0.0
+      puts months_numbers
+      puts payment
+      puts penalty_percent
+      months_numbers.times do
+        penalty_payment = penalty_payment + payment * penalty_percent
+      end
+      penalty_payment
+    end
+
+    def order_is_payed?(orders, order_number)
+      orders.find_by(:payment_number => order_number)
+      if orders.find_by(:payment_number => order_number)
+        true
+      else
+        false
+      end
+
+    end
+
+    def calculate_payments(client_credit)
+
+      payments = Array.new
+
+      sum = client_credit.sum.to_f
+      term = client_credit.term
+      credit_percent = client_credit.credit.percent.to_f / 100
+      coefficient = credit_percent / 12
+
+      if client_credit.repayment_method == 'Равными долями'
+        payment = (sum * coefficient)/(1 - 1 / ((1 + coefficient) ** term))
+        all_sum = sum
+        1.upto(12) do |time|
+          percent_payment = all_sum * coefficient
+          main_payment = payment - percent_payment
+          payments.push({:main_payment => main_payment,
+                         :percent_payment => percent_payment,
+                         :payment => payment})
+          all_sum -= main_payment
+        end
+      elsif client_credit.repayment_method == 'Стандартный'
+        main_payment = sum / term
+        1.upto(12) do |time|
+          percent_payment = (sum - (time - 1) * sum / term) * coefficient
+          payments.push({:main_payment => main_payment,
+                         :percent_payment => percent_payment,
+                         :payment => (main_payment + percent_payment)})
+        end
+      end
+
+      payments
+    end
+  end
+end

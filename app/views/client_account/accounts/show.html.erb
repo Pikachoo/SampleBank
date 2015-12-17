@@ -1,7 +1,7 @@
 <div id="container">
   <div id="content" class="account-settings">
     <div id="accounts" class="ui segment">
-      <%= form_tag accounts_path, method: 'patch' do %>
+      <%= form_tag client_account_accounts_path, method: 'patch' do %>
         <h3 class="ui header dividing">Банковские счета</h3>
           <% unless flash[:notice].nil? %>
               <div class="ui success message">

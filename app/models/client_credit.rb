@@ -5,10 +5,11 @@ class ClientCredit < ActiveRecord::Base
   belongs_to :credit_payment_type, :foreign_key => :payment_id
   belongs_to :credit_granting_type, :foreign_key => :granting_id
 
+
   def update_state(state)
     if state == 1
-      self.update_attributes(begin_date: Date.today)
-      Account.create_account(self)
+      account = Account.create_account(self)
+      self.update_attributes(account_id: account.id, begin_date: Date.today)
       User.create_user_for_client(self.client_id)
     end
     self.update_attributes(credit_state: state)

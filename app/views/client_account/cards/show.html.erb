@@ -2,7 +2,7 @@
   <div id="content" class="account-settings">
 
     <div id="cards" class="ui segment">
-      <%=form_tag cards_path, method: 'patch' do%>
+      <%=form_tag client_account_cards_path, method: 'patch' do%>
         <h3 class="ui header dividing">Пластиковые карты</h3>
           <% unless flash[:notice].nil? %>
               <div class="ui success message">

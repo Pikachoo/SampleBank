@@ -1,7 +1,7 @@
 <div id="container">
   <div id="content" class="account-settings">
     <div class="ui segment" id="cashbox">
-      <%= form_tag  operator_cashbox_index_path, class: "ui form error success", id: "credit_form", method: :post do %>
+      <%= form_for :cashbox, url: cashier_cashbox_index_path, html: {class: "ui form error success", id: "cashbox_form"}, method: :post do |f| %>
           <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
             <b>Во время отправки данных обнаружились следующие ошибки:</b>
             <ul>
@@ -14,20 +14,21 @@
           </div>
 
 
+          <% puts json: @cashbox_inputs %>
           <div class="field">
-            <%= label_tag :sum, 'Вносимая сумма' %>
-            <%= number_field_tag :sum, params[:sum], placeholder: 'Вносимая сумма' %><br/>
+            <%= f.label :sum, 'Вносимая сумма' %>
+            <%= f.number_field :sum, value: @cashbox_inputs['sum'], placeholder: 'Вносимая сумма' %><br/>
           </div>
           <div class="field">
-            <%= label_tag :credit_number, 'Номер кредита' %>
-            <%= number_field_tag :credit_number, params[:credit_number], placeholder: 'Номер кредита' %><br/>
+            <%= f.label :credit_number, 'Номер кредита' %>
+            <%= f.number_field :credit_number, value: @cashbox_inputs['credit_number'], placeholder: 'Номер кредита' %><br/>
           </div>
 
           <div class="field">
-            <%= label_tag :currency, 'Валюта' %>
+            <%= f.label :currency, 'Валюта' %>
 
             <div class="ui selection dropdown" id="dropdown_granting">
-              <%= number_field_tag :currency, params[:currency], type: "hidden" %>
+              <%= f.number_field :currency, value: @cashbox_inputs['currency'], type: "hidden" %>
               <i class="dropdown icon"></i>
 
               <div class="default text">Валюта</div>
@@ -45,7 +46,8 @@
             <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
             <ul id="errors_list"></ul>
           </div>
-          <%= button_tag 'Сохранить кредит', type: 'button', class: 'ui button', onclick: "validateCredit()" %>
+          <%= f.submit type: 'button', class: 'ui button', value: 'Внести сумму', onclick: "validateCash()" %>
+
       <% end %>
     </div>
   </div>

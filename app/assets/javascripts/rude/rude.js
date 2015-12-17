@@ -13,7 +13,7 @@ var rude =
             $('.cards .card img').css('left', diff);
 
 
-            var window_height = parseInt($(window).height());
+            var window_height = parseInt(rude.window.height());
 
             var footer_height = parseInt($('#footer').css('height'));
             var header_height = parseInt($('#header').css('height'));

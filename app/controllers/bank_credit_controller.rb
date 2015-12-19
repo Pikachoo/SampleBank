@@ -2,7 +2,7 @@ require 'securerandom'
 class BankCreditController < ApplicationController
 
   load_and_authorize_resource
-  skip_load_resource :only => :new
+  skip_load_resource :only => [:new, :create]
   def new
     @credit_warrency_types = CreditWarrentyType.all
     @credit_payment_types = CreditPaymentType.all
@@ -33,6 +33,7 @@ class BankCreditController < ApplicationController
   end
 
   def create
+    params.permit(:bank_credit)
     validation_errors = validate
     return redirect_to :back, flash: { validation_errors: validate, inputs_params: params[:bank_credit] } if validation_errors != nil
 

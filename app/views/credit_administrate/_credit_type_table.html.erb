@@ -13,7 +13,12 @@
               <% if credits_type == "Кредиты ожидающие подтверждения" %>
                 <td>Реккомендация к подтверждению</td>
               <% end %>
-              <td>Ссылка</td>
+              <% if credits_type == "Действующие кредиты" || credits_type == "Кредиты ожидающие подтверждения"  %>
+                <td>Ссылка</td>
+              <% end %>
+              <% if credits_type == "Действующие кредиты" || credits_type == "Закрытые кредиты"  %>
+                  <td>Версия для печати</td>
+              <% end %>
             </tr>
             <% credits.each do |e| %>
                 <tr>
@@ -34,6 +39,11 @@
                   <% if credits_type == "Действующие кредиты" %>
                       <td>
                         <%= link_to "Перейти", credit_info_path(e.id) %>
+                      </td>
+                  <% end %>
+                  <% if credits_type == "Действующие кредиты" || credits_type == "Закрытые кредиты"  %>
+                      <td>
+                        <%= link_to "Перейти", credit_print_info_path(e.id) %>
                       </td>
                   <% end %>
                 </tr>

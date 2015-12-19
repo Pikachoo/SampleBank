@@ -1,5 +1,7 @@
 class ClientCredit < ActiveRecord::Base
-  paginates_per 2
+
+  paginates_per 25
+  
   belongs_to :account
   belongs_to :client
   belongs_to :credit

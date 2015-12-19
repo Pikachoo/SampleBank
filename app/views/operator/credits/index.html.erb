@@ -3,6 +3,20 @@
 
     <div class="ui segment" id="credits" >
       <h3 class="ui header dividing">Кредиты</h3>
+      <% if @message %>
+          <div class="ui success message">
+            <ul>
+              <li><%= @message %></li>
+            </ul>
+          </div>
+      <% end %>
+      <% if @error_message %>
+          <div class="ui error message">
+            <ul>
+              <li><%= @error_message %></li>
+            </ul>
+          </div>
+      <% end %>
       <table class="ui table celled striped">
         <thead>
         <tr id='credti_tr'>

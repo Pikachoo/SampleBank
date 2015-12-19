@@ -11,7 +11,8 @@
             <tr>
               <td>Id</td>
               <td>Имя</td>
-              <td>Ссылка</td>
+              <td>Удалить</td>
+              <td>Изменить</td>
             </tr>
             <% users.each do |user| %>
                 <tr>
@@ -22,7 +23,10 @@
                     <%= user.name %>
                   </td>
                   <td>
-                    <%= link_to "Перейти", '#' %>
+                    <%= link_to "Изменить", edit_operator_user_path(user.id), class: 'ui button orange' %>
+                  </td>
+                  <td>
+                    <%= link_to "Удалить", operator_user_path(user.id), method: :delete, class: 'ui button orange' %>
                   </td>
                 </tr>
             <% end %>

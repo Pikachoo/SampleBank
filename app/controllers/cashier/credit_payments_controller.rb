@@ -27,8 +27,9 @@ module Cashier
       @client_credit_id = params[:credit_id]
       payment_id = params[:payment_id]
       sum = params[:sum]
+      penalty = params[:penalty_sum]
 
-      Order.create(credit_id: @client_credit_id, payment_number: payment_id, sum: sum, order_date: Date.today)
+      Order.create(credit_id: @client_credit_id, payment_number: payment_id, sum: sum, penalty_sum: penalty, order_date: Date.today)
       credit_payments(ClientCredit.find(@client_credit_id))
 
       render 'create'
@@ -61,12 +62,19 @@ module Cashier
           penalty_payment = calculate_penalty_payment(times - time, payments[time][:payment], client_credit.credit.default_interest.to_f / 100)
         end
         payments[time][:payment] += penalty_payment
-        bel_payment = Currency.exchange_sum(client_credit.credit.currency.name, 'BYR', payments[time][:payment])
+        if is_payed
+          bel_payment = orders.find_by(:payment_number => time).sum
+          penalty_payment = orders.find_by(:payment_number => time).penalty_sum
+          payments[time][:payment] += penalty_payment
+          puts json: payments[time][:percent_payment]
+        else
+          bel_payment = Currency.exchange_sum(client_credit.credit.currency.name, 'BYR', payments[time][:payment])
+        end
         @paymens_params.push({number: time,
                               main_payment: payments[time][:main_payment].round(2),
                               percent_payment: payments[time][:percent_payment].round(2),
                               payment: payments[time][:payment].round(2),
-                              bel_payment: bel_payment.ceil.to_f.round(-2),
+                              bel_payment: bel_payment.round(-2),
                               penalty_payment: penalty_payment.round(2),
                               expire_date: client_credit.begin_date.to_time.advance(:months => time).to_date,
                               is_payed: is_payed})

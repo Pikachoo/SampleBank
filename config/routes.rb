@@ -39,6 +39,6 @@ Rails.application.routes.draw do
   namespace :cashier do
     resources :cashbox
     resources :credit_payments
-    get '/credit_payments/:credit_id/:payment_id/pay/:sum', to: 'credit_payments#pay', as: 'credit_payment_pay'
+    get '/credit_payments/:credit_id/:payment_id/pay/:sum/:penalty_sum', to: 'credit_payments#pay', as: 'credit_payment_pay'
   end
 end

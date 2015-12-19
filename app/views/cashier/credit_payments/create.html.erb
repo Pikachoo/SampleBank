@@ -47,7 +47,7 @@
                       <td><i class="icon checkmark green"></i></td>
                   <% else %>
                       <td>
-                        <%= link_to  'Оплатить', cashier_credit_payment_pay_path(@client_credit_id,payment[:number], payment[:bel_payment]), class: "ui button" %>
+                        <%= link_to  'Оплатить', cashier_credit_payment_pay_path(@client_credit_id,payment[:number], payment[:bel_payment],payment[:penalty_payment]), class: "ui button" %>
                       </td>
                   <% end %>
 

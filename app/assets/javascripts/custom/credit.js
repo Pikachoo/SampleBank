@@ -7,7 +7,7 @@ function get_credit_information(id)
 {
     //console.log(window.api_url);
     var information = json_parse(window.api_url + window.api_part_credit + id);
-    var credit = construct(information.credit);
+    var credit = construct(information.credits);
     var payments = information.payments;
     var warrenties = information.warrenties;
     var grantings = information.grantings;
@@ -34,6 +34,7 @@ function get_credit_information(id)
 }
 
 function set_max_min_values(credit){
+    console.log(credit.max_number_of_months)
     $("#bank_credit_credit_sum").attr({
         "max" : credit.max_sum,
         "min" : credit.min_sum

@@ -21,8 +21,9 @@
               <th>Основной долг</th>
               <th>Проценты</th>
               <th>Просрочено</th>
-              <th>Штрафные проценты</th>
+              <th>Пеня</th>
               <th>Весь платеж</th>
+              <th>Итого к оплате</th>
               <th>До какого числа</th>
               <th>Оплачено</th>
             </tr>
@@ -36,16 +37,17 @@
                   <% if payment[:is_payed] %>
                       <td><i class="icon remove green"></i></td>
                   <% else %>
-                      <td><i class="icon checkmark red"></i></td>
+                      <td><i class="icon remove red"></i></td>
                 <% end %>
                   <td><%= payment[:penalty_payment] %></td>
                   <td><%= payment[:payment] %></td>
+                  <td><%= payment[:bel_payment] %></td>
                   <td><%= payment[:expire_date] %></td>
                   <% if payment[:is_payed] %>
                       <td><i class="icon checkmark green"></i></td>
                   <% else %>
                       <td>
-                        <button class="ui button">Оплатить</button>
+                        <%= link_to  'Оплатить', cashier_credit_payment_pay_path(@client_credit_id,payment[:number], payment[:bel_payment],payment[:penalty_payment]), class: "ui button" %>
                       </td>
                   <% end %>
 

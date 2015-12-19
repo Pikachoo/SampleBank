@@ -12,7 +12,7 @@ module Cashier
 
       client_credit = ClientCredit.where(id: client_credit_id)
       if !client_credit.empty?
-        final_sum = exchange_sum(currency_id, client_credit.credit.currency_id, sum)
+        final_sum = Currency.exchange_sum(Currency.find(currency_id).name, client_credit.credit.currency.name, sum)
         client_credit.update_attributes(brought_sum: final_sum)
       else
         redirect_to :back, params: params, flash: {validation_errors: ['Такого кредита не существует'],
@@ -22,21 +22,7 @@ module Cashier
     end
 
 
-    def exchange_sum(currency_from_id, currency_to_id, sum)
-      if currency_from_id == currency_to_id
-        final_sum = sum.to_f
-      else
-        exchange_rate = ExchangeRate.find_by(from_currency_id: currency_from_id, to_currency_id: currency_to_id)
-        if exchange_rate
-          final_sum = sum.to_f * exchange_rate.coefficient
-        else
-          exchange_rate = ExchangeRate.find_by(from_currency_id: currency_to_id, to_currency_id: currency_from_id)
-          final_sum = sum.to_f / exchange_rate.coefficient
-        end
-      end
 
-      final_sum
-    end
 
   end
 end

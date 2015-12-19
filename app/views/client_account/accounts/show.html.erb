@@ -1,8 +1,13 @@
 <div id="container">
   <div id="content" class="account-settings">
+    <style>
+      h3.ui.header.dividing {
+        margin-top: 0 !important;
+      }
+    </style>
     <div id="accounts" class="ui segment">
       <%= form_tag client_account_accounts_path, method: 'patch' do %>
-        <h3 class="ui header dividing">Банковские счета</h3>
+          <h3 class="ui header dividing">Банковские счета</h3>
           <% unless flash[:notice].nil? %>
               <div class="ui success message">
                 <% flash.each do |name, msg| %>
@@ -11,50 +16,51 @@
 
               </div>
           <% end %>
-          <% flash[:notice] = nil%>
-        <table class="ui table celled striped">
-          <thead>
-          <tr>
-            <th class="center ">Наименование</th>
-            <th class="center">Доступный остаток</th>
-            <th class="center">Валюта</th>
-            <!--<th class="center width-10">Последняя операция</th>-->
-            <th class="center">Уведомления</th>
-          </tr>
-          </thead>
+          <% flash[:notice] = nil %>
 
-          <tbody>
-            <% @accounts.each do |account|%>
+          <table class="ui table celled striped">
+            <thead>
             <tr>
-              <td class="bold"> <%=link_to account.IBAN, client_account_show_account_path(account.id)%></td>
-
-              <td class="center"><%= account.balance%></td>
-              <td class="center"><%= account.currency.name%></td>
-              <td>
-                <div class="list">
-                  <div class="item">
-                    <div class="ui child checkbox">
-                      <%= check_box_tag "sms_ids[]", account.id.to_s, account.is_sms%>
-                      <label>SMS</label>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="ui child checkbox">
-                      <%= check_box_tag "emails_ids[]", account.id.to_s, account.is_email%>
-                      <label>Email</label>
-                    </div>
-                  </div>
-                </div>
-              </td>
+              <th class="center ">Наименование</th>
+              <th class="center">Доступный остаток</th>
+              <th class="center">Валюта</th>
+              <!--<th class="center width-10">Последняя операция</th>-->
+              <th class="center">Уведомления</th>
             </tr>
-          <%end%>
+            </thead>
 
-          </tbody>
-        </table>
-        <div class="buttons">
-          <button class="ui button">Сохранить изменения</button>
-        </div>
-      <%end%>
+            <tbody>
+            <% @accounts.each do |account| %>
+                <tr>
+                  <td class="bold"> <%= link_to account.IBAN, client_account_show_account_path(account.id) %></td>
+
+                  <td class="center"><%= account.balance %></td>
+                  <td class="center"><%= account.currency.name %></td>
+                  <td>
+                    <div class="list">
+                      <div class="item">
+                        <div class="ui child checkbox">
+                          <%= check_box_tag "sms_ids[]", account.id.to_s, account.is_sms %>
+                          <label>SMS</label>
+                        </div>
+                      </div>
+                      <div class="item">
+                        <div class="ui child checkbox">
+                          <%= check_box_tag "emails_ids[]", account.id.to_s, account.is_email %>
+                          <label>Email</label>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+            <% end %>
+
+            </tbody>
+          </table>
+          <div class="buttons">
+            <button class="ui button">Сохранить изменения</button>
+          </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,17 +1,18 @@
 <div id="container">
   <div id="content" class="account-settings">
     <div class="ui segment" id="credit_payments">
-          <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
-            <b>Во время отправки данных обнаружились следующие ошибки:</b>
-            <ul>
-              <% if (flash[:validation_errors] != nil) %>
-                  <% flash[:validation_errors].each do |e| %>
-                      <li><%= e %></li>
-                  <% end %>
+      <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
+        <b>Во время отправки данных обнаружились следующие ошибки:</b>
+        <ul>
+          <% if (flash[:validation_errors] != nil) %>
+              <% flash[:validation_errors].each do |e| %>
+                  <li><%= e %></li>
               <% end %>
-            </ul>
-          </div>
+          <% end %>
+        </ul>
+      </div>
 
+      <% if @paymens_params.empty? == false %>
 
           <table class="ui table celled striped">
             <thead>
@@ -51,12 +52,18 @@
             <% end %>
             </tbody>
           </table>
+      <% else %>
+      <div class="ui success message">
+        <p>На данный момент платежей нет.</p>
+      </div>
+
+      <% end %>
 
 
-          <div id="step-errors" class="validation_errors invisible">
-            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
-            <ul id="errors_list"></ul>
-          </div>
+      <div id="step-errors" class="validation_errors invisible">
+        <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+        <ul id="errors_list"></ul>
+      </div>
 
     </div>
   </div>

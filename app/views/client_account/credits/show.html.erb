@@ -1,6 +1,10 @@
 <div id="container">
   <div id="content" class="account-settings">
-
+    <style>
+      h3.ui.header.dividing {
+        margin-top: 0 !important;
+      }
+    </style>
     <div id="cards" class="ui segment">
           <h3 class="ui header dividing">Кредиты</h3>
           <% unless flash[:notice].nil? %>
@@ -12,17 +16,18 @@
               </div>
           <% end %>
           <% flash[:notice] = nil%>
+
           <table class="ui table celled striped">
             <thead>
             <tr>
-              <th>Кредит номер</th>
-              <th>Номер счета</th>
-              <th>Название</th>
-              <th>Сумма</th>
-              <th>Срок</th>
-              <th>Проценты, %</th>
-              <th>Штрафные проценты, %</th>
-              <th>Дата начала</th>
+              <th style="text-align: center!important;" >Кредит номер</th>
+              <th style="text-align: center!important;">Номер счета</th>
+              <th style="text-align: center!important;">Название</th>
+              <th style="text-align: center!important;">Сумма</th>
+              <th style="text-align: center!important;">Срок</th>
+              <th style="white-space: nowrap;">Проценты, %</th>
+              <th style="text-align: center!important;">Штрафные проценты, %</th>
+              <th style="text-align: center!important;">Дата начала</th>
             </tr>
             </thead>
             <tbody>

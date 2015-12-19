@@ -2,7 +2,7 @@ class CreditAdministrateController < ApplicationController
   before_filter :check_is_manage
 
   def check_is_manage
-    raise() if User.find(session[:user_id]).role_id != 2
+    raise() if User.find(session[:user_id]).role_id == 1
   end
 
   def index
@@ -28,7 +28,7 @@ class CreditAdministrateController < ApplicationController
   def applyment_confirmation
     client_credit = ClientCredit.find(params[:id])
     client_credit.update_state(1)
-    redirect_to credit_administrate_index_path
+    redirect_to credit_print_info_path(id: params[:id])
   end
 
   def applyment_decline
@@ -36,7 +36,14 @@ class CreditAdministrateController < ApplicationController
     redirect_to credit_administrate_index_path
   end
 
-
+  def print_credit
+    @credit = ClientCredit.where(id: params[:id]).first
+    @client = Client.where(id: @credit.client_id).first
+    @user = User.find(session[:user_id])
+    @employee = BankEmployee.where(user_id: @user.id).first
+    @role = Role.where(id: @user.role_id).first.name
+    @credit_info = Credit.where(id: @credit.credit_id).first
+  end
 
 end
 

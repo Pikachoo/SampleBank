@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'current_credit/close/:id', to: 'credit_administrate#close', as: :credit_close
   get 'credit_applyment/decline/:id', to: 'credit_administrate#applyment_decline', as: :applyment_decline
   get 'credit_applyment/confirmation/:id', to: 'credit_administrate#applyment_confirmation', as: :applyment_confirmation
+  get 'current_information/print/:id', to: 'credit_administrate#print_credit', as: :credit_print_info
 
   namespace :api do
     get "credit_information/:id" => 'credit#get_extra_information_by_id'

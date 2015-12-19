@@ -50,9 +50,9 @@ class User < ActiveRecord::Base
 
     user = User.new(name: client.passport_identificational_number, role_id: 1)
     if user.valid?
-      user.save_first_time
-    else
       user = User.find_by(name: client.passport_identificational_number)
+    else
+      user.save_first_time
     end
 
     client.user_id = user.id

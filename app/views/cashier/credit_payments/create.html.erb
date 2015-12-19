@@ -12,6 +12,13 @@
               <% end %>
             </ul>
           </div>
+          <% if @message %>
+              <div class="ui success message">
+                <ul>
+                  <li><%= @message %></li>
+                </ul>
+              </div>
+          <% end %>
 
 
           <table class="ui table celled striped">

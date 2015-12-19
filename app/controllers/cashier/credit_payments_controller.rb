@@ -29,8 +29,12 @@ module Cashier
       sum = params[:sum]
       penalty = params[:penalty_sum]
 
-      Order.create(credit_id: @client_credit_id, payment_number: payment_id, sum: sum, penalty_sum: penalty, order_date: Date.today)
-      credit_payments(ClientCredit.find(@client_credit_id))
+      if Order.find_by(credit_id: @client_credit_id, payment_number: payment_id)
+        @message = 'Платеж уже был проведен.'
+      else
+        Order.create(credit_id: @client_credit_id, payment_number: payment_id, sum: sum, penalty_sum: penalty, order_date: Date.today)
+      end
+      @paymens_params = ClientCredit.credit_payments(ClientCredit.find(@client_credit_id))
 
       render 'create'
     end

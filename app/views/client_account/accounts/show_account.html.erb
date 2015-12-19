@@ -1,9 +1,34 @@
 
 <div id="container">
   <div id="content" class="account-settings">
+    <div id="accounts" class="ui segment">
+          <h3 class="ui header dividing">Операции по  счету</h3>
 
-    <div id="cards" class="ui segment">
-      <%= 'здесь должны быть операции' %>
+          <table class="ui table celled striped">
+            <thead>
+            <tr>
+              <th class="center ">Сообщение</th>
+              <th class="center ">Сумма</th>
+              <th class="center ">Валюта</th>
+              <th class="center ">Тип</th>
+              <th class="center ">Дата</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @operations.each do |operation|%>
+                <tr>
+                  <td class="bold"> <%=operation.message%></td>
+                  <td class="center"><%=operation.money%></td>
+                  <td class="center"><%= operation.currency.name%></td>
+                  <td class="center"><%= operation.operation_type%></td>
+                  <td class="center"><%= operation.date%></td>
+                </tr>
+            <%end%>
+
+            </tbody>
+          </table>
     </div>
   </div>
 </div>
+

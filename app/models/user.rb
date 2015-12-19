@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
         self.error_message = ['Данный пользователь уже существует.']
       end
     end
+    self
   end
 
   def encrypt_password
@@ -46,19 +47,20 @@ class User < ActiveRecord::Base
   def self.create_user_for_client(client_id)
     client = Client.find(client_id)
 
-    if client.user_id
+    if client
+      user = User.new(name: client.passport_identificational_number, role_id: 1)
+      user_find = User.find_by(name: client.passport_identificational_number)
+      if !user_find
+        user = user.save_first_time
+      else
+        user = user_find
+      end
 
-    user = User.new(name: client.passport_identificational_number, role_id: 1)
-    if user.valid?
-      user = User.find_by(name: client.passport_identificational_number)
-    else
-      user.save_first_time
+      client.user_id = user.id
+      client.save
+      user
     end
 
-    client.user_id = user.id
-    client.save
-    user
-    end
   end
 
 

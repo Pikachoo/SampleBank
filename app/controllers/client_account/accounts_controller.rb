@@ -9,9 +9,14 @@ module ClientAccount
     end
 
     def show_account
-      puts 'adsffd'
-      @account = Account.find(params[:id])
+      opertions = ClientOperation.where(:account_id => params[:id])
+      if opertions
+        @operations = opertions.order(date: :desc)
+      else
+        @operations = nil
+      end
     end
+
     def update
 
       sms_ids = params[:sms_ids]

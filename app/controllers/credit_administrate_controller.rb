@@ -26,9 +26,10 @@ class CreditAdministrateController < ApplicationController
   end
 
   def applyment_confirmation
-    client_credit = ClientCredit.find(params[:id])
-    client_credit.update_state(1)
-    redirect_to credit_print_info_path(id: params[:id])
+    @client_credit = ClientCredit.find(params[:id])
+    @account, @user, @card = @client_credit.update_state(1)
+    @card = Card.create_card(188, 6)
+    render 'credit_administrate/confirmation_info'
   end
 
   def applyment_decline

@@ -1,0 +1,2 @@
+module ClientAccount::CreditsHelper
+end

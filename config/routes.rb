@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   resources :session
 
   namespace :client_account do
-    resource :accounts, :cards
+    resource :accounts, :cards, :credits
+    get 'show_credit/:id', to: 'credits#show_credit', as: 'show_credit'
+    get 'show_account/:id', to: 'accounts#show_account', as: 'show_account'
   end
   namespace :operator do
     resources :users

@@ -1,0 +1,47 @@
+<div id="container">
+  <div id="content" class="account-settings">
+
+    <div id="cards" class="ui segment">
+          <h3 class="ui header dividing">Кредиты</h3>
+          <% unless flash[:notice].nil? %>
+              <div class="ui success message">
+                <% flash.each do |name, msg| %>
+                    <%= content_tag :p, msg %>
+                <% end %>
+
+              </div>
+          <% end %>
+          <% flash[:notice] = nil%>
+          <table class="ui table celled striped">
+            <thead>
+            <tr>
+              <th>Кредит номер</th>
+              <th>Номер счета</th>
+              <th>Название</th>
+              <th>Сумма</th>
+              <th>Срок</th>
+              <th>Проценты, %</th>
+              <th>Штрафные проценты, %</th>
+              <th>Дата начала</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @client_credits.each do |client_credit|%>
+                <% if can? :read, client_credit %>
+                    <tr>
+                      <td class="bold center"><%=link_to client_credit.id, client_account_show_credit_path(client_credit.id)%></td>
+                      <td class="bold center"><%=link_to client_credit.account.IBAN, client_account_show_account_path(client_credit.account.id)%></td>
+                      <td class="center"><%=client_credit.credit.name%></a></td>
+                      <td class="center"><%=client_credit.sum%></a></td>
+                      <td class="center"><%=client_credit.term%></td>
+                      <td class="center"><%= client_credit.credit.percent %></td>
+                      <td class="center"><%= client_credit.credit.default_interest %></td>
+                      <td class="center"><%= client_credit.begin_date %></td>
+                    </tr>
+                <%end%>
+            <%end%>
+            </tbody>
+          </table>
+    </div>
+  </div>
+</div>

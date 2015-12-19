@@ -1,12 +1,17 @@
 module ClientAccount
   class AccountsController < ApplicationController
     load_and_authorize_resource
+    # skip_authorize_resource :only => :show_account
 
     def show
       flash[:notice] = nil
       @accounts = current_client.accounts
     end
 
+    def show_account
+      puts 'adsffd'
+      @account = Account.find(params[:id])
+    end
     def update
 
       sms_ids = params[:sms_ids]

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   namespace :operator do
     resources :users
     resources :credits
+    get 'users/:id/update_password', to: 'users#update_password', as: 'user_update_password'
     get  'timemachine/new',       to: 'timemachine#new'
     post 'timemachine/create',    to: 'timemachine#create'
   end

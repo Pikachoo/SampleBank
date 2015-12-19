@@ -12,6 +12,9 @@ module Operator
     def index
       @client_users = User.where(role_id: 1).page(params[:client_users_page].to_i)
       @operator_users = User.where(role_id: 2).page(params[:operator_users_page].to_i)
+      @cashier_users = User.where(role_id: 5).page(params[:cashier_users].to_i)
+      @user_admin_users = User.where(role_id: 3).page(params[:user_admin_users].to_i)
+      @credit_admin_users = User.where(role_id: 4).page(params[:credit_admin_users].to_i)
     end
 
     def new
@@ -31,11 +34,18 @@ module Operator
       @user = User.find(params[:id])
     end
 
+    def update_password
+      @user = User.find(params[:id])
+      @user.generate_password
+    end
     def update
       @user.update(user_params)
 
       @client_users = User.where(role_id: 1).page(params[:client_users_page].to_i)
       @operator_users = User.where(role_id: 2).page(params[:operator_users_page].to_i)
+      @cashier_users = User.where(role_id: 5).page(params[:cashier_users].to_i)
+      @user_admin_users = User.where(role_id: 3).page(params[:user_admin_users].to_i)
+      @credit_admin_users = User.where(role_id: 4).page(params[:credit_admin_users].to_i)
       @message = 'Пользователь обновлен.'
       render 'operator/users/index'
     end
@@ -47,6 +57,9 @@ module Operator
 
         @client_users = User.where(role_id: 1).page(params[:client_users_page].to_i)
         @operator_users = User.where(role_id: 2).page(params[:operator_users_page].to_i)
+        @cashier_users = User.where(role_id: 5).page(params[:cashier_users].to_i)
+        @user_admin_users = User.where(role_id: 3).page(params[:user_admin_users].to_i)
+        @credit_admin_users = User.where(role_id: 4).page(params[:credit_admin_users].to_i)
         @message = 'Пользователь удален.'
         render 'operator/users/index'
       end

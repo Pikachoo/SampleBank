@@ -1,14 +1,32 @@
 <div id="container">
-  <div id="content" >
+  <div id="content">
 
-    <div class="ui segment" id="credits" >
-      <form class="ui form error success">
+    <div class="ui segment" id="credits">
+      <% if @message %>
+          <div class="ui success message">
+            <ul>
+              <li><%= @message %></li>
+            </ul>
+          </div>
+      <% end %>
+      <% if @error_message %>
+          <div class="ui error message">
+            <ul>
+              <li><%= @error_message %></li>
+            </ul>
+          </div>
+      <% end %>
 
-        <h2 class="ui header" style="text-align: center">Центр работы с пользователями</h2>
-        <%= render partial: "users_table", locals: {users: @client_users, total_pages: @client_users.total_pages, users_type: 'Аккаунты клиентов', param_id: 'client_users_page', current_page: params[:client_users_page].to_i} %>
-        <%= render partial: 'users_table', locals: {users: @operator_users, total_pages: @operator_users.total_pages, users_type: 'Аккаунты операционистов', param_id: 'operator_users_page', current_page: params[:operator_users_page].to_i} %>
-      </form>
-      <%= link_to 'Создать', new_operator_user_path, style: 'margin-top: 17px', class: 'ui button orange' if can? :create, User %>
+      <h2 class="ui header" style="text-align: center">Центр работы с пользователями</h2>
+      <%= render partial: "users_table", locals: {users: @client_users, total_pages: @client_users.total_pages, users_type: 'Аккаунты клиентов', param_id: 'client_users_page', current_page: params[:client_users_page].to_i} %>
+      <%= render partial: 'users_table', locals: {users: @operator_users, total_pages: @operator_users.total_pages, users_type: 'Аккаунты операционистов', param_id: 'operator_users_page', current_page: params[:operator_users_page].to_i} %>
+      <%= render partial: 'users_table', locals: {users: @cashier_users, total_pages: @cashier_users.total_pages, users_type: 'Аккаунты кассиров', param_id: 'cashier_users_page', current_page: params[:cashier_users_page].to_i} %>
+      <%= render partial: 'users_table', locals: {users: @user_admin_users, total_pages: @user_admin_users.total_pages, users_type: 'Аккаунты администраторов пользователей', param_id: 'user_admin_users_page', current_page: params[:user_admin_users_page].to_i} %>
+      <%= render partial: 'users_table', locals: {users: @credit_admin_users, total_pages: @credit_admin_users.total_pages, users_type: 'Аккаунты администраторов кредитов', param_id: 'credit_admin_users_page', current_page: params[:credit_admin_users_page].to_i} %>
+
+      <div style="display: flex; padding-top: 10px">
+        <%= link_to 'Создать', new_operator_user_path, style: 'margin-top: 17px', class: 'ui button orange' if can? :create, User %>
+      </div>
 
     </div>
   </div>

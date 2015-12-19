@@ -1,0 +1,65 @@
+<div id="container">
+  <div id="content" class="account-settings">
+    <div class="ui segment" id="credit_payments">
+          <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
+            <b>Во время отправки данных обнаружились следующие ошибки:</b>
+            <ul>
+              <% if (flash[:validation_errors] != nil) %>
+                  <% flash[:validation_errors].each do |e| %>
+                      <li><%= e %></li>
+                  <% end %>
+              <% end %>
+            </ul>
+          </div>
+
+
+          <table class="ui table celled striped">
+            <thead>
+            <tr>
+              <th>Номер платежа</th>
+              <th>Основной долг</th>
+              <th>Проценты</th>
+              <th>Просрочено</th>
+              <th>Пеня</th>
+              <th>Весь платеж</th>
+              <th>Итого к оплате</th>
+              <th>До какого числа</th>
+              <th>Оплачено</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @paymens_params.each do |payment| %>
+                <tr>
+                  <td><%= payment[:number] %></td>
+                  <td><%= payment[:main_payment] %></td>
+                  <td><%= payment[:percent_payment] %></td>
+                  <% if payment[:is_payed] %>
+                      <td><i class="icon remove green"></i></td>
+                  <% else %>
+                      <td><i class="icon remove red"></i></td>
+                  <% end %>
+                  <td><%= payment[:penalty_payment] %></td>
+                  <td><%= payment[:payment] %></td>
+                  <td><%= payment[:bel_payment] %></td>
+                  <td><%= payment[:expire_date] %></td>
+                  <% if payment[:is_payed] %>
+                      <td><i class="icon checkmark green"></i></td>
+                  <% else %>
+                      <td><i class="icon checkmark red"></i></td>
+                  <% end %>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+
+          <div id="step-errors" class="validation_errors invisible">
+            <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
+            <ul id="errors_list"></ul>
+          </div>
+
+    </div>
+  </div>
+</div>
+
+

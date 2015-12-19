@@ -19,9 +19,14 @@ class Ability
         if client.accounts
           can :read, Account, client_id: client.id
           can :update, Account, client_id: client.id
+          can :show_account, Account
         end
-      end
 
+
+        can :read, ClientCredit, client_id: client.id
+        can :show_credit, ClientCredit, client_id: client.id
+
+      end
 
 
     end

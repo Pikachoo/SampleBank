@@ -16,6 +16,7 @@
   <% if current_user %>
       <%= link_to 'Счета', client_account_accounts_path, class: 'item' if current_user.is? 'client' %>
       <%= link_to 'Карточки', client_account_cards_path, class: 'item' if current_user.is? 'client' %>
+      <%= link_to 'Кредиты', client_account_credits_path, class: 'item' if current_user.is? 'client' %>
   <% end %>
   <div class="right menu">
     <% if current_user %>

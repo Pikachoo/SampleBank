@@ -5,8 +5,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_client
   rescue_from CanCan::AccessDenied do | exception |
+    puts exception
     redirect_to root_url, alert: exception.message
   end
+
   private
 
   def current_user

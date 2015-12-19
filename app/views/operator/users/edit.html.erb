@@ -1,12 +1,11 @@
 <div id="container">
   <div id="content" class="account-settings">
     <div class="ui segment" id="credits">
-      <%= form_for :user, url: operator_users_path, html: {class: "ui form error success", id: "user_form"}, method: :post do |f| %>
+      <%= form_for @user, url: operator_user_path, method: 'put', html: {class: "ui form error success", id: "user_form"} do |f| %>
           <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
             <b>Во время отправки данных обнаружились следующие ошибки:</b>
             <ul>
-              <% puts params
-                 if (flash[:validation_errors] != nil) %>
+              <% if (flash[:validation_errors] != nil) %>
                   <% flash[:validation_errors].each do |e| %>
                       <li><%= e %></li>
                   <% end %>
@@ -14,16 +13,18 @@
             </ul>
           </div>
 
+
           <div class="field">
             <%= f.label :name, 'Имя пользователя' %>
-            <%= f.text_field :name, value: @user_inputs['name'], placeholder: 'Имя пользователя' %><br/>
+            <%= f.text_field :name, value: @user["name"], placeholder: "Имя пользователя" %><br/>
           </div>
 
           <div class="field">
-            <%= f.label :role, 'Роль' %>
+            <%= f.label :role_id, 'Роль' %>
+
 
             <div class="ui selection dropdown" id="dropdown_granting">
-              <%= f.number_field :role_id, value: @user_inputs['role_id'], type: "hidden" %>
+              <%= f.number_field :role_id, value: @user["role_id"], type: "hidden" %>
               <i class="dropdown icon"></i>
 
               <div class="default text">Роль</div>
@@ -36,12 +37,14 @@
             </div>
           </div>
 
+
           <div id="step-errors" class="validation_errors invisible">
             <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
             <ul id="errors_list"></ul>
           </div>
-          <%= f.submit type: 'button', class: 'ui button', value: 'Создать пользователя', onclick: "validateUser()" %>
+          <%= f.submit type: 'button', class: 'ui button', value: 'Сохранить пользователя', onclick: "validateUser()" %>
       <% end %>
     </div>
   </div>
 </div>
+

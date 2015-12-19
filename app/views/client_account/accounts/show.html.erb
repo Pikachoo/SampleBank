@@ -26,7 +26,8 @@
           <tbody>
             <% @accounts.each do |account|%>
             <tr>
-              <td class="bold"><a href="#"><%= account.IBAN%></a> </td>
+              <td class="bold"> <%=link_to account.IBAN, client_account_show_account_path(account.id)%></td>
+
               <td class="center"><%= account.balance%></td>
               <td class="center"><%= account.currency.name%></td>
               <td>

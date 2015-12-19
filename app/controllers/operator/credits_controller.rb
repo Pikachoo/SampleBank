@@ -1,18 +1,26 @@
 module Operator
   class CreditsController < ApplicationController
     load_and_authorize_resource
-    skip_load_resource :only => :create
+    skip_load_resource :create, :update
+    rescue_from ActiveRecord::RecordNotFound do |exception|
+      @credits = Credit.all
+      @error_message = 'Кредит не найден'
+      render 'operator/credits/index'
+    end
+
     def index
       @credits = Credit.all
     end
+
     def new
 
     end
+
     def create
 
       credit = Credit.new(credit_params)
       credit.currency_id = params[:credit][:currency]
-      credit.save_credit_and_dependecies(params[:credit][:warrenty_type],  params[:credit][:granting_type],  params[:credit][:payment_type])
+      credit.save_credit_and_dependecies(params[:credit][:warrenty_type], params[:credit][:granting_type], params[:credit][:payment_type])
 
       @credits = Credit.all
       render 'operator/credits/index'
@@ -21,10 +29,12 @@ module Operator
     def edit
       @credit = Credit.find(params[:id])
     end
+
     def update
       @credit.update(credit_params)
-      @credit.update_dependecies(params[:credit][:warrenty_type],  params[:credit][:granting_type],  params[:credit][:payment_type])
+      @credit.update_dependecies(params[:credit][:warrenty_type], params[:credit][:granting_type], params[:credit][:payment_type])
       @credits = Credit.all
+      @message = 'Кредит обновлен.'
       render 'operator/credits/index'
     end
 
@@ -33,8 +43,11 @@ module Operator
       credit.destroy_credit_and_dependecies
 
       @credits = Credit.all
+      @message = 'Кредит удален.'
       render 'operator/credits/index'
+
     end
+
     private
     def credit_params
       params.require(:credit).permit(:name, :min_sum, :max_sum, :min_number_of_months,

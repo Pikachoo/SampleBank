@@ -1,9 +1,9 @@
 class CreditAdministrateController < ApplicationController
-  before_filter :check_is_manage
+  load_and_authorize_resource :client_credit
 
-  def check_is_manage
-    raise() if User.find(session[:user_id]).role_id == 1
-  end
+  # def check_is_manage
+  #   raise() if User.find(session[:user_id]).role_id == 1
+  # end
 
   def index
     @applyment_credits = ClientCredit.where(credit_state: 0).page(params[:applyment_credits_page].to_i)

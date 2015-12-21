@@ -11,6 +11,7 @@ function get_credit_information(id)
     var payments = information.payments;
     var warrenties = information.warrenties;
     var grantings = information.grantings;
+    var currency_name = information.currency_name;
 
     clear_dropdowns();
 
@@ -29,12 +30,26 @@ function get_credit_information(id)
     }
 
     set_max_min_values(credit);
+    set_visible();
+    set_credit_sum_label(currency_name);
     refresh_dropdowns();
 
 }
+function  set_credit_sum_label(currency_name)
+{
+    var selector = $("#credit_sum_label");
+    selector.text('*Сумма кредита в '+currency_name);
+}
+function set_visible()
+{
+    var selector = $("#credit_info");
+    console.log(selector.body);
+    selector.css('display','block');
+    selector.css('visibility','visible');
 
+}
 function set_max_min_values(credit){
-    console.log(credit.max_number_of_months)
+    console.log(credit.max_number_of_months);
     $("#bank_credit_credit_sum").attr({
         "max" : credit.max_sum,
         "min" : credit.min_sum

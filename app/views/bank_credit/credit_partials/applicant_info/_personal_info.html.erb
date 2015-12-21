@@ -30,7 +30,7 @@
 
   <div class="field">
     <label>*Возраст</label>
-    <%= f.number_field "#{name}_age", min: 18, value: @bank_credit_inputs["#{name}_age"], placeholder: "Колличество полных лет"%>
+    <%= f.number_field "#{name}_age", min: 18, max: 120, value: @bank_credit_inputs["#{name}_age"], placeholder: "Колличество полных лет"%>
   </div>
 </div>
 

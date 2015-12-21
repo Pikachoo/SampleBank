@@ -54,9 +54,8 @@
 
           <div id="step6" class="step">
             <p><b>ШАГ 6 из 9</b> - Заполните общие сведенья о супруге заявителя.</p>
-            <button type="button" class="ui button orange" onclick="validateSixthCreditStep()">Пропустить</button>
+            <button type="button" id="skipSixStepButton" class="ui button orange" onclick="validateSixthCreditStep()">Пропустить</button>
             <%= render partial: 'bank_credit/credit_partials/applicant_info/applicant_info', locals: { name: 'partner', step: 6, f: f} %>
-            <%= render partial: 'bank_credit/credit_partials/job_info/organization_info', locals: { name: 'partner', f: f }  %>
             <button type="button" class="ui button orange" onclick="navigate('#step5')">Назад</button>
             <button type="button" class="ui button orange" onclick="validateSixthCreditStep()">Далее</button>
 

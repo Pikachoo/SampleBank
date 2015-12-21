@@ -8,6 +8,9 @@
 <%= render partial: "bank_credit/credit_partials/applicant_info/phones", locals: {name: name, f: f}  %>
 <%= render partial: "bank_credit/credit_partials/applicant_info/addresses", locals: {name: name, f: f}  %>
 <%= render partial: "bank_credit/credit_partials/applicant_info/email", locals: {name: name, f: f}  %>
+<% if name != "customer" %>
+    <%= render partial: 'bank_credit/credit_partials/job_info/organization_info', locals: { name: name, f: f }  %>
+<% end %>
 
 <div id="step-errors-<%= step %>" class="validation_errors invisible">
   <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>

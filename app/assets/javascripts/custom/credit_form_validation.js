@@ -164,7 +164,10 @@ function validateFourthCreditStep() {
 }
 
 function validateFifthCreditStep() {
+    $("#skipSixStepButton").show();
     validateJobCreditStep(5, "customer_additional");
+    if ($("#bank_credit_customer_family_status").val() == 3 || $("#bank_credit_customer_family_status").val() == 4)
+        $("#skipSixStepButton").hide();
 }
 
 function validateSixthCreditStep() {

@@ -5,7 +5,8 @@ module ClientAccount
 
     def show
       flash[:notice] = nil
-      @client_credits = current_client.client_credits
+      @current_page = params[:client_cards].to_i
+      @client_credits = current_client.client_credits.page(params[:client_credits].to_i)
       if @client_credits.empty?
         flash[:notice] = 'У клиента нет кредитов.'
       end

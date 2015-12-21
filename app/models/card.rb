@@ -2,6 +2,8 @@ class Card < ActiveRecord::Base
   belongs_to :client
   belongs_to :account
 
+  paginates_per 5
+
   def self.create_card(account_id, client_id)
     rnd = Random.new
     card_number = rnd.rand(1000000000000000..9999999999999999) #44

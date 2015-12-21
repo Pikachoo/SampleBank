@@ -4,7 +4,8 @@ module ClientAccount
 
     def show
       flash[:notice] = nil
-      @cards = current_client.cards
+      @current_page = params[:client_cards].to_i
+      @cards = current_client.cards.page(params[:client_cards].to_i)
       puts json: @cards
     end
 

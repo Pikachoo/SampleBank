@@ -62,5 +62,6 @@
           </div>
       <% end %>
     </div>
+    <%= render partial: "paginator/paginator", locals: {pageCount: @accounts.total_pages, currentPage: @current_page, maxPerPageCount: 15, path: "accounts", param_id: "accounts_credits"} %>
   </div>
 </div>

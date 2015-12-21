@@ -5,13 +5,14 @@ module ClientAccount
 
     def show
       flash[:notice] = nil
-      @accounts = current_client.accounts
+      @current_page = params[:accounts_credits].to_i
+      @accounts = current_client.accounts.page(params[:accounts_credits])
     end
 
     def show_account
-      opertions = ClientOperation.where(:account_id => params[:id])
-      if opertions
-        @operations = opertions.order(date: :desc)
+      operations = ClientOperation.where(:account_id => params[:id])
+      if operations
+        @operations = operations.order(date: :desc)
       else
         @operations = nil
       end

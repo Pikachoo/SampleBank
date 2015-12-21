@@ -20,31 +20,31 @@ function validateCredit() {
     var max_number_of_months = $("#credit_max_number_of_months").val();
     var min_number_of_months = $("#credit_min_number_of_months").val();
 
-    if (min_number_of_months <= 0){
+    if (min_number_of_months <= 0 || !isInRange("#credit_min_number_of_months")){
         validateErrorsCount++;
         add_error("<li>Укажите минимальный срок кредита.</li>");
     }
 
-    if (max_number_of_months <= 0 || parseInt(max_number_of_months) < parseInt(min_number_of_months)){
+    if (max_number_of_months <= 0 || parseInt(max_number_of_months) < parseInt(min_number_of_months) || !isInRange("#credit_max_number_of_months")){
         validateErrorsCount++;
         add_error("<li>Укажите максимальный срок кредита.</li>");
     }
 
     var min_sum = $("#credit_min_sum").val();
     var max_sum = $("#credit_max_sum").val();
-    if (min_sum <= 0){
+    if (min_sum <= 0 || !isInRange("#credit_min_sum")){
         validateErrorsCount++;
         add_error("<li>Укажите минимальную сумму кредита.</li>");
     }
-    if (max_sum <= 0 || parseInt(max_sum) < parseInt(min_sum)){
+    if (max_sum <= 0 || parseInt(max_sum) < parseInt(min_sum) ||  !isInRange("#credit_max_sum")){
         validateErrorsCount++;
         add_error("<li>Укажите максимальную сумму кредита.</li>");
     }
-    if ($("#credit_percent").val() <= 0){
+    if ($("#credit_percent").val() <= 0 || !isInRange("#credit_percent")){
         validateErrorsCount++;
         add_error("<li>Укажите проценты по кредиту.</li>");
     }
-    if ($("#credit_default_interest").val() <= 0){
+    if ($("#credit_default_interest").val() <= 0 || !isInRange("#credit_default_interest")){
         validateErrorsCount++;
         add_error("<li>Укажите штрафные проценты по кредиту.</li>");
     }

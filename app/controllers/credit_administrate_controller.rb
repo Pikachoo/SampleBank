@@ -1,9 +1,9 @@
 class CreditAdministrateController < ApplicationController
-  before_filter :check_is_manage
+  load_and_authorize_resource :client_credit
 
-  def check_is_manage
-    raise() if User.find(session[:user_id]).role_id == 1
-  end
+  # def check_is_manage
+  #   raise() if User.find(session[:user_id]).role_id == 1
+  # end
 
   def index
     @applyment_credits = ClientCredit.where(credit_state: 0).page(params[:applyment_credits_page].to_i)
@@ -26,9 +26,9 @@ class CreditAdministrateController < ApplicationController
   end
 
   def applyment_confirmation
-    client_credit = ClientCredit.find(params[:id])
-    client_credit.update_state(1)
-    redirect_to credit_print_info_path(id: params[:id])
+    @client_credit = ClientCredit.find(params[:id])
+    @account, @user, @card = @client_credit.update_state(1)
+    render 'credit_administrate/confirmation_info'
   end
 
   def applyment_decline

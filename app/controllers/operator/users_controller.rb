@@ -37,6 +37,7 @@ module Operator
     def update_password
       @user = User.find(params[:id])
       @user.generate_password
+      @user.save
     end
     def update
       @user.update(user_params)

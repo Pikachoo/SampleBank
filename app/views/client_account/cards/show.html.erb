@@ -1,6 +1,10 @@
 <div id="container">
   <div id="content" class="account-settings">
-
+    <style>
+      h3.ui.header.dividing {
+        margin-top: 0 !important;
+      }
+    </style>
     <div id="cards" class="ui segment">
       <%=form_tag client_account_cards_path, method: 'patch' do%>
         <h3 class="ui header dividing">Пластиковые карты</h3>

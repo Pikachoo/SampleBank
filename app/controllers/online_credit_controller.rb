@@ -22,12 +22,15 @@ class OnlineCreditController < ApplicationController
                              customers_patronymic: "",
                              customers_phone: "",
                              customers_email: "",
-                             client_job_types: client_job_types,
-                             credit_warranty_types: credit_warranty_types,
-                             currencies: currencies,
-                             salary: "0",
-                             client_goals: client_goals}
+                             salary: "0"}
     @online_credit_inputs = flash[:inputs_params] if flash[:inputs_params] != nil
+    @online_credit_inputs[:client_job_types] = client_job_types
+    @online_credit_inputs[:credit_warranty_types] = credit_warranty_types
+    @online_credit_inputs[:client_goals] = client_goals
+    @online_credit_inputs[:currencies] = currencies
+
+
+    puts json: @online_credit_inputs
   end
 
   def index
@@ -196,6 +199,7 @@ class OnlineCreditController < ApplicationController
   def validate
     validation_errors = []
     onlineCredit = params[:online_credit]
+    validation_errors.push 'В нашем банке с такими параметрами нет кредита.' if !validate_credit_type(onlineCredit[:sum_value].to_i, onlineCredit[:term_loan_product].to_i, onlineCredit[:currency_type].to_i)
     validation_errors.push "Выберите тип кредита на 1ом шаге." if onlineCredit[:credit_product_type].to_i <= 0 || onlineCredit[:credit_product_type].to_i > 5
     validation_errors.push "Выберите валюту 2ом шаге." if onlineCredit[:currency_type].to_i <= 0 || onlineCredit[:currency_type].to_i > 3
     validation_errors.push "Введите сумму кредита большую нуля на 3ем шаге." if onlineCredit[:sum_value].to_i <= 0
@@ -211,5 +215,21 @@ class OnlineCreditController < ApplicationController
     validation_errors.push "Введите ваш мобильный телефон на 6ом шаге." if onlineCredit[:customers_phone] == ""
     validation_errors.push "Введите вашу заработную плату на 6ом шаге." if onlineCredit[:salary].to_i < 1
     validation_errors == [] ? nil : validation_errors
+  end
+  def validate_credit_type(sum, term, currency_id)
+    credits = Credit.all
+    counter = 0
+    credits.each do |credit|
+      if (credit.min_sum <= sum && sum <= credit.max_sum ) &&
+          (credit.min_number_of_months <= term && term <= credit.max_number_of_months) &&
+          (credit.currency_id == currency_id)
+        counter += 1
+      end
+    end
+    if counter > 0
+      true
+    else
+      false
+    end
   end
 end

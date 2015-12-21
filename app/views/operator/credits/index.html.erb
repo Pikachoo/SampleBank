@@ -132,7 +132,7 @@
           <th>Удалить</th>
           <% @credits.each do |credit| %>
               <% if can? :destroy, credit %>
-                  <td><%= link_to 'Удалить', operator_credit_path(credit.id), method: :delete, class: 'ui button orange' if can? :delete, Credit %></td>
+                  <td><%= link_to 'Удалить', operator_credit_path(credit.id), method: :delete, class: 'ui button orange', onclick: "if (!confirm('Вы уверены?')) { return false; }" if can? :delete, Credit %></td>
               <% end %>
           <% end %>
 

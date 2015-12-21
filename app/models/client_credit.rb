@@ -1,7 +1,7 @@
 class ClientCredit < ActiveRecord::Base
 
   paginates_per 25
-  
+
   belongs_to :account
   belongs_to :client
   belongs_to :credit
@@ -10,22 +10,30 @@ class ClientCredit < ActiveRecord::Base
 
 
   def update_state(state)
+    result = Array.new
     if state == 1
       account = Account.create_account(self)
-      self.update_attributes(account_id: account.id, begin_date: Date.today)
-      User.create_user_for_client(self.client_id)
+      result.push(account)
+      self.update_attributes(account_id: account.id, begin_date: Timemachine.get_current_date)
+      user = User.create_user_for_client(self.client_id)
+      result.push(user)
+      if self.payment_id == 2
+        card = Card.create_card(account.id, self.client_id)
+        result.push(card)
+      end
     end
     self.update_attributes(credit_state: state)
+    result
   end
 
   def self.credit_payments(client_credit)
     orders = Order.where(credit_id: client_credit.id)
     payments = self.calculate_payments(client_credit)
 
-    timemachine = Timemachine.find(1)
-    timemachine_months = timemachine.cur_date.year * 12 + timemachine.cur_date.month
+    timemachine = Timemachine.get_current_date
+    timemachine_months = timemachine.year * 12 + timemachine.month
     credit_months = client_credit.begin_date.year * 12 + client_credit.begin_date.month
-    days = timemachine.cur_date.day - client_credit.begin_date.day
+    days = timemachine.day - client_credit.begin_date.day
     months = timemachine_months - credit_months
 
     if days < 0

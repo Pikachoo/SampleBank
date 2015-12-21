@@ -30,7 +30,7 @@
               <div class="menu" id="menu_granting" tabindex="-1">
 
                 <% Role.all.each do |role| %>
-                    <div class="item" data-value="<%= role.id %>"><%= role.name %></div>
+                    <div class="item" data-value="<%= role.id %>"><%= role.russian_name %></div>
                 <% end %>
               </div>
             </div>

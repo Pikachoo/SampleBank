@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
   has_many :cards
 
   def self.create_account(client_credit)
-    uri = URI.parse("http://bank.tarnenok.by/api/accounts/open?typeId=1&currencyId=#{client_credit.credit.currency_id}&clientId=#{client_credit.client.id}&sum=#{client_credit.sum}")
+    uri = URI.parse("http://bank.tarnenok.by/api/accounts/open?typeId=1&currencyId=#{client_credit.credit.currency_id}&clientId=#{client_credit.client.id}&balance=#{client_credit.sum}")
     req = Net::HTTP::Post.new(uri.request_uri)
     res = Net::HTTP.start(uri.hostname, uri.port) { |http|
       http.request(req)

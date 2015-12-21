@@ -1,3 +1,6 @@
+
+require 'active_support'
+require 'active_support/core_ext/date_time'
 class ClientCredit < ActiveRecord::Base
 
   paginates_per 25
@@ -14,6 +17,9 @@ class ClientCredit < ActiveRecord::Base
     if state == 1
       account = Account.create_account(self)
       result.push(account)
+      time = account.created_date
+      cur_date = Timemachine.get_current_date
+      account.update_attributes(created_date: time.change(:year => cur_date.year, month: cur_date.month, day: cur_date.day))
       self.update_attributes(account_id: account.id, begin_date: Timemachine.get_current_date)
       user = User.create_user_for_client(self.client_id)
       result.push(user)

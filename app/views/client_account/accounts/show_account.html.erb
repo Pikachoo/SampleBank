@@ -4,6 +4,7 @@
     <div id="accounts" class="ui segment">
           <h3 class="ui header dividing">Операции по  счету</h3>
 
+      <%if @operations.empty? == false %>
           <table class="ui table celled striped">
             <thead>
             <tr>
@@ -28,6 +29,11 @@
 
             </tbody>
           </table>
+          <%else%>
+          <div class="ui success message">
+            <p>На данный момент операций нет.</p>
+          </div>
+          <%end%>
     </div>
   </div>
 </div>

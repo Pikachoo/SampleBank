@@ -5,69 +5,80 @@
         margin-top: 0 !important;
       }
     </style>
-    <div id="cards" class="ui segment">
-      <%=form_tag client_account_cards_path, method: 'patch' do%>
-        <h3 class="ui header dividing">Пластиковые карты</h3>
-          <% unless flash[:notice].nil? %>
-              <div class="ui success message">
-                <% flash.each do |name, msg| %>
-                    <%= content_tag :p, msg %>
+    <% if @cards.empty? == false %>
+        <div id="cards" class="ui segment">
+          <%= form_tag client_account_cards_path, method: 'patch' do %>
+              <h3 class="ui header dividing">Пластиковые карты</h3>
+              <% unless flash[:notice].nil? %>
+                  <div class="ui success message">
+                    <% flash.each do |name, msg| %>
+                        <%= content_tag :p, msg %>
+                    <% end %>
+
+                  </div>
+              <% end %>
+              <% flash[:notice] = nil %>
+              <table class="ui table celled striped">
+                <thead>
+                <tr>
+                  <th>Класс карты</th>
+                  <th>Тип карты</th>
+                  <th>Номер карты</th>
+                  <th>Привязанный счёт</th>
+                  <th>Начало действия</th>
+                  <th>Срок истечения</th>
+                  <th class="center width-10">Доступный остаток</th>
+                  <th class="center width-5">Валюта</th>
+                  <!--<th class="center width-10">Последняя операция</th>-->
+                  <th class="center width-5">Уведомления</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <% @cards.each do |card| %>
+                    <% if can? :read, card %>
+                        <tr>
+                          <td class="bold"><%= card.card_type %></td>
+                          <td class="bold"><%= card.account.account_type %></td>
+                          <td class="bold"><%= card.number %></td>
+                          <td class="bold center"><%= link_to card.account.IBAN, client_account_show_account_path(card.account.id) %></td>
+                          <td class="center"><%= card.date_expiry%></td>
+                          <td class="center"><%= card.date_created %></td>
+                          <td class="center"><%= card.account.balance %></td>
+                          <td class="center"><%= card.account.currency.name %></td>
+
+                          <td>
+                            <div class="list">
+                              <div class="item">
+                                <div class="ui child checkbox">
+                                  <%= check_box_tag "sms_ids[]", card.id.to_s, card.is_sms %>
+                                  <label>SMS</label>
+                                </div>
+                              </div>
+                              <div class="item">
+                                <div class="ui child checkbox">
+                                  <%= check_box_tag "emails_ids[]", card.id.to_s, card.is_email %>
+                                  <label>Email</label>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                    <% end %>
                 <% end %>
 
+                </tbody>
+              </table>
+
+              <div class="buttons">
+                <button class="ui button">Сохранить изменения</button>
               </div>
           <% end %>
-          <% flash[:notice] = nil%>
-        <table class="ui table celled striped">
-          <thead>
-          <tr>
-            <th>Класс карты</th>
-            <th>Тип карты</th>
-            <th>Номер карты</th>
-            <th>Привязанный счёт</th>
-            <th class="center width-10">Доступный остаток</th>
-            <th class="center width-5">Валюта</th>
-            <!--<th class="center width-10">Последняя операция</th>-->
-            <th class="center width-5">Уведомления</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <% @cards.each do |card|%>
-            <% if can? :read, card %>
-                <tr>
-                  <td class="bold"><%=card.card_type%></td>
-                  <td class="bold"><%=card.account.account_type%></td>
-                  <td class="bold"><%=card.number%></td>
-                  <td class="bold center"><%=link_to card.account.IBAN, client_account_show_account_path(card.account.id)%></td>
-                  <td class="center"><%=card.account.balance%></td>
-                  <td class="center"><%= card.account.currency.name%></td>
-                  <td>
-                    <div class="list">
-                      <div class="item">
-                        <div class="ui child checkbox">
-                          <%= check_box_tag "sms_ids[]", card.id.to_s, card.is_sms%>
-                          <label>SMS</label>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="ui child checkbox">
-                          <%= check_box_tag "emails_ids[]", card.id.to_s, card.is_email%>
-                          <label>Email</label>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-            <%end%>
-          <%end%>
-
-          </tbody>
-        </table>
-
-        <div class="buttons">
-          <button class="ui button">Сохранить изменения</button>
+    <% else %>
+        <div class="ui success message">
+          <p>На данный момент карточек нет.</p>
         </div>
-      <%end%>
+    <% end %>
     </div>
     <%= render partial: "paginator/paginator", locals: {pageCount: @cards.total_pages, currentPage: @current_page, maxPerPageCount: 15, path: "cards", param_id: "client_cards"} %>
   </div>

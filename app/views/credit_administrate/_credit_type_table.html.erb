@@ -33,17 +33,17 @@
                   <% end %>
                   <% if credits_type == "Кредиты ожидающие подтверждения" %>
                       <td>
-                        <%= link_to "Перейти", applyment_path(e.id) %>
+                        <%= link_to "Перейти", applyment_path(e.id), class: 'ui button orange' %>
                       </td>
                   <% end %>
                   <% if credits_type == "Действующие кредиты" %>
                       <td>
-                        <%= link_to "Перейти", credit_info_path(e.id) %>
+                        <%= link_to "Перейти", credit_info_path(e.id), class: 'ui button orange' %>
                       </td>
                   <% end %>
                   <% if credits_type == "Действующие кредиты" || credits_type == "Закрытые кредиты"  %>
                       <td>
-                        <%= link_to "Перейти", credit_print_info_path(e.id) %>
+                        <%= link_to "Просмотреть", credit_print_info_path(e.id), class: 'ui button orange' %>
                       </td>
                   <% end %>
                 </tr>

@@ -124,20 +124,25 @@
       <div class="card">
         <div class="content">
           <%= image_tag('test.png')%>
-          <div class="description">
+          <div class="description" style="text-align: left;">
 
-            <b>Онлайн заявка на кредит.</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Nulla mi enim, accumsan non molestie vel, tincidunt sit amet augue.
-            Nulla et malesuada lorem, a rutrum nibh. Etiam et dictum elit.
-            Etiam aliquam sollicitudin mi, in maximus enim aliquet et.
-            Mauris malesuada purus vitae tellus rutrum, non malesuada velit facilisis. Aliquam vel lectus luctus dui molestie hendrerit. Aliquam convallis ultricies arcu venenatis venenatis.
+            <b>Онлайн заявка на кредит.</b> Проверьте вашу <u>кредитоспособность</u> онлайн!
+            Теперь у вас есть возможность пройти пробный курс кредитования
+            без необходимости посещения любого из отделений нашего банка! Это совершенно бесплатная
+            имитация составления портрета вашей платёжеспособности.
+            Не уверены в вашей кредитоспособности? Пройдите тест, и наша система подскажет, стоит ли вам
+            идти в банк за кредитом прямо сейчас, или всё - же лучше подождать некоторое
+            время, пока вы полностью не будете готовы пройти процесс кредитования.
           </div>
         </div>
 
-        <div class="ui bottom attached button">
-          <i class="add icon"></i>
-          Узнать больше
-        </div>
+
+        <%= link_to new_online_credit_path do%>
+          <div class="ui bottom attached button">
+            <i class="add icon"></i>
+            Пройти сейчас
+          </div>
+        <% end %>
       </div>
     </div>
 

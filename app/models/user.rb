@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  paginates_per 25
+
 
   def self.authenticate(name, password)
     user = find_by_name(name)

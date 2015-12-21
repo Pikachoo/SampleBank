@@ -3,6 +3,16 @@ function validateElementWithNullify(elementSelector, errorsId, message) {
         addErrorMessage(errorsId, message);
 }
 
+function validateNumbersForGreatest(greaterNumber, lesserNumber, errorsId, message) {
+    if (greaterNumber < lesserNumber)
+        addErrorMessage(errorsId, message);
+}
+
+function validateNumbersForEquals(firstNumber, secondNumber, errorsId, message) {
+    if (firstNumber != secondNumber)
+        addErrorMessage(errorsId, message);
+}
+
 function validateElementWithEmptiness(elementSelector, errorsId, message) {
     if (!isElementNotEmpty(elementSelector))
         addErrorMessage(errorsId, message);
@@ -83,6 +93,13 @@ function validateApplicant(step, id) {
     validateElementWithEmptiness("#bank_credit_" + id + "_birthdate", step, "Укажите день рождения");
     validateElementWithEmptiness("#bank_credit_" + id + "_id", step, "Укажите идентификационный номер");
     validateElementWithNullify("#bank_credit_" + id + "_age", step, "Укажите возраст");
+    var age = Math.floor((new Date() - new Date($("#bank_credit_" + id + "_birthdate").val()))/31536000000);
+    validateNumbersForEquals(age, $("#bank_credit_" + id + "_age").val(), step, "Убедитесь в правильности ввода возраста и дня рождения");
+    var livingAge = $("#bank_credit_" + id + "_rb_age").val();
+    if (livingAge > 0)
+        validateNumbersForGreatest($("#bank_credit_" + id + "_age").val(), livingAge, step, "Убедитесь в правильности ввода возраста и срока проживания в Республике Беларусь.");
+    if ($("#bank_credit_customer_age").val() < 18)
+        addErrorMessage(step, "Наш банк не работает с несовершеннолетними.");
     validateElementWithEmptiness("#bank_credit_" + id + "_country", step, "Укажите гражданство");
     validateElementWithEmptiness("#bank_credit_" + id + "_birthplace", step, "Укажите место рождения");
     validateElementWithNullify("#bank_credit_" + id + "_family_status", step, "Укажите семейное положение");
@@ -98,10 +115,16 @@ function validateApplicant(step, id) {
     validateElementWithEmptiness("#bank_credit_" + id + "_document_number", step, "Укажите номер документа");
     validateElementWithEmptiness("#bank_credit_" + id + "_document_given_date", step, "Укажите дату выдачи документа");
     validateElementWithEmptiness("#bank_credit_" + id + "_document_end_date", step, "Укажите дату окончания документа");
+    if (new Date($("#bank_credit_" + id + "_document_end_date").val()) <= new Date($("#bank_credit_" + id + "_document_given_date").val()))
+        addErrorMessage(step, "Укажите корректные данны о даче выдачи и окончания документа");
+    if (new Date($("#bank_credit_" + id + "_document_given_date").val()) >= new Date())
+        addErrorMessage(step, "Убедитесь что вы правильно указали дату выдачи документа.");
     validateElementWithEmptiness("#bank_credit_" + id + "_registration_address", step, "Укажите адрес регистрации по месту жительства");
     //validateElementWithEmptiness("#bank_credit_" + id + "_registration_place", step, "Укажите адрес регистрации по месту пребывания");
     validateElementWithEmptiness("#bank_credit_" + id + "_actual_living_place", step, "Укажите адрес места фактического проживания");
     validateElementWithNullify("#bank_credit_" + id + "_living_age", step, "Укажите срок проживания клиента по фактическому адресу");
+    var livingAgeRb = $("#bank_credit_" + id + "_living_age").val();
+    validateNumbersForGreatest($("#bank_credit_" + id + "_age").val(), livingAgeRb, step, "Убедитесь в правильности ввода возраста и срока проживания по фактическому месту жительства.");
     navigateAfterValidation("#step-errors-" + step, step);
 }
 
@@ -118,6 +141,8 @@ function validateJobCreditStep(step, id) {
     validateToggledElement("#bank_credit_" + id + "_employment_type", 11, "bank_credit_" + id + "_another_employment", step, "Уточните тип занятости.");
     validateElementWithEmptiness("#bank_credit_" + id + "_start_job_date", step, "Укажите начало работы клиента");
     validateElementWithEmptiness("#bank_credit_" + id + "_end_job_date", step, "Укажите срок окончания работы клиента");
+    if (new Date($("#bank_credit_" + id + "_end_job_date").val()) <= new Date($("#bank_credit_" + id + "_start_job_date").val()))
+        addErrorMessage(step, "Укажите верные данны о начале работы и конце контракта клиента");
     validateElementWithEmptiness("#bank_credit_" + id + "_organization_name", step, "Укажите наименование организации");
     validateElementWithEmptiness("#bank_credit_" + id + "_job_name", step, "Укажите должность клиента");
     validateElementWithEmptiness("#bank_credit_" + id + "_organization_address", step, "Укажите адресс организации клиента");
@@ -126,6 +151,11 @@ function validateJobCreditStep(step, id) {
     validateElementWithNullify("#bank_credit_" + id + "_experience_in_organization", step, "Укажите стаж работы клиента");
     validateElementWithNullify("#bank_credit_" + id + "_job_category", step, "Укажите категорию занимаемой должности клиента");
     validateToggledElement("#bank_credit_" + id + "_job_category", 9, "bank_credit_" + id + "_owners_percent", step, "Укажите процент от доходов предприятия.");
+    var job_changing = $("#bank_credit_" + id + "_job_changing_value").val();
+    if (job_changing < 0)
+        addErrorMessage(step, "Убедитесь в правильности ввода колличества смен работы за последние три года(они должны быть положительными).");
+    if (job_changing > 0)
+        validateNumbersForGreatest($("#bank_credit_" + id + "_job_changing_value").val(), 30, step, "Убедитесь в правильности ввода колличества смен работы(максимум 30, минимум 0).");
     navigateAfterValidation("#step-errors-" + step, step);
 }
 

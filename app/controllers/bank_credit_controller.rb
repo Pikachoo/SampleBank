@@ -540,7 +540,7 @@ class BankCreditController < ApplicationController
     validation_errors.push 'Укажите сумму кредита на 2ом шаге.' if bank_credit[:credit_sum].to_i < 1
     validation_errors.push 'Укажите срок кредита на 2ом шаге.' if bank_credit[:credit_term].to_i < 1
 
-    if ((bank_credit[:credit_sum].to_i < Credit.first.min_sum && bank_credit[:credit_sum].to_i < Credit.last.min_sum) || (bank_credit[:credit_sum].to_i > Credit.first.max_sum && bank_credit[:credit_sum].to_i > Credit.last.max_sum))
+    if (bank_credit[:credit_sum].to_i < Credit.all.minimum(:min_sum) || bank_credit[:credit_sum].to_i > Credit.all.maximum(:max_sum))
       validation_errors.push 'Укажите правильное значение кредитной суммы'
     end
     #validation_errors.push 'Укажите срок освоения кредита на 2ом шаге.' if bank_credit[:credit_limit_term].to_i < 1

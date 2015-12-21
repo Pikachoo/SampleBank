@@ -1,15 +1,15 @@
 <div class='field'>
-    <label>Среднемесячные доходы за последние 6 месяцев</label>
+    <label >Среднемесячные доходы в BYR за последние 6 месяцев</label>
     <%= f.number_field :last_incomings, value: @bank_credit_inputs["last_incomings"], default: 0, min: 0 %>
 </div>
 
 <div class='field'>
-    <label>Среднемесячные расходы за последние 6 месяцев </label>
+    <label>Среднемесячные расходы в BYR за последние 6 месяцев </label>
     <%= f.number_field :last_outcomings, value: @bank_credit_inputs["last_outcomings"], default: 0, min: 0 %>
 </div>
 
 <div class='field'>
-    <label>Среднемесячные доход семьи за последние 6 месяцев</label>
+    <label>Среднемесячные доход  семьи в BYR за последние 6 месяцев</label>
     <%= f.number_field :family_incomings, value: @bank_credit_inputs["family_incomings"], default: 0, min: 0 %>
 </div>
 

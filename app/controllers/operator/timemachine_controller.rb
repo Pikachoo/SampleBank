@@ -3,6 +3,7 @@ module Operator
     authorize_resource
     def new
 
+      @cur_date = Timemachine.get_current_date
     end
 
     def create

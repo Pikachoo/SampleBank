@@ -11,9 +11,9 @@
         <% leftExtremum = currentPage - middlePadding %>
         <% rightExtremum = currentPage + middlePadding %>
         <% if currentPage < 1 + middlePoint then leftExtremum = middlePoint end %>
-        <% for i in 1..(middlePoint) %>
-              <%= link_to i, path + "?#{param_id + "=" + i.to_s}", class: i == currentPage ? "active item" : "item" %>
-            <% end %>
+          <% for i in 1..(middlePoint) %>
+            <%= link_to i, path + "?#{param_id + "=" + i.to_s}", class: i == currentPage ? "active item" : "item" %>
+          <% end %>
           <% if leftExtremum > middlePoint + 1 %>
               <div class="disabled item">
                 ...

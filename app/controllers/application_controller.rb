@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_client
   rescue_from CanCan::AccessDenied do | exception |
     puts exception
-    redirect_to root_url, alert: exception.message
+    render :file =>  'public/502.html', :status => :forbidden, :layout => false, alert: exception.message
   end
 
   private

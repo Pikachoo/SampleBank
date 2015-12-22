@@ -205,7 +205,8 @@ class BankCreditController < ApplicationController
     #Second step mark
     credit_sum = bank_credit[:credit_sum].to_f
     necessary_mark = credit_sum
-    coefficient = credit_sum < Credit.first.min_sum ? 20000 : 1
+    currency = Currency.where(id: (Credit.where(id: params[:credit_type]).first.currency_id)).first
+    coefficient = currency.id == 3 ? 1 : CurrencyExchRate.where(from_currency_id: currency.id, to_currency_id: 3).first.rate
     necessary_mark *= coefficient
 
     mark_explanations.push "Необходимая оценка равна #{necessary_mark}"

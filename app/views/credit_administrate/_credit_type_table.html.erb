@@ -26,7 +26,7 @@
                     <%= e.id %>
                   </td>
                   <td>
-                    <%= e.sum %> <%=e.credit_id == 1 ? "BYR" : "USD" %>
+                    <%= e.sum %> <%= Currency.where(id: (Credit.where(id: e.credit_id).first.currency_id)).first.name %>
                   </td>
                   <% if credits_type == "Кредиты ожидающие подтверждения" %>
                       <td><%= e.is_require == 1 ? "Реккомендуется" : "Не реккомендуется" %></td>

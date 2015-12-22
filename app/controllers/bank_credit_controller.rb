@@ -35,7 +35,6 @@ class BankCreditController < ApplicationController
   def create
     params.permit(:bank_credit)
     validation_errors = validate
-=begin
     return redirect_to :back, flash: { validation_errors: validate, inputs_params: params[:bank_credit] } if validation_errors != nil
 
     application_id = SecureRandom.uuid
@@ -52,14 +51,6 @@ class BankCreditController < ApplicationController
     client = save_client
     puts json: client
     save_credit(client)
-=end
-    @mark, @necessary_mark, @mark_explanations, @calculating, @is_collateral_employed, @credit_sum = calculate_mark
-    puts '=-----------'
-    puts '=-----------'
-    puts '=-----------'
-    puts @mark.inspect
-    puts '=-----------'
-    puts '=-----------'
   end
 
   def save_client

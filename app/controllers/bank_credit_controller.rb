@@ -205,14 +205,16 @@ class BankCreditController < ApplicationController
     #Second step mark
     credit_sum = bank_credit[:credit_sum].to_f
     necessary_mark = credit_sum
-    coefficient = credit_sum < Credit.first.min_sum ? 20000 : 1
+    currency = Currency.where(id: (Credit.where(id: params[:credit_type]).first.currency_id)).first
+    coefficient = currency.id == 3 ? 1 : CurrencyExchRate.where(from_currency_id: currency.id, to_currency_id: 3).first.rate
     necessary_mark *= coefficient
+    #mark *= onlineCredit[:salary].to_f * 0.0001 * onlineCredit[:term_loan_product].to_f
 
     mark_explanations.push "Необходимая оценка равна #{necessary_mark}"
 
-    mark *= bank_credit[:credit_term].to_f / 12.0
-    mark_explanations.push "Добавночный коэфициент для срока кредита будет равен #{(bank_credit[:credit_term].to_f / 12.0).round(2)}"
-    calculating += "*#{(bank_credit[:credit_term].to_f / 12.0).round(2)}"
+    #mark *= bank_credit[:credit_term].to_f / 12.0
+    #mark_explanations.push "Добавночный коэфициент для срока кредита будет равен #{(bank_credit[:credit_term].to_f / 12.0).round(2)}"
+    #calculating += "*#{(bank_credit[:credit_term].to_f / 12.0).round(2)}"
 
     case bank_credit[:make_insurance].to_i
       when 1
@@ -393,6 +395,7 @@ class BankCreditController < ApplicationController
 
     #Ninth step mark
     incomings_additional = (bank_credit[:last_incomings].to_f + bank_credit[:family_incomings].to_f) / bank_credit[:last_outcomings].to_f
+
     incomings_additional = incomings_additional > 1.0 ? incomings_additional / 100 : incomings_additional / -100
     mark += incomings_additional
     mark_explanations.push "Коэфициент среднего достатка равен #{incomings_additional}"
@@ -506,6 +509,12 @@ class BankCreditController < ApplicationController
     end
     #End of eleventh step mark
 
+
+    mark_explanations.push "Итоговая оценка равна: #{mark}"
+    client_incomings = (bank_credit[:salary].to_f + bank_credit[:family_incomings].to_f - bank_credit[:last_outcomings].to_f )* bank_credit[:credit_term].to_f
+    mark_explanations.push "Профит клиента за последующие месяцы + профит семьи будет равен: #{client_incomings}"
+    mark *= client_incomings
+
     if collateral_employee >= credit_sum
       collateral_employed = true
       calculated_mark = "#{collateral_employee}>#{credit_sum}"
@@ -540,7 +549,8 @@ class BankCreditController < ApplicationController
     validation_errors.push 'Укажите сумму кредита на 2ом шаге.' if bank_credit[:credit_sum].to_i < 1
     validation_errors.push 'Укажите срок кредита на 2ом шаге.' if bank_credit[:credit_term].to_i < 1
 
-    if (bank_credit[:credit_sum].to_i < Credit.all.minimum(:min_sum) || bank_credit[:credit_sum].to_i > Credit.all.maximum(:max_sum))
+    #if (bank_credit[:credit_sum].to_i < Credit.all.minimum(:min_sum) || bank_credit[:credit_sum].to_i > Credit.all.maximum(:max_sum))
+    if (bank_credit[:credit_sum].to_i < Credit.where(id: params[:credit_type]).first.min_sum || bank_credit[:credit_sum].to_i > Credit.where(id: params[:credit_type]).first.max_sum)
       validation_errors.push 'Укажите правильное значение кредитной суммы'
     end
     #validation_errors.push 'Укажите срок освоения кредита на 2ом шаге.' if bank_credit[:credit_limit_term].to_i < 1

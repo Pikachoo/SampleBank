@@ -1,6 +1,6 @@
 <h3>Информация о кредите:</h3>
 Дата заявки: <%= @client_credit.begin_date %><br/>
-Сумма: <%= @client_credit.sum %><br/> <%= @client_credit.credit_id == 1 ? "BYR" : "USD" %>
+Сумма: <%= @client_credit.sum %> <%= Currency.where(id: (Credit.where(id: @client_credit.credit_id).first.currency_id)).first.name %><br/>
 Кредитная линия: <%= @client_credit.credit.name %><br/>
 Способ выдачи: <%= @client_credit.credit_payment_type.name %><br/>
 Срок: <%= @client_credit.term %> месяц(ев)<br/>

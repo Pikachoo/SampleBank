@@ -14,8 +14,8 @@ module ClientAccount
 
       sms_ids = params[:sms_ids]
       emails_ids = params[:emails_ids]
-
-      @cards = current_client.cards
+      @current_page = params[:client_cards].to_i
+      @cards = current_client.cards.page(params[:client_cards].to_i)
 
       @cards.each do |card|
         if sms_ids

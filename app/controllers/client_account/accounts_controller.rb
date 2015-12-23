@@ -23,8 +23,8 @@ module ClientAccount
 
       sms_ids = params[:sms_ids]
       emails_ids = params[:emails_ids]
-
-      @accounts = current_client.accounts
+      @current_page = params[:accounts_credits].to_i
+      @accounts = current_client.accounts.page(params[:accounts_credits])
 
       @accounts.each do |account|
         if sms_ids

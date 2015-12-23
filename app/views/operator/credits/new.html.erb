@@ -58,12 +58,12 @@
 
           <div class="field">
             <%= f.label :percent, 'Проценты по кредиту' %>
-            <%= f.number_field :percent, value: @credit["percent"], min:'10', max:'100', placeholder: "Проценты по кредиту" %><br/>
+            <%= f.number_field :percent, value: @credit["percent"], min:'3', max:'100', placeholder: "Проценты по кредиту" %><br/>
           </div>
 
           <div class="field">
             <%= f.label :default_interest, 'Штрафные проценты' %>
-            <%= f.number_field :default_interest, value: @credit["default_interest"], min:'10', max:'100', placeholder: "Штрафные проценты" %><br/>
+            <%= f.number_field :default_interest, value: @credit["default_interest"], min:'3', max:'100', placeholder: "Штрафные проценты" %><br/>
           </div>
 
 

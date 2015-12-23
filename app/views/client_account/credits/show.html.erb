@@ -6,21 +6,22 @@
       }
     </style>
     <div id="cards" class="ui segment">
-          <h3 class="ui header dividing">Кредиты</h3>
-          <% unless flash[:notice].nil? %>
-              <div class="ui success message">
-                <% flash.each do |name, msg| %>
-                    <%= content_tag :p, msg %>
-                <% end %>
+      <h3 class="ui header dividing">Кредиты</h3>
+      <% unless flash[:notice].nil? %>
+          <div class="ui success message">
+            <% flash.each do |name, msg| %>
+                <%= content_tag :p, msg %>
+            <% end %>
 
-              </div>
-          <% end %>
-          <% flash[:notice] = nil%>
+          </div>
+      <% end %>
+      <% flash[:notice] = nil %>
+      <% if @client_credits.empty? == false %>
 
           <table class="ui table celled striped">
             <thead>
             <tr>
-              <th style="text-align: center!important;" >Кредит номер</th>
+              <th style="text-align: center!important;">Кредит номер</th>
               <th style="text-align: center!important;">Номер счета</th>
               <th style="text-align: center!important;">Название</th>
               <th style="text-align: center!important;">Сумма</th>
@@ -31,22 +32,28 @@
             </tr>
             </thead>
             <tbody>
-            <% @client_credits.each do |client_credit|%>
+            <% @client_credits.each do |client_credit| %>
                 <% if can? :read, client_credit %>
                     <tr>
-                      <td class="bold center"><%=link_to client_credit.id, client_account_show_credit_path(client_credit.id)%></td>
-                      <td class="bold center"><%=link_to client_credit.account.IBAN, client_account_show_account_path(client_credit.account.id)%></td>
-                      <td class="center"><%=client_credit.credit.name%></a></td>
-                      <td class="center"><%=client_credit.sum%></a></td>
-                      <td class="center"><%=client_credit.term%></td>
+                      <td class="bold center"><%= link_to client_credit.id, client_account_show_credit_path(client_credit.id) %></td>
+                      <td class="bold center"><%= link_to client_credit.account.IBAN, client_account_show_account_path(client_credit.account.id) %></td>
+                      <td class="center"><%= client_credit.credit.name %></a></td>
+                      <td class="center"><%= client_credit.sum %></a></td>
+                      <td class="center"><%= client_credit.term %></td>
                       <td class="center"><%= client_credit.credit.percent %></td>
                       <td class="center"><%= client_credit.credit.default_interest %></td>
                       <td class="center"><%= client_credit.begin_date %></td>
                     </tr>
-                <%end%>
-            <%end%>
+                <% end %>
+            <% end %>
             </tbody>
           </table>
+      <% else %>
+          <div class="ui success message">
+            <p>На данный момент кредитов нет.</p>
+          </div>
+
+      <% end %>
     </div>
     <%= render partial: "paginator/paginator", locals: {pageCount: @client_credits.total_pages, currentPage: @current_page, maxPerPageCount: 15, path: "credits", param_id: "client_credits"} %>
   </div>

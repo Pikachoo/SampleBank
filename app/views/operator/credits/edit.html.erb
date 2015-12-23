@@ -39,32 +39,32 @@
 
           <div class="field">
             <%= f.label :min_sum, 'Минимальная сумма кредита' %>
-            <%= f.number_field :min_sum, value: @credit["min_sum"], placeholder: "Минимальная сумма кредита" %><br/>
+            <%= f.number_field :min_sum, value: @credit["min_sum"],min: '1', max:'1000000000000', placeholder: "Минимальная сумма кредита" %><br/>
           </div>
 
           <div class="field">
             <%= f.label :max_sum, 'Максимальная сумма кредита' %>
-            <%= f.number_field :max_sum, value: @credit["max_sum"], placeholder: "Максимальная сумма кредита" %><br/>
+            <%= f.number_field :max_sum, value: @credit["max_sum"],min: '1', max:'1000000000000', placeholder: "Максимальная сумма кредита" %><br/>
           </div>
 
           <div class="field">
             <%= f.label :min_number_of_months, 'Минимальный срок кредита' %>
-            <%= f.number_field :min_number_of_months, value: @credit["min_number_of_months"], placeholder: "Минимальный срок кредита" %><br/>
+            <%= f.number_field :min_number_of_months, value: @credit["min_number_of_months"],min: '1', max:'480', placeholder: "Минимальный срок кредита" %><br/>
           </div>
 
           <div class="field">
             <%= f.label :max_number_of_months, 'Максимальный срок кредита' %>
-            <%= f.number_field :max_number_of_months, value: @credit["max_number_of_months"], placeholder: "Максимальный срок кредита" %><br/>
+            <%= f.number_field :max_number_of_months, value: @credit["max_number_of_months"], min: '1', max:'480', placeholder: "Максимальный срок кредита" %><br/>
           </div>
 
           <div class="field">
             <%= f.label :percent, 'Проценты по кредиту' %>
-            <%= f.number_field :percent, value: @credit["percent"], placeholder: "Проценты по кредиту" %><br/>
+            <%= f.number_field :percent, value: @credit["percent"], min:'3', max:'100',placeholder: "Проценты по кредиту" %><br/>
           </div>
 
           <div class="field">
             <%= f.label :default_interest, 'Штрафные проценты' %>
-            <%= f.number_field :default_interest, value: @credit["default_interest"], placeholder: "Штрафные проценты" %><br/>
+            <%= f.number_field :default_interest, value: @credit["default_interest"],min:'3', max:'100', placeholder: "Штрафные проценты" %><br/>
           </div>
 
           <% grantings = Array.new

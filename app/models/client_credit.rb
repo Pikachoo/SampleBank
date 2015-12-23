@@ -1,3 +1,5 @@
+require 'active_support'
+require 'active_support/core_ext/date_time'
 class ClientCredit < ActiveRecord::Base
 
   paginates_per 25
@@ -14,6 +16,9 @@ class ClientCredit < ActiveRecord::Base
     if state == 1
       account = Account.create_account(self)
       result.push(account)
+      time = account.created_date
+      cur_date = Timemachine.get_current_date
+      account.update_attributes(created_date: time.change(:year => cur_date.year, month: cur_date.month, day: cur_date.day))
       self.update_attributes(account_id: account.id, begin_date: Timemachine.get_current_date)
       user = User.create_user_for_client(self.client_id)
       result.push(user)
@@ -35,36 +40,40 @@ class ClientCredit < ActiveRecord::Base
     credit_months = client_credit.begin_date.year * 12 + client_credit.begin_date.month
     days = timemachine.day - client_credit.begin_date.day
     months = timemachine_months - credit_months
-
-    if days < 0
-      self.calculate_payments_params(months, payments, client_credit, orders)
+    if months > client_credit.term
+      self.calculate_payments_params(client_credit.term, payments, client_credit, orders, months)
     else
-      self.calculate_payments_params(months + 1, payments, client_credit, orders)
+      if days < 0
+        self.calculate_payments_params(months, payments, client_credit, orders, months)
+      else
+        self.calculate_payments_params(months + 1, payments, client_credit, orders, months)
+      end
     end
+
     @paymens_params
   end
 
-  def self.calculate_payments_params(times, payments, client_credit, orders)
+  def self.calculate_payments_params(times, payments, client_credit, orders, months_since)
     @paymens_params = Array.new
     1.upto(times) do |time|
       is_payed = self.order_is_payed?(orders, time)
       penalty_payment = 0
       unless is_payed
-        penalty_payment = self.calculate_penalty_payment(times - time, payments[time][:payment], client_credit.credit.default_interest.to_f / 100)
+        penalty_payment = self.calculate_penalty_payment(months_since - time, payments[time - 1][:payment], client_credit.credit.default_interest.to_f / 100)
       end
-      payments[time][:payment] += penalty_payment
+      payments[time - 1][:payment] += penalty_payment
       if is_payed
         bel_payment = orders.find_by(:payment_number => time).sum
         penalty_payment = orders.find_by(:payment_number => time).penalty_sum
-        payments[time][:payment] += penalty_payment
-        puts json: payments[time][:percent_payment]
+        payments[time - 1][:payment] += penalty_payment
+        puts json: payments[time - 1][:percent_payment]
       else
-        bel_payment = Currency.exchange_sum(client_credit.credit.currency.name, 'BYR', payments[time][:payment])
+        bel_payment = Currency.exchange_sum(client_credit.credit.currency.name, 'BYR', payments[time - 1][:payment])
       end
       @paymens_params.push({number: time,
-                            main_payment: payments[time][:main_payment].round(2),
-                            percent_payment: payments[time][:percent_payment].round(2),
-                            payment: payments[time][:payment].round(2),
+                            main_payment: payments[time - 1][:main_payment].round(2),
+                            percent_payment: payments[time - 1][:percent_payment].round(2),
+                            payment: payments[time - 1][:payment].round(2),
                             bel_payment: bel_payment.round(-2),
                             penalty_payment: penalty_payment.round(2),
                             expire_date: client_credit.begin_date.to_time.advance(:months => time).to_date,

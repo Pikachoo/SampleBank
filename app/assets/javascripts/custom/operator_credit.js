@@ -20,33 +20,57 @@ function validateCredit() {
     var max_number_of_months = $("#credit_max_number_of_months").val();
     var min_number_of_months = $("#credit_min_number_of_months").val();
 
-    if (min_number_of_months <= 0 || !isInRange("#credit_min_number_of_months")){
+    if (min_number_of_months <= 0){
         validateErrorsCount++;
         add_error("<li>Укажите минимальный срок кредита.</li>");
     }
-
-    if (max_number_of_months <= 0 || parseInt(max_number_of_months) < parseInt(min_number_of_months) || !isInRange("#credit_max_number_of_months")){
+    if (!isInRange("#credit_min_number_of_months")){
+        validateErrorsCount++;
+        add_error("<li>Проверьте правильность ввода минимального срока кредита.</li>");
+    }
+    if (max_number_of_months <= 0){
         validateErrorsCount++;
         add_error("<li>Укажите максимальный срок кредита.</li>");
+    }
+    if (parseInt(max_number_of_months) < parseInt(min_number_of_months) || !isInRange("#credit_max_number_of_months")){
+        validateErrorsCount++;
+        add_error("<li>Проверьте правильность ввода максимального срока кредита.</li>");
     }
 
     var min_sum = $("#credit_min_sum").val();
     var max_sum = $("#credit_max_sum").val();
-    if (min_sum <= 0 || !isInRange("#credit_min_sum")){
+    if (min_sum <= 0 ){
         validateErrorsCount++;
         add_error("<li>Укажите минимальную сумму кредита.</li>");
     }
-    if (max_sum <= 0 || parseInt(max_sum) < parseInt(min_sum) ||  !isInRange("#credit_max_sum")){
+    if (!isInRange("#credit_min_sum")){
+        validateErrorsCount++;
+        add_error("<li>Проверьте правильность ввода минимальной суммы кредита.</li>");
+    }
+    if (max_sum <= 0  ){
         validateErrorsCount++;
         add_error("<li>Укажите максимальную сумму кредита.</li>");
     }
-    if ($("#credit_percent").val() <= 0 || !isInRange("#credit_percent")){
+    if (parseInt(max_sum) < parseInt(min_sum) ||  !isInRange("#credit_max_sum")){
+        validateErrorsCount++;
+        add_error("<li>Проверьте правильность ввода максимально суммы кредита.</li>");
+    }
+    if ($("#credit_percent").val() <= 0 ){
         validateErrorsCount++;
         add_error("<li>Укажите проценты по кредиту.</li>");
     }
-    if ($("#credit_default_interest").val() <= 0 || !isInRange("#credit_default_interest")){
+    if(!isInRange("#credit_percent"))
+    {
+        validateErrorsCount++;
+        add_error("<li>Проверьте правильность ввода процентов по кредиту.</li>");
+    }
+    if ($("#credit_default_interest").val() <= 0 ){
         validateErrorsCount++;
         add_error("<li>Укажите штрафные проценты по кредиту.</li>");
+    }
+    if (!isInRange("#credit_default_interest")){
+        validateErrorsCount++;
+        add_error("<li>Проверьте правильность ввода штрафных процентов по кредиту.</li>");
     }
     if ($("#credit_granting_type").val() == "0" || $("#credit_granting_type").val() == "" || $("#credit_granting_type").val() == undefined){
         validateErrorsCount++;

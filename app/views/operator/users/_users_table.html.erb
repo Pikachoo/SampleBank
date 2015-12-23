@@ -6,7 +6,7 @@
           <%= users_type %>:
         </a>
 
-        <div class="content">
+        <div class="content active">
           <table class="sortable ui table striped" >
             <tr>
               <td>Id</td>
@@ -27,7 +27,7 @@
                     <%= link_to "Изменить", edit_operator_user_path(user.id), class: 'ui button orange' %>
                   </td>
                   <td>
-                    <%= link_to "Удалить", operator_user_path(user.id), method: :delete, class: 'ui button orange' %>
+                    <%= link_to "Удалить", operator_user_path(user.id), method: :delete,   'data-confirm' => "Удалить пользователя?", class: 'ui button orange' %>
                   </td>
                   <td>
                     <%= link_to "Сбросить пароль", operator_user_update_password_path(user.id), class: 'ui button orange' , onclick: "if (!confirm('Вы уверены?')) { return false; }"%>

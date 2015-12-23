@@ -13,7 +13,8 @@ class Card < ActiveRecord::Base
                        number: card_number,
                        card_type: 'Visa Electron',
                        cvv: card_cvv,
-                       date_expiry: Timemachine.get_current_date + 1.year)
+                       date_expiry: Timemachine.get_current_date + 1.year,
+                       date_created: Timemachine.get_current_date)
     card
   end
 end

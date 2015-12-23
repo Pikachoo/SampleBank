@@ -5,7 +5,8 @@ module ClientAccount
     def show
       flash[:notice] = nil
       @current_page = params[:client_cards].to_i
-      @cards = current_client.cards.page(params[:client_cards].to_i)
+      cur_date = Timemachine.get_current_date
+      @cards = current_client.cards.where("date_created <= '#{cur_date}'").page(params[:client_cards].to_i)
       puts json: @cards
     end
 
@@ -13,8 +14,8 @@ module ClientAccount
 
       sms_ids = params[:sms_ids]
       emails_ids = params[:emails_ids]
-
-      @cards = current_client.cards
+      @current_page = params[:client_cards].to_i
+      @cards = current_client.cards.page(params[:client_cards].to_i)
 
       @cards.each do |card|
         if sms_ids

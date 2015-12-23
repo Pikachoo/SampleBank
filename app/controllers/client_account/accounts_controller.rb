@@ -6,7 +6,8 @@ module ClientAccount
     def show
       flash[:notice] = nil
       @current_page = params[:accounts_credits].to_i
-      @accounts = current_client.accounts.page(params[:accounts_credits])
+      cur_date = Timemachine.get_current_date
+      @accounts = current_client.accounts.where("created_date <= '#{cur_date}'").page(params[:accounts_credits])
     end
 
     def show_account
@@ -22,8 +23,8 @@ module ClientAccount
 
       sms_ids = params[:sms_ids]
       emails_ids = params[:emails_ids]
-
-      @accounts = current_client.accounts
+      @current_page = params[:accounts_credits].to_i
+      @accounts = current_client.accounts.page(params[:accounts_credits])
 
       @accounts.each do |account|
         if sms_ids

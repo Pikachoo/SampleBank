@@ -27,7 +27,10 @@ class CreditAdministrateController < ApplicationController
 
   def applyment_confirmation
     @client_credit = ClientCredit.find(params[:id])
-    @account, @user, @card = @client_credit.update_state(1)
+    result = @client_credit.update_state(1)
+    @account = result[:account]
+    @user = result[:user]
+    @card = result[:card]
     render 'credit_administrate/confirmation_info'
   end
 

@@ -109,7 +109,7 @@ function validateApplicant(step, id) {
     validateElementWithNullify("#bank_credit_" + id + "_military_conditions", step, "Укажите отношение к воинской службе");
     validateToggledElement("#bank_credit_" + id + "_military_conditions", 3, "bank_credit_" + id + "_reprieve_end_date", step, "Укажите срок окончания отсрочки");
     validateElementWithNullify("#bank_credit_" + id + "_name_info", step, "Укажите менялось ли ФИО");
-    validateToggledElement("#bank_credit_" + id + "_name_info", 1, "bank_credit_" + id + "_changing_reason", step, "Укажите причину смены фио");
+    validateToggledElement("#bank_creditСоздан _" + id + "_name_info", 1, "bank_credit_" + id + "_changing_reason", step, "Укажите причину смены фио");
     validateElementWithEmptiness("#bank_credit_" + id + "_document_type", step, "Укажите наименование документа");
     validateElementWithEmptiness("#bank_credit_" + id + "_document_series", step, "Укажите серию документа");
     validateElementWithEmptiness("#bank_credit_" + id + "_document_number", step, "Укажите номер документа");

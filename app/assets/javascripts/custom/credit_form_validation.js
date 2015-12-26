@@ -17,18 +17,18 @@ function validateElementWithEmptiness(elementSelector, errorsId, message) {
     if (!isElementNotEmpty(elementSelector))
         addErrorMessage(errorsId, message);
 }
-function validateElementWithMaxMin(elementSelector, errorsId, message){
-    if(!isInRange(elementSelector))
+function validateElementWithMaxMin(elementSelector, errorsId, message) {
+    if (!isInRange(elementSelector))
         addErrorMessage(errorsId, message);
 }
 function isElementGreaterThanZero(elementSelector) {
     return $(elementSelector).val() != undefined && $(elementSelector).val() > 0;
 }
-function isInRange(elementSelector){
+function isInRange(elementSelector) {
     var value = Number($(elementSelector).val());
     var min = Number($(elementSelector).attr('min'));
     var max = Number($(elementSelector).attr('max'));
-    return value >= min  && value <= max;
+    return value >= min && value <= max;
 
 }
 function isElementNotEmpty(elementSelector) {
@@ -45,7 +45,7 @@ function validateToggledElement(elementSelector, elementValue, toogledElementId,
         addErrorMessage(errorsId, message);
 }
 
-function prepareToValidation(errorsId){
+function prepareToValidation(errorsId) {
     $("#step-errors-" + errorsId).hide();
     $("#errors-list-" + errorsId).empty();
 };
@@ -63,7 +63,7 @@ function validateFirstCreditStep() {
     $("#bank_credit_credit_type").val($("[name='credit_type']:checked").val());
     validateElementWithNullify("#bank_credit_granted_procedure", 1, "Выберите порядок предоставления");
     validateElementWithNullify("#bank_credit_issuance_method", 1, "Выберите способ выдачи");
-    if  ($('#credit_affirmation').text() != '') {
+    if ($('#credit_affirmation').text() != '') {
         validateElementWithNullify("#bank_credit_affirmation_of_commitments", 1, "Выберите вид обеспечения исполнения кредитных обязательств");
     }
     validateElementWithNullify("[name='score_existance']:checked", 1, "Укажите, имеется ли з.п. или доходы в нашем банке");
@@ -77,13 +77,29 @@ function validateFirstCreditStep() {
 
 function validateSecondCreditStep() {
     prepareToValidation(2);
-    validateElementWithNullify("#bank_credit_credit_sum", 2, "Укажите сумму кредита");validateElementWithMaxMin("#bank_credit_credit_sum", 2, "Укажите правильную сумму кредита (В порядке от " + $(bank_credit_credit_sum).attr('min') + " до " + $(bank_credit_credit_sum).attr('max') + ")");
+    validateElementWithNullify("#bank_credit_credit_sum", 2, "Укажите сумму кредита");
+    validateElementWithMaxMin("#bank_credit_credit_sum", 2, "Укажите правильную сумму кредита (В порядке от " + $(bank_credit_credit_sum).attr('min') + " до " + $(bank_credit_credit_sum).attr('max') + ")");
     validateElementWithNullify("#bank_credit_credit_term", 2, "Укажите колличество месяцев до конца оплаты");
     validateElementWithMaxMin("#bank_credit_credit_term", 2, "Укажите правильное количество месяцев до конца оплаты (от " + $(bank_credit_credit_term).attr('min') + " до " + $(bank_credit_credit_term).attr('max') + ")месяцев");
     validateElementWithNullify("#bank_credit_make_insurance", 2, "Укажите информацию о страховании клиента");
     validateElementWithNullify("#bank_credit_repayment_method", 2, "Укажите способ погашения кредита");
     navigateAfterValidation("#step-errors-2", 2);
 }
+function validateTelephon(telephone, step, error) {
+    var match_str = telephone.match(/^[\+]\d*/);
+    if (telephone != '') {
+        if (match_str != null) {
+            if (match_str[0].length != 13) {
+                addErrorMessage(step, error);
+            }
+        }
+        else {
+            addErrorMessage(step, error);
+        }
+    }
+
+}
+
 
 function validateApplicant(step, id) {
     prepareToValidation(step);
@@ -93,7 +109,7 @@ function validateApplicant(step, id) {
     validateElementWithEmptiness("#bank_credit_" + id + "_birthdate", step, "Укажите день рождения");
     validateElementWithEmptiness("#bank_credit_" + id + "_id", step, "Укажите идентификационный номер");
     validateElementWithNullify("#bank_credit_" + id + "_age", step, "Укажите возраст");
-    var age = Math.floor((new Date() - new Date($("#bank_credit_" + id + "_birthdate").val()))/31536000000);
+    var age = Math.floor((new Date() - new Date($("#bank_credit_" + id + "_birthdate").val())) / 31536000000);
     validateNumbersForEquals(age, $("#bank_credit_" + id + "_age").val(), step, "Убедитесь в правильности ввода возраста и дня рождения");
     var livingAge = $("#bank_credit_" + id + "_rb_age").val();
     if (livingAge > 0)
@@ -119,6 +135,12 @@ function validateApplicant(step, id) {
         addErrorMessage(step, "Укажите корректные данны о даче выдачи и окончания документа");
     if (new Date($("#bank_credit_" + id + "_document_given_date").val()) >= new Date())
         addErrorMessage(step, "Убедитесь что вы правильно указали дату выдачи документа.");
+    validateElementWithEmptiness('#bank_credit_customer_mobile_phone', step, 'Укажите мобильный телефон');
+    validateTelephon($('#bank_credit_customer_mobile_phone').val(), step, 'Укажите правильно мобильный телефон');
+    validateTelephon($('#bank_credit_customer_work_phone').val(), step, 'Укажите правильно рабочий телефон');
+    validateTelephon($('#bank_credit_customer_actual_phone').val(), step, 'Укажите правильно домашний телефон');
+    validateTelephon($('#bank_credit_customer_constant_phone').val(), step, 'Укажите правильно домашний телефон');
+
     validateElementWithEmptiness("#bank_credit_" + id + "_registration_address", step, "Укажите адрес регистрации по месту жительства");
     //validateElementWithEmptiness("#bank_credit_" + id + "_registration_place", step, "Укажите адрес регистрации по месту пребывания");
     validateElementWithEmptiness("#bank_credit_" + id + "_actual_living_place", step, "Укажите адрес места фактического проживания");
@@ -135,7 +157,7 @@ function validateThirdCreditStep() {
 function validateJobCreditStep(step, id) {
     prepareToValidation(step);
     validateElementWithNullify("#bank_credit_" + id + "_employment_type", step, "Укажите тип работы клиента");
-    if ($("#bank_credit_" + id + "_employment_type").val() == 4 || $("#bank_credit_" + id + "_employment_type").val() == 10 )
+    if ($("#bank_credit_" + id + "_employment_type").val() == 4 || $("#bank_credit_" + id + "_employment_type").val() == 10)
         return navigateAfterValidation("#step-errors-" + step, step);
     validateToggledElement("#bank_credit_" + id + "_employment_type", 9, "bank_credit_" + id + "_practical_employment", step, "Уточните тип практики.");
     validateToggledElement("#bank_credit_" + id + "_employment_type", 11, "bank_credit_" + id + "_another_employment", step, "Уточните тип занятости.");

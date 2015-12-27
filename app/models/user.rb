@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
       if client.nil? == false
         phone_number = client.phone_mobile[1..-1]
         email = client.email
-        text = "Пользователь создан имя: #{self.name} пароль: #{self.password}"
+        text = "Пользователь создан.\nИмя: #{self.name}\nПароль: #{self.password}"
 
         User.send_sms(phone_number, text)
         User.send_email(email, text) if email != ''

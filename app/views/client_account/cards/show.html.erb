@@ -21,16 +21,16 @@
               <table class="ui table celled striped">
                 <thead>
                 <tr>
-                  <th>Класс карты</th>
-                  <th>Тип карты</th>
-                  <th>Номер карты</th>
-                  <th>Привязанный счёт</th>
-                  <th>Начало действия</th>
-                  <th>Срок истечения</th>
+                  <th class="center">Класс карты</th>
+                  <th class="center">Тип карты</th>
+                  <th class="center">Номер карты</th>
+                  <th class="center">Привязанный счёт</th>
+                  <th class="center">Начало действия</th>
+                  <th class="center">Срок истечения</th>
                   <th class="center width-10">Доступный остаток</th>
                   <th class="center width-5">Валюта</th>
                   <!--<th class="center width-10">Последняя операция</th>-->
-                  <th class="center width-5">Уведомления</th>
+                  <!--<th class="center width-5">Уведомления</th>-->
                 </tr>
                 </thead>
 
@@ -47,22 +47,22 @@
                           <td class="center"><%= card.account.balance %></td>
                           <td class="center"><%= card.account.currency.name %></td>
 
-                          <td>
-                            <div class="list">
-                              <div class="item">
-                                <div class="ui child checkbox">
-                                  <%= check_box_tag "sms_ids[]", card.id.to_s, card.is_sms %>
-                                  <label>SMS</label>
-                                </div>
-                              </div>
-                              <div class="item">
-                                <div class="ui child checkbox">
-                                  <%= check_box_tag "emails_ids[]", card.id.to_s, card.is_email %>
-                                  <label>Email</label>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
+                          <!--<td>-->
+                            <!--<div class="list">-->
+                              <!--<div class="item">-->
+                                <!--<div class="ui child checkbox">-->
+                                  <!--<% check_box_tag "sms_ids[]", card.id.to_s, card.is_sms %>-->
+                                  <!--<label>SMS</label>-->
+                                <!--</div>-->
+                              <!--</div>-->
+                              <!--<div class="item">-->
+                                <!--<div class="ui child checkbox">-->
+                                  <!--<% check_box_tag "emails_ids[]", card.id.to_s, card.is_email %>-->
+                                  <!--<label>Email</label>-->
+                                <!--</div>-->
+                              <!--</div>-->
+                            <!--</div>-->
+                          <!--</td>-->
                         </tr>
                     <% end %>
                 <% end %>
@@ -70,9 +70,9 @@
                 </tbody>
               </table>
 
-              <div class="buttons">
-                <button class="ui button">Сохранить изменения</button>
-              </div>
+              <!--<div class="buttons">-->
+                <!--<button class="ui button">Сохранить изменения</button>-->
+              <!--</div>-->
           <% end %>
     <% else %>
         <div class="ui success message">

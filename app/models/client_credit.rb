@@ -12,19 +12,25 @@ class ClientCredit < ActiveRecord::Base
 
 
   def update_state(state)
-    result = Array.new
+    result = Hash.new
     if state == 1
       account = Account.create_account(self)
-      result.push(account)
+     if account.nil? == false
+        result[:account] = account
+      else
+        account = Account.find_by(self.account_id)
+      end
+
       time = account.created_date
       cur_date = Timemachine.get_current_date
       account.update_attributes(created_date: time.change(:year => cur_date.year, month: cur_date.month, day: cur_date.day))
       self.update_attributes(account_id: account.id, begin_date: Timemachine.get_current_date)
       user = User.create_user_for_client(self.client_id)
-      result.push(user)
-      if self.payment_id == 2
+      result[:user] = user
+
+      if self.payment_id == 2 && Card.find_by(account_id: account.id).nil?
         card = Card.create_card(account.id, self.client_id)
-        result.push(card)
+        result[:card] = card
       end
     end
     self.update_attributes(credit_state: state)

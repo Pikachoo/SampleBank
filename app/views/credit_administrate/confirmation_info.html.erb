@@ -3,15 +3,19 @@
 
     <div class="ui segment" id="credits">
       <div class="ui success message">
-        <h3>Создан пользователь</h3>
-        <label class='user_labels'>Имя: <%= @user.name %></label>
-        <label class='user_labels'>Роль: <%= @user.role.name %></label>
+        <% if @user %>
+            <h3>Пользователь</h3>
+            <label class='user_labels'>Имя: <%= @user.name %></label>
+            <label class='user_labels'>Роль: <%= @user.role.name %></label>
+        <% end %>
 
-        <h3>Создан счет</h3>
-        <label class='user_labels'>Номер: <%= @account.IBAN %></label>
-        <label class='user_labels'>Тип: <%= @account.account_type %></label>
-        <label class='user_labels'>Баланс: <%= @account.balance %></label>
-        <label class='user_labels'>Валюта: <%= @account.currency.name %></label>
+        <% if @account %>
+            <h3>Создан счет</h3>
+            <label class='user_labels'>Номер: <%= @account.IBAN %></label>
+            <label class='user_labels'>Тип: <%= @account.account_type %></label>
+            <label class='user_labels'>Баланс: <%= @account.balance %></label>
+            <label class='user_labels'>Валюта: <%= @account.currency.name %></label>
+        <% end %>
         <% if @card %>
             <h3>Создана карточка</h3>
             <label class='user_labels'>Номер: <%= @card.number %></label>

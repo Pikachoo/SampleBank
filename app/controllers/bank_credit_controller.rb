@@ -49,8 +49,7 @@ class BankCreditController < ApplicationController
 
     @mark, @necessary_mark, @mark_explanations, @calculating, @is_collateral_employed, @credit_sum = calculate_mark
     client = save_client
-    puts json: client
-    save_credit(client)
+    @client_credit = save_credit(client)
   end
 
   def save_client
@@ -122,8 +121,15 @@ class BankCreditController < ApplicationController
     client_credit_search = ClientCredit.where(client_id: client_credit.client_id, credit_id: client_credit.credit_id, begin_date: client_credit.begin_date)
     if client_credit_search.empty?
       client_credit.save
+      client_credit
     end
-    puts json: client_credit_search
+
+    if client_credit_search.empty?
+      return client_credit
+    else
+      return client_credit_search.first
+    end
+
   end
 
   def calculate_mark

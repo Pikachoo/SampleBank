@@ -1,6 +1,6 @@
 <div id="container">
   <div id="content" >
-      <div class="ui segment">
+      <div class="ui segment" id = 'bank_credit'>
         <h2 class="ui header dividing" style="text-align: center">Заявка на кредит успешно добавлена</h2>
         <!--<div class="request-info">
           <p>Вся информация о выставлении оценки.</p>
@@ -23,9 +23,9 @@
 
         <% unless @is_collateral_employed %>
             <% if (@mark >= @necessary_mark) %>
-                <h2 style="text-align: center">Выдача кредита одобрена</h2>
+                <h2 style="text-align: center">Выдача кредита № <%= @client_credit.id %> одобрена</h2>
             <% else %>
-                <h2 style="text-align: center">Выдача кредита не рекомендуется</h2>
+                <h2 style="text-align: center">Выдача кредита № <%= @client_credit.id %> не рекомендуется</h2>
             <% end %>
         <% else %>
             <h2 style="text-align: center">Оценка залога полностью покроет долг. <%= @credit_sum %></h2>

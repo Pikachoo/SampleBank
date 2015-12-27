@@ -23,16 +23,30 @@ class User < ActiveRecord::Base
     end
   end
 
-  def save_first_time
+  def save_first_time(client)
     self.generate_password
     if self.valid?
       self.save
+      phone_number = client.phone_mobile[1..-1]
+      text = "Пользователь создан имя: #{self.name} пароль: #{self.password}"
+
+      puts 'sd'
+      User.send_sms(phone_number, text)
     else
       if self.errors[:name]
         self.error_message = ['Данный пользователь уже существует.']
       end
     end
     self
+  end
+
+  def self.send_sms(telephone_number, text)
+    uri = URI('http://rude-php.com/rude-sms/')
+    params = { :phone => telephone_number, :message => text }
+    uri.query = URI.encode_www_form(params)
+    res = Net::HTTP.get_response(uri)
+
+    res.body
   end
 
   def encrypt_password
@@ -53,7 +67,7 @@ class User < ActiveRecord::Base
       user = User.new(name: client.passport_identificational_number, role_id: 1)
       user_find = User.find_by(name: client.passport_identificational_number)
       if !user_find
-        user = user.save_first_time
+        user = user.save_first_time(client)
       else
         user = user_find
       end

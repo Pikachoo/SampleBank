@@ -93,3 +93,20 @@ table.sortable td {
 table { width: 100%; }
 
 tbody td { padding: 11px 1px 1px 12px;}
+
+@media print
+{
+  .no-print, .no-print *
+  {
+    display: none !important;
+  }
+  #credit_aministrate {
+    width: 100%;
+    background: #ffffff;
+  }
+  #content {
+    width: 100%;
+    padding: 0;
+  }
+}
+

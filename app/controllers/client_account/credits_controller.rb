@@ -6,8 +6,9 @@ module ClientAccount
     def show
       flash[:notice] = nil
       @current_page = params[:client_cards].to_i
-      cur_date = Timemachine.get_current_date
-      @client_credits = current_client.client_credits.where("begin_date <= '#{cur_date}'").page(params[:client_credits].to_i)
+      cur_date = Timemachine.get_current_date+ 1.day
+      puts cur_date
+      @client_credits = current_client.client_credits.where("begin_date <= '#{cur_date}' and credit_state = 1").page(params[:client_credits].to_i)
       if @client_credits.empty?
         flash[:notice] = 'У клиента нет кредитов.'
       end

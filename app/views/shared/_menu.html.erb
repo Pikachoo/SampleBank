@@ -1,4 +1,4 @@
-<div id="menu" class="ui menu inverted">
+<div id="menu" class="ui menu inverted no-print">
   <%= link_to "Главная", root_path, class: 'item' %>
   <%= link_to 'Онлайн заявка на кредит', new_online_credit_path, class: 'item' if current_user.nil? %>
   <%= link_to 'Оформление кредита', new_bank_credit_path, class: 'item' if can? :manage, ClientCredit %>

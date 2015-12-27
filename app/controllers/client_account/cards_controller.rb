@@ -5,8 +5,15 @@ module ClientAccount
     def show
       flash[:notice] = nil
       @current_page = params[:client_cards].to_i
-      cur_date = Timemachine.get_current_date
-      @cards = current_client.cards.where("date_created <= '#{cur_date}'").page(params[:client_cards].to_i)
+      cur_date = Timemachine.get_current_date+ 1.day
+      puts cur_date
+      client_credits = current_client.client_credits.where("begin_date <= '#{cur_date}' and credit_state = 1")
+      account_ids = Array.new
+      client_credits.each do |credit|
+        account_ids.push credit.account_id
+      end
+      @cards = current_client.cards.where("date_created <= '#{cur_date}' and account_id IN (#{account_ids.join(',')})").page(params[:client_cards].to_i)
+
       puts json: @cards
     end
 

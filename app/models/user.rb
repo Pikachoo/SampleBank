@@ -23,15 +23,19 @@ class User < ActiveRecord::Base
     end
   end
 
-  def save_first_time(client)
+  def save_first_time(client = nil)
     self.generate_password
     if self.valid?
       self.save
-      phone_number = client.phone_mobile[1..-1]
-      text = "Пользователь создан имя: #{self.name} пароль: #{self.password}"
+      if client.nil? == false
+        phone_number = client.phone_mobile[1..-1]
+        email = client.email
+        text = "Пользователь создан имя: #{self.name} пароль: #{self.password}"
 
-      puts 'sd'
-      User.send_sms(phone_number, text)
+        User.send_sms(phone_number, text)
+        User.send_email(email, text) if email != ''
+      end
+
     else
       if self.errors[:name]
         self.error_message = ['Данный пользователь уже существует.']
@@ -42,11 +46,69 @@ class User < ActiveRecord::Base
 
   def self.send_sms(telephone_number, text)
     uri = URI('http://rude-php.com/rude-sms/')
-    params = { :phone => telephone_number, :message => text }
+    params = {:phone => telephone_number, :message => text}
     uri.query = URI.encode_www_form(params)
     res = Net::HTTP.get_response(uri)
 
+    puts uri
     res.body
+  end
+
+  def send_sms(text)
+    if self.is? 'client'
+      client = Client.find_by(user_id: self.id)
+      telephone_number = client.phone_mobile[1..-1] if client
+    else
+      employee = BankEmployee.find_by(user_id: self.id)
+      telephone_number = employee.mobile_phone[1..-1] if employee
+    end
+    if telephone_number
+      uri = URI('http://rude-php.com/rude-sms/')
+      params = {:phone => telephone_number, :message => text}
+      uri.query = URI.encode_www_form(params)
+      res = Net::HTTP.get_response(uri)
+
+      puts uri
+      res.body
+    end
+  end
+
+  def self.send_email(email, text)
+    uri = URI('http://rude-php.com/rude-email/?task=send&from=Bank')
+    params = {:task => 'send',
+              :from => 'RudeBank',
+              :to => email,
+              :subject => 'RUDE bank оповещение',
+              :text => text}
+    uri.query = URI.encode_www_form(params)
+    res = Net::HTTP.get_response(uri)
+
+    puts uri
+    res.body
+
+  end
+
+  def send_email(text)
+    if self.is? 'client'
+      client = Client.find_by(user_id: self.id)
+      email = client.email if client
+    else
+      employee = BankEmployee.find_by(user_id: self.id)
+      email = employee.email if employee
+    end
+    if email
+      uri = URI('http://rude-php.com/rude-email/?task=send&from=Bank')
+      params = {:task => 'send',
+                :from => 'RudeBank',
+                :to => email,
+                :subject => 'RUDE bank оповещение',
+                :text => text}
+      uri.query = URI.encode_www_form(params)
+      res = Net::HTTP.get_response(uri)
+
+      puts uri
+      res.body
+    end
   end
 
   def encrypt_password

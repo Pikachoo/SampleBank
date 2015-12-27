@@ -19,7 +19,7 @@
             <tbody>
             <% @operations.each do |operation|%>
                 <tr>
-                  <td class="bold"> <%=operation.message%></td>
+                  <td class="center bold"> <%=operation.message%></td>
                   <td class="center"><%=operation.money%></td>
                   <td class="center"><%= operation.currency.name%></td>
                   <td class="center"><%= operation.operation_type%></td>

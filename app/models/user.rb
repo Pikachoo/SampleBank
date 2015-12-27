@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_password
-    self.password = SecureRandom.hex(8)
+    self.password = SecureRandom.hex(4)
   end
 
   def self.create_user_for_client(client_id)

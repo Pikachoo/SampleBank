@@ -56,11 +56,13 @@ module Operator
     def destroy
       begin
         user = User.find(params[:id])
+        @message = 'Пользователь удален.'
         if user.id != current_user.id
-          # user.send_email("Пользователь с именем #{user.name} был удален.")
-          # user.send_sms("Пользователь с именем #{user.name} был удален.")
-          # # user.destroy
-          puts 'ая яй'
+          user.send_email("Пользователь с именем #{user.name} был удален.")
+          user.send_sms("Пользователь с именем #{user.name} был удален.")
+          user.destroy
+        else
+          @message = 'Вы не может удалить себя.'
         end
 
         @client_users = User.where(role_id: 1).order(:name).page(params[:client_users_page].to_i)
@@ -68,7 +70,7 @@ module Operator
         @cashier_users = User.where(role_id: 5).order(:name).page(params[:cashier_users].to_i)
         @user_admin_users = User.where(role_id: 3).order(:name).page(params[:user_admin_users].to_i)
         @credit_admin_users = User.where(role_id: 4).order(:name).page(params[:credit_admin_users].to_i)
-        @message = 'Пользователь удален.'
+
         render 'operator/users/index'
       end
     end

@@ -32,5 +32,8 @@
         <% end %>
         <h2>В ближайшее время оператор рассмотрит заявку на выдачу кредита и свяжется с клиентом.</h2>
       </div>
+    <div style="display: flex; padding-top: 10px">
+      <%= link_to 'Перейти к одобрению кредита',  applyment_path(@client_credit.id), style: 'margin-top: 17px', class: 'ui button orange' %>
+    </div>
     </div>
 </div>

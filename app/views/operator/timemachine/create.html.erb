@@ -6,6 +6,9 @@
             <br/>
             <%= label_tag :cur_time, "Текущая дата = #{@cur_date}" %>
           </div>
+      <div style="display: flex; padding-top: 10px">
+        <%= link_to 'Вернуться к машине времени', operator_timemachine_new_path, style: 'margin-top: 17px', class: 'ui button orange' if can? :manage, Timemachine %>
+      </div>
     </div>
   </div>
 </div>

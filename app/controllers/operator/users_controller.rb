@@ -23,9 +23,33 @@ module Operator
     end
 
     def create
+
+      #создание сотрудника банка
+      employee_name = params[:user][:man_name]
+      employee_surname = params[:user][:man_surname]
+      employee_patronymic = params[:user][:man_patronymic]
+      employee_mobile_phone = params[:user][:man_mobile_phone]
+      employee_email = params[:user][:man_email]
+      bank_employee = BankEmployee.create(name: employee_name,
+                                          surname: employee_surname,
+                                          patronymic: employee_patronymic,
+                                          email: employee_email,
+                                          mobile_phone: employee_mobile_phone)
+      # создание пользователя
       @user = User.new(user_params)
-      @user.save_first_time
-      @user_inputs = {name: @user.name, role_id: @user.role_id}
+      @user = @user.save_user_employee(bank_employee)
+
+      #обновление связи user и bank_employee
+      bank_employee.update_attributes(user_id: @user.id)
+
+      @user_inputs = {name: @user.name,
+                      role_id: @user.role_id,
+                      man_name: employee_name,
+                      man_surname: employee_surname,
+                      man_patronymic: employee_patronymic,
+                      man_mobile_phone: employee_mobile_phone,
+                      man_email: employee_email}
+
       redirect_to :back, flash: {validation_errors: @user.error_message,
                                  inputs_params: params[:user]} unless @user.error_message.nil?
     end

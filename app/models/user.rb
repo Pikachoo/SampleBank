@@ -23,6 +23,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  def save_user_employee(bank_employee)
+    self.generate_password
+    if self.valid?
+      self.save
+
+        phone_number = bank_employee.mobile_phone[1..-1]
+        email = bank_employee.email
+        text = "Пользователь создан.\nИмя: #{self.name}\nПароль: #{self.password}"
+
+        User.send_sms(phone_number, text)
+        User.send_email(email, text) if email != ''
+    else
+      if self.errors[:name]
+        self.error_message = ['Данный пользователь уже существует.']
+      end
+    end
+    self
+  end
+
   def save_first_time(client = nil)
     self.generate_password
     if self.valid?

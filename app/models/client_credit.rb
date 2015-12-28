@@ -35,6 +35,8 @@ class ClientCredit < ActiveRecord::Base
       User.send_email(self.client.email, "Кредит №#{self.id} одобрен.")
       User.send_sms(self.client.phone_mobile[1..-1], "Кредит №#{self.id} одобрен.")
     elsif state == 3
+      User.send_email(self.client.email, "Кредит №#{self.id} закрыт.")
+      User.send_sms(self.client.phone_mobile[1..-1], "Кредит №#{self.id} закрыт.")
       self.account.update_attributes(is_active: false)
     end
     self.update_attributes(credit_state: state)

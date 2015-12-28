@@ -56,9 +56,12 @@ module Operator
     def destroy
       begin
         user = User.find(params[:id])
-        user.send_email("Пользователь с именем #{user.name} был удален.")
-        user.send_sms("Пользователь с именем #{user.name} был удален.")
-        user.destroy
+        if user.id != current_user.id
+          # user.send_email("Пользователь с именем #{user.name} был удален.")
+          # user.send_sms("Пользователь с именем #{user.name} был удален.")
+          # # user.destroy
+          puts 'ая яй'
+        end
 
         @client_users = User.where(role_id: 1).order(:name).page(params[:client_users_page].to_i)
         @operator_users = User.where(role_id: 2).order(:name).page(params[:operator_users_page].to_i)

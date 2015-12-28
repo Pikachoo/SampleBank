@@ -36,9 +36,10 @@ class Credit < ActiveRecord::Base
   def destroy_credit_and_dependecies()
     Credit.transaction do
       begin
-        self.destroy_credit_dependecies
 
-        self.destroy
+        self.destroy_credit_dependecies
+        # self.destroy
+        self.update_attributes(is_active: false)
       rescue
         raise ActiveRecord::Rollback
       end
@@ -48,17 +49,20 @@ class Credit < ActiveRecord::Base
   def destroy_credit_dependecies
     credit_grantings = CreditGranting.where(credit_id: self.id)
     credit_grantings.each do |granting|
-      granting.destroy
+      granting.update_attributes(is_active: false)
+      # granting.destroy
     end
 
     credit_payments = CreditPayment.where(credit_id: self.id)
     credit_payments.each do |payment|
-      payment.destroy
+      # payment.destroy
+      payment.update_attributes(is_active: false)
     end
 
     credit_warrenties = CreditWarrenty.where(credit_id: self.id)
     credit_warrenties.each do |warrenty|
-      warrenty.destroy
+      # warrenty.destroy
+      warrenty.update_attributes(is_active: false)
     end
 
   end

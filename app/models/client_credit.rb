@@ -15,7 +15,7 @@ class ClientCredit < ActiveRecord::Base
     result = Hash.new
     if state == 1
       account = Account.create_account(self)
-     if account.nil? == false
+      if account.nil? == false
         result[:account] = account
       else
         account = Account.find_by(self.account_id)
@@ -34,6 +34,8 @@ class ClientCredit < ActiveRecord::Base
       end
       User.send_email(self.client.email, "Кредит №#{self.id} одобрен.")
       User.send_sms(self.client.phone_mobile[1..-1], "Кредит №#{self.id} одобрен.")
+    elsif state == 3
+      self.account.update_attributes(is_active: false)
     end
     self.update_attributes(credit_state: state)
     result
@@ -48,7 +50,10 @@ class ClientCredit < ActiveRecord::Base
     credit_months = client_credit.begin_date.year * 12 + client_credit.begin_date.month
     days = timemachine.day - client_credit.begin_date.day
     months = timemachine_months - credit_months
+    puts "months #{months}"
     if months > client_credit.term
+      self.calculate_payments_params(client_credit.term, payments, client_credit, orders, months)
+    elsif months == client_credit.term && days >= 0
       self.calculate_payments_params(client_credit.term, payments, client_credit, orders, months)
     else
       if days < 0
@@ -67,6 +72,8 @@ class ClientCredit < ActiveRecord::Base
       is_payed = self.order_is_payed?(orders, time)
       penalty_payment = 0
       unless is_payed
+        puts json: payments
+        puts json: time
         penalty_payment = self.calculate_penalty_payment(months_since - time, payments[time - 1][:payment], client_credit.credit.default_interest.to_f / 100)
       end
       payments[time - 1][:payment] += penalty_payment
@@ -136,5 +143,14 @@ class ClientCredit < ActiveRecord::Base
     end
 
     payments
+  end
+
+  def can_be_closed?
+    orders = Order.where(credit_id: self.id)
+    if orders.count == self.term
+      true
+    else
+      false
+    end
   end
 end

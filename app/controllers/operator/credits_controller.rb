@@ -3,13 +3,13 @@ module Operator
     load_and_authorize_resource
     skip_load_resource :create, :update
     rescue_from ActiveRecord::RecordNotFound do |exception|
-      @credits = Credit.all
-      @error_message = 'Кредит не найден'
-      render 'operator/credits/index'
+      @message = 'Кредит не найден'
+      redirect_to operator_credits_path, flash: { message: @message }
     end
 
     def index
-      @credits = Credit.all
+      @credits = Credit.where(is_active: true)
+      @message = flash[:message] if flash[:message] != nil
     end
 
     def new
@@ -20,10 +20,9 @@ module Operator
 
       credit = Credit.new(credit_params)
       credit.currency_id = params[:credit][:currency]
-      credit.save_credit_and_dependecies(params[:credit][:warrenty_type], params[:credit][:granting_type], params[:credit][:payment_type])
+      @message = credit.save_credit_and_dependecies(params[:credit][:warrenty_type], params[:credit][:granting_type], params[:credit][:payment_type])
 
-      @credits = Credit.all
-      render 'operator/credits/index'
+      redirect_to operator_credits_path, flash: { message: @message }
     end
 
     def edit
@@ -33,18 +32,17 @@ module Operator
     def update
       @credit.update(credit_params)
       @credit.update_dependecies(params[:credit][:warrenty_type], params[:credit][:granting_type], params[:credit][:payment_type])
-      @credits = Credit.all
+
       @message = 'Кредит обновлен.'
-      render 'operator/credits/index'
+      redirect_to operator_credits_path, flash: { message: @message }
     end
 
     def destroy
       credit = Credit.find(params[:id])
       credit.destroy_credit_and_dependecies
 
-      @credits = Credit.all
       @message = 'Кредит удален.'
-      render 'operator/credits/index'
+      redirect_to operator_credits_path, flash: { message: @message }
 
     end
 

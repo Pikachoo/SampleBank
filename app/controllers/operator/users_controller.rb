@@ -15,6 +15,7 @@ module Operator
       @cashier_users = User.where(role_id: 5).order(:name).page(params[:cashier_users].to_i)
       @user_admin_users = User.where(role_id: 3).order(:name).page(params[:user_admin_users].to_i)
       @credit_admin_users = User.where(role_id: 4).order(:name).page(params[:credit_admin_users].to_i)
+      @message = flash[:message] if flash[:message] != nil
     end
 
     def new
@@ -30,16 +31,16 @@ module Operator
       employee_patronymic = params[:user][:man_patronymic]
       employee_mobile_phone = params[:user][:man_mobile_phone]
       employee_email = params[:user][:man_email]
-      bank_employee = BankEmployee.create(name: employee_name,
-                                          surname: employee_surname,
-                                          patronymic: employee_patronymic,
-                                          email: employee_email,
-                                          mobile_phone: employee_mobile_phone)
-      # создание пользователя
+      bank_employee = BankEmployee.create_employee_for_user(employee_name,
+                                                            employee_surname,
+                                                            employee_patronymic,
+                                                            employee_email,
+                                                            employee_mobile_phone)
+      # # создание пользователя
       @user = User.new(user_params)
       @user = @user.save_user_employee(bank_employee)
-
-      #обновление связи user и bank_employee
+      # puts json: user
+      # #обновление связи user и bank_employee
       bank_employee.update_attributes(user_id: @user.id)
 
       @user_inputs = {name: @user.name,
@@ -68,13 +69,9 @@ module Operator
     def update
       @user.update(user_params)
 
-      @client_users = User.where(role_id: 1).order(:name).page(params[:client_users_page].to_i)
-      @operator_users = User.where(role_id: 2).order(:name).page(params[:operator_users_page].to_i)
-      @cashier_users = User.where(role_id: 5).order(:name).page(params[:cashier_users].to_i)
-      @user_admin_users = User.where(role_id: 3).order(:name).page(params[:user_admin_users].to_i)
-      @credit_admin_users = User.where(role_id: 4).order(:name).page(params[:credit_admin_users].to_i)
       @message = 'Пользователь обновлен.'
-      render 'operator/users/index'
+
+      redirect_to operator_users_path, flash: { message: @message }
     end
 
     def destroy
@@ -89,13 +86,7 @@ module Operator
           @message = 'Вы не может удалить себя.'
         end
 
-        @client_users = User.where(role_id: 1).order(:name).page(params[:client_users_page].to_i)
-        @operator_users = User.where(role_id: 2).order(:name).page(params[:operator_users_page].to_i)
-        @cashier_users = User.where(role_id: 5).order(:name).page(params[:cashier_users].to_i)
-        @user_admin_users = User.where(role_id: 3).order(:name).page(params[:user_admin_users].to_i)
-        @credit_admin_users = User.where(role_id: 4).order(:name).page(params[:credit_admin_users].to_i)
-
-        render 'operator/users/index'
+        redirect_to operator_users_path, flash: { message: @message }
       end
     end
 

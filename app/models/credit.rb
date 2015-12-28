@@ -70,25 +70,31 @@ class Credit < ActiveRecord::Base
   def save_credit_and_dependecies(warrenty_types, granting_types, payment_types)
     Credit.transaction do
       begin
-        self.save
+        credit_find = Credit.find_by_name(self.name)
+        if credit_find.nil?
+          self.save
 
-        credit_warrenty_ids = warrenty_types
-        credit_warrenty_ids = credit_warrenty_ids.split(",").map { |s| s.to_i }
-        credit_warrenty_ids.each do |warrenty|
-          CreditWarrenty.create(credit_id: self.id, warrenty_type_id: warrenty)
-        end
+          credit_warrenty_ids = warrenty_types
+          credit_warrenty_ids = credit_warrenty_ids.split(",").map { |s| s.to_i }
+          credit_warrenty_ids.each do |warrenty|
+            CreditWarrenty.create(credit_id: self.id, warrenty_type_id: warrenty)
+          end
 
 
-        credit_granting_ids = granting_types
-        credit_granting_ids = credit_granting_ids.split(",").map { |s| s.to_i }
-        credit_granting_ids.each do |granting|
-          CreditGranting.create(credit_id: self.id, granting_type_id: granting)
-        end
+          credit_granting_ids = granting_types
+          credit_granting_ids = credit_granting_ids.split(",").map { |s| s.to_i }
+          credit_granting_ids.each do |granting|
+            CreditGranting.create(credit_id: self.id, granting_type_id: granting)
+          end
 
-        credit_payment_ids = payment_types
-        credit_payment_ids = credit_payment_ids.split(",").map { |s| s.to_i }
-        credit_payment_ids.each do |payment|
-          CreditPayment.create(credit_id: self.id, payment_type_id: payment)
+          credit_payment_ids = payment_types
+          credit_payment_ids = credit_payment_ids.split(",").map { |s| s.to_i }
+          credit_payment_ids.each do |payment|
+            CreditPayment.create(credit_id: self.id, payment_type_id: payment)
+          end
+          return 'Кредит создан.'
+        else
+          return 'Кредит с таким именем уже существует.'
         end
       rescue
         raise ActiveRecord::Rollback

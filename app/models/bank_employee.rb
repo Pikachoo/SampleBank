@@ -1,19 +1,19 @@
 class BankEmployee < ActiveRecord::Base
-  def self.create_employee_for_user(name, surname, patonymic, email, phone)
+  def self.create_employee_for_user(name, surname, patronymic, email, phone)
 
-    bank_employee_find = BankEmployee.find_by(name: employee_name,
-                                              surname: employee_surname,
-                                              patronymic: employee_patronymic,
-                                              mobile_phone: employee_mobile_phone,
-                                              email: employee_email)
+    bank_employee_find = BankEmployee.find_by(name: name,
+                                              surname: surname,
+                                              patronymic: patronymic,
+                                              mobile_phone: phone,
+                                              email: email)
     if bank_employee_find.nil?
-      return BankEmployee.create(name: employee_name,
-                                        surname: employee_surname,
-                                        patronymic: employee_patronymic,
-                                        mobile_phone: employee_mobile_phone,
-                                        email: employee_email)
+      return BankEmployee.create(name: name,
+                                        surname: surname,
+                                        patronymic: patronymic,
+                                        mobile_phone: phone,
+                                        email: email)
     else
-      return
+      return bank_employee_find
 
     end
   end

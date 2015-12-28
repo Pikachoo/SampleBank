@@ -6,7 +6,7 @@ class BankCreditController < ApplicationController
   def new
     @credit_warrency_types = CreditWarrentyType.all
     @credit_payment_types = CreditPaymentType.all
-    @credits = Credit.all
+    @credits = Credit.where(is_active: true)
     @client_job_types = ClientJobType.all
     @client_family_status = ClientFamilyStatus.all
     @client_eduction = ClientEducation.all

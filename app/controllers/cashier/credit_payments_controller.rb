@@ -36,8 +36,8 @@ module Cashier
       end
       @paymens_params = ClientCredit.credit_payments(ClientCredit.find(@client_credit_id))
 
-      User.send_email(ClientCredit.find(@client_credit_id).client.email, "Кредит №#{@client_credit_id}:\nплатеж №#{payment_id} оплачен.\nсумма: #{sum}.\n")
-      User.send_sms(ClientCredit.find(@client_credit_id).client.phone_mobile[1..-1], "Кредит №#{@client_credit_id}:\nплатеж №#{payment_id} оплачен.\nсумма: #{sum}.\n")
+      User.send_email(ClientCredit.find(@client_credit_id).client.email, "Кредит №#{@client_credit_id}: платеж №#{payment_id} оплачен, сумма #{sum}.")
+      User.send_sms(ClientCredit.find(@client_credit_id).client.phone_mobile[1..-1], "Кредит №#{@client_credit_id}: платеж №#{payment_id} оплачен, сумма #{sum}.")
       render 'create'
     end
 

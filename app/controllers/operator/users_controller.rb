@@ -38,8 +38,8 @@ module Operator
       @user = User.find(params[:id])
       @user.generate_password
       @user.save
-      @user.send_email("Пароль был изменен.\nПользователь\n имя: #{@user.name}\n новый пароль: #{@user.password}")
-      @user.send_sms("Пароль был изменен.\nПользователь\n имя: #{@user.name}\n новый пароль: #{@user.password}")
+      @user.send_email("Пароль был изменен. Логин: #{@user.name}, новый пароль: #{@user.password}.")
+      @user.send_sms("Пароль был изменен. Логин: #{@user.name}, новый пароль: #{@user.password}.")
     end
     def update
       @user.update(user_params)

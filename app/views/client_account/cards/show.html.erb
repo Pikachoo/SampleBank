@@ -42,8 +42,8 @@
                           <td class="bold center"><%= card.account.account_type %></td>
                           <td class="bold center"><%= card.number %></td>
                           <td class="bold center"><%= link_to card.account.IBAN, client_account_show_account_path(card.account.id) %></td>
-                          <td class="center"><%= card.date_expiry%></td>
                           <td class="center"><%= card.date_created %></td>
+                          <td class="center"><%= card.date_expiry%></td>
                           <td class="center"><%= card.account.balance %></td>
                           <td class="center"><%= card.account.currency.name %></td>
 

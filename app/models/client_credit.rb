@@ -32,6 +32,8 @@ class ClientCredit < ActiveRecord::Base
         card = Card.create_card(account.id, self.client_id)
         result[:card] = card
       end
+      User.send_email(self.client.email, "Кредит №#{self.id} одобрен.")
+      User.send_sms(self.client.phone_mobile[1..-1], "Кредит №#{self.id} одобрен.")
     end
     self.update_attributes(credit_state: state)
     result

@@ -30,7 +30,7 @@
 
   <div class="field">
     <label>*Возраст</label>
-    <%= f.number_field "#{name}_age", min: 18, max: 120, value: @bank_credit_inputs["#{name}_age"], placeholder: "Колличество полных лет"%>
+    <%= f.number_field "#{name}_age", min: 18, max: 120, value: @bank_credit_inputs["#{name}_age"], placeholder: "Количество полных лет"%>
   </div>
 </div>
 
@@ -61,5 +61,5 @@
 
 <div class="field">
   <label>Длительность подтверждаемого проживания на территории РБ (заполняется лицом без гражданства/иностранным гражданином, постоянно проживающим в Республике Беларусь)</label>
-  <%= f.number_field "#{name}_rb_age", min: 0, value: @bank_credit_inputs["#{name}_rb_age"], placeholder: "Колличество полных лет"%>
+  <%= f.number_field "#{name}_rb_age", min: 0, value: @bank_credit_inputs["#{name}_rb_age"], placeholder: "Количество полных лет"%>
 </div>

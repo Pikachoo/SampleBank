@@ -8,7 +8,16 @@
 
   <div class="field">
     <label>*Серия</label>
-    <%= f.text_field "#{name}_document_series", value: @bank_credit_inputs["#{name}_document_series"], placeholder: "Серия"%>
+    <div class="ui selection dropdown">
+        <%= f.number_field "#{name}_document_series", value: @bank_credit_inputs["#{name}_document_series"], type: "hidden"%>
+        <i class="dropdown icon"></i>
+        <div class="default text">Серия</div>
+        <div class="menu">
+            <% @passport_series.each do |series|%>
+                <div class="item" data-value="<%= series.id %>" ><%= series.name %></div>
+            <%end%>
+        </div>
+    </div>
   </div>
 
   <div class="field">

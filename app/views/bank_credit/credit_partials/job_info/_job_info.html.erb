@@ -6,10 +6,10 @@
 <%= render partial: "bank_credit/credit_partials/job_info/organization_employeers", locals: { name: name, f: f }  %>
 <%= render partial: "bank_credit/credit_partials/job_info/organization_experience", locals: { name: name, f: f }  %>
 
-<h3>Количество фактов смены основного места работы за 3 последних года</h3>
+<!--<h3>Количество фактов смены основного места работы за 3 последних года</h3>
 <div class="field">
   <%= f.number_field :"#{name}_job_changing_value", min: 0, value: @bank_credit_inputs["#{name}_job_changing_value"], placeholder: "Количество фактов смены основного места работы за 3 последних года" %>
-</div>
+</div>-->
 
 <%= render partial: "bank_credit/credit_partials/job_info/job_category", locals: { name: name, f: f }  %>
 <%= render partial: "bank_credit/credit_partials/job_info/phones", locals: { name: name, f: f }  %>

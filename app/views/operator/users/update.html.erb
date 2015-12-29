@@ -1,0 +1,15 @@
+<div id="container">
+  <div id="content">
+
+    <div class="ui segment" id="credits">
+      <div class="ui success message">
+        <h3>Пользователь обновлен</h3>
+        <label class='user_labels'>Имя: <%= @user.name %></label>
+        <label class='user_labels'>Роль: <%= @user.role.russian_name %></label>
+      </div>
+      <div style="display: flex; padding-top: 10px">
+        <%= link_to 'Вернуться к списку пользователей', operator_users_path, style: 'margin-top: 17px', class: 'ui button orange' if can? :read, User %>
+      </div>
+    </div>
+  </div>
+</div>

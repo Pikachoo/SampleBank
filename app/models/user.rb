@@ -165,6 +165,28 @@ class User < ActiveRecord::Base
     end
 
   end
+  def custom_update(params)
+
+    user_find = User.find_by_name(params[:name])
+    if user_find.nil?
+      self.update(params)
+
+      bank_employee = BankEmployee.find_by(user_id: self.id)
+      phone_number = bank_employee.mobile_phone[1..-1]
+      email = bank_employee.email
+      text = "Пользователь обновлен.\nИмя: #{self.name}\nРоль: #{self.role.name}"
+
+      User.send_sms(phone_number, text)
+      User.send_email(email, text) if email != ''
+      return self
+    else
+
+      user = User.find_by_name(self.name)
+      user.error_message = ["Пользователь с  именем #{params[:name]} уже существует."]
+      puts json: user
+      return user
+    end
+  end
 
 
   def is?(requested_role)

@@ -69,11 +69,11 @@ module Operator
       @user.send_sms("Пароль был изменен. Логин: #{@user.name}, новый пароль: #{@user.password}.")
     end
     def update
-      @user.update(user_params)
-
-      @message = 'Пользователь обновлен.'
-
-      redirect_to operator_users_path, flash: { message: @message }
+      puts 'z я здесь'
+      @user = @user.custom_update(user_params)
+      # @message = 'Пользователь обновлен.'
+      redirect_to :back, flash: {validation_errors: @user.error_message,
+                                 inputs_params: params[:user]} unless @user.error_message.nil?
     end
 
     def destroy

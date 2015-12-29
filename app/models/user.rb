@@ -168,7 +168,7 @@ class User < ActiveRecord::Base
   def custom_update(params)
 
     user_find = User.find_by_name(params[:name])
-    if user_find.nil?
+    if user_find.nil? || self.name == params[:name]
       self.update(params)
 
       bank_employee = BankEmployee.find_by(user_id: self.id)

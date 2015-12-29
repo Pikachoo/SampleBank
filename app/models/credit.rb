@@ -5,6 +5,8 @@ class Credit < ActiveRecord::Base
   has_many :credit_payments
   has_many :client_credits
 
+  attr_accessor :error_message
+
   def get_credit_payments
     credit_payments = CreditPayment.where(credit_id: self.id)
     puts json: credit_payments
@@ -100,6 +102,16 @@ class Credit < ActiveRecord::Base
         raise ActiveRecord::Rollback
       end
     end
+  end
+  def custom_update(params, warrenty_types, granting_types, payment_types)
+    credit_find = Credit.find_by_name(params[:name])
+    if credit_find.nil? || self.name == params[:name]
+      self.update(params)
+      self.update_dependecies(warrenty_types, granting_types, payment_types)
+    else
+      self.error_message = ["Кредит с именем #{params[:name]} уже существует."]
+    end
+    return self
   end
 
   def update_dependecies(warrenty_types, granting_types, payment_types)

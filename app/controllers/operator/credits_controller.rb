@@ -4,7 +4,7 @@ module Operator
     skip_load_resource :create, :update
     rescue_from ActiveRecord::RecordNotFound do |exception|
       @message = 'Кредит не найден'
-      redirect_to operator_credits_path, flash: { message: @message }
+      redirect_to operator_credits_path, flash: {message: @message}
     end
 
     def index
@@ -22,7 +22,7 @@ module Operator
       credit.currency_id = params[:credit][:currency]
       @message = credit.save_credit_and_dependecies(params[:credit][:warrenty_type], params[:credit][:granting_type], params[:credit][:payment_type])
 
-      redirect_to operator_credits_path, flash: { message: @message }
+      redirect_to operator_credits_path, flash: {message: @message}
     end
 
     def edit
@@ -30,11 +30,18 @@ module Operator
     end
 
     def update
-      @credit.update(credit_params)
-      @credit.update_dependecies(params[:credit][:warrenty_type], params[:credit][:granting_type], params[:credit][:payment_type])
+
+      @credit = @credit.custom_update(credit_params, params[:credit][:warrenty_type], params[:credit][:granting_type], params[:credit][:payment_type])
+
 
       @message = 'Кредит обновлен.'
-      redirect_to operator_credits_path, flash: { message: @message }
+      unless @credit.error_message.nil?
+        redirect_to :back, flash: {validation_errors: @credit.error_message,
+                                   inputs_params: params[:user]}
+      else
+
+        redirect_to operator_credits_path, flash: {message: @message}
+      end
     end
 
     def destroy
@@ -42,7 +49,7 @@ module Operator
       credit.destroy_credit_and_dependecies
 
       @message = 'Кредит удален.'
-      redirect_to operator_credits_path, flash: { message: @message }
+      redirect_to operator_credits_path, flash: {message: @message}
 
     end
 

@@ -43,6 +43,7 @@ module Operator
       # #обновление связи user и bank_employee
       bank_employee.update_attributes(user_id: @user.id)
 
+      puts 'olol'
       @user_inputs = {name: @user.name,
                       role_id: @user.role_id,
                       man_name: employee_name,
@@ -51,6 +52,7 @@ module Operator
                       man_mobile_phone: employee_mobile_phone,
                       man_email: employee_email}
 
+      puts @user.error_message.class
       redirect_to :back, flash: {validation_errors: @user.error_message,
                                  inputs_params: params[:user]} unless @user.error_message.nil?
     end
@@ -83,7 +85,7 @@ module Operator
           user.send_sms("Пользователь с именем #{user.name} был удален.")
           user.destroy
         else
-          @message = 'Вы не может удалить себя.'
+          @message = 'Вы не можете удалить себя.'
         end
 
         redirect_to operator_users_path, flash: { message: @message }

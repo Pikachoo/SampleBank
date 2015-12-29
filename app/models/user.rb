@@ -36,10 +36,12 @@ class User < ActiveRecord::Base
       User.send_email(email, text) if email != ''
       return self
     else
-      if self.errors[:name]
+      if self.errors[:name].empty?  == false
         self.error_message = ['Данный пользователь уже существует.']
       end
-      return User.find_by_name(self.name)
+      user = User.find_by_name(self.name)
+      user.error_message = self.error_message
+      return user
     end
   end
 
@@ -57,9 +59,12 @@ class User < ActiveRecord::Base
       end
 
     else
-      if self.errors[:name]
-        self.error_message = ['Данный пользователь уже существует.']
+      if self.errors[:name].empty?  == false
+        self.error_message =  ['Данный пользователь уже существует.']
       end
+      user = User.find_by_name(self.name)
+      user.error_message = self.error_message
+      return user
     end
     self
   end

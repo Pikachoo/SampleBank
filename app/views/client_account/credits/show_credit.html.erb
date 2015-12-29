@@ -17,36 +17,36 @@
           <table class="ui table celled striped">
             <thead>
             <tr>
-              <th>Номер платежа</th>
-              <th>Основной долг</th>
-              <th>Проценты</th>
-              <th>Просрочено</th>
-              <th>Пеня</th>
-              <th>Весь платеж</th>
-              <th>Итого к оплате</th>
-              <th>До какого числа</th>
-              <th>Оплачено</th>
+              <th class="center">Номер платежа</th>
+              <th class="center">Основной долг</th>
+              <th class="center">Проценты</th>
+              <th class="center">Просрочено</th>
+              <th class="center">Пеня</th>
+              <th class="center">Весь платеж</th>
+              <th class="center">Итого к оплате</th>
+              <th class="center">До какого числа</th>
+              <th class="center">Оплачено</th>
             </tr>
             </thead>
             <tbody>
             <% @paymens_params.each do |payment| %>
                 <tr>
-                  <td><%= payment[:number] %></td>
-                  <td><%= payment[:main_payment] %></td>
-                  <td><%= payment[:percent_payment] %></td>
+                  <td class="center"><%= payment[:number] %></td>
+                  <td class="center"><%= payment[:main_payment] %></td>
+                  <td class="center"><%= payment[:percent_payment] %></td>
                   <% if payment[:is_payed] %>
-                      <td><i class="icon remove green"></i></td>
+                      <td class="center"><i class="icon remove green"></i></td>
                   <% else %>
-                      <td><i class="icon remove red"></i></td>
+                      <td class="center"><i class="icon remove red"></i></td>
                   <% end %>
-                  <td><%= payment[:penalty_payment] %></td>
-                  <td><%= payment[:payment] %></td>
-                  <td><%= payment[:bel_payment] %></td>
-                  <td><%= payment[:expire_date] %></td>
+                  <td class="center"><%= payment[:penalty_payment] %></td>
+                  <td class="center"><%= payment[:payment] %></td>
+                  <td class="center"><%= payment[:bel_payment] %></td>
+                  <td class="center"><%= payment[:expire_date] %></td>
                   <% if payment[:is_payed] %>
-                      <td><i class="icon checkmark green"></i></td>
+                      <td class="center"><i class="icon checkmark green"></i></td>
                   <% else %>
-                      <td><i class="icon checkmark red"></i></td>
+                      <td class="center"><i class="icon checkmark red"></i></td>
                   <% end %>
                 </tr>
             <% end %>

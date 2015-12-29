@@ -13,7 +13,28 @@
               <% end %>
             </ul>
           </div>
+          <div class="field">
+            <%= f.label :man_name, 'Имя' %>
+            <%= f.text_field :man_name, value: @user_inputs['man_name'], placeholder: 'Имя' %><br/>
+          </div>
+          <div class="field">
+            <%= f.label :man_surname, 'Фамилия' %>
+            <%= f.text_field :man_surname, value: @user_inputs['man_surname'], placeholder: 'Фамилия' %><br/>
+          </div>
+          <div class="field">
+            <%= f.label :man_patronymic, 'Отчество' %>
+            <%= f.text_field :man_patronymic, value: @user_inputs['man_patronymic'], placeholder: 'Отчество' %><br/>
+          </div>
+          <div class="field">
+            <%= f.label :man_mobile_phone, 'Мобильный телефон' %>
+            <%= f.text_field :man_mobile_phone, value: @user_inputs['man_mobile_phone'], placeholder: '+375ХХХХХХХХХ' %><br/>
+          </div>
 
+          <div class="field">
+            <%= f.label :man_email, 'Email' %>
+
+            <%= f.email_field :man_email, value: @user_inputs['man_email'], placeholder: "E-mail"%>
+          </div>
           <div class="field">
             <%= f.label :name, 'Имя пользователя' %>
             <%= f.text_field :name, value: @user_inputs['name'], placeholder: 'Имя пользователя' %><br/>
@@ -29,7 +50,7 @@
               <div class="default text">Роль</div>
               <div class="menu" id="menu_granting" tabindex="-1">
 
-                <% Role.all.each do |role| %>
+                <% Role.where("name <> 'client' ").each do |role| %>
                     <div class="item" data-value="<%= role.id %>"><%= role.russian_name %></div>
                 <% end %>
               </div>

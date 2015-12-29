@@ -41,8 +41,14 @@ class CreditAdministrateController < ApplicationController
   end
 
   def applyment_decline
-    ClientCredit.find(params[:id]).update_attributes(credit_state: 4)
-    redirect_to credit_administrate_index_path
+    client_credit = ClientCredit.find(params[:id])
+    if client_credit.credit_state == 0
+      client_credit.update_attributes(credit_state: 4)
+      redirect_to credit_administrate_index_path, flash: {validation_messages: ["Кредит №#{params[:id]}  откланен."]}
+    else
+      redirect_to credit_administrate_index_path, flash: {validation_errors: ["Кредит №#{params[:id]} уже был рассмотрен."]}
+    end
+
   end
 
   def print_credit

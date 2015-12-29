@@ -1,27 +1,40 @@
 <div id="container">
-    <div id="content">
-      <div class="ui segment piled" id = 'credit_aministrate'>
+  <div id="content">
+    <div class="ui segment piled" id='credit_aministrate'>
 
-        <form class="ui form error success">
+      <form class="ui form error success">
 
 
-          <h2 class="ui header" style="text-align: center">Центр работы с кредитами</h2>
-          <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
-            <b>Во время отправки данных обнаружились следующие ошибки:</b>
-            <ul>
-              <% puts params
-                 if (flash[:validation_errors] != nil) %>
-                  <% flash[:validation_errors].each do |e| %>
-                      <li><%= e %></li>
-                  <% end %>
-              <% end %>
-            </ul>
-          </div>
-          <%= render partial: "credit_type_table", locals: {credits: @applyment_credits, total_pages: @applyment_credits.total_pages, credits_type: "Кредиты ожидающие подтверждения", param_id: "applyment_credits_page", current_page: params[:applyment_credits_page].to_i} %>
-          <%= render partial: "credit_type_table", locals: {credits: @opened_credits, total_pages: @opened_credits.total_pages, credits_type: "Действующие кредиты", param_id: "opened_credits_page", current_page: params[:opened_credits_page].to_i} %>
-          <%= render partial: "credit_type_table", locals: {credits: @closed_credits, total_pages: @closed_credits.total_pages, credits_type: "Закрытые кредиты", param_id: "closed_credits_page", current_page: params[:closed_credits_page].to_i} %>
-          <%= render partial: "credit_type_table", locals: {credits: @declined_credits, total_pages: @declined_credits.total_pages, credits_type: "Отменённые кредиты", param_id: "declined_credits_page", current_page: params[:declined_credits_page].to_i} %>
-        </form>
-      </div>
+        <h2 class="ui header" style="text-align: center">Центр работы с кредитами</h2>
+
+        <div id="submit-errors" class="validation_errors <%= 'invisible' if flash[:validation_errors] == nil %>">
+          <b>Во время отправки данных обнаружились следующие ошибки:</b>
+          <ul>
+            <% puts params
+               if (flash[:validation_errors] != nil) %>
+                <% flash[:validation_errors].each do |e| %>
+                    <li><%= e %></li>
+                <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <% if flash[:validation_messages] != nil %>
+            <div class="ui success message ">
+              <ul>
+                <% puts params
+                   if (flash[:validation_messages] != nil) %>
+                    <% flash[:validation_messages].each do |e| %>
+                        <li><%= e %></li>
+                    <% end %>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+        <%= render partial: "credit_type_table", locals: {credits: @applyment_credits, total_pages: @applyment_credits.total_pages, credits_type: "Кредиты ожидающие подтверждения", param_id: "applyment_credits_page", current_page: params[:applyment_credits_page].to_i} %>
+        <%= render partial: "credit_type_table", locals: {credits: @opened_credits, total_pages: @opened_credits.total_pages, credits_type: "Действующие кредиты", param_id: "opened_credits_page", current_page: params[:opened_credits_page].to_i} %>
+        <%= render partial: "credit_type_table", locals: {credits: @closed_credits, total_pages: @closed_credits.total_pages, credits_type: "Закрытые кредиты", param_id: "closed_credits_page", current_page: params[:closed_credits_page].to_i} %>
+        <%= render partial: "credit_type_table", locals: {credits: @declined_credits, total_pages: @declined_credits.total_pages, credits_type: "Отменённые кредиты", param_id: "declined_credits_page", current_page: params[:declined_credits_page].to_i} %>
+      </form>
     </div>
+  </div>
 </div>

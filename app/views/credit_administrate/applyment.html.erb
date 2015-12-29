@@ -15,7 +15,7 @@
 
           <div style="display: flex">
             <%= link_to 'Отменить регистрацию кредита', applyment_decline_path, class: 'ui button orange' if can? :manage, ClientCredit %>
-            <%= link_to 'Оформить кредит', applyment_confirmation_path, style: "margin-left: 150px", class: 'ui button orange' if can? :manage, ClientCredit%>
+            <%= link_to 'Оформить кредит', applyment_confirmation_path, onclick: "return rude.trigger.init();", style: "margin-left: 150px", class: 'ui button orange' if can? :manage, ClientCredit%>
           </div>
         </form>
       </div>

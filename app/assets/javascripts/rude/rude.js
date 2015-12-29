@@ -1,5 +1,42 @@
 var rude =
 {
+    trigger:
+    {
+        value: 0,
+
+        init: function()
+        {
+            if (!rude.trigger.is.locked())
+            {
+                rude.trigger.lock();
+
+                return true;
+            }
+
+            console.log('!!!');
+
+            return false;
+        },
+
+        lock: function()
+        {
+            rude.trigger.value = 1;
+        },
+
+        is:
+        {
+            locked: function ()
+            {
+                return rude.trigger.value != 0
+            }
+        },
+
+        reset: function()
+        {
+            rude.trigger.value = 0;
+        }
+    },
+
     cards:
     {
 

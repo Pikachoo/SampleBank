@@ -15,12 +15,13 @@ class ClientCredit < ActiveRecord::Base
     result = Hash.new
     if state == 1
       account = Account.create_account(self)
-      if account.nil? == false
-        result[:account] = account
-      else
+      if account.nil?
         account = Account.find_by(self.account_id)
       end
 
+      result[:account] = account
+
+      puts json: account
       time = account.created_date
       cur_date = Timemachine.get_current_date
       account.update_attributes(created_date: time.change(:year => cur_date.year, month: cur_date.month, day: cur_date.day))
@@ -28,12 +29,17 @@ class ClientCredit < ActiveRecord::Base
       user = User.create_user_for_client(self.client_id)
       result[:user] = user
 
-      if self.payment_id == 2 && Card.find_by(account_id: account.id).nil?
-        card = Card.create_card(account.id, self.client_id)
+
+      if self.payment_id == 2
+        card = Card.find_by(account_id: account.id)
+        if card.nil?
+          card = Card.create_card(account.id, self.client_id)
+        end
         result[:card] = card
       end
-      User.send_email(self.client.email, "Кредит №#{self.id} одобрен.")
-      User.send_sms(self.client.phone_mobile[1..-1], "Кредит №#{self.id} одобрен.")
+
+      # User.send_email(self.client.email, "Кредит №#{self.id} одобрен.")
+      # User.send_sms(self.client.phone_mobile[1..-1], "Кредит №#{self.id} одобрен.")
     elsif state == 3
       User.send_email(self.client.email, "Кредит №#{self.id} закрыт.")
       User.send_sms(self.client.phone_mobile[1..-1], "Кредит №#{self.id} закрыт.")

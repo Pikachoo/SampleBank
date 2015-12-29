@@ -7,15 +7,7 @@
     </style>
     <div id="cards" class="ui segment">
       <h3 class="ui header dividing">Кредиты</h3>
-      <% unless flash[:notice].nil? %>
-          <div class="ui success message">
-            <% flash.each do |name, msg| %>
-                <%= content_tag :p, msg %>
-            <% end %>
 
-          </div>
-      <% end %>
-      <% flash[:notice] = nil %>
       <% if @client_credits.empty? == false %>
 
           <table class="ui table celled striped">

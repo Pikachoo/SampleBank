@@ -7,13 +7,8 @@ module ClientAccount
       flash[:notice] = nil
       @current_page = params[:accounts_credits].to_i
       cur_date = Timemachine.get_current_date  + 1.day
-      puts cur_date
-      client_credits = current_client.client_credits.where("begin_date <= '#{cur_date}' and credit_state = 1")
-      account_ids = Array.new
-      client_credits.each do |credit|
-        account_ids.push credit.account_id
-      end
-      @accounts = current_client.accounts.where("created_date <= '#{cur_date}' and id IN (#{account_ids.join(',')})").page(params[:accounts_credits])
+      where_str = "created_date <= '#{cur_date}' and is_active = true"
+      @accounts = current_client.accounts.where(where_str).page(params[:accounts_credits])
     end
 
     def show_account

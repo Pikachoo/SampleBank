@@ -38,6 +38,10 @@ class ClientCredit < ActiveRecord::Base
       User.send_email(self.client.email, "Кредит №#{self.id} закрыт.")
       User.send_sms(self.client.phone_mobile[1..-1], "Кредит №#{self.id} закрыт.")
       self.account.update_attributes(is_active: false)
+      card_find = Card.find_by(account_id: self.account.id)
+      if card_find
+        card_find.update_attributes(is_active: false)
+      end
     end
     self.update_attributes(credit_state: state)
     result

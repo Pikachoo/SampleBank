@@ -7,7 +7,9 @@
 <%= render partial: "bank_credit/credit_partials/applicant_info/personal_document", locals: {name: name, f: f}  %>
 <%= render partial: "bank_credit/credit_partials/applicant_info/phones", locals: {name: name, f: f}  %>
 <%= render partial: "bank_credit/credit_partials/applicant_info/addresses", locals: {name: name, f: f}  %>
-<%= render partial: "bank_credit/credit_partials/applicant_info/email", locals: {name: name, f: f}  %>
+<% if name == "customer" %>
+    <%= render partial: "bank_credit/credit_partials/applicant_info/email", locals: {name: name, f: f}  %>
+<% end %>
 <% if name != "customer" %>
     <%= render partial: 'bank_credit/credit_partials/job_info/organization_info', locals: { name: name, f: f }  %>
 <% end %>

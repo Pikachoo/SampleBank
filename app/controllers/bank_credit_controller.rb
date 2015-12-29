@@ -537,13 +537,13 @@ class BankCreditController < ApplicationController
     validation_errors = []
     bank_credit = params[:bank_credit]
     #First step validation
-    validation_errors.push 'Выберите тип кредита на 1ом шаге.' if bank_credit[:credit_type].to_i < 1 || bank_credit[:credit_type].to_i > 10
+    validation_errors.push 'Выберите тип кредита на 1ом шаге.' unless Credit.ids.include? bank_credit[:credit_type].to_i
     # validation_errors.push 'Укажите вид финансирования недвижимости на 1ом шаге.' if bank_credit[:credit_type].to_i == 4 && bank_credit[:another_home_credit_type] == ''
     # validation_errors.push 'Укажите вид автокредита на 1ом шаге.' if bank_credit[:credit_type].to_i == 6 && bank_credit[:credit_type_another_car] == ''
     # validation_errors.push 'Укажите вид кредитных карт на 1ом шаге.' if bank_credit[:credit_type].to_i == 8 && bank_credit[:credit_type_another_card] == ''
-    validation_errors.push 'Выберите порядок предоставления на 1ом шаге.' if bank_credit[:granted_procedure].to_i < 1 || bank_credit[:granted_procedure].to_i > 3
+    validation_errors.push 'Выберите порядок предоставления на 1ом шаге.' unless CreditGrantingType.ids.include? bank_credit[:granted_procedure].to_i
     # validation_errors.push 'Выберите порядок обеспечения на 1ом шаге.' if bank_credit[:affirmation_of_commitments].to_i < 1 || bank_credit[:affirmation_of_commitments].to_i > 13
-    validation_errors.push 'Выберите способ выдачи на 1ом шаге.' if bank_credit[:issuance_method].to_i < 1 || bank_credit[:granted_procedure].to_i > 5
+    validation_errors.push 'Выберите способ выдачи на 1ом шаге.' unless CreditPaymentType.ids.include? bank_credit[:issuance_method].to_i #if bank_credit[:issuance_method].to_i < 1 || bank_credit[:granted_procedure].to_i > 5
     validation_errors.push 'Укажите наличие счёта в нашем банке на 1ом шаге.' if bank_credit[:score_existance].to_i < 1 || bank_credit[:score_existance].to_i > 2
     validation_errors.push 'Укажите номер счёта в нашем банке на 1ом шаге.' if bank_credit[:score_existance].to_i == 1 && bank_credit[:account_id] == ''
     validation_errors.push 'Укажите номер счёта получателя на 1ом шаге.' if bank_credit[:issuance_method].to_i == 5 && bank_credit[:issuance_score] == ''
@@ -562,7 +562,7 @@ class BankCreditController < ApplicationController
     #validation_errors.push 'Укажите срок освоения кредита на 2ом шаге.' if bank_credit[:credit_limit_term].to_i < 1
     # validation_errors.push 'Укажите ответ на совокупный кредит на 2ом шаге.' if bank_credit[:total_income].to_i < 1 || bank_credit[:total_income].to_i > 2
     validation_errors.push 'Укажите будет ли клиент страховаться на 2ом шаге.' if bank_credit[:make_insurance].to_i < 1 || bank_credit[:total_income].to_i > 2
-    validation_errors.push 'Укажите вид выплаты кредита на 2ом шаге.' if bank_credit[:repayment_method].to_i < 1 || bank_credit[:total_income].to_i > 2
+    validation_errors.push 'Укажите вид погашения кредита на 2ом шаге.' if bank_credit[:repayment_method].to_i < 1 || bank_credit[:total_income].to_i > 2
     #End of second step validation
 
     #Third step validation
@@ -574,10 +574,10 @@ class BankCreditController < ApplicationController
     validation_errors.push 'Укажите возраст клиента на 3ем шаге.' if bank_credit[:customer_age] == '' || bank_credit[:customer_age].to_i < 1
     validation_errors.push 'Укажите гражданство клиента на 3ем шаге.' if bank_credit[:customer_country] == ''
     validation_errors.push 'Укажите место рождения клиента на 3ем шаге.' if bank_credit[:customer_birthplace] == ''
-    validation_errors.push 'Укажите семейное положение клиента на 3ем шаге.' if bank_credit[:customer_family_status].to_i < 1 || bank_credit[:customer_family_status].to_i > 5
+    validation_errors.push 'Укажите семейное положение клиента на 3ем шаге.' unless ClientFamilyStatus.ids.include? bank_credit[:customer_family_status].to_i
     validation_errors.push 'Укажите жилищные условия клиента на 3ем шаге.' if bank_credit[:customer_living_conditions].to_i < 1 || bank_credit[:customer_living_conditions].to_i > 8
     validation_errors.push 'Укажите тип жилищных условий клиента на 3ем шаге.' if bank_credit[:customer_living_conditions].to_i == 8 && bank_credit[:customer_another_living_conditions] == ''
-    validation_errors.push 'Укажите образование клиента на 3ем шаге.' if bank_credit[:customer_education].to_i < 1 || bank_credit[:customer_education].to_i > 8
+    validation_errors.push 'Укажите образование клиента на 3ем шаге.' unless ClientEducation.ids.include? bank_credit[:customer_education].to_i
     validation_errors.push 'Укажите отношение клиента к воинской службе на 3ем шаге.' if bank_credit[:customer_military_conditions].to_i < 1 || bank_credit[:customer_military_conditions].to_i > 4
     validation_errors.push 'Укажите дату отсрочки клиента от воинской службы на 3ем шаге.' if bank_credit[:customer_military_conditions].to_i == 3 && bank_credit[:customer_reprieve_end_date] == ''
     validation_errors.push 'Укажите информацию об имени клиента на 3ем шаге.' if bank_credit[:customer_name_info].to_i < 1 || bank_credit[:customer_name_info].to_i > 2

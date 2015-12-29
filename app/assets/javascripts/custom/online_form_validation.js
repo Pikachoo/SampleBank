@@ -20,6 +20,16 @@ function validateFifthStep() {
     }
 }
 
+function validateFourthStep(validationId, step) {
+    if ($("#" + validationId).val() > 0 && $("#" + validationId).val() < 25) {
+        navigateAndToggle(step);
+    }
+    else{
+        toggleElement('#step-errors-' + step, true);
+    }
+}
+
+
 function validateSixthStep() {
     var validateErrorsCount = 0;
     $("#errors_list").empty();

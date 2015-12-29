@@ -66,6 +66,12 @@ function validateFirstCreditStep() {
     if ($('#credit_affirmation').text() != '') {
         validateElementWithNullify("#bank_credit_affirmation_of_commitments", 1, "Выберите вид обеспечения исполнения кредитных обязательств");
     }
+    //if ($("#bank_credit_collateral_customer").val() != '') {
+    //    validateElementWithNullify("#bank_credit_collateral_customer", 1, "Выберите Сумму залога клиента большую чем ноль");
+    //}
+    //if ($("#bank_credit_collateral_employee").val() != '') {
+    //    validateElementWithNullify("#bank_credit_collateral_employee", 1, "Введите оценку суммы залога клиента большую чем ноль");
+    //}
     validateElementWithNullify("[name='score_existance']:checked", 1, "Укажите, имеется ли з.п. или доходы в нашем банке");
     validateToggledElement("[name='credit_type']:checked", 4, "bank_credit_another_home_credit_type", 1, "Укажите вид кредита на финансирование имущества");
     validateToggledElement("[name='credit_type']:checked", 6, "bank_credit_credit_type_another_car", 1, "Укажите вид автокредита");
@@ -73,6 +79,11 @@ function validateFirstCreditStep() {
     validateToggledElement("[name='score_existance']:checked", 1, "bank_credit_account_id", 1, "Укажите номер счёта");
     $("#bank_credit_score_existance").val($("[name='score_existance']:checked").val());
     navigateAfterValidation("#step-errors-1", 1);
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
 
 function validateSecondCreditStep() {
@@ -135,6 +146,8 @@ function validateApplicant(step, id) {
         addErrorMessage(step, "Укажите корректные данны о даче выдачи и окончания документа");
     if (new Date($("#bank_credit_" + id + "_document_given_date").val()) >= new Date())
         addErrorMessage(step, "Убедитесь что вы правильно указали дату выдачи документа.");
+    if (new Date($("#bank_credit_" + id + "_document_end_date").val()) <= new Date())
+        addErrorMessage(step, "Убедитесь что вы правильно указали дату окончания документа.");
     validateElementWithEmptiness('#bank_credit_customer_mobile_phone', step, 'Укажите мобильный телефон');
     validateTelephon($('#bank_credit_customer_mobile_phone').val(), step, 'Укажите правильно мобильный телефон');
     validateTelephon($('#bank_credit_customer_work_phone').val(), step, 'Укажите правильно рабочий телефон');
@@ -147,6 +160,11 @@ function validateApplicant(step, id) {
     validateElementWithNullify("#bank_credit_" + id + "_living_age", step, "Укажите срок проживания клиента по фактическому адресу");
     var livingAgeRb = $("#bank_credit_" + id + "_living_age").val();
     validateNumbersForGreatest($("#bank_credit_" + id + "_age").val(), livingAgeRb, step, "Убедитесь в правильности ввода возраста и срока проживания по фактическому месту жительства.");
+    if (step == 3) {
+        if (validateEmail($("#bank_credit_customer_email").val()) == false) {
+            addErrorMessage(step, "Введите e-mail в правильном формате.");
+        }
+    }
     navigateAfterValidation("#step-errors-" + step, step);
 }
 

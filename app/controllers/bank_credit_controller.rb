@@ -10,6 +10,7 @@ class BankCreditController < ApplicationController
     @client_job_types = ClientJobType.all
     @client_family_status = ClientFamilyStatus.all
     @client_eduction = ClientEducation.all
+    @passport_series = PassportSeries.all
 
     @bank_credit_inputs =  {credit_type: 0,
                             credit_type_another_car: '',
@@ -66,7 +67,7 @@ class BankCreditController < ApplicationController
     client.phone_mobile= params[:bank_credit][:customer_mobile_phone]
     client.phone_work= params[:bank_credit][:customer_work_phone]
     client.email = params[:bank_credit][:customer_email]
-    client.passport_series = params[:bank_credit][:customer_document_series]
+    client.passport_series = PassportSeries.where(id: params[:bank_credit][:customer_document_series].to_i).first.name
     client.passport_number = params[:bank_credit][:customer_document_number]
     client.passport_begin_date = params[:bank_credit][:customer_document_given_date]
     client.passport_end_date = params[:bank_credit][:customer_document_end_date]

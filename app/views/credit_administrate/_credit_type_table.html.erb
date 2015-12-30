@@ -43,7 +43,7 @@
                   <% end %>
                   <% if credits_type == "Действующие кредиты" || credits_type == "Закрытые кредиты"  %>
                       <td>
-                        <%= link_to "Просмотреть", credit_print_info_path(e.id), class: 'ui button orange' %>
+                        <%= link_to "Просмотреть",client_account_show_credit_path(e.id), class: 'ui button orange' %>
                       </td>
                   <% end %>
                 </tr>

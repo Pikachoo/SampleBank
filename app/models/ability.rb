@@ -34,6 +34,8 @@ class Ability
     if user.is? 'operator'
       can :manage, BankCredit
       can :manage, ClientCredit
+      can :manage, Account
+      can :show_credit, ClientCredit
       can :manage, @bank_credit_inputs
       can :manage, CreditApplication
       can :read, CreditGranting

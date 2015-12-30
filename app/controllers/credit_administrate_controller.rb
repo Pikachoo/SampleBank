@@ -7,8 +7,10 @@ class CreditAdministrateController < ApplicationController
 
   def index
     @applyment_credits = ClientCredit.where(credit_state: 0).page(params[:applyment_credits_page].to_i)
-    @opened_credits = ClientCredit.where(credit_state: 1).page(params[:opened_credits_page].to_i)
-    @closed_credits = ClientCredit.where(credit_state: 3).page(params[:closed_credits_page].to_i)
+    cur_date = Timemachine.get_current_date  + 1.day
+
+    @opened_credits = ClientCredit.where("credit_state = 1 and begin_date <= '#{cur_date}'").page(params[:opened_credits_page].to_i)
+    @closed_credits = ClientCredit.where("credit_state = 3 and begin_date <= '#{cur_date}'").page(params[:closed_credits_page].to_i)
     @declined_credits = ClientCredit.where(credit_state: 4).page(params[:declined_credits_page].to_i)
   end
 

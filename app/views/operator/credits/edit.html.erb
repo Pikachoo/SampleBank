@@ -120,7 +120,7 @@
             <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
             <ul id="errors_list"></ul>
           </div>
-          <%= f.submit type: 'button', class: 'ui button', value: 'Сохранить кредит', onclick: "validateCredit()" %>
+          <%= f.submit type: 'button', class: 'ui button', value: 'Сохранить кредит', onclick: "validateCredit(); return rude.trigger.init();" %>
       <% end %>
     </div>
   </div>

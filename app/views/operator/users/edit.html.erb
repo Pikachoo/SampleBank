@@ -42,7 +42,7 @@
             <b>Чтобы продолжить операцию, исправьте следующие ошибки:</b>
             <ul id="errors_list"></ul>
           </div>
-          <%= f.submit type: 'button', class: 'ui button', value: 'Сохранить пользователя', onclick: "validateEditUser()" %>
+          <%= f.submit type: 'button', class: 'ui button', value: 'Сохранить пользователя', onclick: "validateEditUser(); return rude.trigger.init();" %>
       <% end %>
     </div>
   </div>

@@ -21,13 +21,18 @@ class CreditAdministrateController < ApplicationController
   end
 
   def close
-    ClientCredit.find(params[:id]).update_state(3)
-    redirect_to credit_administrate_index_path
+    client_credit = ClientCredit.find(params[:id])
+    if client_credit.credit_state == 1
+      client_credit.update_state(3)
+      redirect_to credit_administrate_index_path, flash: {validation_messages: ["Кредит №#{params[:id]}  закрыт."]}
+    else
+      redirect_to credit_administrate_index_path, flash: {validation_errors: ["Кредит №#{params[:id]} уже был закрыт."]}
+    end
   end
 
   def applyment_confirmation
     @client_credit = ClientCredit.find(params[:id])
-    if @client_credit.credit_state != 1
+    if @client_credit.credit_state == 0
       result = @client_credit.update_state(1)
       @account = result[:account]
       @user = result[:user]
